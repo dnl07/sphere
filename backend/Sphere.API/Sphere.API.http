@@ -1,6 +1,6 @@
-@Sphere.API_HostAddress = http://localhost:5062
+@Sphere.Api_HostAddress = http://localhost:5062
 
-GET {{Sphere.API_HostAddress}}/weatherforecast/
+GET {{Sphere.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

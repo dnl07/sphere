@@ -2,10 +2,7 @@
 
 namespace Sphere.Application.Commons.Interfaces {
     public interface IClothingItemRepository {
-        Task AddAsync(ClothingItem item);
-        Task<ClothingItem> GetByIdAsync(Guid id);
-        Task<IEnumerable<ClothingItem>> GetAllAsync();
-        Task UpdateAsync(ClothingItem item);
-        Task DeleteAsync(Guid id);
+        Task AddAsync(ClothingItem item, CancellationToken ct);
+        Task<ClothingItem?> GetByIdAsync(Guid id, CancellationToken ct);
     }
 }

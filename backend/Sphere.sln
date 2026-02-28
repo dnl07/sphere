@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36930.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphere.API", "Sphere.API\Sphere.API.csproj", "{F053FBEC-BF08-4969-88D9-725D35F59BA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphere.Api", "Sphere.Api\Sphere.Api.csproj", "{F053FBEC-BF08-4969-88D9-725D35F59BA1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphere.Domain", "Sphere.Domain\Sphere.Domain.csproj", "{3A863E5D-D872-4E2F-A823-5697449B4B3C}"
 EndProject
