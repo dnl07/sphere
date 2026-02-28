@@ -1,0 +1,28 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  api:
+    build:
+     context: .
+     dockerfile: Sphere.Api/Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=SphereDb;Username=postgres;Password=password
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+  
+volumes:
+  postgres_data:
