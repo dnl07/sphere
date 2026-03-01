@@ -2,7 +2,7 @@
 using Sphere.Domain.Clothing;
 
 namespace Sphere.API.Mappers {
-    public static class ClothingItemMapper {
+    public static class CreateClothingItemMapper {
         public static ClothingItem ToDomain(this CreateClothingItemCommand command) {
             return new ClothingItem(
                 command.Name,
@@ -10,8 +10,9 @@ namespace Sphere.API.Mappers {
             );
         }
 
-        public static CreateClothingItemResponse ToResponse(this ClothingItem item) {
+        public static CreateClothingItemResponse ToCreateResponse(this ClothingItem item) {
             return new CreateClothingItemResponse(
+                item.Id,
                 item.Name,
                 item.Type
             );

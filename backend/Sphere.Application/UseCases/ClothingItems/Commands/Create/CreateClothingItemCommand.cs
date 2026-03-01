@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Sphere.Application.Commons.Interfaces;
+﻿using Sphere.Application.Commons.Interfaces;
 
 namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
     public class CreateClothingItemCommand : IUseCase<CreateClothingItemResponse> {

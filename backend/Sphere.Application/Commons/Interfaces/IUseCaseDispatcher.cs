@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Sphere.Application.Commons.Interfaces {
-    internal interface IUseCaseDispatcher {
+    public interface IUseCaseDispatcher {
+        public Task<TResponse> Dispatch<TResponse>(IUseCase<TResponse> useCase, CancellationToken ct = default);
     }
 }

@@ -1,27 +1,40 @@
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sphere.API.Dtos.Requests;
 using Sphere.API.Mappers;
+using Sphere.Application.Commons.Interfaces;
+using Sphere.Application.UseCases.ClothingItems.Commands.Get;
 
 namespace Sphere.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class ClothingController : ControllerBase
-    {
-        private readonly IMediator _mediator;
+    [Route("api/clothing")]
+    public class ClothingController : ControllerBase {
+        private readonly IUseCaseDispatcher _dispatcher;
 
-        public ClothingController(IMediator mediator) {
-            _mediator = mediator;
+        public ClothingController(IUseCaseDispatcher dispatcher) {
+            _dispatcher = dispatcher;
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateClothingItemRequestDto request) {
             var command = request.ToCommand();
 
-            var result = await _mediator.Send(command);
+            var response = await _dispatcher.Dispatch(command);
 
-            return Ok(result);
+            return Ok(response);
+        }
+
+        [HttpGet("get/{id}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id) {
+            var query = new GetClothingItemQuery(id);
+
+            var response = await _dispatcher.Dispatch(query);
+
+            if (response is null) {
+                return NotFound();
+            }
+
+            return Ok(response);
         }
     }
 }

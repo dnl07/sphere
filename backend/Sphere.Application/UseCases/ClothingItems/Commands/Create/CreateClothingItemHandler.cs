@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Sphere.API.Mappers;
+﻿using Sphere.API.Mappers;
 using Sphere.Application.Commons.Interfaces;
 
 namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
@@ -15,7 +14,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
 
             await _repository.AddAsync(item, ct);
 
-            return item.ToResponse();
+            return item.ToCreateResponse();
         }
     }
 }
