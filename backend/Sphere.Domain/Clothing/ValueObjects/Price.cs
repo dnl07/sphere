@@ -20,5 +20,9 @@ namespace Sphere.Domain.Clothing.ValueObjects {
             Amount = amount;
             Currency = currency;
         }
+
+        public override bool Equals(object? obj) => obj is Price price && Amount == price.Amount && Currency == price.Currency;
+        public override int GetHashCode() => HashCode.Combine(Amount, Currency);
+        public override string ToString() => $"{Amount} {Currency}";
     }
 }
