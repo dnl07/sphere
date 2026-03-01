@@ -5,7 +5,10 @@ namespace Sphere.Domain.Clothing {
         public string Name { get; set; }
         public string Type { get; set; }
 
-        private ClothingItem() { }
+        private ClothingItem() {
+            Name = string.Empty;
+            Type = string.Empty;
+        }
 
         public ClothingItem(string name, string type) {
             Name = name; 
