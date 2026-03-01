@@ -1,4 +1,4 @@
-﻿using Sphere.Application.ClothingItems.Commands.Create;
+﻿using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 using Sphere.Domain.Clothing;
 
 namespace Sphere.API.Mappers {

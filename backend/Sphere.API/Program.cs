@@ -1,6 +1,7 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Sphere.Application;
+using Sphere.Application.Commons;
+using Sphere.Infrastructure;
 using Sphere.Infrastructure.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,20 +13,20 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(ApplicationAssemblyMarker).Assembly));
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+using (var scope = app.Services.CreateScope()) {
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
+
+    if (app.Environment.IsDevelopment() || app.Environment.IsProduction()) {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
