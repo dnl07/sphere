@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sphere.Domain.Clothing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Sphere.Domain.ClothingImages;
 
 namespace Sphere.Infrastructure.Persistance.Configurations {
     public class ClothingItemConfiguration : IEntityTypeConfiguration<ClothingItem> {
@@ -30,6 +26,11 @@ namespace Sphere.Infrastructure.Persistance.Configurations {
                     .HasMaxLength(3)
                     .IsRequired();
             });
+
+            builder.HasOne(x => x.Image)
+                .WithOne()
+                .HasForeignKey<ClothingImage>("ClothingItemId")
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable("ClothingItems");
         }

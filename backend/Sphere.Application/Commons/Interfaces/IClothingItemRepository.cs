@@ -1,4 +1,5 @@
 ﻿using Sphere.Domain.Clothing;
+using Sphere.Domain.ClothingImages;
 
 namespace Sphere.Application.Commons.Interfaces {
     public interface IClothingItemRepository {

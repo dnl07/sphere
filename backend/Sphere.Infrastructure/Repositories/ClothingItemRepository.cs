@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Domain.Clothing;
+using Sphere.Domain.ClothingImages;
 using Sphere.Infrastructure.Persistance;
 
 namespace Sphere.Infrastructure.Repositories {
@@ -19,6 +20,7 @@ namespace Sphere.Infrastructure.Repositories {
         public async Task<ClothingItem?> GetByIdAsync(Guid id, CancellationToken ct = default) {
             return await _context.ClothingItems
                 .Where(x => x.Id == id)
+                .Include(x => x.Image)
                 .FirstOrDefaultAsync(ct);
         }
     }

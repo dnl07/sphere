@@ -6,8 +6,7 @@ namespace Sphere.API.Mappers {
         public static GetClothingItemResponse ToGetResponse(this ClothingItem item) {
             return new GetClothingItemResponse(
                 item.Id,
-                item.Name,
-                item.Type
+                item.Name
             );
         }
     }

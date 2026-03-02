@@ -20,9 +20,13 @@ services:
       - postgres
     environment:
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=spheredb;Username=postgres;Password=password
+      - FILE_STORAGE_PATH=/app/uploads
     ports:
       - "5000:5000"
+    volumes:
+      - uploads_data:/app/uploads
     restart: unless-stopped
   
 volumes:
   postgres_data:
+  uploads_data:

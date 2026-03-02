@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sphere.API.Dtos.Requests;
 using Sphere.API.Mappers;
 using Sphere.Application.Commons.Interfaces;
+using Sphere.Application.UseCases.ClothingImage.Queries.Get;
 using Sphere.Application.UseCases.ClothingItems.Commands.Get;
 
 namespace Sphere.API.Controllers
@@ -16,7 +17,7 @@ namespace Sphere.API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] CreateClothingItemRequestDto request) {
+        public async Task<IActionResult> Create([FromForm] CreateClothingItemRequestDto request) {
             var command = request.ToCommand();
 
             var response = await _dispatcher.Dispatch(command);
@@ -28,6 +29,19 @@ namespace Sphere.API.Controllers
         public async Task<IActionResult> GetById([FromRoute] Guid id) {
             var query = new GetClothingItemQuery(id);
 
+            var response = await _dispatcher.Dispatch(query);
+
+            if (response is null) {
+                return NotFound();
+            }
+
+            return Ok(response);
+        }
+
+        [HttpGet("{itemId}/image")]
+        public async Task<IActionResult> GetImageById([FromRoute] Guid itemId) {
+            var query = new GetClothingImageQuery(itemId);
+             
             var response = await _dispatcher.Dispatch(query);
 
             if (response is null) {

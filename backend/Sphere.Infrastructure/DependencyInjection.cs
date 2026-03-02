@@ -13,6 +13,8 @@ namespace Sphere.Infrastructure {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(connectionString));
 
+            services.AddSingleton<IFileStorage, FileStorage.LocalFileStorage>();
+
             services.AddScoped<IClothingItemRepository, ClothingItemRepository>();
 
             return services;

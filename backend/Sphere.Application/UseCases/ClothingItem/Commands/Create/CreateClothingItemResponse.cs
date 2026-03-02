@@ -2,12 +2,10 @@
     public class CreateClothingItemResponse {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
 
-        public CreateClothingItemResponse(Guid id, string name, string type) {
+        public CreateClothingItemResponse(Guid id, string name) {
             Id = id;
             Name = name;
-            Type = type;
         }
     }
 }
