@@ -1,5 +1,6 @@
 ﻿using Sphere.Application.Commons.Exceptions;
 using Sphere.Application.Commons.Interfaces;
+using Sphere.Application.Commons.Interfaces.Repository;
 
 namespace Sphere.Application.UseCases.ClothingImage.Queries.Get {
     public class GetClothingImageHandler : IUseCaseHandler<GetClothingImageQuery, GetClothingImageResponse> {

@@ -1,4 +1,4 @@
-﻿namespace Sphere.Application.UseCases.ClothingItems.Commands.Get {
+﻿namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
     public class GetClothingItemResponse {
         public Guid Id { get; set; }
         public string Name { get; set; }

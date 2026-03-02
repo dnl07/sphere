@@ -1,8 +1,9 @@
 ﻿using Sphere.API.Mappers;
 using Sphere.Application.Commons.Exceptions;
 using Sphere.Application.Commons.Interfaces;
+using Sphere.Application.Commons.Interfaces.Repository;
 
-namespace Sphere.Application.UseCases.ClothingItems.Commands.Get {
+namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
     public class GetClothingItemHandler : IUseCaseHandler<GetClothingItemQuery, GetClothingItemResponse> {
         private readonly IClothingItemRepository _repository;
 

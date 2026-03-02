@@ -1,5 +1,6 @@
 ﻿using Sphere.API.Mappers;
 using Sphere.Application.Commons.Interfaces;
+using Sphere.Application.Commons.Interfaces.Repository;
 
 namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
     public class CreateClothingItemHandler : IUseCaseHandler<CreateClothingItemCommand, CreateClothingItemResponse> {

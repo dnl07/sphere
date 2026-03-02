@@ -4,6 +4,7 @@ using Sphere.Infrastructure.Persistance;
 using Sphere.Infrastructure.Repositories;
 using Sphere.Application.Commons.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Sphere.Application.Commons.Interfaces.Repository;
 
 namespace Sphere.Infrastructure {
     public static class DependencyInjection {
