@@ -1,0 +1,6 @@
+[submodule "backend/services/SearchEngine"]
+	path = backend/services/SearchEngine
+	url = git@github.com:dnl07/SearchEngine.git
+[submodule "backend/services/background-remover"]
+	path = backend/services/background-remover
+	url = git@github.com:dnl07/background-remover.git

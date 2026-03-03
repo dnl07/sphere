@@ -13,7 +13,7 @@ namespace Sphere.API.Mappers {
                 cmd.Size,
                 cmd.Material,
                 cmd.Color,
-                new Price(cmd.PriceAmount, cmd.Currency),
+                new Price(cmd.PriceAmount ?? 0, cmd.Currency ?? "EUR"),
                 new ClothingImage(cmd.ImageFileName, cmd.Image.Length, cmd.ImageContentType)
             );
         }
