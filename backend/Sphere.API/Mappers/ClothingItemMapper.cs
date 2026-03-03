@@ -5,22 +5,21 @@ using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 namespace Sphere.API.Mappers {
     public static class ClothingItemMapper {
         public static CreateClothingItemCommand ToCommand(this CreateClothingItemRequestDto request) {
-            byte[] image = request.Image != null ? request.Image.ConvertToBytes() : [];
-            string imageFileName = request.Image != null ? request.Image.FileName : string.Empty;
-            string imageContentType = request.Image != null ? request.Image.ContentType : string.Empty;
+            ArgumentNullException.ThrowIfNull(request);
+            ArgumentNullException.ThrowIfNull(request.Image);
 
             return new CreateClothingItemCommand(
-                request.Name,
-                request.Category,
-                request.Description,
-                request.Size,
-                request.Material,
-                request.Color,
-                request.PriceAmount,
-                request.Currency,
-                image,
-                imageFileName,
-                imageContentType
+                name: request.Name,
+                category: request.Category,
+                description: request.Description ?? string.Empty,
+                size: request.Size ?? string.Empty,
+                material: request.Material ?? string.Empty,
+                color: request.Color ?? string.Empty,
+                amount: request.PriceAmount ?? 0,
+                currency: request.Currency ?? "EUR",
+                image: request.Image.ConvertToBytes(),
+                imageFileName: request.Image.FileName,
+                imageContentType: request.Image.ContentType
             );
         }
     }

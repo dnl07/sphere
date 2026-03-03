@@ -10,6 +10,7 @@ namespace Sphere.API.Controllers
 {
     [ApiController]
     [Route("api/clothing")]
+    [Produces("application/json")]
     public class ClothingController : ControllerBase {
         private readonly IUseCaseDispatcher _dispatcher;
 
@@ -17,32 +18,20 @@ namespace Sphere.API.Controllers
             _dispatcher = dispatcher;
         }
 
-        [HttpPost("create")]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromForm] CreateClothingItemRequestDto request) {
             var command = request.ToCommand();
-
             var response = await _dispatcher.Dispatch(command);
 
             return Ok(response);
         }
 
-        [HttpGet("get/{id}")]
-        public async Task<IActionResult> GetById([FromRoute] Guid id) {
-            var query = new GetClothingImageQuery(id);
-
-            var response = await _dispatcher.Dispatch(query);
-
-            if (response is null) {
-                return NotFound();
-            }
-
-            return Ok(response);
-        }
-
-        [HttpGet("get/all")]
+        [HttpGet()]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll() {
             var query = new GetAllClothingItemQuery();
-
             var response = await _dispatcher.Dispatch(query);
 
             if (response is null) {
@@ -52,8 +41,22 @@ namespace Sphere.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("delete/{id}")]
-        public async Task<IActionResult> DeleteById([FromRoute] Guid id) {
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromForm] CreateClothingItemRequestDto request, [FromRoute] Guid id) {
+            var query = new GetClothingImageQuery(id);
+            var response = await _dispatcher.Dispatch(query);
+
+            if (response is null) {
+                return NotFound();
+            }
+
+            return Ok(response);
+        }
+
+        /*[HttpPut("{id}")]
+        public async Task<IActionResult> UpdateById([FromRoute] Guid id) {
             var query = new DeleteClothingItemCommand(id);
 
             var response = await _dispatcher.Dispatch(query);
@@ -63,12 +66,13 @@ namespace Sphere.API.Controllers
             }
 
             return Ok(response);
-        }
+        }*/
 
-        [HttpGet("{itemId}/image")]
-        public async Task<IActionResult> GetImageById([FromRoute] Guid itemId) {
-            var query = new GetClothingImageQuery(itemId);
-             
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteById([FromRoute] Guid id) {
+            var query = new DeleteClothingItemCommand(id);
             var response = await _dispatcher.Dispatch(query);
 
             if (response is null) {
@@ -76,6 +80,20 @@ namespace Sphere.API.Controllers
             }
 
             return Ok(response);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("{itemId}/image")]
+        public async Task<IActionResult> GetImageById([FromRoute] Guid itemId) {
+            var query = new GetClothingImageQuery(itemId);
+            var response = await _dispatcher.Dispatch(query);
+
+            if (response is null) {
+                return NotFound();
+            }
+
+            return File(response.Image, response.ContentType, response.FileName);
         }
     }
 }

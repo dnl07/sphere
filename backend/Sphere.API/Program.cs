@@ -1,17 +1,23 @@
 using Microsoft.EntityFrameworkCore;
-using Sphere.Application;
+using Sphere.Api.Middleware;
 using Sphere.Application.Commons;
 using Sphere.Infrastructure;
 using Sphere.Infrastructure.Persistance;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+// Json serialization options
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options => {
+        options.JsonSerializerOptions.DictionaryKeyPolicy = null;
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(typeof(ApplicationAssemblyMarker).Assembly));
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
@@ -23,7 +29,10 @@ using (var scope = app.Services.CreateScope()) {
     db.Database.Migrate();
 }
 
-    if (app.Environment.IsDevelopment() || app.Environment.IsProduction()) {
+// Middleware
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction()) {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
