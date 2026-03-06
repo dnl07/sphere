@@ -1,10 +1,5 @@
 ﻿using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sphere.Application.UseCases.SearchEngine.Command.Search {
     public class SearchHandler : IUseCaseHandler<SearchCommand, SearchResponse> {

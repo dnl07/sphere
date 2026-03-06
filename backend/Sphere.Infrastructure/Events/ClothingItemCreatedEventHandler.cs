@@ -28,7 +28,13 @@ namespace Sphere.Infrastructure.EventHandlers {
                 return;
             }
 
-            var response = await _searchEngine.IndexItemAsync(item.Name, item.Description, ct);
+            var indexItem = new SearchIndexItem {
+                Id = item.Id,
+                Name = item.Name,
+                Description = item.Description
+            };
+
+            var response = await _searchEngine.IndexItemAsync(indexItem, ct);
             _logger.LogInformation("Clothing got id {response}", response);
             item.SetSearchEngineId(response);
         }

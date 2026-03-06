@@ -3,6 +3,7 @@ using Sphere.Api.Middleware;
 using Sphere.Application.Commons;
 using Sphere.Infrastructure;
 using Sphere.Infrastructure.Persistance;
+using Sphere.Infrastructure.Services.SearchEngine;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,8 @@ using (var scope = app.Services.CreateScope()) {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
 }
+
+await SearchEngineInitializer.InitializeAsync(app.Services);
 
 // Middleware
 app.UseMiddleware<ExceptionHandlingMiddleware>();

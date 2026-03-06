@@ -27,6 +27,7 @@ namespace Sphere.Infrastructure {
             services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
             services.AddScoped<IDomainEventHandler<ClothingItemCreatedEvent>, ClothingItemCreatedEventHandler>();
 
+            // Search Engine Services
             services.AddHttpClient<ISearchEngineService, SearchEngineService>((sp, client) => {
                 var config = sp.GetRequiredService<IConfiguration>();
                 client.BaseAddress = new Uri(config["SearchEngine:BaseUrl"]!);
