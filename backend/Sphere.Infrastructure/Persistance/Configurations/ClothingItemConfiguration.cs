@@ -27,6 +27,10 @@ namespace Sphere.Infrastructure.Persistance.Configurations {
                     .IsRequired();
             });
 
+            builder.Property(x => x.SearchEngineId)
+                .IsRequired(false)
+                .HasMaxLength(100);
+
             builder.HasOne(x => x.Image)
                 .WithOne()
                 .HasForeignKey<ClothingImage>("ClothingItemId")

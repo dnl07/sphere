@@ -1,20 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Domain.Clothing;
-using Sphere.Domain.ClothingImages;
 using Sphere.Infrastructure.Persistance;
 
 namespace Sphere.Infrastructure.Repositories {
     public class ClothingItemRepository : IClothingItemRepository {
         private readonly AppDbContext _context;
+        private readonly IDomainEventDispatcher _dispatcher;
 
-        public ClothingItemRepository(AppDbContext context) {
+        public ClothingItemRepository(AppDbContext context, IDomainEventDispatcher dispatcher) {
             _context = context;
+            _dispatcher = dispatcher;
         }
 
         public async Task AddAsync(ClothingItem item, CancellationToken ct = default) {
             await _context.ClothingItems.AddAsync(item, ct);
             await _context.SaveChangesAsync(ct);
+
+            await _dispatcher.DispatchAsync(item.DomainEvents, ct);
+            item.ClearDomainEvents();
         }
 
         public async Task<ClothingItem?> GetByIdAsync(Guid id, CancellationToken ct = default) {

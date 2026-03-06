@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Sphere.Application.Commons.Interfaces;
-using static System.Net.Mime.MediaTypeNames;
 
-namespace Sphere.Infrastructure.FileStorage {
+namespace Sphere.Infrastructure.Services.FileStorage {
     public class LocalFileStorage : IFileStorage {
         private readonly string _basePath;
 

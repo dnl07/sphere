@@ -1,5 +1,6 @@
 ﻿using Sphere.Domain.Clothing.ValueObjects;
 using Sphere.Domain.ClothingImages;
+using Sphere.Domain.ClothingItems.Events;
 using Sphere.Domain.Common;
 
 namespace Sphere.Domain.Clothing {
@@ -14,6 +15,8 @@ namespace Sphere.Domain.Clothing {
 
         public ClothingImage Image { get; set; }
 
+        public string? SearchEngineId { get; set; }
+
         #pragma warning disable CS8618
         private ClothingItem() { }
         #pragma warning restore CS8618
@@ -27,6 +30,16 @@ namespace Sphere.Domain.Clothing {
             Color = color;
             Price = price;
             Image = image;
+
+            AddDomainEvent(new ClothingItemCreatedEvent(Id, Name));
+        }
+
+        public void Delete() {
+            AddDomainEvent(new ClothingItemDeletedEvent(Id, Image.Id, Name));
+        }
+
+        public void SetSearchEngineId(string searchEngineId) {
+            SearchEngineId = searchEngineId;
         }
     }
 }

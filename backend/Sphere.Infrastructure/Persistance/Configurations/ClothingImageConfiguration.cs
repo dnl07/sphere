@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sphere.Domain.ClothingImages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sphere.Infrastructure.Persistance.Configurations {
     public  class ClothingImageConfiguration : IEntityTypeConfiguration<ClothingImage> {

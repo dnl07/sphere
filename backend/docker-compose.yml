@@ -18,6 +18,7 @@ services:
      dockerfile: Sphere.Api/Dockerfile
     depends_on:
       - postgres
+      - search-engine
     environment:
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=spheredb;Username=postgres;Password=password
       - FILE_STORAGE_PATH=/app/uploads
@@ -27,6 +28,28 @@ services:
       - uploads_data:/app/uploads
     restart: unless-stopped
   
+  search-engine:
+    build:
+      context: ./services/SearchEngine
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"
+    volumes:
+      - search_data:/app/search-data
+    restart: unless-stopped
+
+  background-remover:
+    build:
+      context: ./services/background-remover
+      dockerfile: Dockerfile
+    command: "api --port 5002"
+    ports:
+      - "5002:5002"
+    volumes:
+      - remover_data:/app/remover-data
+    restart: unless-stopped
 volumes:
   postgres_data:
   uploads_data:
+  search_data:
+  remover_data:

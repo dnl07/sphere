@@ -5,6 +5,12 @@ using Sphere.Infrastructure.Repositories;
 using Sphere.Application.Commons.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Sphere.Application.Commons.Interfaces.Repository;
+using Sphere.Infrastructure.Events;
+using Sphere.Domain.ClothingItems.Events;
+using Sphere.Infrastructure.EventHandlers;
+using Sphere.Application.Commons.Interfaces.Services;
+using Sphere.Infrastructure.Services.SearchEngine;
+using Sphere.Infrastructure.Services.FileStorage;
 
 namespace Sphere.Infrastructure {
     public static class DependencyInjection {
@@ -14,9 +20,18 @@ namespace Sphere.Infrastructure {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(connectionString));
 
-            services.AddSingleton<IFileStorage, FileStorage.LocalFileStorage>();
+            services.AddSingleton<IFileStorage, LocalFileStorage>();
 
             services.AddScoped<IClothingItemRepository, ClothingItemRepository>();
+
+            services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
+            services.AddScoped<IDomainEventHandler<ClothingItemCreatedEvent>, ClothingItemCreatedEventHandler>();
+
+            services.AddHttpClient<ISearchEngineService, SearchEngineService>((sp, client) => {
+                var config = sp.GetRequiredService<IConfiguration>();
+                client.BaseAddress = new Uri(config["SearchEngine:BaseUrl"]!);
+                client.Timeout = TimeSpan.FromSeconds(int.Parse(config["SearchEngine:Timeout"] ?? "30"));
+            });
 
             return services;
         }
