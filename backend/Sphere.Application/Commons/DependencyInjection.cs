@@ -23,6 +23,7 @@ namespace Sphere.Application.Commons {
             // Queries
             services.AddScoped<IUseCaseHandler<GetClothingItemQuery, GetClothingItemResponse>, GetClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<GetAllClothingItemQuery, GetAllClothingItemResponse>, GetAllClothingItemHandler>();
+            services.AddScoped<IUseCaseHandler<GetClothingImageQuery, GetClothingImageResponse>, GetClothingImageHandler>();
 
             //Image Handlers
             services.AddScoped<IUseCaseHandler<GetImageQuery, GetImageResponse>, GetImageHandler>();
