@@ -4,23 +4,23 @@ using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Domain.ClothingItems.Events;
 
-namespace Sphere.Infrastructure.EventHandlers {
-    public class ClothingItemCreatedEventHandler : IDomainEventHandler<ClothingItemCreatedEvent> {
+namespace Sphere.Infrastructure.Events.Handlers {
+    public class ClothingItemDeletedEventHandler : IDomainEventHandler<ClothingItemDeletedEvent> {
         private readonly ISearchEngineService _searchEngine;
         private readonly IClothingItemRepository _clothingItemRepository;
 
         private readonly ILogger<ClothingItemCreatedEventHandler> _logger;
 
-        public ClothingItemCreatedEventHandler(
-            ISearchEngineService searchEngine, 
-            IClothingItemRepository clothingItemRepository, 
+        public ClothingItemDeletedEventHandler(
+            ISearchEngineService searchEngine,
+            IClothingItemRepository clothingItemRepository,
             ILogger<ClothingItemCreatedEventHandler> logger) {
             _searchEngine = searchEngine;
             _clothingItemRepository = clothingItemRepository;
             _logger = logger;
         }
 
-        public async Task HandleAsync(ClothingItemCreatedEvent domainEvent, CancellationToken ct = default) {
+        public async Task HandleAsync(ClothingItemDeletedEvent domainEvent, CancellationToken ct = default) {
             var item = await _clothingItemRepository.GetByIdAsync(domainEvent.ClothingItemId, ct);
 
             if (item == null) {
@@ -28,15 +28,8 @@ namespace Sphere.Infrastructure.EventHandlers {
                 return;
             }
 
-            var indexItem = new SearchIndexItem {
-                Id = item.Id,
-                Name = item.Name,
-                Description = item.Description
-            };
-
-            var response = await _searchEngine.IndexItemAsync(indexItem, ct);
-            _logger.LogInformation("Clothing got id {response}", response);
-            item.SetSearchEngineId(response);
+            await _searchEngine.RemoveItemAsync(item.Id, ct);
+            _logger.LogInformation("Clothing got id {response}", item.Id);
         }
     }
 }

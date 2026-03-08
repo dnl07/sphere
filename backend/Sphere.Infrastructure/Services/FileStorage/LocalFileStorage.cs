@@ -14,7 +14,7 @@ namespace Sphere.Infrastructure.Services.FileStorage {
         }
 
         public async Task<bool> SaveAsync(Guid imageId, byte[] fileContent, CancellationToken ct = default) {
-            string filePath = Path.Combine(_basePath, imageId.ToString());
+            string filePath = GetFilePath(imageId);
             await File.WriteAllBytesAsync(filePath, fileContent, ct);
 
             if (File.Exists(filePath)) {
@@ -23,22 +23,24 @@ namespace Sphere.Infrastructure.Services.FileStorage {
             return false;
         }
          
-        public async Task<byte[]> GetAsync(Guid key, CancellationToken ct = default) {
-            string filePath = Path.Combine(_basePath, key.ToString());
+        public async Task<byte[]> GetAsync(Guid imageId, CancellationToken ct = default) {
+            string filePath = GetFilePath(imageId);
 
             if (!File.Exists(filePath)) {
-                throw new FileNotFoundException("File not found", key.ToString());
+                throw new FileNotFoundException("File not found", imageId.ToString());
             }
             return await File.ReadAllBytesAsync(filePath, ct);
         }
 
-        public Task DeleteAsync(Guid key, CancellationToken ct = default) {
-            var id = key.ToString();
+        public Task DeleteAsync(Guid imageId, CancellationToken ct = default) {
+            string filePath = GetFilePath(imageId);
 
-            if (File.Exists(id)) {
-                File.Delete(id);
+            if (File.Exists(filePath)) {
+                File.Delete(filePath);
             }
             return Task.CompletedTask;
         }
+
+        private string GetFilePath(Guid key) => Path.Combine(_basePath, key.ToString());
     }
 }

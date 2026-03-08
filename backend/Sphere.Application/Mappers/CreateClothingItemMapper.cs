@@ -1,7 +1,7 @@
 ﻿using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 using Sphere.Domain.Clothing;
 using Sphere.Domain.Clothing.ValueObjects;
-using Sphere.Domain.ClothingImages;
+using Sphere.Domain.Images;
 
 namespace Sphere.API.Mappers {
     public static class CreateClothingItemMapper {
@@ -14,14 +14,22 @@ namespace Sphere.API.Mappers {
                 cmd.Material,
                 cmd.Color,
                 new Price(cmd.PriceAmount ?? 0, cmd.Currency ?? "EUR"),
-                new ClothingImage(cmd.ImageFileName, cmd.Image.Length, cmd.ImageContentType)
+                new Image(cmd.ImageFileName, cmd.Image.Length, cmd.ImageContentType)
             );
         }
 
         public static CreateClothingItemResponse ToCreateResponse(this ClothingItem item) {
             return new CreateClothingItemResponse(
                 item.Id,
-                item.Name
+                item.Name,
+                item.Category,
+                item.Description,
+                item.Size,
+                item.Material,
+                item.Color,
+                item.Price?.Amount,
+                item.Price?.Currency,
+                item.Image.Id
             );
         }
     }

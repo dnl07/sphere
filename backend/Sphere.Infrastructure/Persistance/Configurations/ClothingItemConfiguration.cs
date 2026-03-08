@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sphere.Domain.Clothing;
-using Sphere.Domain.ClothingImages;
 
 namespace Sphere.Infrastructure.Persistance.Configurations {
     public class ClothingItemConfiguration : IEntityTypeConfiguration<ClothingItem> {
@@ -27,14 +26,10 @@ namespace Sphere.Infrastructure.Persistance.Configurations {
                     .IsRequired();
             });
 
-            builder.Property(x => x.SearchEngineId)
-                .IsRequired(false)
-                .HasMaxLength(100);
-
             builder.HasOne(x => x.Image)
-                .WithOne()
-                .HasForeignKey<ClothingImage>("ClothingItemId")
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithMany()
+                .HasForeignKey(x => x.ImageId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.ToTable("ClothingItems");
         }

@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Sphere.Domain.ClothingImages;
+using Sphere.Domain.Images;
 
 namespace Sphere.Infrastructure.Persistance.Configurations {
-    public  class ClothingImageConfiguration : IEntityTypeConfiguration<ClothingImage> {
-        public void Configure(EntityTypeBuilder<ClothingImage> builder) {
+    public  class ImageConfiguration : IEntityTypeConfiguration<Image> {
+        public void Configure(EntityTypeBuilder<Image> builder) {
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.FileName)
@@ -18,10 +18,7 @@ namespace Sphere.Infrastructure.Persistance.Configurations {
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(x => x.ClothingItemId)
-                .IsRequired();
-
-            builder.ToTable("ClothingImages");
+            builder.ToTable("Images");
         }
     }
 }

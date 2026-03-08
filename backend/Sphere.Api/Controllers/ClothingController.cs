@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using Sphere.API.Dtos.Requests;
 using Sphere.API.Mappers;
 using Sphere.Application.Commons.Interfaces;
-using Sphere.Application.UseCases.ClothingImage.Queries.Get;
 using Sphere.Application.UseCases.ClothingItem.Commands.Delete;
+using Sphere.Application.UseCases.ClothingItems.Queries.Get;
 using Sphere.Application.UseCases.ClothingItems.Queries.GetAll;
+using Sphere.Application.UseCases.Image.Queries.Get;
 
 namespace Sphere.API.Controllers
 {
@@ -45,7 +46,7 @@ namespace Sphere.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id) {
-            var query = new GetClothingImageQuery(id);
+            var query = new GetClothingItemQuery(id);
             var response = await _dispatcher.Dispatch(query);
 
             if (response is null) {
@@ -86,14 +87,14 @@ namespace Sphere.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{itemId}/image")]
         public async Task<IActionResult> GetImageById([FromRoute] Guid itemId) {
-            var query = new GetClothingImageQuery(itemId);
+            var query = new GetImageQuery(itemId);
             var response = await _dispatcher.Dispatch(query);
 
             if (response is null) {
                 return NotFound();
             }
 
-            return File(response.Image, response.ContentType, response.FileName);
+            return File(response.FileData, response.ContentType, response.FileName);
         }
     }
 }

@@ -77,6 +77,15 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
         }
 
         public async Task RemoveItemAsync(Guid clothingItemId, CancellationToken ct = default) {
+            var url = $"documents/remove/{clothingItemId}";
+            try {
+                var response = await _client.DeleteAsync(url, ct);
+                response.EnsureSuccessStatusCode();
+                _logger.LogDebug("Item with ID {Id} successfully removed from search index", clothingItemId);
+            } catch (Exception e) {
+                _logger.LogError(e, "Error occurred while removing item with ID: {Id}", clothingItemId);
+                throw;
+            }
         }
     }
 }

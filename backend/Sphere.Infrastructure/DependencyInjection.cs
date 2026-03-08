@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Infrastructure.Events;
 using Sphere.Domain.ClothingItems.Events;
-using Sphere.Infrastructure.EventHandlers;
 using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Infrastructure.Services.SearchEngine;
 using Sphere.Infrastructure.Services.FileStorage;
+using Sphere.Infrastructure.Events.Handlers;
 
 namespace Sphere.Infrastructure {
     public static class DependencyInjection {
@@ -23,6 +23,7 @@ namespace Sphere.Infrastructure {
             services.AddSingleton<IFileStorage, LocalFileStorage>();
 
             services.AddScoped<IClothingItemRepository, ClothingItemRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
 
             services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
             services.AddScoped<IDomainEventHandler<ClothingItemCreatedEvent>, ClothingItemCreatedEventHandler>();
