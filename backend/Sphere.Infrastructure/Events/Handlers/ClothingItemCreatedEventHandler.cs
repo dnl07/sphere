@@ -24,7 +24,7 @@ namespace Sphere.Infrastructure.Events.Handlers {
             var item = await _clothingItemRepository.GetByIdAsync(domainEvent.ClothingItemId, ct);
 
             if (item == null) {
-                _logger.LogInformation("Clothing item with ID {ClothingItemId} not found. Skipping search engine indexing.", domainEvent.ClothingItemId);
+                _logger.LogWarning("Clothing item with ID {ClothingItemId} not found. Skipping search engine indexing.", domainEvent.ClothingItemId);
                 return;
             }
 
@@ -35,7 +35,7 @@ namespace Sphere.Infrastructure.Events.Handlers {
             };
 
             var response = await _searchEngine.IndexItemAsync(indexItem, ct);
-            _logger.LogInformation("Clothing got id {response}", response);
+            _logger.LogInformation("Clothing item indexed with ID {response}", response);
         }
     }
 }

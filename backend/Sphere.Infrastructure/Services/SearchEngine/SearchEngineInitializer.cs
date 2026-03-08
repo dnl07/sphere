@@ -5,6 +5,9 @@ using Sphere.Application.Commons.Interfaces.Services;
 
 namespace Sphere.Infrastructure.Services.SearchEngine {
     public static class SearchEngineInitializer {
+        /// <summary>
+        /// Initializes the search engine by waiting for it to be available and then indexing existing items from the database.
+        /// </summary>
         public static async Task InitializeAsync(IServiceProvider serviceProvider, CancellationToken ct = default) {
             using var scope = serviceProvider.CreateScope();
 
@@ -17,12 +20,17 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
             await IndexExistingItemsAsync(searchEngine, repo, logger, ct);
         }
 
+        /// <summary>
+        /// Waits for the search engine to be available by repeatedly trying to initialize 
+        /// it until it succeeds or a maximum number of retries is reached.
+        /// </summary>
         private static async Task WaitForSearchEngineAsync(ISearchEngineService searchEngine, ILogger logger, CancellationToken ct) {
             var maxRetries = 10;
 
             logger.LogInformation("Waiting for search engine container...");
-            await Task.Delay(TimeSpan.FromSeconds(5), ct);
+            await Task.Delay(TimeSpan.FromSeconds(3), ct);
 
+            // Try to initialize the search engine with retries
             for (int i = 0; i < maxRetries; i++) {
                 try {
                     logger.LogInformation("Initializing search engine (attempt {Attempt}/{MaxRetries})...", i + 1, maxRetries);
@@ -39,9 +47,12 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
             }
         }
 
+        /// <summary>
+        /// Indexes existing clothing items from the database into the search engine. 
+        /// </summary>
         private static async Task IndexExistingItemsAsync(ISearchEngineService searchEngine, IClothingItemRepository repo, ILogger logger, CancellationToken ct) {
             var items = await repo.GetAllAsync();
-            logger.LogInformation("SearchEngineSeeder: Indexing {Count} items...", items.Count);
+            logger.LogInformation("SearchEngine: Indexing {Count} items...", items.Count);
 
             foreach (var item in items) {
                 try {
@@ -51,9 +62,9 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
                         Description = item.Description
                     };
                     await searchEngine.IndexItemAsync(indexItem, ct);
-                    logger.LogDebug("SearchEngineSeeder: Indexed {ItemId}", item.Id);
+                    logger.LogDebug("SearchEngine: Indexed {ItemId}", item.Id);
                 } catch (Exception e) {
-                    logger.LogError(e, "SearchEngineSeeder: Failed to index {ItemId}", item.Id);
+                    logger.LogError(e, "SearchEngine: Failed to index {ItemId}", item.Id);
                 }
             }
         }

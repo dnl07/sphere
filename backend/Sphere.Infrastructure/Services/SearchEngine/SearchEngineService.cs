@@ -67,7 +67,6 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
 
                 _logger.LogDebug("Item {name} successfully indexed", indexItem.Name);
 
-                // Assuming the response contains the ID of the indexed document
                 return deserialized?.AddedDocuments.FirstOrDefault()?.Id.ToString() ?? string.Empty;
 
             } catch (Exception e) {

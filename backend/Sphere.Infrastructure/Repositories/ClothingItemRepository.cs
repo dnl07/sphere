@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Domain.Clothing;
@@ -8,18 +9,25 @@ namespace Sphere.Infrastructure.Repositories {
     public class ClothingItemRepository : IClothingItemRepository {
         private readonly AppDbContext _context;
         private readonly IDomainEventDispatcher _dispatcher;
+        private readonly ILogger<ClothingItemRepository> _logger;
 
-        public ClothingItemRepository(AppDbContext context, IDomainEventDispatcher dispatcher) {
+        public ClothingItemRepository(AppDbContext context, 
+            IDomainEventDispatcher dispatcher, 
+            ILogger<ClothingItemRepository> logger) {
             _context = context;
             _dispatcher = dispatcher;
+            _logger = logger;
         }
 
         public async Task AddAsync(ClothingItem item, CancellationToken ct = default) {
             await _context.ClothingItems.AddAsync(item, ct);
             await _context.SaveChangesAsync(ct);
 
+            // Dispatch domain events
             await _dispatcher.DispatchAsync(item.DomainEvents, ct);
             item.ClearDomainEvents();
+
+            _logger.LogInformation("Added clothing item with ID {ClothingItemId}", item.Id);
         }
 
         public async Task<ClothingItem?> GetByIdAsync(Guid id, CancellationToken ct = default) {
@@ -40,10 +48,20 @@ namespace Sphere.Infrastructure.Repositories {
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync(ct);
 
-            if (item != null) {
-                _context.ClothingItems.Remove(item);
-                await _context.SaveChangesAsync(ct);
+            if (item == null) {
+                _logger.LogWarning("Clothing item with ID {ClothingItemId} not found. Skipping deletion.", id);
+                return;
             }
+
+            _logger.LogInformation("Deleting clothing item with ID {ClothingItemId}", id);
+
+            // Dispatch domain events before deletion
+            await _dispatcher.DispatchAsync(item.DomainEvents, ct);
+            item.ClearDomainEvents();
+
+            // Remove the item from the database
+            _context.ClothingItems.Remove(item);
+            await _context.SaveChangesAsync(ct);
         }
     }
 }

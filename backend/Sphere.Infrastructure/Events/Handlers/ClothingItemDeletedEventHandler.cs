@@ -24,12 +24,12 @@ namespace Sphere.Infrastructure.Events.Handlers {
             var item = await _clothingItemRepository.GetByIdAsync(domainEvent.ClothingItemId, ct);
 
             if (item == null) {
-                _logger.LogInformation("Clothing item with ID {ClothingItemId} not found. Skipping search engine indexing.", domainEvent.ClothingItemId);
+                _logger.LogWarning("Clothing item with ID {ClothingItemId} not found. Skipping search engine indexing.", domainEvent.ClothingItemId);
                 return;
             }
 
             await _searchEngine.RemoveItemAsync(item.Id, ct);
-            _logger.LogInformation("Clothing got id {response}", item.Id);
+            _logger.LogInformation("Clothing item removed with ID {response}", item.Id);
         }
     }
 }
