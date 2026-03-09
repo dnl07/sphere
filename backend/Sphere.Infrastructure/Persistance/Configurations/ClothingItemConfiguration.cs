@@ -11,6 +11,11 @@ namespace Sphere.Infrastructure.Persistance.Configurations {
                 .IsRequired()
                 .HasMaxLength(100);
 
+            builder.HasOne(x => x.Category)
+                .WithMany()
+                .HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.Property(x => x.Description)
                 .HasMaxLength(500);
 

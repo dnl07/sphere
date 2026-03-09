@@ -22,7 +22,9 @@ namespace Sphere.Infrastructure {
 
             services.AddSingleton<IFileStorage, LocalFileStorage>();
 
+            // Repositories
             services.AddScoped<IClothingItemRepository, ClothingItemRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IImageRepository, ImageRepository>();
 
             // Domain Event Services

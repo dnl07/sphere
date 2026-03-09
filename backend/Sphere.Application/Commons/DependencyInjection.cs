@@ -5,6 +5,8 @@ using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 using Sphere.Application.UseCases.ClothingItems.Queries.Get;
 using Sphere.Application.UseCases.ClothingItems.Queries.GetAll;
 using Sphere.Application.UseCases.Image.Queries.Get;
+using Sphere.Application.UseCases.Category.Queries.GetAll;
+
 using Sphere.Application.UseCases.SearchEngine.Command.Search;
 
 namespace Sphere.Application.Commons {
@@ -16,16 +18,17 @@ namespace Sphere.Application.Commons {
             // Register all use case handlers
 
             // Clothing Item Handlers
-            // Commands
             services.AddScoped<IUseCaseHandler<CreateClothingItemCommand, CreateClothingItemResponse>, CreateClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<DeleteClothingItemCommand, DeleteClothingItemResponse>, DeleteClothingItemHandler>();
 
-            // Queries
             services.AddScoped<IUseCaseHandler<GetClothingItemQuery, GetClothingItemResponse>, GetClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<GetAllClothingItemQuery, GetAllClothingItemResponse>, GetAllClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<GetClothingImageQuery, GetClothingImageResponse>, GetClothingImageHandler>();
 
-            //Image Handlers
+            // Category Handlers
+            services.AddScoped<IUseCaseHandler<GetAllCategoryQuery, GetAllCategoryResponse>, GetAllCategoryHandler>();
+
+            // Image Handlers
             services.AddScoped<IUseCaseHandler<GetImageQuery, GetImageResponse>, GetImageHandler>();
 
             // Search Engine Handlers

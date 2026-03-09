@@ -80,7 +80,7 @@ namespace Sphere.API.Controllers
                 return NotFound();
             }
 
-            return Ok(response);
+            return Ok();
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -7,7 +7,7 @@ namespace Sphere.API.Mappers {
             return new GetClothingItemResponse(
                 item.Id,
                 item.Name,
-                item.Category,
+                item.Category.Name,
                 item.Description,
                 item.Size,
                 item.Material,

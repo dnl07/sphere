@@ -1,4 +1,5 @@
-﻿using Sphere.Domain.Clothing.ValueObjects;
+﻿using Sphere.Domain.Categories;
+using Sphere.Domain.Clothing.ValueObjects;
 using Sphere.Domain.ClothingItems.Events;
 using Sphere.Domain.Common;
 using Sphere.Domain.Images;
@@ -6,7 +7,10 @@ using Sphere.Domain.Images;
 namespace Sphere.Domain.Clothing {
     public class ClothingItem : AggregateRoot {
         public string Name { get; set; }
-        public string Category { get; set; }
+
+        public Guid CategoryId { get; set; }
+        public Category Category { get; set; }
+
         public string? Description { get; set; }
         public string? Size { get; set; }
         public string? Material { get; set; }
@@ -23,7 +27,7 @@ namespace Sphere.Domain.Clothing {
         private ClothingItem() { }
         #pragma warning restore CS8618
 
-        public ClothingItem(string name, string category, string? description, string? size, string? material, string? color, Price? price, Image image) {
+        public ClothingItem(string name, Category category, string? description, string? size, string? material, string? color, Price? price, Image image) {
             Name = name; 
             Category = category;
             Description = description;
@@ -33,7 +37,7 @@ namespace Sphere.Domain.Clothing {
             Price = price;
             Image = image;
 
-            AddDomainEvent(new ClothingItemCreatedEvent(Id, Name));
+            AddDomainEvent(new ClothingItemCreatedEvent(Id));
         }
 
         public void Delete() {

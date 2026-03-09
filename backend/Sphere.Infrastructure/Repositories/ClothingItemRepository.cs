@@ -33,12 +33,14 @@ namespace Sphere.Infrastructure.Repositories {
         public async Task<ClothingItem?> GetByIdAsync(Guid id, CancellationToken ct = default) {
             return await _context.ClothingItems
                 .Where(x => x.Id == id)
+                .Include(x => x.Category)
                 .Include(x => x.Image)
                 .FirstOrDefaultAsync(ct);
         }
 
         public async Task<List<ClothingItem>> GetAllAsync(CancellationToken ct = default) {
             return await _context.ClothingItems
+                .Include(x => x.Category)
                 .Include(x => x.Image)
                 .ToListAsync(ct);
         }

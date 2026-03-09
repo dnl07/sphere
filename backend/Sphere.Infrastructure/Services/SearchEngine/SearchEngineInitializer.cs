@@ -5,6 +5,8 @@ using Sphere.Application.Commons.Interfaces.Services;
 
 namespace Sphere.Infrastructure.Services.SearchEngine {
     public static class SearchEngineInitializer {
+        private static bool _initialized = false;
+
         /// <summary>
         /// Initializes the search engine by waiting for it to be available and then indexing existing items from the database.
         /// </summary>
@@ -15,6 +17,11 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
             var repo = scope.ServiceProvider.GetRequiredService<IClothingItemRepository>();
             var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("SearchEngineInitializer");
             logger.LogInformation("Waiting for search engine container...");
+
+            if (_initialized) {
+                logger.LogInformation("Search engine already initialized.");
+                return;
+            }
 
             await WaitForSearchEngineAsync(searchEngine, logger, ct);
             await IndexExistingItemsAsync(searchEngine, repo, logger, ct);
@@ -36,6 +43,7 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
                     logger.LogInformation("Initializing search engine (attempt {Attempt}/{MaxRetries})...", i + 1, maxRetries);
                     await searchEngine.InitializeAsync(ct);
                     logger.LogInformation("Search engine initialized successfully");
+                    _initialized = true;
                     return;
                 } catch (Exception ex) {
                     logger.LogWarning(ex, "Attempt {Attempt} failed: {Message}", i + 1, ex.Message);

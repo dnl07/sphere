@@ -1,4 +1,5 @@
 ﻿using Sphere.Application.UseCases.ClothingItems.Commands.Create;
+using Sphere.Domain.Categories;
 using Sphere.Domain.Clothing;
 using Sphere.Domain.Clothing.ValueObjects;
 using Sphere.Domain.Images;
@@ -8,7 +9,7 @@ namespace Sphere.API.Mappers {
         public static ClothingItem ToDomain(this CreateClothingItemCommand cmd) {
             return new ClothingItem(
                 cmd.Name,
-                cmd.Category,
+                new Category(cmd.Category),
                 cmd.Description,
                 cmd.Size,
                 cmd.Material,
@@ -22,7 +23,7 @@ namespace Sphere.API.Mappers {
             return new CreateClothingItemResponse(
                 item.Id,
                 item.Name,
-                item.Category,
+                item.Category.Name,
                 item.Description,
                 item.Size,
                 item.Material,
