@@ -25,8 +25,10 @@ namespace Sphere.Infrastructure {
             services.AddScoped<IClothingItemRepository, ClothingItemRepository>();
             services.AddScoped<IImageRepository, ImageRepository>();
 
+            // Domain Event Services
             services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
             services.AddScoped<IDomainEventHandler<ClothingItemCreatedEvent>, ClothingItemCreatedEventHandler>();
+            services.AddScoped<IDomainEventHandler<ClothingItemDeletedEvent>, ClothingItemDeletedEventHandler>();
 
             // Search Engine Services
             services.AddHttpClient<ISearchEngineService, SearchEngineService>((sp, client) => {

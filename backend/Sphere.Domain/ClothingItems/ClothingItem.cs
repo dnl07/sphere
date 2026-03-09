@@ -37,7 +37,7 @@ namespace Sphere.Domain.Clothing {
         }
 
         public void Delete() {
-            AddDomainEvent(new ClothingItemDeletedEvent(Id, Image.Id, Name));
+            AddDomainEvent(new ClothingItemDeletedEvent(Id, Image.Id));
         }
     }
 }

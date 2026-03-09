@@ -3,16 +3,19 @@ using Sphere.Application.Commons.Interfaces.Repository;
 
 namespace Sphere.Application.UseCases.ClothingItem.Commands.Delete {
     public class DeleteClothingItemHandler : IUseCaseHandler<DeleteClothingItemCommand, DeleteClothingItemResponse> {
-        private IFileStorage _fileStorage;
-        private IClothingItemRepository _repository;
+        private readonly IClothingItemRepository _repository;
 
-        public DeleteClothingItemHandler(IFileStorage fileStorage, IClothingItemRepository repository) {
-            _fileStorage = fileStorage;
+        public DeleteClothingItemHandler(IClothingItemRepository repository) {
             _repository = repository;
         }
 
         public async Task<DeleteClothingItemResponse> Handle(DeleteClothingItemCommand cmd, CancellationToken ct) {
-            await _fileStorage.DeleteAsync(cmd.Id, ct);
+            var item = await _repository.GetByIdAsync(cmd.Id, ct);
+
+            if (item != null) {
+                item.Delete();
+            }
+
             await _repository.DeleteAsync(cmd.Id, ct);
 
             return new DeleteClothingItemResponse();
