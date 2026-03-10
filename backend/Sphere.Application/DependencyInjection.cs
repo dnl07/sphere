@@ -8,6 +8,8 @@ using Sphere.Application.UseCases.Image.Queries.Get;
 using Sphere.Application.UseCases.Category.Queries.GetAll;
 
 using Sphere.Application.UseCases.SearchEngine.Command.Search;
+using Sphere.Application.Commons.Interfaces.Services;
+using Sphere.Application.UseCases.Inference.Commands.Create;
 
 namespace Sphere.Application.Commons {
     public static class DependencyInjection {
@@ -33,6 +35,9 @@ namespace Sphere.Application.Commons {
 
             // Search Engine Handlers
             services.AddScoped<IUseCaseHandler<SearchCommand, SearchResponse>, SearchHandler>();
+
+            // Background Remover Handler
+            services.AddScoped<IUseCaseHandler<CreateInferenceCommand, CreateInferenceResponse>, CreateInferenceHandler>();
 
             return services;
         }
