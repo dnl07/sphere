@@ -1,9 +1,9 @@
-import ClothingGallery from "../../components/clothing/ClothingGallery"
+import HeroSection from "../../components/features/hero/HeroSection"
 
 function Home() {
     return (
         <div>
-            <ClothingGallery />
+            <HeroSection />
         </div>
     )
 }
