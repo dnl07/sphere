@@ -19,6 +19,7 @@ services:
     depends_on:
       - postgres
       - search-engine
+      - background-remover
     environment:
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=spheredb;Username=postgres;Password=password
       - FILE_STORAGE_PATH=/app/uploads
@@ -61,6 +62,8 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
 
 volumes:
   postgres_data:
