@@ -1,5 +1,5 @@
 import useClothingItems from "../../../hooks/useClothingItems";
-import { clothingEndpoints } from "../../../services/endpoints";
+import { clothingEndpoints } from "../../../api/endpoints";
 
 const ClothingGallery = () => {    
     const { items, loading, error } = useClothingItems();

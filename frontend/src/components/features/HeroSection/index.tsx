@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import Button from "../../../common/Button";
+import Button from "../../common/Button";
 
 const HeroSection = () => {
     const navigate = useNavigate();
@@ -8,6 +8,7 @@ const HeroSection = () => {
         <div>
             <h1>SPHERE</h1>
             <Button onClick={() => navigate("/closet")}>Go to Closet</Button>
+            <Button onClick={() => navigate("/create")}>Add an item</Button>
         </div>
     );
 }

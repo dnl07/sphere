@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../services/axiosInstance";
-import type { ClothingItem, ClothingResponseDto } from "../models/clothingItem";
+import axiosInstance from "../api/axiosInstance";
+import type { ClothingItem, ClothingResponseDto } from "../models/ClothingItem";
 
 const useClothingItems = () => {
     const [items, setItems] = useState<ClothingItem[]>([]);

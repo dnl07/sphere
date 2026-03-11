@@ -7,6 +7,7 @@ const Closet = () => {
 
     return (
         <div>
+            <h1>Closet</h1>
             <Button onClick={() => navigate("/")}>Go back to Home</Button>
             <ClothingGallery />
         </div>
