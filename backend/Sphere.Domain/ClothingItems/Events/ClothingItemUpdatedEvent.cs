@@ -1,11 +1,11 @@
 ﻿using Sphere.Domain.Common;
 
 namespace Sphere.Domain.ClothingItems.Events {
-    public class ClothingItemCreatedEvent : IDomainEvent {
+    public class ClothingItemUpdatedEvent : IDomainEvent {
         public Guid ClothingItemId { get; }
         public DateTime OccurredAt { get; }
 
-        public ClothingItemCreatedEvent(Guid clothingItemId) {
+        public ClothingItemUpdatedEvent(Guid clothingItemId) {
             ClothingItemId = clothingItemId;
             OccurredAt = DateTime.UtcNow;
         }

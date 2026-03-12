@@ -2,46 +2,47 @@
 using Sphere.Domain.Clothing.ValueObjects;
 using Sphere.Domain.ClothingItems.Events;
 using Sphere.Domain.Common;
-using Sphere.Domain.Images;
+using Sphere.Domain.MediaFiles;
 
-namespace Sphere.Domain.Clothing {
-    public class ClothingItem : AggregateRoot {
-        public string Name { get; set; }
+namespace Sphere.Domain.ClothingItems {
+    public partial class ClothingItem : AggregateRoot { 
+        public string Name { get; private set; }
 
-        public Guid CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Guid CategoryId { get; private set; }
 
-        public string? Description { get; set; }
-        public string? Size { get; set; }
-        public string? Material { get; set; }
-        public string? Color { get; set; }
-        public Price? Price { get; set; }
+        public string? Description { get; private set; }
+        public string? Size { get; private set; }
+        public string? Material { get; private set; }
+        public string? Color { get; private set; }
+        public Price? Price { get; private set; }
 
-        // Where bought?
-        // When bought?
+        // TODO: Implement these properties in the commands and handlers
+        public DateTime? BoughtAt { get; private set; }
+        public string? Store { get; private set; }
 
-        public Guid ImageId { get; set; }
-        public Image Image { get; set; }
+        public Guid ImageId { get; private set; }
 
         #pragma warning disable CS8618
         private ClothingItem() { }
         #pragma warning restore CS8618
 
-        public ClothingItem(string name, Category category, string? description, string? size, string? material, string? color, Price? price, Image image) {
-            Name = name; 
-            Category = category;
+        public ClothingItem(string name, Guid categoryId, string? description, string? size, string? material, string? color, Price? price, Guid imageId) {
+            Name = name;
+            CategoryId = categoryId;
             Description = description;
             Size = size;
             Material = material;
             Color = color;
             Price = price;
-            Image = image;
+            ImageId = imageId;
+
+            Validate();
 
             AddDomainEvent(new ClothingItemCreatedEvent(Id));
         }
 
         public void Delete() {
-            AddDomainEvent(new ClothingItemDeletedEvent(Id, Image.Id));
+            AddDomainEvent(new ClothingItemDeletedEvent(Id, ImageId));
         }
     }
 }
