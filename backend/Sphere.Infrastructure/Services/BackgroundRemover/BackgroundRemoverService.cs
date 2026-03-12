@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Services;
-using Sphere.Infrastructure.Services.SearchEngine;
 using System.IO.Compression;
 using System.Net.Http.Headers;
-using System.Net.Mime;
 
 namespace Sphere.Infrastructure.Services.BackgroundRemover {
     internal class BackgroundRemoverService : IBackgroundRemoverService {

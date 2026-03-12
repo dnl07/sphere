@@ -2,7 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
-using Sphere.Domain.Clothing;
+using Sphere.Domain.Categories;
+using Sphere.Domain.ClothingItems;
 using Sphere.Infrastructure.Persistance;
 
 namespace Sphere.Infrastructure.Repositories {
@@ -33,15 +34,11 @@ namespace Sphere.Infrastructure.Repositories {
         public async Task<ClothingItem?> GetByIdAsync(Guid id, CancellationToken ct = default) {
             return await _context.ClothingItems
                 .Where(x => x.Id == id)
-                .Include(x => x.Category)
-                .Include(x => x.Image)
                 .FirstOrDefaultAsync(ct);
         }
 
         public async Task<List<ClothingItem>> GetAllAsync(CancellationToken ct = default) {
             return await _context.ClothingItems
-                .Include(x => x.Category)
-                .Include(x => x.Image)
                 .ToListAsync(ct);
         }
 
@@ -64,6 +61,20 @@ namespace Sphere.Infrastructure.Repositories {
             // Remove the item from the database
             _context.ClothingItems.Remove(item);
             await _context.SaveChangesAsync(ct);
+        }
+
+        public async Task<Category?> GetCategoryByIdAsync(Guid id, CancellationToken ct = default) {
+            return await _context.Categories.FindAsync(new object[] { id }, ct);
+        }
+
+        public async Task<Category?> GetCategoryByNameAsync(string name, CancellationToken ct = default) {
+            string normalized = name.ToLower();
+
+            return await _context.Categories.FirstOrDefaultAsync(c => c.Name.Equals(normalized, StringComparison.CurrentCultureIgnoreCase), ct);
+        }
+
+        public async Task<List<Category>> GetAllCategoriesAsync(CancellationToken ct = default) {
+            return await _context.Categories.ToListAsync(ct);
         }
     }
 }

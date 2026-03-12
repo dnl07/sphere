@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Sphere.Domain.Clothing;
+using Sphere.Domain.ClothingItems;
 
 namespace Sphere.Infrastructure.Persistance.Configurations {
     public class ClothingItemConfiguration : IEntityTypeConfiguration<ClothingItem> {

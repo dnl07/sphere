@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sphere.Domain.Categories;
-using Sphere.Domain.Clothing;
-using Sphere.Domain.Images;
+using Sphere.Domain.ClothingItems;
+using Sphere.Domain.MediaFiles;
 using Sphere.Infrastructure.Persistance.Seeds;
 
 namespace Sphere.Infrastructure.Persistance {
@@ -11,7 +11,7 @@ namespace Sphere.Infrastructure.Persistance {
         public DbSet<ClothingItem> ClothingItems { get; set; }
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<Image> Images { get; set; }
+        public DbSet<MediaFile> MediaFiles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

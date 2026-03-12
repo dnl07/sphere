@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sphere.Domain.Categories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sphere.Infrastructure.Persistance.Seeds {
     public static class CategorySeeder {

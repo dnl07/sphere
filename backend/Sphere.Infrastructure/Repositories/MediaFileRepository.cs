@@ -1,28 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Repository;
-using Sphere.Domain.Images;
+using Sphere.Domain.MediaFiles;
 using Sphere.Infrastructure.Persistance;
 
 namespace Sphere.Infrastructure.Repositories {
-    public class ImageRepository : IImageRepository {
+    public class MediaFileRepository : IMediaFileRepository {
         private readonly AppDbContext _context;
-        private readonly ILogger<ImageRepository> _logger;
+        private readonly ILogger<MediaFileRepository> _logger;
 
-        public ImageRepository(AppDbContext context, ILogger <ImageRepository> logger) {
+        public MediaFileRepository(AppDbContext context, ILogger <MediaFileRepository> logger) {
             _context = context;
             _logger = logger;
         }
 
-        public async Task AddAsync(Image image, CancellationToken ct = default) {
-            await _context.Images.AddAsync(image, ct);
+        public async Task AddAsync(MediaFile image, CancellationToken ct = default) {
+            await _context.MediaFiles.AddAsync(image, ct);
             await _context.SaveChangesAsync(ct);
 
             _logger.LogInformation("Added image with ID {ImageId}", image.Id);
         }
 
-        public async Task<Image?> GetByIdAsync(Guid id, CancellationToken ct = default) {
-            var item = await _context.Images
+        public async Task<MediaFile?> GetByIdAsync(Guid id, CancellationToken ct = default) {
+            var item = await _context.MediaFiles
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync(ct);
 
@@ -30,7 +30,7 @@ namespace Sphere.Infrastructure.Repositories {
         }
 
         public async Task DeleteAsync(Guid id, CancellationToken ct = default) {
-            var item = await _context.Images
+            var item = await _context.MediaFiles
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync(ct);
 
@@ -41,7 +41,7 @@ namespace Sphere.Infrastructure.Repositories {
 
             _logger.LogInformation("Deleting image with ID {ImageId}", item.Id);
 
-            _context.Images.Remove(item);
+            _context.MediaFiles.Remove(item);
             await _context.SaveChangesAsync(ct);
         }
     }
