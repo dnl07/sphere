@@ -4,7 +4,6 @@
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
 
-
         protected Entity() {
             Id = Guid.NewGuid();
         }

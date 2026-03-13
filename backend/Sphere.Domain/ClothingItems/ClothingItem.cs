@@ -1,8 +1,6 @@
-﻿using Sphere.Domain.Categories;
-using Sphere.Domain.Clothing.ValueObjects;
+﻿using Sphere.Domain.Clothing.ValueObjects;
 using Sphere.Domain.ClothingItems.Events;
 using Sphere.Domain.Common;
-using Sphere.Domain.MediaFiles;
 
 namespace Sphere.Domain.ClothingItems {
     public partial class ClothingItem : AggregateRoot { 
@@ -26,7 +24,7 @@ namespace Sphere.Domain.ClothingItems {
         private ClothingItem() { }
         #pragma warning restore CS8618
 
-        public ClothingItem(string name, Guid categoryId, string? description, string? size, string? material, string? color, Price? price, Guid imageId) {
+        private ClothingItem(string name, Guid categoryId, string? description, string? size, string? material, string? color, Price? price, Guid imageId) {
             Name = name;
             CategoryId = categoryId;
             Description = description;
@@ -35,10 +33,32 @@ namespace Sphere.Domain.ClothingItems {
             Color = color;
             Price = price;
             ImageId = imageId;
+        }
+
+        public ClothingItem Create(
+            string name, 
+            Guid categoryId, 
+            string? description, 
+            string? size, 
+            string? material, 
+            string? color,
+            decimal? priceAmount,
+            string? currency,
+            Guid imageId) {
+
+            Price? price = null;
+
+            if (priceAmount.HasValue) {
+                price = new Price(priceAmount.Value, currency ?? "EUR");
+            }
+
+            var item = new ClothingItem(name, categoryId, description, size, material, color, price, imageId);
 
             Validate();
 
             AddDomainEvent(new ClothingItemCreatedEvent(Id));
+
+            return item;
         }
 
         public void Delete() {

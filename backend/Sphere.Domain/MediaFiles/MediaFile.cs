@@ -10,12 +10,10 @@ namespace Sphere.Domain.MediaFiles {
         private MediaFile() { }
         #pragma warning restore CS8618
 
-        public MediaFile(string fileName, long fileSize, string contentType) {
+        private MediaFile(string fileName, long fileSize, string contentType) {
             FileName = fileName;
             FileSize = fileSize;
             ContentType = contentType;
-
-            Validate();
         }
     }
 }

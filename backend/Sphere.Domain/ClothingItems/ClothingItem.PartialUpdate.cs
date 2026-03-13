@@ -6,21 +6,20 @@ namespace Sphere.Domain.ClothingItems {
     public partial class ClothingItem {
         public void Update(
             string? name = null,
-            Category? category = null,
+            Guid? categoryId = null,
             string? description = null,
             string? size = null,
             string? material = null,
             string? color = null,
             decimal? priceAmount = null,
             string? currency = null,
-            MediaFile? newImage = null) {
+            Guid? imageId = null) {
             if (name != null) {
                 Name = name;
             }
 
-            if (category != null) {
-                Category = category;
-                CategoryId = category.Id;
+            if (categoryId is not null) {
+                CategoryId = categoryId.Value;
             }
 
             if (description != null) {
@@ -46,9 +45,8 @@ namespace Sphere.Domain.ClothingItems {
                 Price = new Price(priceAmount.Value, currency);
             }
 
-            if (newImage != null) {
-                Image = newImage;
-                ImageId = newImage.Id;
+            if (imageId is not null) {
+                CategoryId = imageId.Value;
             }
 
             Validate();
