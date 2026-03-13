@@ -1,9 +1,9 @@
-﻿using Sphere.Domain.Clothing.ValueObjects;
-using Sphere.Domain.ClothingItems.Events;
+﻿using Sphere.Domain.ClothingItems.Events;
+using Sphere.Domain.ClothingItems.ValueObjects;
 
 namespace Sphere.Domain.ClothingItems {
     public partial class ClothingItem {
-        public ClothingItem Create(
+        public static ClothingItem Create(
             string name,
             Guid categoryId,
             string? description,
@@ -22,9 +22,9 @@ namespace Sphere.Domain.ClothingItems {
 
             var item = new ClothingItem(name, categoryId, description, size, material, color, price, imageId);
 
-            Validate();
+            item.Validate();
 
-            AddDomainEvent(new ClothingItemCreatedEvent(Id));
+            item.AddDomainEvent(new ClothingItemCreatedEvent(item.Id));
 
             return item;
         }

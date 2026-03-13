@@ -4,7 +4,6 @@ using Sphere.Application.Commons;
 using Sphere.Infrastructure;
 using Sphere.Infrastructure.Persistance;
 using Sphere.Infrastructure.Services.SearchEngine;
-using System.Security.Authentication.ExtendedProtection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);

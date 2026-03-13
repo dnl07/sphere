@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Services;
+using Sphere.Infrastructure.Services.SearchEngine.Models;
 using System.Net.Http.Json;
 
 namespace Sphere.Infrastructure.Services.SearchEngine {
@@ -13,14 +14,17 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
         }
 
         public async Task InitializeAsync(CancellationToken ct) {
-            var url = "engine/init";
-
-            var options = new {
-                useOwnId = true
-            };
-
             try {
-                var response = await _client.PostAsJsonAsync(url, options);
+                var statusResponse = await _client.GetFromJsonAsync<EngineStatus>("engine/status", ct);
+
+                if (statusResponse?.IsInitialized == true) {
+                    _logger.LogInformation("Search engine is already initialized according to status check.");
+                    return;
+                }
+
+                var options = new { useOwnId = true };
+
+                var response = await _client.PostAsJsonAsync("engine/init", options, ct);
                 response.EnsureSuccessStatusCode();
                 _logger.LogInformation("Search engine initialized successfully");
             } catch (Exception e) {

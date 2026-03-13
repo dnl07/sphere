@@ -1,6 +1,4 @@
-﻿using Sphere.Domain.Clothing.ValueObjects;
-
-namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
+﻿namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
     public class GetClothingImageResponse {
         public byte[] FileData { get; set; }
         public string FileName { get; set; }

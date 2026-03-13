@@ -1,15 +1,15 @@
 ﻿using Sphere.Domain.Clothing.Exceptions;
 
-namespace Sphere.Domain.Clothing.ValueObjects {
+namespace Sphere.Domain.ClothingItems.ValueObjects {
     public class Price {
         public decimal Amount { get; }
         public string Currency { get; }
 
         public Price(decimal amount, string currency) {
-            Validate();
-
             Amount = amount;
             Currency = currency;
+
+            Validate();
         }
 
         public override bool Equals(object? obj) => obj is Price price && Amount == price.Amount && Currency == price.Currency;

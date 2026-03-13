@@ -1,5 +1,4 @@
-﻿using Sphere.Domain.Categories;
-using Sphere.Domain.Clothing.ValueObjects;
+﻿using Sphere.Domain.ClothingItems.ValueObjects;
 
 namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
     public class GetClothingItemResponse {

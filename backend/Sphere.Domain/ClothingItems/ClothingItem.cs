@@ -1,5 +1,5 @@
-﻿using Sphere.Domain.Clothing.ValueObjects;
-using Sphere.Domain.ClothingItems.Events;
+﻿using Sphere.Domain.ClothingItems.Events;
+using Sphere.Domain.ClothingItems.ValueObjects;
 using Sphere.Domain.Common;
 
 namespace Sphere.Domain.ClothingItems {
@@ -33,32 +33,6 @@ namespace Sphere.Domain.ClothingItems {
             Color = color;
             Price = price;
             ImageId = imageId;
-        }
-
-        public ClothingItem Create(
-            string name, 
-            Guid categoryId, 
-            string? description, 
-            string? size, 
-            string? material, 
-            string? color,
-            decimal? priceAmount,
-            string? currency,
-            Guid imageId) {
-
-            Price? price = null;
-
-            if (priceAmount.HasValue) {
-                price = new Price(priceAmount.Value, currency ?? "EUR");
-            }
-
-            var item = new ClothingItem(name, categoryId, description, size, material, color, price, imageId);
-
-            Validate();
-
-            AddDomainEvent(new ClothingItemCreatedEvent(Id));
-
-            return item;
         }
 
         public void Delete() {

@@ -4,9 +4,9 @@ using Sphere.Application.Commons.Interfaces.Repository;
 namespace Sphere.Application.UseCases.Image.Queries.Get {
     public class GetImageHandler : IUseCaseHandler<GetImageQuery, GetImageResponse> {
         private readonly IFileStorage _storage;
-        private readonly IImageRepository _repository;
+        private readonly IMediaFileRepository _repository;
 
-        public GetImageHandler(IFileStorage storage, IImageRepository repository) {
+        public GetImageHandler(IFileStorage storage, IMediaFileRepository repository) {
             _storage = storage;
             _repository = repository;
         }

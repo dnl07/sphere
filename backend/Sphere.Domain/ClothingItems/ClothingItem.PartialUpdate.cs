@@ -1,6 +1,4 @@
-﻿using Sphere.Domain.Categories;
-using Sphere.Domain.Clothing.ValueObjects;
-using Sphere.Domain.MediaFiles;
+﻿using Sphere.Domain.ClothingItems.ValueObjects;
 
 namespace Sphere.Domain.ClothingItems {
     public partial class ClothingItem {

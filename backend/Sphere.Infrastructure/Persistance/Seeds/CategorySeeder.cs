@@ -5,9 +5,44 @@ namespace Sphere.Infrastructure.Persistance.Seeds {
     public static class CategorySeeder {
         public static void Seed(ModelBuilder modelBuilder) {
             modelBuilder.Entity<Category>().HasData(
-                new Category("Shirts") { Id = Guid.Parse("11111111-1111-1111-1111-111111111111") },
-                new Category("Pants") { Id = Guid.Parse("22222222-2222-2222-2222-222222222222") },
-                new Category("Shoes") { Id = Guid.Parse("33333333-3333-3333-3333-333333333333") }
+                // Tops
+                Category.Create("T-Shirt"),
+                Category.Create("Long Sleeve Shirt"),
+                Category.Create("Blouse"),
+
+                // Outerwear
+                Category.Create("Jacket"),
+                Category.Create("Coat"),
+                Category.Create("Blazer"),
+
+                // Bottoms
+                Category.Create("Jeans"),
+                Category.Create("Pants"),
+                Category.Create("Shorts"),
+                Category.Create("Leggings"),
+                Category.Create("Joggers"),
+                Category.Create("Sweatpants"),
+
+                // Dresses and skirts
+                Category.Create("Dress"),
+                Category.Create("Skirt"),
+
+                // Sweatshirts and hoodies
+                Category.Create("Sweater"),
+                Category.Create("Pullover"),
+                Category.Create("Cardigan"),
+                Category.Create("Hoodie"),
+
+                // Accessories
+                Category.Create("Hat"),
+                Category.Create("Cap"),
+                Category.Create("Scarf"),
+                Category.Create("Gloves"),
+
+                // Footwear
+                Category.Create("Sneakers"),
+                Category.Create("Boots"),
+                Category.Create("High Heels")
             );
         }
     }

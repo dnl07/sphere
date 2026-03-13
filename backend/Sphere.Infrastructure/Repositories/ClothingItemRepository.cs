@@ -20,6 +20,10 @@ namespace Sphere.Infrastructure.Repositories {
             _logger = logger;
         }
 
+        public async Task SaveChangesAsync(CancellationToken ct = default) {
+            await _context.SaveChangesAsync(ct);
+        }
+
         public async Task AddAsync(ClothingItem item, CancellationToken ct = default) {
             await _context.ClothingItems.AddAsync(item, ct);
             await _context.SaveChangesAsync(ct);
@@ -70,7 +74,7 @@ namespace Sphere.Infrastructure.Repositories {
         public async Task<Category?> GetCategoryByNameAsync(string name, CancellationToken ct = default) {
             string normalized = name.ToLower();
 
-            return await _context.Categories.FirstOrDefaultAsync(c => c.Name.Equals(normalized, StringComparison.CurrentCultureIgnoreCase), ct);
+            return await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToUpper() == normalized.ToUpper(), ct);
         }
 
         public async Task<List<Category>> GetAllCategoriesAsync(CancellationToken ct = default) {

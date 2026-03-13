@@ -1,7 +1,7 @@
-﻿using Sphere.API.Mappers;
-using Sphere.Application.Commons.Exceptions;
+﻿using Sphere.Application.Commons.Exceptions;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
+using Sphere.Application.Mappers;
 
 namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
     public class GetClothingItemHandler : IUseCaseHandler<GetClothingItemQuery, GetClothingItemResponse> {
@@ -18,7 +18,13 @@ namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
                 throw new NotFoundException($"Clothing item with ID {request.Id} not found.");
             }
 
-            return response.ToGetResponse();
+            var category = await _repository.GetCategoryByIdAsync(response.CategoryId, ct);
+
+            if (category == null) {
+                throw new NotFoundException($"Category with ID {response.CategoryId} not found.");
+            }
+
+            return response.ToGetResponse(category.Name);
         }
     }
 }

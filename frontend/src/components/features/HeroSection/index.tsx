@@ -6,7 +6,7 @@ const HeroSection = () => {
 
     return (
         <div>
-            <h1>SPHERE</h1>
+            <h1 className="text-3xl font-bold underline">SPHERE</h1>
             <Button onClick={() => navigate("/closet")}>Go to Closet</Button>
             <Button onClick={() => navigate("/create")}>Add an item</Button>
         </div>

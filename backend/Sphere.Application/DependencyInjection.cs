@@ -8,8 +8,8 @@ using Sphere.Application.UseCases.Image.Queries.Get;
 using Sphere.Application.UseCases.Category.Queries.GetAll;
 
 using Sphere.Application.UseCases.SearchEngine.Command.Search;
-using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Application.UseCases.Inference.Commands.Create;
+using Sphere.Application.UseCases.ClothingItem.Commands.Update;
 
 namespace Sphere.Application.Commons {
     public static class DependencyInjection {
@@ -17,12 +17,10 @@ namespace Sphere.Application.Commons {
             // Register Dispatcher
             services.AddScoped<IUseCaseDispatcher, UseCaseDispatcher>();
 
-            // Register all use case handlers
-
             // Clothing Item Handlers
             services.AddScoped<IUseCaseHandler<CreateClothingItemCommand, CreateClothingItemResponse>, CreateClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<DeleteClothingItemCommand, DeleteClothingItemResponse>, DeleteClothingItemHandler>();
-
+            services.AddScoped<IUseCaseHandler<UpdateClothingItemCommand, UpdateClothingItemResponse>, UpdateClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<GetClothingItemQuery, GetClothingItemResponse>, GetClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<GetAllClothingItemQuery, GetAllClothingItemResponse>, GetAllClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<GetClothingImageQuery, GetClothingImageResponse>, GetClothingImageHandler>();

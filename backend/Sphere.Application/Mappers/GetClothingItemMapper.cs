@@ -1,13 +1,13 @@
 ﻿using Sphere.Application.UseCases.ClothingItems.Queries.Get;
-using Sphere.Domain.Clothing;
+using Sphere.Domain.ClothingItems;
 
-namespace Sphere.API.Mappers {
+namespace Sphere.Application.Mappers {
     public static class GetClothingItemMapper {
-        public static GetClothingItemResponse ToGetResponse(this ClothingItem item) {
+        public static GetClothingItemResponse ToGetResponse(this ClothingItem item, string categoryName) {
             return new GetClothingItemResponse(
                 item.Id,
                 item.Name,
-                item.Category.Name,
+                categoryName,
                 item.Description,
                 item.Size,
                 item.Material,

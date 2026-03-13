@@ -5,7 +5,6 @@ using Sphere.Application.Commons.Interfaces.Services;
 
 namespace Sphere.Infrastructure.Services.SearchEngine {
     public static class SearchEngineInitializer {
-        private static bool _initialized = false;
 
         /// <summary>
         /// Initializes the search engine by waiting for it to be available and then indexing existing items from the database.
@@ -18,11 +17,6 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
             var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("SearchEngineInitializer");
             logger.LogInformation("Waiting for search engine container...");
 
-            if (_initialized) {
-                logger.LogInformation("Search engine already initialized.");
-                return;
-            }
-
             await WaitForSearchEngineAsync(searchEngine, logger, ct);
             await IndexExistingItemsAsync(searchEngine, repo, logger, ct);
         }
@@ -32,7 +26,7 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
         /// it until it succeeds or a maximum number of retries is reached.
         /// </summary>
         private static async Task WaitForSearchEngineAsync(ISearchEngineService searchEngine, ILogger logger, CancellationToken ct) {
-            var maxRetries = 10;
+            var maxRetries = 5;
 
             logger.LogInformation("Waiting for search engine container...");
             await Task.Delay(TimeSpan.FromSeconds(3), ct);
@@ -43,7 +37,6 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
                     logger.LogInformation("Initializing search engine (attempt {Attempt}/{MaxRetries})...", i + 1, maxRetries);
                     await searchEngine.InitializeAsync(ct);
                     logger.LogInformation("Search engine initialized successfully");
-                    _initialized = true;
                     return;
                 } catch (Exception ex) {
                     logger.LogWarning(ex, "Attempt {Attempt} failed: {Message}", i + 1, ex.Message);

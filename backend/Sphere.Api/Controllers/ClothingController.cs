@@ -23,7 +23,7 @@ namespace Sphere.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromForm] CreateClothingItemRequestDto request) {
-            var command = request.ToCommand();
+            var command = request.ToCreateCommand();
             var response = await _dispatcher.Dispatch(command);
 
             return Ok(response);
@@ -56,18 +56,26 @@ namespace Sphere.API.Controllers
             return Ok(response);
         }
 
-        /*[HttpPut("{id}")]
-        public async Task<IActionResult> UpdateById([FromRoute] Guid id) {
-            var query = new DeleteClothingItemCommand(id);
 
-            var response = await _dispatcher.Dispatch(query);
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateById(string id, [FromForm] UpdateClothingItemRequestDto request) {
+            if (!Guid.TryParse(id, out var guidId)) {
+                return BadRequest("Invalid ID format.");
+            }
+
+            var command = request.ToUpdateCommand(guidId);
+
+            var response = await _dispatcher.Dispatch(command);
 
             if (response is null) {
                 return NotFound();
             }
 
             return Ok(response);
-        }*/
+        }
 
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -25,7 +25,6 @@ namespace Sphere.Infrastructure {
 
             // Repositories
             services.AddScoped<IClothingItemRepository, ClothingItemRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IMediaFileRepository, MediaFileRepository>();
 
             // Domain Event Services

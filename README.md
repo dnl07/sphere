@@ -1,4 +1,4 @@
-# sphere
+# sphere (in development!)
 
 Sphere is a modular platform for managing, searching, and processing clothing items and images. It is designed for extensibility, currently under active development. Sphere provides a REST API for CRUD operations on clothing items and categories, with a frontend planned using React + TypeScript.
 
