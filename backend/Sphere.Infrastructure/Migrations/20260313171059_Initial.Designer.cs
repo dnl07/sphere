@@ -12,7 +12,7 @@ using Sphere.Infrastructure.Persistance;
 namespace Sphere.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260313161329_Initial")]
+    [Migration("20260313171059_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -49,175 +49,175 @@ namespace Sphere.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("56411260-205d-4f21-aa91-6032491c34ba"),
+                            Id = new Guid("9827f22f-a79a-da9a-d435-2223e419a145"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "T-Shirt",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("7b7f42ea-d910-4187-b16f-e0aeca694a75"),
+                            Id = new Guid("177d825b-36e8-d9ab-4b93-e03b212dbfe2"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Long Sleeve Shirt",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("b4d1b24c-f670-4160-ba47-55910c13f7c7"),
+                            Id = new Guid("8b4b0500-a80b-30c6-1761-1b99e6bf1f3f"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Blouse",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("1d8e8ea8-ff54-40d4-9c4d-73e889866ec0"),
+                            Id = new Guid("464b5ae7-5b60-de3a-dcce-3e98dace883a"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jacket",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("ec89f1e1-8c23-4893-9941-242bdd306eb7"),
+                            Id = new Guid("d92e166e-bca2-3076-7e0a-249786f4951e"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Coat",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("2593374a-f6a3-4d10-8935-4556484f6fc3"),
+                            Id = new Guid("e99548c0-13c7-3264-78a3-df15426030cd"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Blazer",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("33551e06-2c77-49e5-b6a4-85215e8cec6b"),
+                            Id = new Guid("d1f37c34-1d7a-df71-9641-ba489fc0e0a0"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jeans",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("364f9d6c-0af2-45ce-8684-c5b1587f2ac5"),
+                            Id = new Guid("b223cd6e-b69c-1818-8451-cdf0f35d4704"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Pants",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("ea098850-97ee-4687-8b06-c862eef3ce68"),
+                            Id = new Guid("7595c37a-01b7-93bc-aeb9-a7a1473a57c3"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Shorts",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("782c81a0-e5d5-44f0-bbde-b9ad7772a555"),
+                            Id = new Guid("6a72b4cc-64c0-c5c7-411a-5a6f70a1dc70"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Leggings",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("55f3fd99-54de-4a0f-b0ec-984a99fa7de0"),
+                            Id = new Guid("cb67e7c8-3faa-5411-6b37-2c04e36eb531"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Joggers",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("316a82fb-6f4e-4a95-8dd7-827c173c84b8"),
+                            Id = new Guid("d96fed16-c3cd-aebe-3c49-075184bb5b96"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Sweatpants",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("90727123-30b1-4049-8071-feaf71a34ffb"),
+                            Id = new Guid("3c23e841-e0bb-ee3e-90cc-371b01175388"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Dress",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("7be039e6-9d67-47fd-88a8-67a3b0a93eb4"),
+                            Id = new Guid("a937c8eb-a54d-6fb0-d0be-cfb3cdaa92c0"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Skirt",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("288330b6-c2ae-44cb-9d9a-b9b94e64c60f"),
+                            Id = new Guid("c9aa9c37-9419-afd5-983d-32bd0a2f0557"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Sweater",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("ab8fd7bc-0411-4268-b5a2-6ba89f4686c1"),
+                            Id = new Guid("841bc02f-5d0c-32ee-4551-211edad39bdf"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Pullover",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("2804a7d3-856b-4baf-9291-b4d2b226715c"),
+                            Id = new Guid("650a1cb3-a76d-1e45-246d-2d220f50a986"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Cardigan",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("78124534-5f41-43cf-be11-c75de3a83949"),
+                            Id = new Guid("7953797d-9211-fb4b-a10d-3f98f1623a48"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Hoodie",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("db192c2a-d485-46ef-92d2-65425a176b9e"),
+                            Id = new Guid("627a0da1-ffaa-2f59-4eec-bcf2fe7fad9b"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Hat",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("dad124c0-ad8d-43ea-ab2c-72327c6f3096"),
+                            Id = new Guid("9734d588-a9f4-5829-c67c-73a9f2f52df3"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Cap",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("355bf6d2-e257-4985-9a30-3343b21c438b"),
+                            Id = new Guid("2aec747c-a90c-0c95-64f8-28fa155c3a0d"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Scarf",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("5148214c-48d7-47b5-89e4-75d8a4797dde"),
+                            Id = new Guid("f1da3f64-f5fe-8d4e-ef75-1f54b706cd60"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Gloves",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("3f5e4f15-e10b-4aad-a5ab-110b2be93167"),
+                            Id = new Guid("0e2624ea-76f5-8940-bd80-4dad0885468b"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Sneakers",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("12e559f3-6c95-43a0-b06e-de600a6415c4"),
+                            Id = new Guid("b9657e79-cdc5-a20d-5a93-2f2b0947b94b"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Boots",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("235ad0cf-3b59-432a-b31b-3f1d8842d9e6"),
+                            Id = new Guid("6b0d6657-f7e4-ce7c-ccfd-861400f11e4d"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "High Heels",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -307,7 +307,7 @@ namespace Sphere.Infrastructure.Migrations
 
             modelBuilder.Entity("Sphere.Domain.ClothingItems.ClothingItem", b =>
                 {
-                    b.OwnsOne("Sphere.Domain.Clothing.ValueObjects.Price", "Price", b1 =>
+                    b.OwnsOne("Sphere.Domain.ClothingItems.ValueObjects.Price", "Price", b1 =>
                         {
                             b1.Property<Guid>("ClothingItemId")
                                 .HasColumnType("uuid");
