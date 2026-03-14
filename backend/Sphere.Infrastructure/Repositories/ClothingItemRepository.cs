@@ -68,13 +68,15 @@ namespace Sphere.Infrastructure.Repositories {
         }
 
         public async Task<Category?> GetCategoryByIdAsync(Guid id, CancellationToken ct = default) {
-            return await _context.Categories.FindAsync(new object[] { id }, ct);
+            var category = await _context.Categories.FindAsync(new object[] { id }, ct);
+            _logger.LogInformation("Retrieved category with ID {CategoryId}: {CategoryName}", id, category?.Name);
+            return category;
         }
 
         public async Task<Category?> GetCategoryByNameAsync(string name, CancellationToken ct = default) {
             string normalized = name.ToLower();
 
-            return await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToUpper() == normalized.ToUpper(), ct);
+            return await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == normalized.ToLower(), ct);
         }
 
         public async Task<List<Category>> GetAllCategoriesAsync(CancellationToken ct = default) {

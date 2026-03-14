@@ -9,7 +9,7 @@ namespace Sphere.Infrastructure.Repositories {
         private readonly AppDbContext _context;
         private readonly ILogger<MediaFileRepository> _logger;
 
-        public MediaFileRepository(AppDbContext context, ILogger <MediaFileRepository> logger) {
+        public MediaFileRepository(AppDbContext context, ILogger<MediaFileRepository> logger) {
             _context = context;
             _logger = logger;
         }

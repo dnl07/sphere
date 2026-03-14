@@ -1,4 +1,5 @@
-﻿using Sphere.Application.UseCases.ClothingItems.Commands.Create;
+﻿using Sphere.Application.UseCases.ClothingItem.Commands.Update;
+using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 using Sphere.Domain.ClothingItems;
 
 namespace Sphere.Application.Mappers {
@@ -19,6 +20,21 @@ namespace Sphere.Application.Mappers {
 
         public static CreateClothingItemResponse ToCreateResponse(this ClothingItem item, string categoryName) {
             return new CreateClothingItemResponse(
+                item.Id,
+                item.Name,
+                categoryName,
+                item.Description,
+                item.Size,
+                item.Material,
+                item.Color,
+                item.Price?.Amount,
+                item.Price?.Currency,
+                item.ImageId
+            );
+        }
+
+        public static UpdateClothingItemResponse ToUpdateResponse(this ClothingItem item, string categoryName) {
+            return new UpdateClothingItemResponse(
                 item.Id,
                 item.Name,
                 categoryName,

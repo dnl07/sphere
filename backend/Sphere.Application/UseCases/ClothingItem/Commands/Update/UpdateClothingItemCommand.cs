@@ -26,21 +26,21 @@ namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
             string? color,
             decimal? amount,
             string? currency,
-            byte[] image,
-            string imageFileName,
-            string imageContentType) {
+            byte[]? image,
+            string? imageFileName,
+            string? imageContentType) {
             Id = id;
-            Name = name ?? "";
-            Category = category ?? "";
-            Description = description ?? "";
-            Size = size ?? "";
-            Material = material ?? "";
-            Color = color ?? "";
+            Name = name;
+            Category = category;
+            Description = description;
+            Size = size;
+            Material = material;
+            Color = color;
             PriceAmount = amount;
-            Currency = currency ?? "EUR";
+            Currency = currency;
             Image = image ?? [];
-            ImageFileName = imageFileName ?? "";
-            ImageContentType = imageContentType ?? "";
+            ImageFileName = imageFileName;
+            ImageContentType = imageContentType;
         }
     }
 }

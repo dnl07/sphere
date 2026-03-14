@@ -1,4 +1,5 @@
-﻿using Sphere.Application.Commons.Exceptions;
+﻿using Microsoft.Extensions.Logging;
+using Sphere.Application.Commons.Exceptions;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Mappers;
@@ -11,14 +12,23 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
 
         private readonly IFileStorage _fileStorage;
 
-        public CreateClothingItemHandler(IClothingItemRepository clothingRepository, IMediaFileRepository mediaFileRepository, IFileStorage fileStorage) { 
+        private readonly ILogger<CreateClothingItemHandler> _logger;
+
+        public CreateClothingItemHandler(
+            IClothingItemRepository clothingRepository, 
+            IMediaFileRepository mediaFileRepository, 
+            IFileStorage fileStorage,
+            ILogger<CreateClothingItemHandler> logger) { 
             _clothingRepository = clothingRepository;
             _fileStorage = fileStorage;
             _mediaFileRepository = mediaFileRepository;
+            _logger = logger;
         }
 
         public async Task<CreateClothingItemResponse> Handle(CreateClothingItemCommand cmd, CancellationToken ct) {
             var category = await _clothingRepository.GetCategoryByNameAsync(cmd.Category, ct);
+
+            _logger.LogInformation("Creating clothing item with name {Name} in category {Category} with id {id}", cmd.Name, cmd.Category, category?.Id);
 
             if (category is null) {
                 throw new NotFoundException("Category not found.");
@@ -28,7 +38,6 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
 
             await _fileStorage.SaveAsync(mediaFile.Id, cmd.Image, ct);
             await _mediaFileRepository.AddAsync(mediaFile, ct);
-
 
             var item = cmd.ToDomain(category.Id, mediaFile.Id);
 

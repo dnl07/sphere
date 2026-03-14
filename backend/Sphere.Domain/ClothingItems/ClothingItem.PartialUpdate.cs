@@ -20,31 +20,31 @@ namespace Sphere.Domain.ClothingItems {
                 CategoryId = categoryId.Value;
             }
 
-            if (description != null) {
+            if (description is not null) {
                 Description = description;
             }
 
-            if (size != null) {
+            if (size is not null) {
                 Size = size;
             }
 
-            if (material != null) {
+            if (material is not null) {
                 Material = material;
             }
 
-            if (color != null) {
+            if (color is not null) {
                 Color = color;
             }
 
-            priceAmount = priceAmount ?? Price?.Amount;
-            currency = currency ?? Price?.Currency;
+            priceAmount ??= Price?.Amount;
+            currency ??= Price?.Currency;
 
             if (priceAmount is not null && currency is not null) {
                 Price = new Price(priceAmount.Value, currency);
             }
 
             if (imageId is not null) {
-                CategoryId = imageId.Value;
+                ImageId = imageId.Value;
             }
 
             Validate();

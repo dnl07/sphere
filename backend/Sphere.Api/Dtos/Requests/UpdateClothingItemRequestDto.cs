@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 namespace Sphere.API.Dtos.Requests {
     public class UpdateClothingItemRequestDto {
         [StringLength(100, ErrorMessage = "Name cannot be longer than 100 characters")]
-        public string? Name { get; set; } = "";
+        public string? Name { get; set; }
 
         [StringLength(50, ErrorMessage = "Category cannot be longer than 50 characters")]
-        public string? Category { get; set; } = "";
+        public string? Category { get; set; }
 
         [StringLength(500, ErrorMessage = "Description cannot be longer than 500 characters")]
         public string? Description { get; set; }
