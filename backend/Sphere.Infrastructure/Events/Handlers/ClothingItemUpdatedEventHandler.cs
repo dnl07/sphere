@@ -6,13 +6,13 @@ using Sphere.Domain.ClothingItems.Events;
 using Sphere.Infrastructure.Services.SearchEngine.Utils;
 
 namespace Sphere.Infrastructure.Events.Handlers {
-    public class ClothingItemCreatedEventHandler : IDomainEventHandler<ClothingItemCreatedEvent> {
+    public class ClothingItemUpdatedEventHandler : IDomainEventHandler<ClothingItemUpdatedEvent> {
         private readonly ISearchEngineService _searchEngine;
         private readonly IClothingItemRepository _clothingItemRepository;
 
         private readonly ILogger<ClothingItemCreatedEventHandler> _logger;
 
-        public ClothingItemCreatedEventHandler(
+        public ClothingItemUpdatedEventHandler(
             ISearchEngineService searchEngine, 
             IClothingItemRepository clothingItemRepository, 
             ILogger<ClothingItemCreatedEventHandler> logger) {
@@ -21,7 +21,7 @@ namespace Sphere.Infrastructure.Events.Handlers {
             _logger = logger;
         }
 
-        public async Task HandleAsync(ClothingItemCreatedEvent domainEvent, CancellationToken ct = default) {
+        public async Task HandleAsync(ClothingItemUpdatedEvent domainEvent, CancellationToken ct = default) {
             var item = await _clothingItemRepository.GetByIdAsync(domainEvent.ClothingItemId, ct);
 
             if (item == null) {

@@ -71,8 +71,6 @@ namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
 
             var updatedCategory = await _clothingRepository.GetCategoryByIdAsync(item.CategoryId, ct);
 
-            _logger.LogInformation("Category {name} with id {id} searched with id {iid}", updatedCategory?.Name, updatedCategory?.Id, item.CategoryId);
-
             if (updatedCategory is null) {
                 _logger.LogWarning("Category with ID '{CategoryId}' not found after clothing item update.", item.CategoryId);
                 throw new NotFoundException($"Category with ID '{item.CategoryId}' not found after update.");

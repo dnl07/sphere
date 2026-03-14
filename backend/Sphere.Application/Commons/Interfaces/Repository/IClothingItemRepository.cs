@@ -9,10 +9,12 @@ namespace Sphere.Application.Commons.Interfaces.Repository {
         Task AddAsync(ClothingItem item, CancellationToken ct = default);
         Task<ClothingItem?> GetByIdAsync(Guid id, CancellationToken ct = default);
         Task<List<ClothingItem>> GetAllAsync(CancellationToken ct = default);
+        Task<List<ClothingItem>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default);
         Task DeleteAsync(Guid id, CancellationToken ct = default);
 
         // Category
         Task<Category?> GetCategoryByIdAsync(Guid id, CancellationToken ct = default);
+        Task<List<Category>> GetCategoriesByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default);
         Task<Category?> GetCategoryByNameAsync(string name, CancellationToken ct = default);
         Task<List<Category>> GetAllCategoriesAsync(CancellationToken ct = default);
 

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
+using Sphere.Infrastructure.Services.SearchEngine.Utils;
 
 namespace Sphere.Infrastructure.Services.SearchEngine {
     public static class SearchEngineInitializer {
@@ -52,16 +53,18 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
         /// Indexes existing clothing items from the database into the search engine. 
         /// </summary>
         private static async Task IndexExistingItemsAsync(ISearchEngineService searchEngine, IClothingItemRepository repo, ILogger logger, CancellationToken ct) {
-            var items = await repo.GetAllAsync();
+            var items = await repo.GetAllAsync(ct);
             logger.LogInformation("SearchEngine: Indexing {Count} items...", items.Count);
 
             foreach (var item in items) {
                 try {
-                    var indexItem = new SearchIndexItem {
-                        Id = item.Id,
-                        Name = item.Name,
-                        Description = item.Description
-                    };
+                    var category = await repo.GetCategoryByIdAsync(item.CategoryId, ct);
+
+                    if (category is null) {
+                        logger.LogWarning("SearchEngine: Item {ItemId} has category {CategoryName}", item.Id, category?.Name);
+                    }
+
+                    var indexItem = item.ToSearchableText(category?.Name ?? "");
                     await searchEngine.IndexItemAsync(indexItem, ct);
                     logger.LogDebug("SearchEngine: Indexed {ItemId}", item.Id);
                 } catch (Exception e) {

@@ -46,6 +46,14 @@ namespace Sphere.Infrastructure.Repositories {
                 .ToListAsync(ct);
         }
 
+        public async Task<List<ClothingItem>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default) {
+            var items = await _context.ClothingItems
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync(ct);
+            return items;
+        }
+
+
         public async Task DeleteAsync(Guid id, CancellationToken ct = default) {
             var item = await _context.ClothingItems
                 .Where(x => x.Id == id)
@@ -71,6 +79,13 @@ namespace Sphere.Infrastructure.Repositories {
             var category = await _context.Categories.FindAsync(new object[] { id }, ct);
             _logger.LogInformation("Retrieved category with ID {CategoryId}: {CategoryName}", id, category?.Name);
             return category;
+        }
+
+        public async Task<List<Category>> GetCategoriesByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default) {
+            var categories = await _context.Categories
+                .Where(c => ids.Contains(c.Id))
+                .ToListAsync(ct);
+            return categories;
         }
 
         public async Task<Category?> GetCategoryByNameAsync(string name, CancellationToken ct = default) {

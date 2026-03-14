@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Services;
+using Sphere.Domain.ClothingItems;
 using Sphere.Infrastructure.Services.SearchEngine.Models;
 using System.Net.Http.Json;
 
@@ -22,7 +23,7 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
                     return;
                 }
 
-                var options = new { useOwnId = true };
+                var options = new IndexOptions { UseOwnIds = true };
 
                 var response = await _client.PostAsJsonAsync("engine/init", options, ct);
                 response.EnsureSuccessStatusCode();
@@ -59,25 +60,36 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
         public async Task<string> IndexItemAsync(SearchIndexItem indexItem, CancellationToken ct = default) {
             var url = "documents/add";
 
-            var request = new Document {
-                Id = indexItem.Id,
-                Title = indexItem.Name,
-                Description = indexItem.Description ?? string.Empty
-            };
-
             try {
-                var response = await _client.PostAsJsonAsync(url, request, ct);
+                var response = await _client.PostAsJsonAsync(url, indexItem, ct);
                 var deserialized = await response.Content.ReadFromJsonAsync<IndexedResponse>(cancellationToken: ct);
 
-                _logger.LogDebug("Item {name} successfully indexed", indexItem.Name);
+                _logger.LogDebug("Item {name} successfully indexed", indexItem.Title);
 
                 return deserialized?.AddedDocuments.FirstOrDefault()?.Id.ToString() ?? string.Empty;
 
             } catch (Exception e) {
-                _logger.LogError(e, "Error occurred while indexing item: {Name}", indexItem.Name);
+                _logger.LogError(e, "Error occurred while indexing item: {Name}", indexItem.Title);
                 throw;
             }
         }
+
+        public async Task UpdateItemAsync(SearchIndexItem indexItem, CancellationToken ct) {
+            var url = $"documents/update/{indexItem.Id}";
+
+            try {
+                var response = await _client.PutAsJsonAsync(url, indexItem, ct);
+
+                response.EnsureSuccessStatusCode();
+
+                _logger.LogInformation("Item {name} successfully updated in search index", indexItem.Title);
+
+            } catch (Exception e) {
+                _logger.LogError(e, "Error occurred while updating item: {Name}", indexItem.Title);
+                throw;
+            }
+        }
+
 
         public async Task RemoveItemAsync(Guid clothingItemId, CancellationToken ct = default) {
             var url = $"documents/remove/{clothingItemId}";
