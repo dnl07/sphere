@@ -6,20 +6,20 @@ using Sphere.Application.Mappers;
 namespace Sphere.Application.UseCases.SearchEngine.Command.Search {
     public class SearchHandler : IUseCaseHandler<SearchCommand, SearchResponse> {
         private readonly ISearchEngineService _searchEngine;
-        private readonly IClothingItemRepository _clothingRepo;
+        private readonly IClothingItemRepository _clothingRepository;
 
-        public SearchHandler(ISearchEngineService searchEngine, IClothingItemRepository clothingRepo) {
+        public SearchHandler(ISearchEngineService searchEngine, IClothingItemRepository clothingRepository) {
             _searchEngine = searchEngine;
-            _clothingRepo = clothingRepo;
+            _clothingRepository = clothingRepository;
         }
 
         public async Task<SearchResponse> Handle(SearchCommand request, CancellationToken ct) {
             var ids = await _searchEngine.SearchAsync(request.Query, ct);
 
-            var items = await _clothingRepo.GetByIdsAsync(ids, ct);
+            var items = await _clothingRepository.GetByIdsAsync(ids, ct);
 
             var categoryIds = items.Select(i => i.CategoryId).Distinct().ToList();
-            var categories = await _clothingRepo.GetCategoriesByIdsAsync(categoryIds, ct);
+            var categories = await _clothingRepository.GetCategoriesByIdsAsync(categoryIds, ct);
 
             var ordered = ids
                 .Select(id => items.FirstOrDefault(i => i.Id == id))

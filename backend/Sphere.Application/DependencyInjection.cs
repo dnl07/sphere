@@ -10,6 +10,8 @@ using Sphere.Application.UseCases.Category.Queries.GetAll;
 using Sphere.Application.UseCases.SearchEngine.Command.Search;
 using Sphere.Application.UseCases.Inference.Commands.Create;
 using Sphere.Application.UseCases.ClothingItem.Commands.Update;
+using Sphere.Application.UseCases.ClothingItem.Queries.GetAll;
+using Sphere.Application.UseCases.ClothingItem.Commands.Create;
 
 namespace Sphere.Application.Commons {
     public static class DependencyInjection {
@@ -28,8 +30,8 @@ namespace Sphere.Application.Commons {
             // Category Handlers
             services.AddScoped<IUseCaseHandler<GetAllCategoryQuery, GetAllCategoryResponse>, GetAllCategoryHandler>();
 
-            // Image Handlers
-            services.AddScoped<IUseCaseHandler<GetImageQuery, GetImageResponse>, GetImageHandler>();
+            // Media file Handlers
+            services.AddScoped<IUseCaseHandler<GetMediaFileQuery, GetMediaFileResponse>, GetMediaFileHandler>();
 
             // Search Engine Handlers
             services.AddScoped<IUseCaseHandler<SearchCommand, SearchResponse>, SearchHandler>();

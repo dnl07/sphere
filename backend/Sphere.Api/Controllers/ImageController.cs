@@ -17,7 +17,7 @@ namespace Sphere.Api.Controllers {
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById([FromRoute] Guid id) {
-            var query = new GetImageQuery(id);
+            var query = new GetMediaFileQuery(id);
 
             var response = await _dispatcher.Dispatch(query);
 

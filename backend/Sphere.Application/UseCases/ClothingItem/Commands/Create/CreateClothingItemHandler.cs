@@ -2,10 +2,12 @@
 using Sphere.Application.Commons.Exceptions;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
+using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Application.Mappers;
+using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 using Sphere.Domain.MediaFiles;
 
-namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
+namespace Sphere.Application.UseCases.ClothingItem.Commands.Create {
     public class CreateClothingItemHandler : IUseCaseHandler<CreateClothingItemCommand, CreateClothingItemResponse> {
         private readonly IClothingItemRepository _clothingRepository;
         private readonly IMediaFileRepository _mediaFileRepository;
@@ -31,7 +33,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
             _logger.LogInformation("Creating clothing item with name {Name} in category {Category} with id {id}", cmd.Name, cmd.Category, category?.Id);
 
             if (category is null) {
-                throw new NotFoundException("Category not found.");
+                throw new CategoryNotFoundException(cmd.Category);
             }
 
             var mediaFile = MediaFile.Create(cmd.ImageFileName, cmd.Image.Length, cmd.ImageContentType);

@@ -1,4 +1,4 @@
-﻿namespace Sphere.Application.Commons.Interfaces {
+﻿namespace Sphere.Application.Commons.Interfaces.Services {
     public interface IFileStorage {
         Task SaveAsync(Guid id, byte[] fileContent, CancellationToken ct = default);
         Task<byte[]> GetAsync(Guid key, CancellationToken ct = default);

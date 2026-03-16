@@ -1,26 +1,28 @@
-﻿using Sphere.Application.Commons.Interfaces;
+﻿using Sphere.Application.Commons.Exceptions;
+using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
+using Sphere.Application.Commons.Interfaces.Services;
 
 namespace Sphere.Application.UseCases.Image.Queries.Get {
-    public class GetImageHandler : IUseCaseHandler<GetImageQuery, GetImageResponse> {
+    public class GetMediaFileHandler : IUseCaseHandler<GetMediaFileQuery, GetMediaFileResponse> {
         private readonly IFileStorage _storage;
         private readonly IMediaFileRepository _repository;
 
-        public GetImageHandler(IFileStorage storage, IMediaFileRepository repository) {
+        public GetMediaFileHandler(IFileStorage storage, IMediaFileRepository repository) {
             _storage = storage;
             _repository = repository;
         }
 
-        public async Task<GetImageResponse> Handle(GetImageQuery query, CancellationToken ct = default) {
+        public async Task<GetMediaFileResponse> Handle(GetMediaFileQuery query, CancellationToken ct = default) {
             var bytes = await _storage.GetAsync(query.ImageId, ct);
 
             var metadata = await _repository.GetByIdAsync(query.ImageId, ct);
 
             if (metadata == null) {
-                throw new Exception("Image metadata not found.");
+                throw new MediaFileNotFoundException(query.ImageId);
             }
 
-            return new GetImageResponse(
+            return new GetMediaFileResponse(
                 bytes,
                 metadata.FileName,
                 metadata.FileSize,

@@ -1,4 +1,4 @@
-﻿namespace Sphere.Domain.Images.Exceptions {
+﻿namespace Sphere.Domain.MediaFiles.Exceptions {
     public class InvalidMediaFileException : Exception {
         public InvalidMediaFileException() { }
         public InvalidMediaFileException(string message) : base(message) { }

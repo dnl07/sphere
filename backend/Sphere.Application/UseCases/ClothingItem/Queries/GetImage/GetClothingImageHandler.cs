@@ -1,6 +1,7 @@
 ﻿using Sphere.Application.Commons.Exceptions;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
+using Sphere.Application.Commons.Interfaces.Services;
 
 namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
     public class GetClothingImageHandler : IUseCaseHandler<GetClothingImageQuery, GetClothingImageResponse> {
@@ -14,17 +15,17 @@ namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
             _storage = storage;
         }
 
-        public async Task<GetClothingImageResponse> Handle(GetClothingImageQuery request, CancellationToken ct) {
-            var item = await _clothingRepository.GetByIdAsync(request.ItemId, ct);
+        public async Task<GetClothingImageResponse> Handle(GetClothingImageQuery query, CancellationToken ct) {
+            var item = await _clothingRepository.GetByIdAsync(query.ItemId, ct);
 
             if (item == null) {
-                throw new NotFoundException($"Clothing item with ID {request.ItemId} not found.");
+                throw new ClothingItemNotFoundException(query.ItemId);
             }
 
             var imageData = await _mediaFileRepository.GetByIdAsync(item.ImageId);
 
             if (imageData == null) {
-                throw new NotFoundException($"Image with ID {item.ImageId} not found.");
+                throw new MediaFileNotFoundException(item.ImageId);
             }
 
             var image = await _storage.GetAsync(item.ImageId, ct);

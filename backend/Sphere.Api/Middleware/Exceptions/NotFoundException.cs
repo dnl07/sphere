@@ -1,4 +1,4 @@
-﻿namespace Sphere.Application.Commons.Exceptions {
+﻿namespace Sphere.Api.Middleware.Exceptions {
     public class NotFoundException : Exception {
         public NotFoundException() { }
         public NotFoundException(string message) : base(message) { }

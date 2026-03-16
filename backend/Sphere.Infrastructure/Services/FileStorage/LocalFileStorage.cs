@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Sphere.Application.Commons.Interfaces;
+using Sphere.Application.Commons.Interfaces.Services;
 
 namespace Sphere.Infrastructure.Services.FileStorage {
     public class LocalFileStorage : IFileStorage {

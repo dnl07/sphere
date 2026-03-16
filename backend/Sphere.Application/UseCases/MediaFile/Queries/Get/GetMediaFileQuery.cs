@@ -1,10 +1,10 @@
 ﻿using Sphere.Application.Commons.Interfaces;
 
 namespace Sphere.Application.UseCases.Image.Queries.Get {
-    public class GetImageQuery : IUseCase<GetImageResponse> {
+    public class GetMediaFileQuery : IUseCase<GetMediaFileResponse> {
         public Guid ImageId { get; set; }
 
-        public GetImageQuery(Guid imageId) { 
+        public GetMediaFileQuery(Guid imageId) { 
             ImageId = imageId;
         }
     }

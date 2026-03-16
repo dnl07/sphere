@@ -4,6 +4,7 @@ using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Mappers;
 using Sphere.Domain.MediaFiles;
 using Microsoft.Extensions.Logging;
+using Sphere.Application.Commons.Interfaces.Services;
 
 namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
     public class UpdateClothingItemHandler : IUseCaseHandler<UpdateClothingItemCommand, UpdateClothingItemResponse> {
@@ -28,14 +29,14 @@ namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
 
         public async Task<UpdateClothingItemResponse> Handle(UpdateClothingItemCommand cmd, CancellationToken ct) {
             var item = await _clothingRepository.GetByIdAsync(cmd.Id, ct)
-                ?? throw new NotFoundException($"Clothing item with ID {cmd.Id} not found.");
+                ?? throw new ClothingItemNotFoundException(cmd.Id);
 
             Guid? categoryId = null;
             if (cmd.Category != null) {
                 _logger.LogInformation("Looking up category '{CategoryName}' for clothing item update.", cmd.Category);
 
                 var category = await _clothingRepository.GetCategoryByNameAsync(cmd.Category, ct)
-                    ?? throw new NotFoundException($"Category '{cmd.Category}' not found.");
+                    ?? throw new CategoryNotFoundException(cmd.Category);
                 categoryId = category.Id;
             }
 
@@ -72,8 +73,8 @@ namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
             var updatedCategory = await _clothingRepository.GetCategoryByIdAsync(item.CategoryId, ct);
 
             if (updatedCategory is null) {
-                _logger.LogWarning("Category with ID '{CategoryId}' not found after clothing item update.", item.CategoryId);
-                throw new NotFoundException($"Category with ID '{item.CategoryId}' not found after update.");
+                _logger.LogWarning("Category with ID '{CategoryId}' not found", item.CategoryId);
+                throw new CategoryNotFoundException(item.CategoryId);
             }
 
             return item.ToUpdateResponse(updatedCategory.Name);

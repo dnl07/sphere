@@ -3,8 +3,9 @@ using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Mappers;
 using Sphere.Application.UseCases.ClothingItems.Queries.Get;
+using Sphere.Application.UseCases.ClothingItems.Queries.GetAll;
 
-namespace Sphere.Application.UseCases.ClothingItems.Queries.GetAll {
+namespace Sphere.Application.UseCases.ClothingItem.Queries.GetAll {
     public class GetAllClothingItemHandler : IUseCaseHandler<GetAllClothingItemQuery, GetAllClothingItemResponse> {
         private readonly IClothingItemRepository _repository;
 
@@ -16,7 +17,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Queries.GetAll {
             var items = await _repository.GetAllAsync(ct);
 
             if (items.Count == 0) {
-                throw new NotFoundException($"No clothing items found.");
+                return new GetAllClothingItemResponse([]);
             }
 
             var clothingResponses = new List<GetClothingItemResponse>();
@@ -25,7 +26,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Queries.GetAll {
                 var category = await _repository.GetCategoryByIdAsync(item.CategoryId, ct);
 
                 if (category == null) {
-                    throw new NotFoundException($"Category with ID {item.CategoryId} not found for clothing item with ID {item.Id}.");
+                    throw new CategoryNotFoundException(item.CategoryId);
                 }
 
                 clothingResponses.Add(item.ToGetResponse(category.Name));

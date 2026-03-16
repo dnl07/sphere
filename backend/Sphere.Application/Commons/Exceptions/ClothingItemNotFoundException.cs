@@ -1,4 +1,4 @@
-﻿namespace Sphere.Domain.ClothingItems.Exceptions {
+﻿namespace Sphere.Application.Commons.Exceptions {
     public class ClothingItemNotFoundException : Exception {
         public ClothingItemNotFoundException() { }
         public ClothingItemNotFoundException(Guid id) : base($"Clothing with id {id} was not found.") { }

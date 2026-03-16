@@ -1,4 +1,4 @@
-﻿using Sphere.Domain.Images.Exceptions;
+﻿using Sphere.Domain.MediaFiles.Exceptions;
 
 namespace Sphere.Domain.MediaFiles {
     public partial class MediaFile {

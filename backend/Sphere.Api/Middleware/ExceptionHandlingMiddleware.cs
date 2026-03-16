@@ -1,4 +1,4 @@
-﻿using Sphere.Application.Commons.Exceptions;
+﻿using Sphere.Api.Middleware.Exceptions;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 

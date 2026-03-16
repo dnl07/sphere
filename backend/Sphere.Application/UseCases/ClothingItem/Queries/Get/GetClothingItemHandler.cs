@@ -15,13 +15,13 @@ namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
             var response = await _repository.GetByIdAsync(request.Id, ct);
 
             if (response == null) {
-                throw new NotFoundException($"Clothing item with ID {request.Id} not found.");
+                throw new ClothingItemNotFoundException(request.Id);
             }
 
             var category = await _repository.GetCategoryByIdAsync(response.CategoryId, ct);
 
             if (category == null) {
-                throw new NotFoundException($"Category with ID {response.CategoryId} not found.");
+                throw new CategoryNotFoundException(response.CategoryId);
             }
 
             return response.ToGetResponse(category.Name);
