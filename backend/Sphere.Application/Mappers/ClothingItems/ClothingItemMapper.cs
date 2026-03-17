@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sphere.Application.Mappers {
+namespace Sphere.Application.Mappers.ClothingItems {
     public static class ClothingItemMapper {
         public static SearchResultItem ToSearchResult(this ClothingItem item, string? categoryName) {
             return new SearchResultItem(

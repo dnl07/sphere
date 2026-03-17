@@ -3,7 +3,7 @@ using Sphere.Application.Commons.Exceptions;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
-using Sphere.Application.Mappers;
+using Sphere.Application.Mappers.ClothingItems;
 using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 using Sphere.Domain.MediaFiles;
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sphere.Api.Dtos.Requests;
+using Sphere.Api.Dtos.Requests.Inference;
 using Sphere.Api.Utils;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.UseCases.Inference.Commands.Create;

@@ -1,10 +1,10 @@
 ﻿using Sphere.Application.Commons.Exceptions;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
-using Sphere.Application.Mappers;
 using Sphere.Domain.MediaFiles;
 using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Services;
+using Sphere.Application.Mappers.ClothingItems;
 
 namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
     public class UpdateClothingItemHandler : IUseCaseHandler<UpdateClothingItemCommand, UpdateClothingItemResponse> {

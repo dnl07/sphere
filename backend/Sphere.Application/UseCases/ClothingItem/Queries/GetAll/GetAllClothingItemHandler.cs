@@ -1,7 +1,7 @@
 ﻿using Sphere.Application.Commons.Exceptions;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
-using Sphere.Application.Mappers;
+using Sphere.Application.Mappers.ClothingItems;
 using Sphere.Application.UseCases.ClothingItems.Queries.Get;
 using Sphere.Application.UseCases.ClothingItems.Queries.GetAll;
 
@@ -13,7 +13,8 @@ namespace Sphere.Application.UseCases.ClothingItem.Queries.GetAll {
             _repository = repository;
         }
 
-        public async Task<GetAllClothingItemResponse> Handle(GetAllClothingItemQuery request, CancellationToken ct) {
+        public async Task<GetAllClothingItemResponse> Handle(GetAllClothingItemQuery query, CancellationToken ct) {
+
             var items = await _repository.GetAllAsync(ct);
 
             if (items.Count == 0) {
@@ -22,6 +23,7 @@ namespace Sphere.Application.UseCases.ClothingItem.Queries.GetAll {
 
             var clothingResponses = new List<GetClothingItemResponse>();
 
+            // Todo: Optimize this
             foreach (var item in items) {
                 var category = await _repository.GetCategoryByIdAsync(item.CategoryId, ct);
 

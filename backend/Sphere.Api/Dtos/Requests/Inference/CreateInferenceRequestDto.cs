@@ -1,7 +1,7 @@
 ﻿using Sphere.Api.Dtos.Validation;
 using System.ComponentModel.DataAnnotations;
 
-namespace Sphere.Api.Dtos.Requests {
+namespace Sphere.Api.Dtos.Requests.Inference {
     public class CreateInferenceRequestDto {
         [Required(ErrorMessage = "Image is required")]
         [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" })]

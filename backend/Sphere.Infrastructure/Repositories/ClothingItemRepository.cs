@@ -2,10 +2,13 @@
 using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
+using Sphere.Application.Commons.Models;
+using Sphere.Application.UseCases.ClothingItem.Queries.GetFiltered;
 using Sphere.Application.UseCases.ClothingItem.Queries.GetMeta;
 using Sphere.Domain.Categories;
 using Sphere.Domain.ClothingItems;
 using Sphere.Infrastructure.Persistance;
+using Sphere.Infrastructure.Persistance.Specification;
 
 namespace Sphere.Infrastructure.Repositories {
     public class ClothingItemRepository : IClothingItemRepository {
@@ -45,6 +48,23 @@ namespace Sphere.Infrastructure.Repositories {
         public async Task<List<ClothingItem>> GetAllAsync(CancellationToken ct = default) {
             return await _context.ClothingItems
                 .ToListAsync(ct);
+        }
+
+        public async Task<PagedResult<ClothingItem>> GetFilteredAsync(ClothingItemFilter filter, CancellationToken ct = default) {
+            var query = _context.ClothingItems.AsQueryable();
+
+            var spec = new ClothingItemSpecification(filter);
+            var items = await spec.Apply(query).ToListAsync(ct);
+
+            _logger.LogInformation("Retrieved {Count} clothing items with filter {filter}", items.Count, filter.Color);
+
+            return new PagedResult<ClothingItem> {
+                Items = items,
+                TotalCount = items.Count,
+                PageNumber = filter.PageNumber,
+                HasNextPage = false,
+                HasPreviousPage = false
+            };
         }
 
         public async Task<List<ClothingItem>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default) {

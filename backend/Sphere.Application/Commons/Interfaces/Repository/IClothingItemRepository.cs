@@ -1,4 +1,6 @@
-﻿using Sphere.Application.UseCases.ClothingItem.Queries.GetMeta;
+﻿using Sphere.Application.Commons.Models;
+using Sphere.Application.UseCases.ClothingItem.Queries.GetFiltered;
+using Sphere.Application.UseCases.ClothingItem.Queries.GetMeta;
 using Sphere.Domain.Categories;
 using Sphere.Domain.ClothingItems;
 
@@ -10,6 +12,7 @@ namespace Sphere.Application.Commons.Interfaces.Repository {
         Task AddAsync(ClothingItem item, CancellationToken ct = default);
         Task<ClothingItem?> GetByIdAsync(Guid id, CancellationToken ct = default);
         Task<List<ClothingItem>> GetAllAsync(CancellationToken ct = default);
+        Task<PagedResult<ClothingItem>> GetFilteredAsync(ClothingItemFilter filter, CancellationToken ct = default);
         Task<List<ClothingItem>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default);
         Task DeleteAsync(Guid id, CancellationToken ct = default);
         Task<ClothingItemMeta> GetMetaAsync(CancellationToken ct = default);

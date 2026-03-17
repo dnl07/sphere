@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Sphere.Api.Dtos.Requests;
-using Sphere.API.Dtos.Requests;
+using Sphere.Api.Dtos.Requests.ClothingItems;
 using Sphere.API.Mappers;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.UseCases.ClothingItem.Commands.Delete;
+using Sphere.Application.UseCases.ClothingItem.Queries.GetFiltered;
 using Sphere.Application.UseCases.ClothingItem.Queries.GetMeta;
 using Sphere.Application.UseCases.ClothingItems.Queries.Get;
 using Sphere.Application.UseCases.ClothingItems.Queries.GetAll;
@@ -33,17 +33,26 @@ namespace Sphere.API.Controllers
 
         [HttpGet()]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAll([FromQuery] ClothingItemFilterRequest request) {
-            var filter = request.ToFilter();
+        public async Task<IActionResult> GetAll([FromQuery] ClothingItemFilterRequest request, CancellationToken ct) {
+            if (request.IsEmpty()) {
+                var query = new GetAllClothingItemQuery();
+                var response = await _dispatcher.Dispatch(query);
 
-            var query = new GetAllClothingItemQuery(filter);
-            var response = await _dispatcher.Dispatch(query);
+                if (response is null) {
+                    return NotFound();
+                }
 
-            if (response is null) {
+                return Ok(response);
+            }
+
+            var filteredQuery = new GetFilteredClothingItemQuery(request.ToFilter());
+            var filteredResponse = await _dispatcher.Dispatch(filteredQuery);
+
+            if (filteredResponse is null) {
                 return NotFound();
             }
 
-            return Ok(response);
+            return Ok(filteredResponse);
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -110,6 +119,7 @@ namespace Sphere.API.Controllers
         }
 
         [HttpGet("meta")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetMeta() {
             var query = new GetMetaClothingItemQuery();
 

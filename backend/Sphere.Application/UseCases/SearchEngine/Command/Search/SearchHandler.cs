@@ -1,7 +1,7 @@
 ﻿using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
-using Sphere.Application.Mappers;
+using Sphere.Application.Mappers.ClothingItems;
 
 namespace Sphere.Application.UseCases.SearchEngine.Command.Search {
     public class SearchHandler : IUseCaseHandler<SearchCommand, SearchResponse> {
