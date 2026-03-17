@@ -4,6 +4,7 @@ using Sphere.API.Dtos.Requests;
 using Sphere.API.Mappers;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.UseCases.ClothingItem.Commands.Delete;
+using Sphere.Application.UseCases.ClothingItem.Queries.GetMeta;
 using Sphere.Application.UseCases.ClothingItems.Queries.Get;
 using Sphere.Application.UseCases.ClothingItems.Queries.GetAll;
 using Sphere.Application.UseCases.Image.Queries.Get;
@@ -106,6 +107,18 @@ namespace Sphere.API.Controllers
             }
 
             return File(response.FileData, response.ContentType, response.FileName);
+        }
+
+        [HttpGet("meta")]
+        public async Task<IActionResult> GetMeta() {
+            var query = new GetMetaClothingItemQuery();
+
+            var response = await _dispatcher.Dispatch(query);
+            if (response is null) {
+
+                return NotFound();
+            }
+            return Ok(response);
         }
     }
 }

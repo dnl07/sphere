@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
+using Sphere.Application.UseCases.ClothingItem.Queries.GetMeta;
 using Sphere.Domain.Categories;
 using Sphere.Domain.ClothingItems;
 using Sphere.Infrastructure.Persistance;
@@ -79,6 +80,60 @@ namespace Sphere.Infrastructure.Repositories {
             var category = await _context.Categories.FindAsync(new object[] { id }, ct);
             _logger.LogInformation("Retrieved category with ID {CategoryId}: {CategoryName}", id, category?.Name);
             return category;
+        }
+
+        public async Task<ClothingItemMeta> GetMetaAsync(CancellationToken ct) {
+            var query = _context.ClothingItems.AsQueryable();
+
+            var totalItems = await query.CountAsync(ct);
+
+            var availableCategoriesIds = await query
+                .Select(i => i.CategoryId)
+                .Distinct()
+                .ToArrayAsync(ct);
+
+            var availableCategories = await _context.Categories
+                .Where(c => availableCategoriesIds.Contains(c.Id))
+                .Select(c => c.Name)
+                .ToArrayAsync(ct);
+
+            var availableColors = await query
+                .Where(i => i.Color != null)
+                .Select(i => i.Color!)
+                .Distinct()
+                .ToArrayAsync(ct);
+
+            var availableSizes = await query
+                .Where(i => i.Size != null)
+                .Select(i => i.Size!)
+                .Distinct()
+                .ToArrayAsync(ct);
+
+            var availableMaterials = await query
+                .Where(i => i.Material != null)
+                .Select(i => i.Material!)
+                .Distinct()
+                .ToArrayAsync(ct);
+
+            var minPrice = await query
+                .Where(i => i.Price != null)
+                .Select(i => (decimal?)i.Price!.Amount)  
+                .MinAsync(ct);
+
+            var maxPrice = await query
+                .Where(i => i.Price != null)
+                .Select(i => (decimal?)i.Price!.Amount)
+                .MaxAsync(ct);
+
+            return new ClothingItemMeta(
+                TotalItems: totalItems,
+                AvailableCategories: availableCategories,
+                AvailableColors: availableColors,
+                AvailableSizes: availableSizes,
+                AvailableMaterials: availableMaterials,
+                MinPrice: minPrice,
+                MaxPrice: maxPrice
+            );
         }
 
         public async Task<List<Category>> GetCategoriesByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default) {
