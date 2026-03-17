@@ -13,6 +13,7 @@ namespace Sphere.Application.UseCases.ClothingItem.Queries.GetMeta {
         public GetMetaClothingItemHandler(IClothingItemRepository repository) {
             _repository = repository;
         }
+
         public async Task<GetMetaClothingItemResponse> Handle(GetMetaClothingItemQuery query, CancellationToken ct) {
             var meta = await _repository.GetMetaAsync(ct);
 

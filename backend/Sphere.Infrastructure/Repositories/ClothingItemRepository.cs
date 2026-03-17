@@ -94,25 +94,26 @@ namespace Sphere.Infrastructure.Repositories {
 
             var availableCategories = await _context.Categories
                 .Where(c => availableCategoriesIds.Contains(c.Id))
-                .Select(c => c.Name)
+                .GroupBy(c => c.Name)
+                .Select(g => new CategoryCount(g.Key, g.Count()))
                 .ToArrayAsync(ct);
 
             var availableColors = await query
                 .Where(i => i.Color != null)
-                .Select(i => i.Color!)
-                .Distinct()
+                .GroupBy(c => c.Color!)
+                .Select(g => new ColorCount(g.Key, g.Count()))
                 .ToArrayAsync(ct);
 
             var availableSizes = await query
                 .Where(i => i.Size != null)
-                .Select(i => i.Size!)
-                .Distinct()
+                .GroupBy(c => c.Size!)
+                .Select(g => new SizeCount(g.Key, g.Count()))
                 .ToArrayAsync(ct);
 
             var availableMaterials = await query
                 .Where(i => i.Material != null)
-                .Select(i => i.Material!)
-                .Distinct()
+                .GroupBy(c => c.Material!)
+                .Select(g => new MaterialCount(g.Key, g.Count()))
                 .ToArrayAsync(ct);
 
             var minPrice = await query

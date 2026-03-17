@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 namespace Sphere.Application.UseCases.ClothingItem.Queries.GetMeta {
     public record ClothingItemMeta(
         int TotalItems,
-        string[] AvailableCategories,
-        string[] AvailableColors,
-        string[] AvailableSizes,
-        string[] AvailableMaterials,
+        CategoryCount[] AvailableCategories,
+        ColorCount[] AvailableColors,
+        SizeCount[] AvailableSizes,
+        MaterialCount[] AvailableMaterials,
         decimal? MinPrice,
         decimal? MaxPrice
     );
+
+    public record CategoryCount(string Category, int Count);
+    public record ColorCount(string Color, int Count);
+    public record SizeCount(string Size, int Count);
+    public record MaterialCount(string Material, int Count);
 }

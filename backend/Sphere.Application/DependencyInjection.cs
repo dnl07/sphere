@@ -12,6 +12,7 @@ using Sphere.Application.UseCases.Inference.Commands.Create;
 using Sphere.Application.UseCases.ClothingItem.Commands.Update;
 using Sphere.Application.UseCases.ClothingItem.Queries.GetAll;
 using Sphere.Application.UseCases.ClothingItem.Commands.Create;
+using Sphere.Application.UseCases.ClothingItem.Queries.GetMeta;
 
 namespace Sphere.Application.Commons {
     public static class DependencyInjection {
@@ -26,6 +27,7 @@ namespace Sphere.Application.Commons {
             services.AddScoped<IUseCaseHandler<GetClothingItemQuery, GetClothingItemResponse>, GetClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<GetAllClothingItemQuery, GetAllClothingItemResponse>, GetAllClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<GetClothingImageQuery, GetClothingImageResponse>, GetClothingImageHandler>();
+            services.AddScoped<IUseCaseHandler<GetMetaClothingItemQuery, GetMetaClothingItemResponse>, GetMetaClothingItemHandler>();
 
             // Category Handlers
             services.AddScoped<IUseCaseHandler<GetAllCategoryQuery, GetAllCategoryResponse>, GetAllCategoryHandler>();

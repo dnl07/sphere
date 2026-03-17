@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace Sphere.Application.UseCases.ClothingItem.Queries.GetMeta {
     public record GetMetaClothingItemResponse(
         int TotalItems,
-        string[] AvailableCategories,
-        string[] AvailableColors,
-        string[] AvailableSizes,
-        string[] AvailableMaterials,
+        CategoryCount[] AvailableCategories,
+        ColorCount[] AvailableColors,
+        SizeCount[] AvailableSizes,
+        MaterialCount[] AvailableMaterials,
         decimal? MinPrice,
         decimal? MaxPrice
     );
