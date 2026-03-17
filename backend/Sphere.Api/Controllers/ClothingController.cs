@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Sphere.Api.Dtos.Requests;
 using Sphere.API.Dtos.Requests;
 using Sphere.API.Mappers;
 using Sphere.Application.Commons.Interfaces;
@@ -31,8 +32,10 @@ namespace Sphere.API.Controllers
 
         [HttpGet()]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAll() {
-            var query = new GetAllClothingItemQuery();
+        public async Task<IActionResult> GetAll([FromQuery] ClothingItemFilterRequest request) {
+            var filter = request.ToFilter();
+
+            var query = new GetAllClothingItemQuery(filter);
             var response = await _dispatcher.Dispatch(query);
 
             if (response is null) {

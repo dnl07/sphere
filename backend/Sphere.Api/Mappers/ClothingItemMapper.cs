@@ -1,7 +1,9 @@
-﻿using Sphere.Api.Utils;
+﻿using Sphere.Api.Dtos.Requests;
+using Sphere.Api.Utils;
 using Sphere.API.Dtos.Requests;
 using Sphere.Application.UseCases.ClothingItem.Commands.Update;
 using Sphere.Application.UseCases.ClothingItems.Commands.Create;
+using Sphere.Application.UseCases.ClothingItems.Queries.GetAll;
 
 namespace Sphere.API.Mappers {
     public static class ClothingItemMapper {
@@ -45,6 +47,21 @@ namespace Sphere.API.Mappers {
                 imageFileName: imageFileName,
                 imageContentType: imageContentType
             );
+        }
+
+        public static ClothingItemFilter ToFilter(this ClothingItemFilterRequest request) {
+            ArgumentNullException.ThrowIfNull(request);
+
+            return new ClothingItemFilter {
+                Name = request.Name,
+                Description = request.Description,
+                Color = request.Color,
+                Size = request.Size,
+                Material = request.Material,
+                Page = request.PageNumber,
+                PageSize = request.PageSize,
+                FetchAll = request.FetchAll
+            };
         }
     }
 }
