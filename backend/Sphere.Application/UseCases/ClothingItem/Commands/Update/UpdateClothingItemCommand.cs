@@ -1,46 +1,31 @@
 ﻿using Sphere.Application.Commons.Interfaces;
 
 namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
-    public class UpdateClothingItemCommand : IUseCase<UpdateClothingItemResponse> {
-        public Guid Id { get; set; }
-        public string? Name { get; set; }
-        public string? Category { get; set; }
-        public string? Description { get; set; }
-        public string? Size { get; set; }
-        public string? Material { get; set; }
-        public string? Color { get; set; }
-        public decimal? PriceAmount { get; set; }
-        public string? Currency { get; set; }
+    public class UpdateClothingItemCommand(
+        Guid id,
+        string? name,
+        string? category,
+        string? description,
+        string? size,
+        string? material,
+        string? color,
+        decimal? amount,
+        string? currency,
+        byte[]? image,
+        string? imageFileName,
+        string? imageContentType) : IUseCase<UpdateClothingItemResponse> {
+        public Guid Id { get; set; } = id;
+        public string? Name { get; set; } = name;
+        public string? Category { get; set; } = category;
+        public string? Description { get; set; } = description;
+        public string? Size { get; set; } = size;
+        public string? Material { get; set; } = material;
+        public string? Color { get; set; } = color;
+        public decimal? PriceAmount { get; set; } = amount;
+        public string? Currency { get; set; } = currency;
 
-        public byte[]? Image { get; set; } = [];
-        public string? ImageFileName { get; set; } = "";
-        public string? ImageContentType { get; set; } = "";
-
-        public UpdateClothingItemCommand(
-            Guid id,
-            string? name,
-            string? category,
-            string? description,
-            string? size,
-            string? material,
-            string? color,
-            decimal? amount,
-            string? currency,
-            byte[]? image,
-            string? imageFileName,
-            string? imageContentType) {
-            Id = id;
-            Name = name;
-            Category = category;
-            Description = description;
-            Size = size;
-            Material = material;
-            Color = color;
-            PriceAmount = amount;
-            Currency = currency;
-            Image = image ?? [];
-            ImageFileName = imageFileName;
-            ImageContentType = imageContentType;
-        }
+        public byte[]? Image { get; set; } = image ?? [];
+        public string? ImageFileName { get; set; } = imageFileName;
+        public string? ImageContentType { get; set; } = imageContentType;
     }
 }

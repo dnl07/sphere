@@ -6,6 +6,5 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Sphere.Application.UseCases.ClothingItem.Queries.GetMeta {
-    public class GetMetaClothingItemQuery : IUseCase<GetMetaClothingItemResponse> {
-    }
+    public class GetMetaClothingItemQuery : IUseCase<GetMetaClothingItemResponse> { }
 }
