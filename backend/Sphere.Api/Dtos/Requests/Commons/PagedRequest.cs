@@ -1,8 +1,8 @@
 namespace Sphere.Api.Dtos.Requests.Commons {
     public class PagedRequest {
         public bool FetchAll { get; set; } = false;
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 20;
         public int? FromPage { get; set; }
         public int? ToPage { get; set; }
     }   
