@@ -9,9 +9,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <MainLayout />,
         children: [
-            {path: "/", element: <Home />},
-            {path: "/closet", element: <Closet />},
-            {path: "/create", element: <CreateClothingPage />},
+            {index: true, element: <Home />},
+            {path: "closet", element: <Closet />},
+            {path: "create", element: <CreateClothingPage />},
+            { path: "*", element: <h1>404 Not Found</h1> }
         ]
     }
 ])

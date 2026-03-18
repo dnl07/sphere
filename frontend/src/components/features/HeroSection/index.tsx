@@ -1,14 +1,10 @@
 import { useNavigate } from "react-router";
-import Button from "../../common/Button";
 
 const HeroSection = () => {
-    const navigate = useNavigate();
 
     return (
-        <div>
-            <h1 className="text-3xl font-bold underline">SPHERE</h1>
-            <Button onClick={() => navigate("/closet")}>Go to Closet</Button>
-            <Button onClick={() => navigate("/create")}>Add an item</Button>
+        <div className=" flex-1 flex items-center justify-center">
+            <h1 className="text-4xl font-bold">SPHERE</h1>
         </div>
     );
 }
