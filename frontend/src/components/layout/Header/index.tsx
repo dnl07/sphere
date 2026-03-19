@@ -1,16 +1,19 @@
-import { useNavigate } from "react-router";
 import HamburgerButton from "../../ui/HamburgerButton";
 import { useState } from "react";
+import Menu from "../Menu";
+import ClickableBackground from "../ClickableBackground";
+import { NavLink } from "react-router";
 
 const Header = () => {
-    const navigate = useNavigate();
 
     const [ open, setOpen ] = useState(false);
 
     return (
         <header className= "w-full px-6 py-3 flex justify-between shadow-lg">
-            <button className="text-2xl" onClick={() => navigate("")}>SPHERE</button>
+            <NavLink to={""} className="text-2xl">SPHERE</NavLink>
             <HamburgerButton open={open} onClick={() => setOpen(!open)} />
+            <Menu open={open} />
+            {open && <ClickableBackground bgColor="" onClick={() => setOpen(false)}/>}
         </header> 
     )
 }

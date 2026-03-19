@@ -1,5 +1,5 @@
 import { useEffect, useState, type ChangeEvent } from "react";
-import Button from "../../common/Button";
+import Button from "../../ui/Button";
 import { useBackgroundRemover } from "../../../hooks/useBackgroundRemover";
 import { useCreateClothingItem } from "../../../hooks/useCreateClothingItem";
 

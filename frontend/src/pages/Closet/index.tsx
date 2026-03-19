@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import Button from "../../components/common/Button";
+import Button from "../../components/ui/Button";
 import ClothingGallery from "../../components/features/ClothingGallery";
 
 const Closet = () => {
