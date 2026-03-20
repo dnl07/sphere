@@ -1,4 +1,4 @@
-export const API_BASE = "/api";
+export const API_BASE = "";
 
 export const clothingEndpoints = {
     createClothing : () => `${API_BASE}/clothing`,

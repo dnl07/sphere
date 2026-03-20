@@ -1,4 +1,4 @@
-import HamburgerButton from "../../ui/HamburgerButton";
+import HamburgerButton from "../../ui/icons/HamburgerButton";
 import { useState } from "react";
 import ClickableBackground from "../ClickableBackground";
 import { NavLink } from "react-router";
