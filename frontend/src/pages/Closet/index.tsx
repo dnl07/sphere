@@ -1,16 +1,12 @@
-import { useNavigate } from "react-router";
-import Button from "../../components/ui/Button";
-import ClothingGallery from "../../components/features/ClothingGallery";
+import ClothingGallery from "../../components/features/gallery/ClothingGallery";
+import PageWrapper from "../../components/layout/PageWrapper";
 
 const Closet = () => {
-    const navigate = useNavigate();
-
     return (
-        <div>
-            <h1>Closet</h1>
-            <Button onClick={() => navigate("/")}>Go back to Home</Button>
+        <PageWrapper title="Closet">
+            <h1 className="text-3xl">Closet</h1>
             <ClothingGallery />
-        </div>
+        </PageWrapper>
     );
 };
 

@@ -1,10 +1,11 @@
 import HeroSection from "../../components/features/HeroSection"
+import PageWrapper from "../../components/layout/PageWrapper"
 
 function Home() {
     return (
-        <div className="flex-1 flex flex-col">
+        <PageWrapper title="Home">
             <HeroSection />
-        </div>
+        </PageWrapper>
     )
 }
 export default Home

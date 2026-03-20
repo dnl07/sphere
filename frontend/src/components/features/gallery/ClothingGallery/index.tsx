@@ -1,5 +1,5 @@
-import useClothingItems from "../../../hooks/useClothingItems";
-import { clothingEndpoints } from "../../../api/endpoints";
+import useClothingItems from "../../../../hooks/useClothingItems";
+import ClothingGalleryItem from "../ClothingGalleryItem";
 
 const ClothingGallery = () => {    
     const { items, loading, error } = useClothingItems();
@@ -7,11 +7,10 @@ const ClothingGallery = () => {
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
 
-    return (<div>
+    return (
+    <div className="grid grid-cols-3 gap-2">
         {items.map((item) => (
-            <div key={item.id}>
-                <img src={clothingEndpoints.getImage(item.imageId)} />
-            </div>
+            <ClothingGalleryItem key={item.id} item={item} />   
         ))}
     </div>
     );
