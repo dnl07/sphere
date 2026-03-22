@@ -1,8 +1,8 @@
 ﻿using Sphere.Api.Dtos.Requests.ClothingItems;
 using Sphere.Api.Utils;
-using Sphere.Application.UseCases.ClothingItem.Commands.Update;
-using Sphere.Application.UseCases.ClothingItem.Commons;
 using Sphere.Application.UseCases.ClothingItems.Commands.Create;
+using Sphere.Application.UseCases.ClothingItems.Commands.Update;
+using Sphere.Application.UseCases.ClothingItems.Commons;
 
 namespace Sphere.API.Mappers {
     public static class ClothingItemMapper {
@@ -52,13 +52,12 @@ namespace Sphere.API.Mappers {
             ArgumentNullException.ThrowIfNull(request);
 
             return new ClothingItemFilter {
-                CategoryIds = request.CategoryIds,
-                Colors = request.Color,
-                Sizes = request.Size,
-                Materials = request.Material,
+                CategoryNames = request.CategoryNames,
+                Colors = request.Colors,
+                Sizes = request.Sizes,
+                Materials = request.Materials,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
-                FetchAll = request.FetchAll
             };
         }
     }

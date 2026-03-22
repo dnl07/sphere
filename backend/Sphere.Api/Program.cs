@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Sphere.Api.Middleware;
-using Sphere.Application.Commons;
+using Sphere.Application;
 using Sphere.Infrastructure;
 using Sphere.Infrastructure.Persistance;
 using Sphere.Infrastructure.Services.SearchEngine;

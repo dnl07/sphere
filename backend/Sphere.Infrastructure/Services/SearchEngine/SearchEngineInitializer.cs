@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
-using Sphere.Application.UseCases.ClothingItem.Commons;
 using Sphere.Infrastructure.Services.SearchEngine.Utils;
+using Sphere.Application.UseCases.ClothingItems.Commons;
 
 namespace Sphere.Infrastructure.Services.SearchEngine {
     public static class SearchEngineInitializer {

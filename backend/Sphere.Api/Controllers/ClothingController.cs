@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using Sphere.Api.Dtos.Requests.ClothingItems;
 using Sphere.API.Mappers;
 using Sphere.Application.Commons.Interfaces;
-using Sphere.Application.UseCases.ClothingItem.Commands.Delete;
-using Sphere.Application.UseCases.ClothingItem.Queries.GetItems;
-using Sphere.Application.UseCases.ClothingItems.Queries.Get;
-using Sphere.Application.UseCases.Image.Queries.Get;
+using Sphere.Application.UseCases.ClothingItems.Commands.Delete;
+using Sphere.Application.UseCases.ClothingItems.Queries.GetById;
+using Sphere.Application.UseCases.ClothingItems.Queries.GetItems;
+using Sphere.Application.UseCases.MediaFiles.Queries.Get;
 
 namespace Sphere.API.Controllers
 {

@@ -2,7 +2,7 @@
 using Sphere.Api.Dtos.Requests.Inference;
 using Sphere.Api.Utils;
 using Sphere.Application.Commons.Interfaces;
-using Sphere.Application.UseCases.Inference.Commands.Create;
+using Sphere.Application.UseCases.Inference.Commands.Inference;
 
 namespace Sphere.Api.Controllers {
     [ApiController]

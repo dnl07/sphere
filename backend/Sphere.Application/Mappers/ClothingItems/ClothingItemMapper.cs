@@ -1,12 +1,7 @@
-﻿using Sphere.Application.UseCases.ClothingItem.Commons;
-using Sphere.Application.UseCases.ClothingItems.Commands.Create;
-using Sphere.Application.UseCases.SearchEngine.Command.Search;
+﻿using Sphere.Application.UseCases.ClothingItems.Commands.Create;
+using Sphere.Application.UseCases.ClothingItems.Commons;
+using Sphere.Application.UseCases.Search.Command.Search;
 using Sphere.Domain.ClothingItems;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sphere.Application.Mappers.ClothingItems {
     public static class ClothingItemMapper {

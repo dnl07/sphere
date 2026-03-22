@@ -1,4 +1,4 @@
-﻿namespace Sphere.Infrastructure.Services.SearchEngine {
+﻿namespace Sphere.Infrastructure.Services.SearchEngine.Models {
     public class SearchResponse {
         public SearchHit[] Hits { get; set; } = [];
     }

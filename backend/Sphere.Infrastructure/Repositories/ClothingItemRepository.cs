@@ -3,11 +3,12 @@ using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Models;
-using Sphere.Application.UseCases.ClothingItem.Commons;
 using Sphere.Domain.Categories;
 using Sphere.Domain.ClothingItems;
 using Sphere.Infrastructure.Persistance;
 using Sphere.Infrastructure.Persistance.Specification;
+using Sphere.Application.Commons.Exceptions;
+using Sphere.Application.UseCases.ClothingItems.Commons;
 
 namespace Sphere.Infrastructure.Repositories {
     public class ClothingItemRepository : IClothingItemRepository {
@@ -96,6 +97,40 @@ namespace Sphere.Infrastructure.Repositories {
             return category;
         }
 
+        public async Task<List<Category>> GetCategoriesByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default) {
+            var categories = await _context.Categories
+                .Where(c => ids.Contains(c.Id))
+                .ToListAsync(ct);
+            return categories;
+        }
+
+        public async Task<Category?> GetCategoryByNameAsync(string name, CancellationToken ct = default) {
+            string normalized = name.ToLower();
+
+            return await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == normalized.ToLower(), ct);
+        }
+
+        public async Task<List<Category>> GetCategoriesByNamesAsync(IEnumerable<string> names, CancellationToken ct = default) {
+            var namesList = names.ToList();
+
+            var categories = await _context.Categories
+                .Where(c => namesList.Contains(c.Name))
+                .ToListAsync(ct);
+            
+            var notFound = namesList.Except(categories.Select(c => c.Name)).ToList();
+
+            if (notFound.Count > 0) {
+                _logger.LogWarning("Categories not found: {NotFoundCategories}", string.Join(", ", notFound));
+                throw new CategoryNotFoundException(notFound[0]);
+            }
+
+            return categories;
+        }
+
+        public async Task<List<Category>> GetAllCategoriesAsync(CancellationToken ct = default) {
+            return await _context.Categories.ToListAsync(ct);
+        }
+
         public async Task<ClothingItemMeta> GetMetaAsync(ClothingItemFilter filter, CancellationToken ct) {
             var query = _context.ClothingItems.AsQueryable();
 
@@ -135,7 +170,7 @@ namespace Sphere.Infrastructure.Repositories {
 
             var minPrice = await query
                 .Where(i => i.Price != null)
-                .Select(i => (decimal?)i.Price!.Amount)  
+                .Select(i => (decimal?)i.Price!.Amount)
                 .MinAsync(ct);
 
             var maxPrice = await query
@@ -144,7 +179,6 @@ namespace Sphere.Infrastructure.Repositories {
                 .MaxAsync(ct);
 
             return new ClothingItemMeta(
-                totalItems,
                 availableCategories,
                 availableColors,
                 availableSizes,
@@ -152,23 +186,6 @@ namespace Sphere.Infrastructure.Repositories {
                 minPrice,
                 maxPrice
             );
-        }
-
-        public async Task<List<Category>> GetCategoriesByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default) {
-            var categories = await _context.Categories
-                .Where(c => ids.Contains(c.Id))
-                .ToListAsync(ct);
-            return categories;
-        }
-
-        public async Task<Category?> GetCategoryByNameAsync(string name, CancellationToken ct = default) {
-            string normalized = name.ToLower();
-
-            return await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == normalized.ToLower(), ct);
-        }
-
-        public async Task<List<Category>> GetAllCategoriesAsync(CancellationToken ct = default) {
-            return await _context.Categories.ToListAsync(ct);
         }
     }
 }

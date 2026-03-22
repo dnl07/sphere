@@ -1,10 +1,5 @@
-﻿using Sphere.Application.UseCases.ClothingItem.Commons;
+﻿using Sphere.Application.UseCases.ClothingItems.Commons;
 using Sphere.Domain.ClothingItems.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sphere.Application.Mappers.ClothingItems {
     public static class PriceMapper {

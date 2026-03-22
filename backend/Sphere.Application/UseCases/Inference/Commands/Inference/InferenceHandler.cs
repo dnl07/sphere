@@ -1,7 +1,7 @@
 ﻿using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Services;
 
-namespace Sphere.Application.UseCases.Inference.Commands.Create {
+namespace Sphere.Application.UseCases.Inference.Commands.Inference {
     public class InferenceHandler : IUseCaseHandler<InferenceCommand, InferenceResponse> {
         private readonly IBackgroundRemoverService _backgroundRemover;
 

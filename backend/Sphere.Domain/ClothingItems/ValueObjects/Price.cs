@@ -1,4 +1,4 @@
-﻿using Sphere.Domain.Clothing.Exceptions;
+﻿using Sphere.Domain.ClothingItems.Exceptions;
 
 namespace Sphere.Domain.ClothingItems.ValueObjects {
     public class Price {

@@ -1,4 +1,6 @@
-﻿namespace Sphere.Application.Commons.Interfaces.Services {
+﻿using Sphere.Application.Commons.Models;
+
+namespace Sphere.Application.Commons.Interfaces.Services {
     public interface ISearchEngineService {
         Task InitializeAsync(CancellationToken ct);
         Task<List<Guid>> SearchAsync(string query, CancellationToken ct);

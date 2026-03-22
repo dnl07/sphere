@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sphere.Application.Commons.Interfaces;
-using Sphere.Application.UseCases.Category.Queries.GetAll;
+using Sphere.Application.UseCases.Categories.Queries.GetAll;
 
 namespace Sphere.Api.Controllers {
     [ApiController]

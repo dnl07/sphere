@@ -1,4 +1,4 @@
-﻿namespace Sphere.Application.UseCases.Inference.Commands.Create {
+﻿namespace Sphere.Application.UseCases.Inference.Commands.Inference {
     public class InferenceResponse {
         public byte[] CroppedImageData { get; set; } = [];
     }

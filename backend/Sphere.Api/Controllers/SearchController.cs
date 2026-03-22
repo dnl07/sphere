@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sphere.Application.Commons.Interfaces;
-using Sphere.Application.UseCases.SearchEngine.Command.Search;
+using Sphere.Application.UseCases.Search.Command.Search;
 
 namespace Sphere.Api.Controllers {
     [ApiController]

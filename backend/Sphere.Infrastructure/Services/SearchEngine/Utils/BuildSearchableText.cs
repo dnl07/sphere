@@ -1,4 +1,4 @@
-﻿using Sphere.Application.Commons.Interfaces.Services;
+﻿using Sphere.Application.Commons.Models;
 using Sphere.Domain.ClothingItems;
 
 namespace Sphere.Infrastructure.Services.SearchEngine.Utils {

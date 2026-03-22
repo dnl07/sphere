@@ -3,7 +3,7 @@ using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Application.Mappers.ClothingItems;
 
-namespace Sphere.Application.UseCases.SearchEngine.Command.Search {
+namespace Sphere.Application.UseCases.Search.Command.Search {
     public class SearchHandler : IUseCaseHandler<SearchCommand, SearchResponse> {
         private readonly ISearchEngineService _searchEngine;
         private readonly IClothingItemRepository _clothingRepository;

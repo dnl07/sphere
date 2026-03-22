@@ -1,18 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Sphere.Application.Commons;
 using Sphere.Application.Commons.Interfaces;
-using Sphere.Application.UseCases.Category.Queries.GetAll;
-using Sphere.Application.UseCases.ClothingItem.Commands.Create;
-using Sphere.Application.UseCases.ClothingItem.Commands.Delete;
-using Sphere.Application.UseCases.ClothingItem.Commands.Update;
-using Sphere.Application.UseCases.ClothingItem.Commons;
-using Sphere.Application.UseCases.ClothingItem.Queries.GetItems;
+using Sphere.Application.UseCases.Categories.Queries.GetAll;
 using Sphere.Application.UseCases.ClothingItems.Commands.Create;
-using Sphere.Application.UseCases.ClothingItems.Queries.Get;
-using Sphere.Application.UseCases.Image.Queries.Get;
-using Sphere.Application.UseCases.Inference.Commands.Create;
-using Sphere.Application.UseCases.SearchEngine.Command.Search;
+using Sphere.Application.UseCases.ClothingItems.Commands.Delete;
+using Sphere.Application.UseCases.ClothingItems.Commands.Update;
+using Sphere.Application.UseCases.ClothingItems.Commons;
+using Sphere.Application.UseCases.ClothingItems.Queries.GetById;
+using Sphere.Application.UseCases.ClothingItems.Queries.GetImage;
+using Sphere.Application.UseCases.ClothingItems.Queries.GetItems;
+using Sphere.Application.UseCases.Inference.Commands.Inference;
+using Sphere.Application.UseCases.MediaFiles.Queries.Get;
+using Sphere.Application.UseCases.Search.Command.Search;
 
-namespace Sphere.Application.Commons {
+namespace Sphere.Application {
     public static class DependencyInjection {
         public static IServiceCollection AddApplication(this IServiceCollection services) {
             // Register Dispatcher

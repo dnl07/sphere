@@ -1,5 +1,5 @@
 ﻿using Sphere.Application.Commons.Models;
-using Sphere.Application.UseCases.ClothingItem.Commons;
+using Sphere.Application.UseCases.ClothingItems.Commons;
 using Sphere.Domain.Categories;
 using Sphere.Domain.ClothingItems;
 
@@ -19,6 +19,8 @@ namespace Sphere.Application.Commons.Interfaces.Repository {
         Task<Category?> GetCategoryByIdAsync(Guid id, CancellationToken ct = default);
         Task<List<Category>> GetCategoriesByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default);
         Task<Category?> GetCategoryByNameAsync(string name, CancellationToken ct = default);
+        Task<List<Category>> GetCategoriesByNamesAsync(IEnumerable<string> names, CancellationToken ct = default);
+
         Task<List<Category>> GetAllCategoriesAsync(CancellationToken ct = default);
 
     }

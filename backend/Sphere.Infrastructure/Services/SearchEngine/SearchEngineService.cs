@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Services;
-using Sphere.Domain.ClothingItems;
+using Sphere.Application.Commons.Models;
 using Sphere.Infrastructure.Services.SearchEngine.Models;
 using System.Net.Http.Json;
 

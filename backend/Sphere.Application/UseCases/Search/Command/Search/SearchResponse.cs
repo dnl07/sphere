@@ -1,4 +1,4 @@
-﻿namespace Sphere.Application.UseCases.SearchEngine.Command.Search {
+﻿namespace Sphere.Application.UseCases.Search.Command.Search {
     public class SearchResponse {
         public SearchResultItem[] Results { get; set; }
         public SearchResponse(SearchResultItem[] results) {

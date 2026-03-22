@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sphere.Application.Commons.Interfaces;
-using Sphere.Application.UseCases.Image.Queries.Get;
+using Sphere.Application.UseCases.MediaFiles.Queries.Get;
 
 namespace Sphere.Api.Controllers {
     [ApiController]

@@ -1,10 +1,5 @@
-﻿using Sphere.Application.UseCases.ClothingItem.Commons;
+﻿using Sphere.Application.UseCases.ClothingItems.Commons;
 using Sphere.Domain.ClothingItems;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sphere.Infrastructure.Persistance.Specification {
     public class ClothingItemSpecification : Specification<ClothingItem> {
@@ -20,19 +15,18 @@ namespace Sphere.Infrastructure.Persistance.Specification {
             }
 
             if (_filter.Colors != null && _filter.Colors.Length > 0) {
-                query = query.Where(item => _filter.Colors.Contains(item.Color));
+                var colorsLower = _filter.Colors.Select(c => c.ToLower()).ToArray();
+                query = query.Where(item => colorsLower.Contains(item.Color!.ToLower()));
             }
 
             if (_filter.Materials != null && _filter.Materials.Length > 0) {
-                query = query.Where(item => _filter.Materials.Contains(item.Material));
+                var materialsLower = _filter.Materials.Select(m => m.ToLower()).ToArray();
+                query = query.Where(item => materialsLower.Contains(item.Material!.ToLower()));
             }
 
             if (_filter.Sizes != null && _filter.Sizes.Length > 0) {
-                query = query.Where(item => _filter.Sizes.Contains(item.Size));
-            }
-
-            if (_filter.FetchAll) {
-                return query;
+                var sizesLower = _filter.Sizes.Select(s => s.ToLower()).ToArray();
+                query = query.Where(item => sizesLower.Contains(item.Size!.ToLower()));
             }
 
             return query
