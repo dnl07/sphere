@@ -4,14 +4,14 @@ using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Mappers.ClothingItems;
 
 namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
-    public class GetClothingItemHandler : IUseCaseHandler<GetClothingItemQuery, GetClothingItemResponse> {
+    public class GetByIdHandler : IUseCaseHandler<GetByIdQuery, GetByIdResponse> {
         private readonly IClothingItemRepository _repository;
 
-        public GetClothingItemHandler(IClothingItemRepository repository) {
+        public GetByIdHandler(IClothingItemRepository repository) {
             _repository = repository;
         }
 
-        public async Task<GetClothingItemResponse> Handle(GetClothingItemQuery request, CancellationToken ct) {
+        public async Task<GetByIdResponse> Handle(GetByIdQuery request, CancellationToken ct) {
             var response = await _repository.GetByIdAsync(request.Id, ct);
 
             if (response == null) {

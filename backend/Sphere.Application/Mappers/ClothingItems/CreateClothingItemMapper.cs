@@ -1,4 +1,5 @@
 ﻿using Sphere.Application.UseCases.ClothingItem.Commands.Update;
+using Sphere.Application.UseCases.ClothingItem.Commons;
 using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 using Sphere.Domain.Categories;
 using Sphere.Domain.ClothingItems;
@@ -41,6 +42,22 @@ namespace Sphere.Application.Mappers.ClothingItems {
 
         public static UpdateClothingItemResponse ToUpdateResponse(this ClothingItem item, string categoryName) {
             return new UpdateClothingItemResponse {
+                Id = item.Id,
+                Name = item.Name,
+                Category = categoryName,
+                Description = item.Description,
+                Size = item.Size,
+                Material = item.Material,
+                Color = item.Color,
+                Price = item.Price?.ToDto(),
+                ImageId = item.ImageId,
+                CreatedAt = item.CreatedAt,
+                UpdatedAt = item.UpdatedAt
+            };
+        }
+
+        public static ClothingItemDto ToDto(this ClothingItem item, string categoryName) {
+            return new ClothingItemDto {
                 Id = item.Id,
                 Name = item.Name,
                 Category = categoryName,

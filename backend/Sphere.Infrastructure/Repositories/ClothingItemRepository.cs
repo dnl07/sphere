@@ -3,8 +3,7 @@ using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Models;
-using Sphere.Application.UseCases.ClothingItem.Queries.GetFiltered;
-using Sphere.Application.UseCases.ClothingItem.Queries.GetMeta;
+using Sphere.Application.UseCases.ClothingItem.Commons;
 using Sphere.Domain.Categories;
 using Sphere.Domain.ClothingItems;
 using Sphere.Infrastructure.Persistance;
@@ -56,7 +55,7 @@ namespace Sphere.Infrastructure.Repositories {
             var spec = new ClothingItemSpecification(filter);
             var items = await spec.Apply(query).ToListAsync(ct);
 
-            _logger.LogInformation("Retrieved {Count} clothing items with filter {filter}", items.Count, filter.Color);
+            _logger.LogInformation("Retrieved {Count} clothing items with filter {filter}", items.Count, filter.Colors);
 
             return new PagedResult<ClothingItem> {
                 Items = items,
@@ -102,8 +101,11 @@ namespace Sphere.Infrastructure.Repositories {
             return category;
         }
 
-        public async Task<ClothingItemMeta> GetMetaAsync(CancellationToken ct) {
+        public async Task<ClothingItemMeta> GetMetaAsync(ClothingItemFilter filter, CancellationToken ct) {
             var query = _context.ClothingItems.AsQueryable();
+
+            var spec = new ClothingItemSpecification(filter);
+            query = spec.Apply(query);
 
             var totalItems = await query.CountAsync(ct);
 
@@ -147,13 +149,13 @@ namespace Sphere.Infrastructure.Repositories {
                 .MaxAsync(ct);
 
             return new ClothingItemMeta(
-                TotalItems: totalItems,
-                AvailableCategories: availableCategories,
-                AvailableColors: availableColors,
-                AvailableSizes: availableSizes,
-                AvailableMaterials: availableMaterials,
-                MinPrice: minPrice,
-                MaxPrice: maxPrice
+                totalItems,
+                availableCategories,
+                availableColors,
+                availableSizes,
+                availableMaterials,
+                minPrice,
+                maxPrice
             );
         }
 

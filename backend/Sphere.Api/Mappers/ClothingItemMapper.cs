@@ -1,7 +1,7 @@
 ﻿using Sphere.Api.Dtos.Requests.ClothingItems;
 using Sphere.Api.Utils;
 using Sphere.Application.UseCases.ClothingItem.Commands.Update;
-using Sphere.Application.UseCases.ClothingItem.Queries.GetFiltered;
+using Sphere.Application.UseCases.ClothingItem.Commons;
 using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 
 namespace Sphere.API.Mappers {
@@ -53,9 +53,9 @@ namespace Sphere.API.Mappers {
 
             return new ClothingItemFilter {
                 CategoryIds = request.CategoryIds,
-                Color = request.Color,
-                Size = request.Size,
-                Material = request.Material,
+                Colors = request.Color,
+                Sizes = request.Size,
+                Materials = request.Material,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
                 FetchAll = request.FetchAll

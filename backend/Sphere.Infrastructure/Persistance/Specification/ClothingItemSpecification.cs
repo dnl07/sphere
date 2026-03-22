@@ -1,4 +1,4 @@
-﻿using Sphere.Application.UseCases.ClothingItem.Queries.GetFiltered;
+﻿using Sphere.Application.UseCases.ClothingItem.Commons;
 using Sphere.Domain.ClothingItems;
 using System;
 using System.Collections.Generic;
@@ -19,16 +19,16 @@ namespace Sphere.Infrastructure.Persistance.Specification {
                 query = query.Where(item => _filter.CategoryIds.Contains(item.CategoryId));
             }
 
-            if (_filter.Color != null && _filter.Color.Length > 0) {
-                query = query.Where(item => _filter.Color.Contains(item.Color));
+            if (_filter.Colors != null && _filter.Colors.Length > 0) {
+                query = query.Where(item => _filter.Colors.Contains(item.Color));
             }
 
-            if (_filter.Material != null && _filter.Material.Length > 0) {
-                query = query.Where(item => _filter.Material.Contains(item.Material));
+            if (_filter.Materials != null && _filter.Materials.Length > 0) {
+                query = query.Where(item => _filter.Materials.Contains(item.Material));
             }
 
-            if (_filter.Size != null && _filter.Size.Length > 0) {
-                query = query.Where(item => _filter.Size.Contains(item.Size));
+            if (_filter.Sizes != null && _filter.Sizes.Length > 0) {
+                query = query.Where(item => _filter.Sizes.Contains(item.Size));
             }
 
             if (_filter.FetchAll) {

@@ -3,10 +3,8 @@ using Sphere.Api.Dtos.Requests.ClothingItems;
 using Sphere.API.Mappers;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.UseCases.ClothingItem.Commands.Delete;
-using Sphere.Application.UseCases.ClothingItem.Queries.GetFiltered;
-using Sphere.Application.UseCases.ClothingItem.Queries.GetMeta;
+using Sphere.Application.UseCases.ClothingItem.Queries.GetItems;
 using Sphere.Application.UseCases.ClothingItems.Queries.Get;
-using Sphere.Application.UseCases.ClothingItems.Queries.GetAll;
 using Sphere.Application.UseCases.Image.Queries.Get;
 
 namespace Sphere.API.Controllers
@@ -33,33 +31,23 @@ namespace Sphere.API.Controllers
 
         [HttpGet()]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAll([FromQuery] ClothingItemFilterRequest request, CancellationToken ct) {
-            if (request.IsEmpty()) {
-                var query = new GetAllClothingItemQuery();
-                var response = await _dispatcher.Dispatch(query);
+        public async Task<IActionResult> GetClothingItems([FromQuery] ClothingItemFilterRequest request, CancellationToken ct) {
+            var query = new GetItemsQuery(request.ToFilter());
+            var response = await _dispatcher.Dispatch(query);
 
-                if (response is null) {
-                    return NotFound();
-                }
-
-                return Ok(response);
-            }
-
-            var filteredQuery = new GetFilteredClothingItemQuery(request.ToFilter());
-            var filteredResponse = await _dispatcher.Dispatch(filteredQuery);
-
-            if (filteredResponse is null) {
+            if (response is null) {
                 return NotFound();
             }
 
-            return Ok(filteredResponse);
+            return Ok(response);
+            
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id) {
-            var query = new GetClothingItemQuery(id);
+            var query = new GetByIdQuery(id);
             var response = await _dispatcher.Dispatch(query);
 
             if (response is null) {
@@ -116,19 +104,6 @@ namespace Sphere.API.Controllers
             }
 
             return File(response.FileData, response.ContentType, response.FileName);
-        }
-
-        [HttpGet("meta")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetMeta() {
-            var query = new GetMetaClothingItemQuery();
-
-            var response = await _dispatcher.Dispatch(query);
-            if (response is null) {
-
-                return NotFound();
-            }
-            return Ok(response);
         }
     }
 }
