@@ -14,7 +14,7 @@ const Header = () => {
             <HamburgerButton open={open} onClick={() => setOpen(!open)} />
             <HeaderMenu open={open} />
             {open && <ClickableBackground bgColor="" onClick={() => setOpen(false)}/>}
-        </header> 
+        </header>
     )
 }
 

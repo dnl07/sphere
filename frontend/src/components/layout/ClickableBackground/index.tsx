@@ -5,7 +5,7 @@ type Props = {
 
 const ClickableBackground = ({ bgColor, onClick }: Props) => {
     return (
-        <div className={`${bgColor} z-30 fixed top-0 left-0 w-full h-full`} onClick={onClick} />
+        <div className={`${bgColor}  z-10 fixed top-0 left-0 w-full h-full`} onClick={onClick} />
     )
 }
 
