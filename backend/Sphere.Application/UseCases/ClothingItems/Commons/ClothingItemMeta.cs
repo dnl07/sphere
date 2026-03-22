@@ -1,26 +1,23 @@
 ﻿namespace Sphere.Application.UseCases.ClothingItems.Commons {
     public class ClothingItemMeta {
-        public CategoryCount[] AvailableCategories { get; set; } = new CategoryCount[0];
-        public ColorCount[] AvailableColors { get; set; } = new ColorCount[0];
-        public SizeCount[] AvailableSizes { get; set; } = new SizeCount[0];
-        public MaterialCount[] AvailableMaterials { get; set; } = new MaterialCount[0];
+        public FilterOption[] AvailableCategories { get; set; } = [];
+        public FilterOption[] AvailableColors { get; set; } = [];
+        public FilterOption[] AvailableSizes { get; set; } = [];
+        public FilterOption[] AvailableMaterials { get; set; } = [];
         public decimal? MinPrice { get; set; }
-        public decimal? MaxPric { get; set; }
+        public decimal? MaxPrice { get; set; }
 
-        public ClothingItemMeta(CategoryCount[] availableCategories, ColorCount[] availableColors, SizeCount[] availableSizes, MaterialCount[] availableMaterials, decimal? minPrice, decimal? maxPric) {
+        public ClothingItemMeta(FilterOption[] availableCategories, FilterOption[] availableColors, FilterOption[] availableSizes, FilterOption[] availableMaterials, decimal? minPrice, decimal? maxPrice) {
             AvailableCategories = availableCategories;
             AvailableColors = availableColors;
             AvailableSizes = availableSizes;
             AvailableMaterials = availableMaterials;
             MinPrice = minPrice;
-            MaxPric = maxPric;
+            MaxPrice = maxPrice;
         }
 
         public static ClothingItemMeta Empty => new ClothingItemMeta([], [], [], [], null, null);
     }
 
-    public record CategoryCount(string Category, int Count);
-    public record ColorCount(string Color, int Count);
-    public record SizeCount(string Size, int Count);
-    public record MaterialCount(string Material, int Count);
+    public record FilterOption(string Name, int Count);
 }
