@@ -5,7 +5,7 @@ type Props = {
 const DropDownArrow = ({ open }: Props) => {
     return (
         <span
-            className={`block w-5 h-5 border-t-2  border-l-2 border-black transform transition-all duration-200 ${open ? "translate-y-1" : "-translate-y-1"}`}
+            className={`block w-4 h-4 border-t-2  border-l-2 border-black transform transition-all duration-300 -translate-x-1 ${open ? "translate-y-1" : "-translate-y-1"}`}
             style={{
                 transform: open
                     ? "rotate(45deg) rotate3d(0, 0, 0, 0deg)"

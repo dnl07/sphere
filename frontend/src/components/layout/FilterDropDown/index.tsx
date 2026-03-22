@@ -1,21 +1,21 @@
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import DropDownArrow from "../../ui/icons/DropDownArrow";
 
 type Props = {
+    open: boolean,
+    onToggle: () => void,
     children: ReactNode,
     label: string
 }
 
-const FilterDropDown = ({ children, label }: Props) => {
-    const [ onExpanded, setOnExpanded ] = useState(false);
-
+const FilterDropDown = ({ open, onToggle, children, label }: Props) => {
     return (
-        <div className="bg-gray-400 w-full px-2">
-            <button className="bg-gray-600 w-full flex justify-between items-center text-2xl p-2" onClick={() => setOnExpanded(!onExpanded)}>
+        <div className=" w-full">
+            <button className=" w-full flex justify-between items-center text-2xl py-2 cursor-pointer" onClick={onToggle}>
                 {label}
-                <DropDownArrow open={onExpanded}/>
+                <DropDownArrow open={open}/>
             </button>
-            {onExpanded && children}
+            {open && children}
         </div>
 
     )
