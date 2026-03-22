@@ -1,4 +1,5 @@
 ﻿using Sphere.Application.Commons.Interfaces;
+using Sphere.Application.UseCases.ClothingItem.Commons;
 
 namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
     public class UpdateClothingItemCommand(
@@ -13,7 +14,7 @@ namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
         string? currency,
         byte[]? image,
         string? imageFileName,
-        string? imageContentType) : IUseCase<UpdateClothingItemResponse> {
+        string? imageContentType) : IUseCase<ClothingItemDto> {
         public Guid Id { get; set; } = id;
         public string? Name { get; set; } = name;
         public string? Category { get; set; } = category;

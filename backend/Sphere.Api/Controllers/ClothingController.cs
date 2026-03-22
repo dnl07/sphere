@@ -47,7 +47,7 @@ namespace Sphere.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id) {
-            var query = new GetByIdQuery(id);
+            var query = new GetClothingItemByIdQuery(id);
             var response = await _dispatcher.Dispatch(query);
 
             if (response is null) {

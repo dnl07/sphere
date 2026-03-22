@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
+using Sphere.Application.UseCases.ClothingItem.Commons;
 using Sphere.Infrastructure.Services.SearchEngine.Utils;
 
 namespace Sphere.Infrastructure.Services.SearchEngine {
@@ -53,10 +54,10 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
         /// Indexes existing clothing items from the database into the search engine. 
         /// </summary>
         private static async Task IndexExistingItemsAsync(ISearchEngineService searchEngine, IClothingItemRepository repo, ILogger logger, CancellationToken ct) {
-            var items = await repo.GetAllAsync(ct);
-            logger.LogInformation("SearchEngine: Indexing {Count} items...", items.Count);
+            var pagedItems = await repo.GetItemsAsync(new ClothingItemFilter(), ct);
+            logger.LogInformation("SearchEngine: Indexing {Count} items...", pagedItems.Items.Count);
 
-            foreach (var item in items) {
+            foreach (var item in pagedItems.Items) {
                 try {
                     var category = await repo.GetCategoryByIdAsync(item.CategoryId, ct);
 

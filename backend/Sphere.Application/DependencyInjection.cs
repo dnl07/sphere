@@ -1,16 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Sphere.Application.Commons.Interfaces;
+using Sphere.Application.UseCases.Category.Queries.GetAll;
+using Sphere.Application.UseCases.ClothingItem.Commands.Create;
 using Sphere.Application.UseCases.ClothingItem.Commands.Delete;
+using Sphere.Application.UseCases.ClothingItem.Commands.Update;
+using Sphere.Application.UseCases.ClothingItem.Commons;
+using Sphere.Application.UseCases.ClothingItem.Queries.GetItems;
 using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 using Sphere.Application.UseCases.ClothingItems.Queries.Get;
 using Sphere.Application.UseCases.Image.Queries.Get;
-using Sphere.Application.UseCases.Category.Queries.GetAll;
-
-using Sphere.Application.UseCases.SearchEngine.Command.Search;
 using Sphere.Application.UseCases.Inference.Commands.Create;
-using Sphere.Application.UseCases.ClothingItem.Commands.Update;
-using Sphere.Application.UseCases.ClothingItem.Commands.Create;
-using Sphere.Application.UseCases.ClothingItem.Queries.GetItems;
+using Sphere.Application.UseCases.SearchEngine.Command.Search;
 
 namespace Sphere.Application.Commons {
     public static class DependencyInjection {
@@ -19,10 +19,10 @@ namespace Sphere.Application.Commons {
             services.AddScoped<IUseCaseDispatcher, UseCaseDispatcher>();
 
             // Clothing Item Handlers
-            services.AddScoped<IUseCaseHandler<CreateClothingItemCommand, CreateClothingItemResponse>, CreateClothingItemHandler>();
+            services.AddScoped<IUseCaseHandler<CreateClothingItemCommand, ClothingItemDto>, CreateClothingItemHandler>();
             services.AddScoped<IUseCaseHandler<DeleteClothingItemCommand, DeleteClothingItemResponse>, DeleteClothingItemHandler>();
-            services.AddScoped<IUseCaseHandler<UpdateClothingItemCommand, UpdateClothingItemResponse>, UpdateClothingItemHandler>();
-            services.AddScoped<IUseCaseHandler<GetByIdQuery, GetByIdResponse>, GetByIdHandler>();
+            services.AddScoped<IUseCaseHandler<UpdateClothingItemCommand, ClothingItemDto>, UpdateClothingItemHandler>();
+            services.AddScoped<IUseCaseHandler<GetClothingItemByIdQuery, ClothingItemDto>, GetClothingItemByIdHandler>();
             services.AddScoped<IUseCaseHandler<GetClothingImageQuery, GetClothingImageResponse>, GetClothingImageHandler>();
             services.AddScoped<IUseCaseHandler<GetItemsQuery, GetItemsResponse>, GetItemsHandler>();
 
@@ -36,7 +36,7 @@ namespace Sphere.Application.Commons {
             services.AddScoped<IUseCaseHandler<SearchCommand, SearchResponse>, SearchHandler>();
 
             // Background Remover Handler
-            services.AddScoped<IUseCaseHandler<CreateInferenceCommand, CreateInferenceResponse>, CreateInferenceHandler>();
+            services.AddScoped<IUseCaseHandler<InferenceCommand, InferenceResponse>, InferenceHandler>();
 
             return services;
         }

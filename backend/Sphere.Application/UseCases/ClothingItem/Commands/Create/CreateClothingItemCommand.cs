@@ -1,4 +1,5 @@
 ﻿using Sphere.Application.Commons.Interfaces;
+using Sphere.Application.UseCases.ClothingItem.Commons;
 
 namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
     public class CreateClothingItemCommand(string name,
@@ -11,7 +12,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
         string? currency,
         byte[] image,
         string imageFileName,
-        string imageContentType) : IUseCase<CreateClothingItemResponse> {
+        string imageContentType) : IUseCase<ClothingItemDto> {
         public string Name { get; set; } = name ?? "";
         public string Category { get; set; } = category ?? "";
         public string? Description { get; set; } = description ?? "";

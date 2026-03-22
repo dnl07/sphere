@@ -17,7 +17,7 @@ namespace Sphere.Api.Controllers {
         [HttpPost()]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Inference([FromForm] CreateInferenceRequestDto request) {
-            var command = new CreateInferenceCommand(request.Image.ConvertToBytes());
+            var command = new InferenceCommand(request.Image.ConvertToBytes());
 
             var response = await _dispatcher.Dispatch(command);
 

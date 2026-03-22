@@ -10,8 +10,7 @@ namespace Sphere.Application.Commons.Interfaces.Repository {
         // Clothing Item CRUD
         Task AddAsync(ClothingItem item, CancellationToken ct = default);
         Task<ClothingItem?> GetByIdAsync(Guid id, CancellationToken ct = default);
-        Task<List<ClothingItem>> GetAllAsync(CancellationToken ct = default);
-        Task<PagedResult<ClothingItem>> GetFilteredAsync(ClothingItemFilter filter, CancellationToken ct = default);
+        Task<PagedResult<ClothingItem>> GetItemsAsync(ClothingItemFilter filter, CancellationToken ct = default);
         Task<List<ClothingItem>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct = default);
         Task DeleteAsync(Guid id, CancellationToken ct = default);
         Task<ClothingItemMeta> GetMetaAsync(ClothingItemFilter filter, CancellationToken ct = default);

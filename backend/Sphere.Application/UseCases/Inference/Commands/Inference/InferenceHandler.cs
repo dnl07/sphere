@@ -2,17 +2,17 @@
 using Sphere.Application.Commons.Interfaces.Services;
 
 namespace Sphere.Application.UseCases.Inference.Commands.Create {
-    public class CreateInferenceHandler : IUseCaseHandler<CreateInferenceCommand, CreateInferenceResponse> {
+    public class InferenceHandler : IUseCaseHandler<InferenceCommand, InferenceResponse> {
         private readonly IBackgroundRemoverService _backgroundRemover;
 
-        public CreateInferenceHandler(IBackgroundRemoverService backgroundRemover) {
+        public InferenceHandler(IBackgroundRemoverService backgroundRemover) {
             _backgroundRemover = backgroundRemover;
         }
 
-        public async Task<CreateInferenceResponse> Handle(CreateInferenceCommand request, CancellationToken cancellationToken) {
+        public async Task<InferenceResponse> Handle(InferenceCommand request, CancellationToken cancellationToken) {
             var imageData = await _backgroundRemover.RemoveBackgroundAsync(request.ImageData, cancellationToken);
 
-            return new CreateInferenceResponse {
+            return new InferenceResponse {
                 CroppedImageData = imageData
             };
         }

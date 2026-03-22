@@ -44,12 +44,7 @@ namespace Sphere.Infrastructure.Repositories {
                 .FirstOrDefaultAsync(ct);
         }
 
-        public async Task<List<ClothingItem>> GetAllAsync(CancellationToken ct = default) {
-            return await _context.ClothingItems
-                .ToListAsync(ct);
-        }
-
-        public async Task<PagedResult<ClothingItem>> GetFilteredAsync(ClothingItemFilter filter, CancellationToken ct = default) {
+        public async Task<PagedResult<ClothingItem>> GetItemsAsync(ClothingItemFilter filter, CancellationToken ct = default) {
             var query = _context.ClothingItems.AsQueryable();
 
             var spec = new ClothingItemSpecification(filter);

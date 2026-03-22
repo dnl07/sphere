@@ -1,13 +1,14 @@
-﻿using Sphere.Application.Commons.Exceptions;
+﻿using Microsoft.Extensions.Logging;
+using Sphere.Application.Commons.Exceptions;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
-using Sphere.Domain.MediaFiles;
-using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Application.Mappers.ClothingItems;
+using Sphere.Application.UseCases.ClothingItem.Commons;
+using Sphere.Domain.MediaFiles;
 
 namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
-    public class UpdateClothingItemHandler : IUseCaseHandler<UpdateClothingItemCommand, UpdateClothingItemResponse> {
+    public class UpdateClothingItemHandler : IUseCaseHandler<UpdateClothingItemCommand, ClothingItemDto> {
         private readonly IClothingItemRepository _clothingRepository;
         private readonly IMediaFileRepository _mediaFileRepository;
 
@@ -27,7 +28,7 @@ namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
             _logger = logger;
         }
 
-        public async Task<UpdateClothingItemResponse> Handle(UpdateClothingItemCommand cmd, CancellationToken ct) {
+        public async Task<ClothingItemDto> Handle(UpdateClothingItemCommand cmd, CancellationToken ct) {
             var item = await _clothingRepository.GetByIdAsync(cmd.Id, ct)
                 ?? throw new ClothingItemNotFoundException(cmd.Id);
 
@@ -77,7 +78,7 @@ namespace Sphere.Application.UseCases.ClothingItem.Commands.Update {
                 throw new CategoryNotFoundException(item.CategoryId);
             }
 
-            return item.ToUpdateResponse(updatedCategory.Name);
+            return item.ToDto(updatedCategory.Name);
         }
     }
 }

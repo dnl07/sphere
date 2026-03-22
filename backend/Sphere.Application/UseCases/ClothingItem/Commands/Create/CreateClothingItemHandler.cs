@@ -4,11 +4,12 @@ using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Application.Mappers.ClothingItems;
+using Sphere.Application.UseCases.ClothingItem.Commons;
 using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 using Sphere.Domain.MediaFiles;
 
 namespace Sphere.Application.UseCases.ClothingItem.Commands.Create {
-    public class CreateClothingItemHandler : IUseCaseHandler<CreateClothingItemCommand, CreateClothingItemResponse> {
+    public class CreateClothingItemHandler : IUseCaseHandler<CreateClothingItemCommand, ClothingItemDto> {
         private readonly IClothingItemRepository _clothingRepository;
         private readonly IMediaFileRepository _mediaFileRepository;
 
@@ -27,7 +28,7 @@ namespace Sphere.Application.UseCases.ClothingItem.Commands.Create {
             _logger = logger;
         }
 
-        public async Task<CreateClothingItemResponse> Handle(CreateClothingItemCommand cmd, CancellationToken ct) {
+        public async Task<ClothingItemDto> Handle(CreateClothingItemCommand cmd, CancellationToken ct) {
             var category = await _clothingRepository.GetCategoryByNameAsync(cmd.Category, ct);
 
             _logger.LogInformation("Creating clothing item with name {Name} in category {Category} with id {id}", cmd.Name, cmd.Category, category?.Id);
@@ -45,7 +46,7 @@ namespace Sphere.Application.UseCases.ClothingItem.Commands.Create {
 
             await _clothingRepository.AddAsync(item, ct);
 
-            return item.ToCreateResponse(category.Name);
+            return item.ToDto(category.Name);
         }
     }
 }

@@ -2,16 +2,17 @@
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Mappers.ClothingItems;
+using Sphere.Application.UseCases.ClothingItem.Commons;
 
 namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
-    public class GetByIdHandler : IUseCaseHandler<GetByIdQuery, GetByIdResponse> {
+    public class GetClothingItemByIdHandler : IUseCaseHandler<GetClothingItemByIdQuery, ClothingItemDto> {
         private readonly IClothingItemRepository _repository;
 
-        public GetByIdHandler(IClothingItemRepository repository) {
+        public GetClothingItemByIdHandler(IClothingItemRepository repository) {
             _repository = repository;
         }
 
-        public async Task<GetByIdResponse> Handle(GetByIdQuery request, CancellationToken ct) {
+        public async Task<ClothingItemDto> Handle(GetClothingItemByIdQuery request, CancellationToken ct) {
             var response = await _repository.GetByIdAsync(request.Id, ct);
 
             if (response == null) {
@@ -24,7 +25,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Queries.Get {
                 throw new CategoryNotFoundException(response.CategoryId);
             }
 
-            return response.ToGetResponse(category.Name);
+            return response.ToDto(category.Name);
         }
     }
 }

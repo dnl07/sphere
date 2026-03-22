@@ -18,7 +18,7 @@ namespace Sphere.Application.UseCases.ClothingItem.Queries.GetItems {
         public async Task<GetItemsResponse> Handle(GetItemsQuery query, CancellationToken ct) {
             var filter = query.Filter ?? new ClothingItemFilter();
 
-            var pagedItems = await _clothingRepository.GetFilteredAsync(filter, ct);
+            var pagedItems = await _clothingRepository.GetItemsAsync(filter, ct);
             var meta = await _clothingRepository.GetMetaAsync(filter, ct);
 
             if (pagedItems.Items.Count == 0) {
