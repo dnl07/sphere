@@ -28,19 +28,19 @@ namespace Sphere.Infrastructure.Repositories {
                 .ToArrayAsync(ct);
 
             var availableColors = await query
-                .Where(i => i.Color != null)
+                .Where(i => !string.IsNullOrWhiteSpace(i.Color))
                 .GroupBy(c => c.Color!)
                 .Select(g => new FilterOption(g.Key, g.Count()))
                 .ToArrayAsync(ct);
 
             var availableSizes = await query
-                .Where(i => i.Size != null)
+                .Where(i => !string.IsNullOrWhiteSpace(i.Size))
                 .GroupBy(c => c.Size!)
                 .Select(g => new FilterOption(g.Key, g.Count()))
                 .ToArrayAsync(ct);
 
             var availableMaterials = await query
-                .Where(i => i.Material != null)
+                .Where(i => !string.IsNullOrWhiteSpace(i.Material))
                 .GroupBy(c => c.Material!)
                 .Select(g => new FilterOption(g.Key, g.Count()))
                 .ToArrayAsync(ct);

@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Sphere.Api.Dtos.Requests.ClothingItems;
+using Sphere.Api.Dtos.Responses.ClothingItems;
+using Sphere.Api.Mappers;
 using Sphere.API.Mappers;
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.UseCases.ClothingItems.Commands.Delete;
@@ -22,7 +24,7 @@ namespace Sphere.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create([FromForm] CreateClothingItemRequestDto request) {
+        public async Task<IActionResult> Create([FromForm] CreateClothingItemRequest request) {
             var command = request.ToCreateCommand();
             var response = await _dispatcher.Dispatch(command);
 
@@ -31,15 +33,15 @@ namespace Sphere.API.Controllers
 
         [HttpGet()]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetClothingItems([FromQuery] ClothingItemFilterRequest request, CancellationToken ct) {
+        public async Task<ActionResult<GetClothingItemsResponse>> GetClothingItems([FromQuery] ClothingItemFilterRequest request, CancellationToken ct) {
             var query = new GetItemsQuery(request.ToFilter());
-            var response = await _dispatcher.Dispatch(query);
+            var response = await _dispatcher.Dispatch(query, ct);
 
             if (response is null) {
                 return NotFound();
             }
 
-            return Ok(response);
+            return Ok(response.ToResponse());
             
         }
 
@@ -62,7 +64,7 @@ namespace Sphere.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateById(string id, [FromForm] UpdateClothingItemRequestDto request) {
+        public async Task<IActionResult> UpdateById(string id, [FromForm] UpdateClothingItemRequest request) {
             if (!Guid.TryParse(id, out var guidId)) {
                 return BadRequest("Invalid ID format.");
             }

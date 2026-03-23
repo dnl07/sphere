@@ -16,9 +16,5 @@
 	<PackageReference Include="Microsoft.Extensions.Http" Version="10.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="Dtos\Responses\" />
-  </ItemGroup>
 
 </Project>

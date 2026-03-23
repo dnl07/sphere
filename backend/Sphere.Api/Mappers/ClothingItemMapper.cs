@@ -6,7 +6,7 @@ using Sphere.Application.UseCases.ClothingItems.Commons;
 
 namespace Sphere.API.Mappers {
     public static class ClothingItemMapper {
-        public static CreateClothingItemCommand ToCreateCommand(this CreateClothingItemRequestDto request) {
+        public static CreateClothingItemCommand ToCreateCommand(this CreateClothingItemRequest request) {
             ArgumentNullException.ThrowIfNull(request);
             ArgumentNullException.ThrowIfNull(request.Image);
 
@@ -25,7 +25,7 @@ namespace Sphere.API.Mappers {
             );
         }
 
-        public static UpdateClothingItemCommand ToUpdateCommand(this UpdateClothingItemRequestDto request, Guid Id) {
+        public static UpdateClothingItemCommand ToUpdateCommand(this UpdateClothingItemRequest request, Guid Id) {
             ArgumentNullException.ThrowIfNull(request);
 
             var imageBytes = request.Image?.ConvertToBytes() ?? [];
