@@ -2,6 +2,8 @@ import { useState } from "react";
 import Cross from "../../ui/icons/Cross";
 import FilterBox from "../FilterBox";
 import FilterDropDown from "../FilterDropDown";
+import type { ClothingMeta } from "../../../models/ClothingMeta";
+import useClothingMeta from "../../../hooks/useClothingMeta";
 
 type Props = {
     open: boolean,
@@ -11,6 +13,8 @@ type Props = {
 const FilterMenu = ({ open, closeFilter }: Props) => {
     const [ openLabel, setOpenLabel ] = useState<string | null>(null);
 
+    const { meta } = useClothingMeta();
+
     const toggleBox = (label: string) => {
         if (openLabel === label) {
             setOpenLabel(null);
@@ -19,29 +23,26 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
         }
     }
 
+    const getMetaOptions = (value: string): Record<string, number> | number => {
+        const field = meta?.[value as keyof ClothingMeta];
 
-    const filterOptions: {label: string, paramKey: string}[] = [
-        { label: "Category", paramKey: "category" },
-        { label: "Color", paramKey: "color" },
-        { label: "Material", paramKey: "material" },
-        { label: "Size", paramKey: "size" },
-        { label: "Price", paramKey: "price" }
+        if (typeof field === "object" && field !== null) {
+            return field as Record<string, number>;
+        } else if (typeof field === "number") {
+            return field as number;
+        }
+        return {};
+    }
+
+    const filterOptions: {label: string, paramKey: string, options: Record<string, number>}[] = [
+        { label: "Category", paramKey: "category", options: getMetaOptions("categories") as Record<string, number> },
+        { label: "Color", paramKey: "color", options: getMetaOptions("colors") as Record<string, number>  },
+        { label: "Material", paramKey: "material", options: getMetaOptions("materials") as Record<string, number>  },
+        { label: "Size", paramKey: "size", options: getMetaOptions("sizes") as Record<string, number>  },
     ]
 
-    const test: Record<string, number> = {
-        "Shirts": 10,
-        "Pants": 5,
-        "Shoes": 3,
-        "gergbeqrg": 10,
-        "vqeareqa": 5,
-        "vqre": 3,
-        "Shievgrrts": 10,
-        "vre": 5,
-        "Shoveevres": 3,
-        "Shirevrts": 10,
-        "Parvents": 5,
-        "Shvreoes": 3
-    }
+
+
 
     return (
         <div className={`fixed w-full top-0 z-30 flex justify-end transition-all ease-in-out duration-300 ${open ? "opacity-100" : "invisible opacity-0"}`}>
@@ -49,8 +50,8 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
                 <div className="py-7 flex justify-end">
                     <Cross onClick={closeFilter}/>
                 </div>
-                {filterOptions.map(({ label, paramKey }) => (
-                    <FilterDropDown label={label} open={openLabel === label} onToggle={() => toggleBox(label)}><FilterBox options={test} paramKey={paramKey}/></FilterDropDown>
+                {filterOptions.map(({ label, paramKey, options }) => (
+                    <FilterDropDown label={label} open={openLabel === label} onToggle={() => toggleBox(label)}><FilterBox options={options} paramKey={paramKey}/></FilterDropDown>
                 ))}
             </div>
         </div>
