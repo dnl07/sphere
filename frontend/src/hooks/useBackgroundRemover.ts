@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { removeBackground } from "../api/services/backgroundRemoverService";
 
 export const useBackgroundRemover = () => {
     const [ loading, setLoading ] = useState(false);
@@ -8,7 +7,7 @@ export const useBackgroundRemover = () => {
         try {
             setLoading(true);
 
-            return await removeBackground(file);
+            // return await removeBackground(file);
         } finally {
             setLoading(false);
         }

@@ -46,10 +46,7 @@ export async function getClothingItems(
     params: GetClothingParams = {}
 ): Promise<GetClothingItemsResponse> {
     const response = await axiosInstance.get<GetClothingItemsResponse>("/clothing", { params });
-
-    if (response.status !== 200) {
-        throw new Error(`Failed to fetch clothing items: ${response.statusText}`);
-    }
+    console.log(response)
 
     return response.data;
 }
@@ -58,13 +55,13 @@ export async function getClothingItems(
 
 export type CreateClothingItemRequest = {
     name: string | null;
-    category?: string | null;
+    category: string;
     description?: string | null;
     size?: string | null;
     material?: string | null;
     color?: string | null;
-    priceAmount: number;
-    currency: string;
+    priceAmount?: number | null;
+    currency?: string | null;
     image: Blob;  
 }
 
@@ -73,13 +70,15 @@ export async function createClothingItem(
 ): Promise<ClothingItemDto> {
     const formData = new FormData();
     formData.append("Name", request.name ?? "");
-    if (request.category) formData.append("Category", request.category);
+    formData.append("Category", request.category);
+
     if (request.description) formData.append("Description", request.description);
     if (request.size) formData.append("Size", request.size);
     if (request.material) formData.append("Material", request.material);
     if (request.color) formData.append("Color", request.color);
-    formData.append("PriceAmount", request.priceAmount.toString());
-    formData.append("Currency", request.currency);
+    if (request.priceAmount) formData.append("PriceAmount", request.priceAmount.toString());
+    if (request.currency) formData.append("Color", request.currency);
+
     formData.append("Image", request.image);
 
     const response = await axiosInstance.post<ClothingItemDto>("/clothing", formData);
@@ -116,4 +115,3 @@ export async function updateClothingItemById(
 
     return response.data;
 }
-

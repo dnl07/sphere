@@ -1,8 +1,8 @@
 import { clothingEndpoints } from "../../../../api/endpoints";
-import type { ClothingItem } from "../../../../models/ClothingItem";
+import type { ClothingItemDto } from "../../../../api/types";
 
 type Props = {
-    item: ClothingItem
+    item: ClothingItemDto
 }
 
 const ClothingGalleryItem = ({ item }: Props) => {

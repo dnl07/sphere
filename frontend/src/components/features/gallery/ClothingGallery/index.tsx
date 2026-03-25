@@ -1,15 +1,15 @@
-import useClothingItems from "../../../../hooks/useClothingItems";
+import { useGetClothing } from "../../../../hooks/useClothing";
 import ClothingGalleryItem from "../ClothingGalleryItem";
 
 const ClothingGallery = () => {    
-    const { items, loading, error } = useClothingItems();
+    const { data, isLoading, error } = useGetClothing();
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+    console.log(data?.items)
     return (
     <div className="grid grid-cols-3 gap-2">
-        {items.map((item) => (
+        {data?.items?.map((item) => (
             <ClothingGalleryItem key={item.id} item={item} />   
         ))}
     </div>

@@ -1,13 +1,13 @@
 export interface ClothingItemDto {
-  id?: string;
+  id: string;
   name: string | null;
-  category?: string | null;
+  category: string | null;
   description?: string | null;
   size?: string | null;
   material?: string | null;
   color?: string | null;
   price?: PriceDto;
-  imageId?: string;
+  imageId: string;
   createdAt?: string;
   updatedAt?: string;
 }
