@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { getClothingItems, type GetClothingItemsResponse, type GetClothingParams } from "../api/clothing.api";
+import type { ApiActions, ApiState } from "../api/types/api.types";
 
-interface UseGetClothingState {
+// GET: items
+interface UseGetClothingState extends ApiState<GetClothingItemsResponse> {
     data: GetClothingItemsResponse | null;
-    isLoading: boolean;
-    error: Error | null;
 }
 
-interface UseGetClothingReturn extends UseGetClothingState {
-    refetch: () => void;
+export interface UseGetClothingReturn extends UseGetClothingState, ApiActions {
     updateFilters: (newFilters: Partial<GetClothingParams>) => void;
 }
 
@@ -29,11 +28,11 @@ export function useGetClothing(initial: GetClothingParams = {}): UseGetClothingR
             setState(prev => ({ ...prev, isLoading: false, error: e instanceof Error ? e : new Error("Unknown Error")}))
         }
     };
-    
+
     useEffect(() => {
         fetchItems();
     }, [params]);
-    
+
     const updateFilters = (newFilters: Partial<GetClothingParams>) => {
         setParams(prev => ({ ...prev, ...newFilters, PageNumber: 1}));
     };

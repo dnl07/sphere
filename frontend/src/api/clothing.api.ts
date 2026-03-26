@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosInstance";
-import type { ClothingItemDto } from "./types";
+import type { ClothingItemDto } from "./types/types";
 
 // GET /clothing response types
 
@@ -21,8 +21,8 @@ export interface ClothingItemFilterResponse {
 }
 
 export interface FilterOption {
-    name?: string | null;
-    count?: number;
+    name: string;
+    count: number;
 }
 
 export interface PriceRange {
@@ -46,8 +46,6 @@ export async function getClothingItems(
     params: GetClothingParams = {}
 ): Promise<GetClothingItemsResponse> {
     const response = await axiosInstance.get<GetClothingItemsResponse>("/clothing", { params });
-    console.log(response)
-
     return response.data;
 }
 

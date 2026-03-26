@@ -1,8 +1,8 @@
-import { useGetClothing } from "../../../../hooks/useClothing";
+import { useClosetContext } from "../../../../context/ClosetContext";
 import ClothingGalleryItem from "../ClothingGalleryItem";
 
 const ClothingGallery = () => {    
-    const { data, isLoading, error } = useGetClothing();
+    const { data, isLoading, error } = useClosetContext();
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;

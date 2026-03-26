@@ -1,5 +1,5 @@
 import { clothingEndpoints } from "../../../../api/endpoints";
-import type { ClothingItemDto } from "../../../../api/types";
+import type { ClothingItemDto } from "../../../../api/types/types";
 
 type Props = {
     item: ClothingItemDto

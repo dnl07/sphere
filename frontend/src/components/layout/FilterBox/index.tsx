@@ -1,7 +1,8 @@
 import { useSearchParams } from "react-router";
+import type { FilterOption } from "../../../api/clothing.api";
 
 type Props = {
-    options: Record<string, number>,
+    options: FilterOption[],
     paramKey: string
 }
 
@@ -27,13 +28,13 @@ const FilterBox = ({ options, paramKey }: Props) => {
 
     return(
         <div className="flex flex-wrap gap-2 py-2">
-            {Object.entries(options).map(([label, count]) => (
+            {options.map(option => (
                 <button 
-                    key={label} 
-                    onPointerDown={() => toggle(label)}
-                    className={`px-2 py-1 border-2 cursor-pointer ${active.includes(label) ? "bg-black text-white border-2 border-black" : ""}`}
+                    key={option.name} 
+                    onPointerDown={() => toggle(option.name)}
+                    className={`px-2 py-1 border-2 cursor-pointer ${active.includes(option.name) ? "bg-black text-white border-2 border-black" : ""}`}
                 >
-                    <p>{label} ({count})</p>
+                    <p>{option.name} ({option.count})</p>
                 </button>
             ))}
         </div>
