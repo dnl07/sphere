@@ -13,7 +13,7 @@ namespace Sphere.Api.Mappers {
                 Filters = new ClothingItemFilterResponse {
                     Categories = dto.Meta.AvailableCategories,
                     Colors = dto.Meta.AvailableColors,
-                    Sizes = dto.Meta.AvailableMaterials,
+                    Sizes = dto.Meta.AvailableSizes,
                     Materials = dto.Meta.AvailableMaterials,
                     PriceRange = new PriceRange {
                         Min = dto.Meta.MinPrice,

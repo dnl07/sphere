@@ -29,9 +29,9 @@ namespace Sphere.Infrastructure.Repositories {
             var query = _context.ClothingItems.AsQueryable();
 
             var spec = new ClothingItemSpecification(filter);
-            var items = await spec.Apply(query).ToListAsync(ct);
+            var items = await spec.ApplyPagination(query).ToListAsync(ct);
 
-            _logger.LogInformation("Retrieved {Count} clothing items with filter {filter}", items.Count, filter.Colors);
+            _logger.LogInformation("Retrieved {Count} clothing items with filter {filter}", items.Count, filter.Sizes);
 
             return new PagedResult<ClothingItem> {
                 Items = items,

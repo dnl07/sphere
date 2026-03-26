@@ -16,9 +16,11 @@ namespace Sphere.API.Controllers
     [Produces("application/json")]
     public class ClothingController : ControllerBase {
         private readonly IUseCaseDispatcher _dispatcher;
+        private readonly ILogger<ClothingController> _logger;
 
-        public ClothingController(IUseCaseDispatcher dispatcher) {
+        public ClothingController(IUseCaseDispatcher dispatcher, ILogger<ClothingController> logger) {
             _dispatcher = dispatcher;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -35,6 +37,9 @@ namespace Sphere.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<GetClothingItemsResponse>> GetClothingItems([FromQuery] ClothingItemFilterRequest request, CancellationToken ct) {
             var query = new GetItemsQuery(request.ToFilter());
+
+            _logger.LogInformation("Dispatching GetItemsQuery with filter: {@Filter}", query.Filter.Sizes);
+
             var response = await _dispatcher.Dispatch(query, ct);
 
             if (response is null) {

@@ -29,6 +29,12 @@ namespace Sphere.Infrastructure.Persistance.Specification {
                 query = query.Where(item => sizesLower.Contains(item.Size!.ToLower()));
             }
 
+            return query;
+        }
+
+        public override IQueryable<ClothingItem> ApplyPagination(IQueryable<ClothingItem> query) {
+            query = Apply(query);
+
             return query
                 .Skip((_filter.PageNumber - 1) * _filter.PageSize)
                 .Take(_filter.PageSize);

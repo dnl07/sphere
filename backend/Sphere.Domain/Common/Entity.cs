@@ -6,6 +6,8 @@
 
         protected Entity() {
             Id = Guid.NewGuid();
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public override bool Equals(object? obj) {
