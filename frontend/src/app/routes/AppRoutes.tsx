@@ -4,6 +4,7 @@ import Home from "../../features/home";
 import Closet from "../../features/closet";
 import Atelier from "../../features/atelier";
 import CreateClothingPage from "../../features/CreateClothingPage";
+import ItemPage from "../../features/itemPage";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
             {index: true, element: <Home />},
             {path: "closet", element: <Closet />},
             {path: "atelier", element: <Atelier />},
+            {path: "item/:id", element: <ItemPage />},
             {path: "atelier/create", element: <CreateClothingPage />},
             { path: "*", element: <h1>404 Not Found</h1> }
         ]

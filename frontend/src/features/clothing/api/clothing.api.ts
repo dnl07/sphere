@@ -1,5 +1,5 @@
 import axiosInstance from "../../../shared/api/axiosInstance";
-import type { ClothingItemDto } from "./clothing.types";
+import type { ClothingItemDto } from "../../../shared/api/clothing.types";
 
 // GET /clothing response types
 

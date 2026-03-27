@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { getClothingItems, type GetClothingItemsResponse, type GetClothingParams } from "../api/clothing.api";
+import { getClothingItems, type GetClothingItemsResponse, type GetClothingParams } from "../../clothing/api/clothing.api";
 import type { ApiActions, ApiState } from "../../../shared/api/api.types";
 
 // GET: items
-interface UseGetClothingState extends ApiState<GetClothingItemsResponse> {
+interface UseClothingItemsState extends ApiState<GetClothingItemsResponse> {
     data: GetClothingItemsResponse | null;
 }
 
-export interface UseGetClothingReturn extends UseGetClothingState, ApiActions {
+export interface UseGetClothingItemsReturn extends UseClothingItemsState, ApiActions {
     updateFilters: (newFilters: Partial<GetClothingParams>) => void;
 }
 
-export function useGetClothing(initial: GetClothingParams = {}): UseGetClothingReturn {
+export function useClothingItems(initial: GetClothingParams = {}): UseGetClothingItemsReturn {
     const [ params, setParams ] = useState<GetClothingParams>(initial);
-    const [ state, setState ] = useState<UseGetClothingState>({
+    const [ state, setState ] = useState<UseClothingItemsState>({
         data: null,
         isLoading: true,
         error: null,

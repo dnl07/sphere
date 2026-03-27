@@ -1,14 +1,14 @@
 import { createContext, useContext, type ReactNode } from "react";
-import { useGetClothing, type UseGetClothingReturn } from "../hooks/useClothing";
+import { useClothingItems, type UseGetClothingItemsReturn } from "../../clothing/hooks/useClothing";
 
-const ClosetContext = createContext<UseGetClothingReturn | null>(null);
+const ClosetContext = createContext<UseGetClothingItemsReturn | null>(null);
 
 type ContextProps = {
     children: ReactNode;
 }
 
 export const ClosetProvider = ({ children }: ContextProps) => {
-    const getClothing = useGetClothing();
+    const getClothing = useClothingItems();
     
     return (
         <ClosetContext.Provider value={getClothing}>
