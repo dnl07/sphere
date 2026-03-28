@@ -1,7 +1,15 @@
 import axiosInstance from "../../../shared/api/axiosInstance";
-import type { ClothingItemDto } from "../../../shared/api/clothing.types";
+import { clothingEndpoints } from "../../../shared/api/endpoints";
+import type { ClothingItemDto } from "../clothing.types";
 
-// GET /clothing response types
+// GET
+
+export async function getClothingItem(id: string) {
+    const response = await axiosInstance.get<ClothingItemDto>(clothingEndpoints.getItem(id));
+    return response.data;
+}
+
+// GET ALL
 
 export interface GetClothingItemsResponse {
     items?: ClothingItemDto[] | null;
@@ -106,10 +114,5 @@ export async function updateClothingItemById(
     params: UpdateClothingItemByIdRequest = {}
 ): Promise<ClothingItemDto> {
     const response = await axiosInstance.post<ClothingItemDto>("/clothing", { params });
-
-    if (response.status !== 200) {
-        throw new Error(`Failed to update clothing item: ${response.statusText}`);
-    }
-
     return response.data;
 }

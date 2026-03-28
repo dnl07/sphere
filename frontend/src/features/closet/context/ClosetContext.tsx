@@ -1,5 +1,5 @@
 import { createContext, useContext, type ReactNode } from "react";
-import { useClothingItems, type UseGetClothingItemsReturn } from "../../clothing/hooks/useClothing";
+import { useClothingItems, type UseGetClothingItemsReturn } from "../../clothing/hooks/useClothingItems";
 
 const ClosetContext = createContext<UseGetClothingItemsReturn | null>(null);
 

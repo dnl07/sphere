@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { clothingEndpoints } from "../../../../shared/api/endpoints";
-import type { ClothingItemDto } from "../../../../shared/api/clothing.types";
+import type { ClothingItemDto } from "../../../clothing/clothing.types";
 
 type Props = {
     item: ClothingItemDto
