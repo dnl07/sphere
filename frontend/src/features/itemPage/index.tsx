@@ -3,6 +3,7 @@ import PageWrapper from "../../shared/components/layout/PageWrapper";
 import { useClothingItem } from "../clothing/hooks/useClothingItem";
 import ItemDisplay from "./components/ItemDisplay";
 import ItemDescription from "./components/ItemDescription";
+import ItemActions from "./components/ItemActions";
 
 const ItemPage = () => {
     const { id } = useParams();
@@ -22,10 +23,13 @@ const ItemPage = () => {
     return (
         <PageWrapper>
             {data && 
-                <div className="w-full flex flex-col items-center">
-                    <h1 className="text-2xl mt-3 self-start">{data?.name}</h1>
+                <div className="w-full flex flex-col items-center max-w-xl">
                     <ItemDisplay imageId={data?.imageId}/>
-                    <ItemDescription item={data} />         
+                    <div className="w-full flex justify-between items-center">
+                        <h1 className="text-2xl">{data?.name}</h1>
+                        <ItemActions />      
+                    </div>
+                    <ItemDescription item={data} />   
                 </div>
             }
 

@@ -7,8 +7,8 @@ type Props = {
 
 const ItemDescription = ({ item }: Props) => {
     return (
-        <div className="w-full pt-3">
-            <dl className="flex flex-col gap-3">
+        <div className="w-full pt-3 mb-4">
+            <dl className="grid grid-cols-2 gap-3">
                 {Object.entries(ClothingItemLabels).map(([key, label]) => {
                     const value = item?.[key as keyof ClothingItemDto];
 
