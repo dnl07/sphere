@@ -1,5 +1,6 @@
 ﻿using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
+using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Application.Commons.Models;
 using Sphere.Application.Mappers.ClothingItems;
 using Sphere.Application.UseCases.ClothingItems.Commons;
@@ -7,13 +8,20 @@ using Sphere.Application.UseCases.ClothingItems.Commons;
 namespace Sphere.Application.UseCases.ClothingItems.Queries.GetItems {
     public class GetItemsHandler : IUseCaseHandler<GetItemsQuery, GetItemsResponse> {
         private readonly IClothingItemRepository _clothingRepository;
+        private readonly ISearchEngineService _searchEngineService;
 
-        public GetItemsHandler(IClothingItemRepository clothingRepository) {
+        public GetItemsHandler(IClothingItemRepository clothingRepository, ISearchEngineService searchEngineService) {
             _clothingRepository = clothingRepository;
+            _searchEngineService = searchEngineService;
         }
 
         public async Task<GetItemsResponse> Handle(GetItemsQuery query, CancellationToken ct) {
             var filter = query.Filter ?? new ClothingItemFilter();
+
+            if (!string.IsNullOrEmpty(filter.SearchQuery)) {
+                var searchResults = await _searchEngineService.SearchAsync(filter.SearchQuery, ct);
+                filter.ItemIds = searchResults.ToArray();
+            }
 
             if (filter.CategoryNames != null && filter.CategoryNames.Length > 0) {
                 var categories = await _clothingRepository.GetCategoriesByNamesAsync(filter.CategoryNames, ct);

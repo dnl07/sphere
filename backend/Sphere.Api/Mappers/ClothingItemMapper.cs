@@ -52,6 +52,7 @@ namespace Sphere.API.Mappers {
             ArgumentNullException.ThrowIfNull(request);
 
             return new ClothingItemFilter {
+                SearchQuery = request.SearchQuery,
                 CategoryNames = request.CategoryNames,
                 Colors = request.Colors,
                 Sizes = request.Sizes,

@@ -38,8 +38,6 @@ namespace Sphere.API.Controllers
         public async Task<ActionResult<GetClothingItemsResponse>> GetClothingItems([FromQuery] ClothingItemFilterRequest request, CancellationToken ct) {
             var query = new GetItemsQuery(request.ToFilter());
 
-            _logger.LogInformation("Dispatching GetItemsQuery with filter: {@Filter}", query.Filter.Sizes);
-
             var response = await _dispatcher.Dispatch(query, ct);
 
             if (response is null) {

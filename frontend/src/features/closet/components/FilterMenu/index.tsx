@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FilterDropDown from "../FilterDropDown";
 import { useSearchParams } from "react-router";
 import { useClosetContext } from "../../context/ClosetContext";
@@ -51,10 +51,19 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
             }
         });
 
-        console.log("params:", clothingParams)
+        const searchQuery = searchParams.get("q");
+
+        if (searchQuery) {
+            clothingParams.SearchQuery = searchQuery;
+        }
 
         updateFilters(clothingParams);
     }
+
+    useEffect(() => {
+        applyFilters();
+
+    }, [searchParams])
 
     return (
         <div className={`fixed w-full top-0 z-30 flex justify-end transition-all ease-in-out duration-300 ${open ? "opacity-100" : "invisible opacity-0"}`}>

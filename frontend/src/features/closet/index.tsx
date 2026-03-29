@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ClothingGallery from "./components/ClothingGallery";
 import PageWrapper from "../../shared/components/layout/PageWrapper";
-import FilterIconButton from "../../shared/components/ui/FilterIconButton";
+import FilterIconButton from "./components/FilterIconButton";
 import { ClosetProvider } from "./context/ClosetContext";
 import FilterMenu from "./components/FilterMenu";
 

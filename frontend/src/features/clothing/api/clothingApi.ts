@@ -40,6 +40,7 @@ export interface PriceRange {
 
 // Filter parameters
 export type GetClothingParams = {
+    SearchQuery?: string;
     CategoryNames?: string[];
     Colors?: string[];
     Sizes?: string[];

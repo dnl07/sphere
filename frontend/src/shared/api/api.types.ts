@@ -4,6 +4,6 @@ export interface ApiState<T> {
     error: Error | null;
 }
 
-export interface ApiActions {
-    refetch: () => void;
+export interface ApiActions<T = void> {
+    refetch: (args: T) => void;
 }

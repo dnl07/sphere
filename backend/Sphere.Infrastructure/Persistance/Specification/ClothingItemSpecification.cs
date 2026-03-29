@@ -10,6 +10,10 @@ namespace Sphere.Infrastructure.Persistance.Specification {
         }
 
         public override IQueryable<ClothingItem> Apply(IQueryable<ClothingItem> query) {
+            if (_filter.ItemIds != null && _filter.ItemIds.Length > 0) {
+                query = query.Where(item => _filter.ItemIds.Contains(item.Id));
+            }
+
             if (_filter.CategoryIds != null && _filter.CategoryIds.Length > 0) {
                 query = query.Where(item => _filter.CategoryIds.Contains(item.CategoryId));
             }
