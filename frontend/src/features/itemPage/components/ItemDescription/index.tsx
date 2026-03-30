@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { ClothingItemLabels, type ClothingItemDto } from "../../../clothing/clothing.types";
 
 type Props = {
@@ -28,7 +27,7 @@ const ItemDescription = ({ item }: Props) => {
                     return (
                         <div key={key}>
                             <dt className="font-bold">{label}</dt>
-                            <dd>{value ?? "-"}</dd>
+                            <dd>{value !== "" && value ? value : "-"}</dd>
                         </div>
                     );
                 })}
