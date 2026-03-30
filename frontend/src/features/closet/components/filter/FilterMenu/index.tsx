@@ -5,6 +5,7 @@ import { useClosetContext } from "../../../context/ClosetContext";
 import type { FilterOption, GetClothingParams } from "../../../../clothing/api/clothingApi";
 import Cross from "../../../../../shared/components/ui/icons/Cross";
 import FilterBox from "../FilterBox";
+import useDebounce from "../../../../../shared/hooks/useDebounce";
 
 type Props = {
     open: boolean,
@@ -16,6 +17,7 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
     const [searchParams, _] = useSearchParams();
 
     const { data, updateFilters } = useClosetContext();
+    
 
     const toggleBox = (label: string) => {
         if (openLabel === label) {
@@ -60,9 +62,10 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
         updateFilters(clothingParams);
     }
 
-    useEffect(() => {
-        applyFilters();
+    const debounceApply = useDebounce(applyFilters, 300);
 
+    useEffect(() => {
+        debounceApply();
     }, [searchParams])
 
     return (

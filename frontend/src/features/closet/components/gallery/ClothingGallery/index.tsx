@@ -5,14 +5,16 @@ const ClothingGallery = () => {
     const { data, isLoading, error } = useClosetContext();
 
     if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
-    console.log(data?.items)
+    if (error) return <div>Error: Could not fetch items</div>;
+
+    if (data?.items?.length === 0) return <div>No clothing items found :(</div>
+
     return (
-    <div className="grid grid-cols-3 gap-2">
-        {data?.items?.map((item) => (
-            <ClothingGalleryItem key={item.id} item={item} />   
-        ))}
-    </div>
+        <div className="grid grid-cols-3 gap-2">
+            {data?.items?.map((item) => (
+                <ClothingGalleryItem key={item.id} item={item} />   
+            ))}
+        </div>
     );
 };
 

@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type MouseEventHandler } from "react";
 import { useSearchParams } from "react-router";
 import SearchIcon from "../../../../../shared/components/ui/icons/SearchIcon";
 import FilterIcon from "../../../../../shared/components/ui/icons/FilterIcon";
@@ -21,7 +21,7 @@ const FilterIconButton = ({ filterMenuOpen, onFilter }: Props) => {
     const addQueryToUrl = () => {
         const params = new URLSearchParams(searchParams);
 
-        if (query) {
+        if (query && query.length >= 3) {
             params.set("q", query);
         } else if (!query || query === "") {
             params.delete("q");
@@ -38,13 +38,9 @@ const FilterIconButton = ({ filterMenuOpen, onFilter }: Props) => {
         setIsExpanded(!isExpanded);
     };
 
-    const toggleFilter = () => {
-        if (isExpanded && filterMenuOpen) {
-            onFilter();
-        } else if (!isExpanded && !filterMenuOpen) {
-            onFilter();
-        }
-        setIsExpanded(!isExpanded);
+    const toggleFilter = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        onFilter();
     };
 
     return (
@@ -59,7 +55,7 @@ const FilterIconButton = ({ filterMenuOpen, onFilter }: Props) => {
                         onChange={handleSearchQuery} 
                         onClick={(e) => e.stopPropagation()}
                         />
-                    :     
+                    :
                         <SearchIcon className="w-8 h-8"/>             
                 }
                 </div>
