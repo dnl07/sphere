@@ -1,9 +1,9 @@
 import { useState } from "react";
-import ClothingGallery from "./components/ClothingGallery";
 import PageWrapper from "../../shared/components/layout/PageWrapper";
-import FilterIconButton from "./components/FilterIconButton";
 import { ClosetProvider } from "./context/ClosetContext";
-import FilterMenu from "./components/FilterMenu";
+import FilterMenu from "./components/filter/FilterMenu";
+import FilterIconButton from "./components/filter/FilterIconButton";
+import ClothingGallery from "./components/gallery/ClothingGallery";
 
 const Closet = () => {
     const [ filterMenuOpen, setFilterMenuOpen ] = useState(false);

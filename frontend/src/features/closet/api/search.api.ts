@@ -1,7 +1,7 @@
 // GET /search 
 
 import axiosInstance from "../../../shared/api/axiosInstance";
-import type { ClothingItemDto } from "./clothing.types";
+import type { ClothingItemDto } from "../../clothing/clothing.types";
 
 export interface SearchResponse {
     items?: ClothingItemDto[] | null;

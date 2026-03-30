@@ -1,7 +1,7 @@
 import { useEffect, useState, type ChangeEvent } from "react";
 import { useSearchParams } from "react-router";
-import SearchIcon from "../../../../shared/components/ui/icons/SearchIcon";
-import FilterIcon from "../../../../shared/components/ui/icons/FilterIcon";
+import SearchIcon from "../../../../../shared/components/ui/icons/SearchIcon";
+import FilterIcon from "../../../../../shared/components/ui/icons/FilterIcon";
 
 type Props = {
     filterMenuOpen: boolean

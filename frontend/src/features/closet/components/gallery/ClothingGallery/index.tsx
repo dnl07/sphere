@@ -1,4 +1,4 @@
-import { useClosetContext } from "../../context/ClosetContext";
+import { useClosetContext } from "../../../context/ClosetContext";
 import ClothingGalleryItem from "../ClothingGalleryItem";
 
 const ClothingGallery = () => {    

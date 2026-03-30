@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import DropDownArrow from "../../../../shared/components/ui/icons/DropDownArrow";
+import DropDownArrow from "../../../../../shared/components/ui/icons/DropDownArrow";
 
 type Props = {
     open: boolean,
