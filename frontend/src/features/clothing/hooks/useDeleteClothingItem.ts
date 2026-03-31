@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { ApiActions, ApiState } from "../../../shared/api/api.types";
 import { deleteClothingItem } from "../api/clothingApi";
 
 // DELETE: clothing item
 interface UseDeleteClothingItemState extends ApiState<void> { }
 
-export interface UseDeleteClothingItemReturn extends UseDeleteClothingItemState, ApiActions { }
+export interface UseDeleteClothingItemReturn extends UseDeleteClothingItemState, ApiActions<void> { }
 
 export function useDeleteClothingItem(id: string): UseDeleteClothingItemReturn {
     const [ state, setState ] = useState<UseDeleteClothingItemState>({
         data: null,
-        isLoading: true,
+        isLoading: false,
         error: null,
     });
 
     const deleteItem = async () => {
+        console.log("delete")
         setState(prev => ({ ...prev, isLoading: true, error: null }));
         try {
             await deleteClothingItem(id)
@@ -23,12 +24,8 @@ export function useDeleteClothingItem(id: string): UseDeleteClothingItemReturn {
         }
     };
 
-    useEffect(() => {
-        deleteItem();
-    }, [id]);
-
     return {
         ...state,
-        refetch: deleteItem
+        refetch: () => deleteItem(),
     }
 }

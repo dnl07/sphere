@@ -9,7 +9,7 @@ type Props = {
 const ConfirmDialog = ({ message, onConfirm, onCancel }: Props) => {
     return (
         <ClickableBackground bgColor="" onClick={onCancel}>
-            <div className="bg-bg shadow-2xl px-8 py-6 flex flex-col gap-6  animate-fade-in">
+            <div className="bg-bg shadow-2xl px-8 py-6 flex flex-col gap-6  animate-fade-in z-20">
                 <h3 className="text-md">{message}</h3>
                 <div className="flex flex-row justify-between gap-8">
                     <button className="border-black border-2 p-2 flex-1 cursor-pointer" onClick={onConfirm}>Yes</button>    
