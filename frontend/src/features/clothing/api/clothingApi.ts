@@ -1,77 +1,22 @@
-import axiosInstance from "../../../shared/api/axiosInstance";
-import { clothingEndpoints } from "../../../shared/api/endpoints";
+import { api } from "../../../shared/api/api";
 import type { ClothingItemDto } from "../clothing.types";
+import type { CreateClothingItemRequest, GetClothingItemsResponse, GetClothingParams, UpdateClothingItemByIdRequest } from "./clothingApi.types";
 
 // GET
-
 export async function getClothingItem(id: string) {
-    const response = await axiosInstance.get<ClothingItemDto>(clothingEndpoints.getItem(id));
+    const response = await api.clothing.getItem(id);
     return response.data;
 }
 
 // GET ALL
-
-export interface GetClothingItemsResponse {
-    items?: ClothingItemDto[] | null;
-    totalCount?: number;
-    pageNumber?: number;
-    hasNextPage?: boolean;
-    hasPreviousPage?: boolean;
-    filters?: ClothingItemFilterResponse;
-}
-
-export interface ClothingItemFilterResponse {
-    categories?: FilterOption[] | null;
-    colors?: FilterOption[] | null;
-    sizes?: FilterOption[] | null;
-    materials?: FilterOption[] | null;
-    priceRange?: PriceRange;
-}
-
-export interface FilterOption {
-    name: string;
-    count: number;
-}
-
-export interface PriceRange {
-    min?: number | null;
-    max?: number | null;
-}
-
-// Filter parameters
-export type GetClothingParams = {
-    SearchQuery?: string;
-    CategoryNames?: string[];
-    Colors?: string[];
-    Sizes?: string[];
-    Materials?: string[];
-    PageNumber?: number;
-    PageSize?: number;
-    FromPage?: number;
-    ToPage?: number;
-};
-
 export async function getClothingItems(
     params: GetClothingParams = {}
 ): Promise<GetClothingItemsResponse> {
-    const response = await axiosInstance.get<GetClothingItemsResponse>("/clothing", { params });
+    const response = await api.clothing.getAll(params);
     return response.data;
 }
 
 // POST /clothing request types
-
-export type CreateClothingItemRequest = {
-    name: string | null;
-    category: string;
-    description?: string | null;
-    size?: string | null;
-    material?: string | null;
-    color?: string | null;
-    priceAmount?: number | null;
-    currency?: string | null;
-    image: Blob;  
-}
-
 export async function createClothingItem(
     request: CreateClothingItemRequest
 ): Promise<ClothingItemDto> {
@@ -88,32 +33,20 @@ export async function createClothingItem(
 
     formData.append("Image", request.image);
 
-    const response = await axiosInstance.post<ClothingItemDto>("/clothing", formData);
-
-    if (response.status !== 200) {
-        throw new Error(`Failed to create clothing item: ${response.statusText}`);
-    }
-
+    const response = await api.clothing.createItem(formData);
     return response.data;
 }
 
 // PUT /clothing request types
-
-export type UpdateClothingItemByIdRequest = {
-    Name?: string;
-    Category?: string;
-    Description?: string;
-    Size?: string;
-    Material?: string;
-    Color?: string;
-    PriceAmount?: number;
-    Currency?: string;
-    Image?: Blob;
-};
-
 export async function updateClothingItemById(
     params: UpdateClothingItemByIdRequest = {}
 ): Promise<ClothingItemDto> {
-    const response = await axiosInstance.post<ClothingItemDto>("/clothing", { params });
+    const response = await api.clothing.updateItem(params);
+    return response.data;
+}
+
+// DELETE /clothing 
+export async function deleteClothingItem(id: string) {
+    const response = await api.clothing.deleteItem(id);
     return response.data;
 }

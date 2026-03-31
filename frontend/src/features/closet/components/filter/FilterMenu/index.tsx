@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import FilterDropDown from "../FilterDropDown";
 import { useSearchParams } from "react-router";
 import { useClosetContext } from "../../../context/ClosetContext";
-import type { FilterOption, GetClothingParams } from "../../../../clothing/api/clothingApi";
 import Cross from "../../../../../shared/components/ui/icons/Cross";
 import FilterBox from "../FilterBox";
 import useDebounce from "../../../../../shared/hooks/useDebounce";
+import type { FilterOption, GetClothingParams } from "../../../../clothing/api/clothingApi.types";
 
 type Props = {
     open: boolean,

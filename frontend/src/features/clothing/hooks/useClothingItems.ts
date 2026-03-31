@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { getClothingItems, type GetClothingItemsResponse, type GetClothingParams } from "../api/clothingApi";
 import type { ApiActions, ApiState } from "../../../shared/api/api.types";
+import type { GetClothingItemsResponse, GetClothingParams } from "../api/clothingApi.types";
+import { getClothingItems } from "../api/clothingApi";
 
 // GET: items
 interface UseClothingItemsState extends ApiState<GetClothingItemsResponse> {

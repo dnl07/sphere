@@ -25,7 +25,7 @@ const ItemPage = () => {
             {data && 
                 <div className="w-full flex flex-col items-center max-w-xl">
                     <ItemDisplay imageId={data?.imageId}/>
-                    <div className="w-full flex justify-between items-center">
+                    <div className="w-full flex justify-between items-center my-2">
                         <h1 className="text-2xl">{data?.name}</h1>
                         <ItemActions />      
                     </div>

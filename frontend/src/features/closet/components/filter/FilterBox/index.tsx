@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router";
-import type { FilterOption } from "../../../../clothing/api/clothingApi";
+import type { FilterOption } from "../../../../clothing/api/clothingApi.types";
 
 type Props = {
     options: FilterOption[],
