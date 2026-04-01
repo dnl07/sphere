@@ -14,16 +14,20 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
 
         private readonly IFileStorage _fileStorage;
 
+        private readonly IImageProcessingService _imageProcessingService;
+
         private readonly ILogger<CreateClothingItemHandler> _logger;
 
         public CreateClothingItemHandler(
             IClothingItemRepository clothingRepository, 
             IMediaFileRepository mediaFileRepository, 
             IFileStorage fileStorage,
+            IImageProcessingService imageProcessingService,
             ILogger<CreateClothingItemHandler> logger) { 
             _clothingRepository = clothingRepository;
             _fileStorage = fileStorage;
             _mediaFileRepository = mediaFileRepository;
+            _imageProcessingService = imageProcessingService;
             _logger = logger;
         }
 
@@ -38,7 +42,9 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
 
             var mediaFile = MediaFile.Create(cmd.ImageFileName, cmd.Image.Length, cmd.ImageContentType);
 
-            await _fileStorage.SaveAsync(mediaFile.Id, cmd.Image, ct);
+            var trimmedImage = _imageProcessingService.TrimTransparentBackground(cmd.Image);
+
+            await _fileStorage.SaveAsync(mediaFile.Id, trimmedImage, ct);
             await _mediaFileRepository.AddAsync(mediaFile, ct);
 
             var item = cmd.ToDomain(category.Id, mediaFile.Id);

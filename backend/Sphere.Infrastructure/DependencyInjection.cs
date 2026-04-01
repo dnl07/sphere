@@ -11,6 +11,7 @@ using Sphere.Infrastructure.Persistance;
 using Sphere.Infrastructure.Repositories;
 using Sphere.Infrastructure.Services.BackgroundRemover;
 using Sphere.Infrastructure.Services.FileStorage;
+using Sphere.Infrastructure.Services.ImageProcessing;
 using Sphere.Infrastructure.Services.SearchEngine;
 
 namespace Sphere.Infrastructure {
@@ -45,6 +46,9 @@ namespace Sphere.Infrastructure {
                 client.BaseAddress = new Uri(config["BackgroundRemover:BaseUrl"]!);
                 client.Timeout = TimeSpan.FromSeconds(int.Parse(config["BackgroundRemover:Timeout"] ?? "30"));
             });
+
+            // Image Processing Service
+            services.AddScoped<IImageProcessingService, ImageProcessingService>();
 
             return services;
         }
