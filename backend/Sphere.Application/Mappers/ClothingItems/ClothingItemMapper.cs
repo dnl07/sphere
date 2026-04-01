@@ -9,12 +9,16 @@ namespace Sphere.Application.Mappers.ClothingItems {
             return ClothingItem.Create(
                 cmd.Name,
                 categoryId,
-                cmd.Description,
                 cmd.Size,
                 cmd.Material,
                 cmd.Color,
                 cmd.PriceAmount,
                 cmd.Currency,
+                cmd.BoughtAt,
+                cmd.Store,
+                cmd.Brand,
+                cmd.IsArchived,
+                cmd.Notes,
                 imageId
             );
         }
@@ -24,11 +28,15 @@ namespace Sphere.Application.Mappers.ClothingItems {
                 Id = item.Id,
                 Name = item.Name,
                 Category = categoryName,
-                Description = item.Description,
                 Size = item.Size,
                 Material = item.Material,
                 Color = item.Color,
                 Price = item.Price?.ToDto(),
+                BoughtAt = item.BoughtAt,
+                Store = item.Store,
+                Brand = item.Brand,
+                IsArchived = item.IsArchived,
+                Notes = item.Notes,
                 ImageId = item.ImageId,
                 CreatedAt = item.CreatedAt,
                 UpdatedAt = item.UpdatedAt
@@ -40,7 +48,6 @@ namespace Sphere.Application.Mappers.ClothingItems {
                 item.Id,
                 item.Name,
                 categoryName,
-                item.Description,
                 item.Size,
                 item.Material,
                 item.Color,

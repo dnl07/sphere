@@ -4,7 +4,7 @@ using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Domain.MediaFiles;
 using Sphere.Infrastructure.Persistance;
 
-namespace Sphere.Infrastructure.Repositories {
+namespace Sphere.Infrastructure.Repositories.MediaFiles {
     public class MediaFileRepository : IMediaFileRepository {
         private readonly AppDbContext _context;
         private readonly ILogger<MediaFileRepository> _logger;

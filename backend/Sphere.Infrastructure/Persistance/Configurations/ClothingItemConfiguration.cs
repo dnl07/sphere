@@ -14,9 +14,6 @@ namespace Sphere.Infrastructure.Persistance.Configurations {
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(x => x.Description)
-                .HasMaxLength(500);
-
             builder.Property(x => x.Size)
                 .HasMaxLength(50);
 
@@ -26,10 +23,18 @@ namespace Sphere.Infrastructure.Persistance.Configurations {
             builder.Property(x => x.Color)
                 .HasMaxLength(50);
 
+            builder.Property(x => x.BoughtAt);
+
             builder.Property(x => x.Store)
                 .HasMaxLength(150);
 
-            builder.Property(x => x.BoughtAt);
+            builder.Property(x => x.Brand)
+                .HasMaxLength(150);
+
+            builder.Property(x => x.IsArchived);
+
+            builder.Property(x => x.Notes)
+                .HasMaxLength(500);
 
             builder.Property(x => x.CategoryId)
                 .IsRequired();

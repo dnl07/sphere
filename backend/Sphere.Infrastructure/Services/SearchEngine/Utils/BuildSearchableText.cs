@@ -17,7 +17,6 @@ namespace Sphere.Infrastructure.Services.SearchEngine.Utils {
             return new SearchIndexItem {
                 Id = item.Id,
                 Title = item.Name,
-                Description = item.Description,
                 Tags = tags
             };
         }

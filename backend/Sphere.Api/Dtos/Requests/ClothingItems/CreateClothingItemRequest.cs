@@ -11,9 +11,6 @@ namespace Sphere.Api.Dtos.Requests.ClothingItems {
         [StringLength(50, ErrorMessage = "Category cannot be longer than 50 characters")]
         public string Category { get; set; } = "";
 
-        [StringLength(500, ErrorMessage = "Description cannot be longer than 500 characters")]
-        public string? Description { get; set; }
-
         [StringLength(20, ErrorMessage = "Size cannot be longer than 20 characters")]
         public string? Size { get; set; }
 
@@ -28,6 +25,19 @@ namespace Sphere.Api.Dtos.Requests.ClothingItems {
 
         [StringLength(3, ErrorMessage = "Currency cannot be longer than 3 characters")]
         public string? Currency { get; set; }
+
+        public DateTime? BoughtAt { get; set; }
+
+        [StringLength(150, ErrorMessage = "Store cannot be longer than 150 characters")]
+        public string? Store { get; set; }
+
+        [StringLength(150, ErrorMessage = "Brand cannot be longer than 150 characters")]
+        public string? Brand { get; set; }
+
+        public bool IsArchived { get; set; }
+
+        [StringLength(500, ErrorMessage = "Notes cannot be longer than 500 characters")]
+        public string? Notes { get; set; }
 
         [Required(ErrorMessage = "Image is required")]
         [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".gif" })]

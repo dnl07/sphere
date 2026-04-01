@@ -10,7 +10,6 @@
         public Guid Id { get; }
         public string Name { get; }
         public string? Category { get; }
-        public string? Description { get; }
         public string? Size { get; }
         public string? Material { get; }
         public string? Color { get; }
@@ -22,7 +21,6 @@
             Guid id,
             string name,
             string? category,
-            string? description,
             string? size,
             string? material,
             string? color,
@@ -33,7 +31,6 @@
             Id = id;
             Name = name;
             Category = category;
-            Description = description;
             Size = size;
             Material = material;
             Color = color;

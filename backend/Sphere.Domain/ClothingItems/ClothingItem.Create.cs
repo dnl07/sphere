@@ -6,12 +6,16 @@ namespace Sphere.Domain.ClothingItems {
         public static ClothingItem Create(
             string name,
             Guid categoryId,
-            string? description,
             string? size,
             string? material,
             string? color,
             decimal? priceAmount,
             string? currency,
+            DateTime? boughtAt,
+            string? store,
+            string? brand,
+            bool isArchived,
+            string? notes,
             Guid imageId) {
 
             Price? price = null;
@@ -20,7 +24,7 @@ namespace Sphere.Domain.ClothingItems {
                 price = new Price(priceAmount.Value, currency ?? "EUR");
             }
 
-            var item = new ClothingItem(name, categoryId, description, size, material, color, price, imageId);
+            var item = new ClothingItem(name, categoryId, size, material, color, price, boughtAt, store, brand, isArchived, notes, imageId);
 
             item.Validate();
 

@@ -5,12 +5,16 @@ namespace Sphere.Domain.ClothingItems {
         public void Update(
             string? name = null,
             Guid? categoryId = null,
-            string? description = null,
             string? size = null,
             string? material = null,
             string? color = null,
             decimal? priceAmount = null,
             string? currency = null,
+            DateTime? boughtAt = null,
+            string? store = null,
+            string? brand = null,
+            bool? isArchived = null,
+            string? notes = null,
             Guid? imageId = null) {
             if (name != null) {
                 Name = name;
@@ -18,10 +22,6 @@ namespace Sphere.Domain.ClothingItems {
 
             if (categoryId is not null) {
                 CategoryId = categoryId.Value;
-            }
-
-            if (description is not null) {
-                Description = description;
             }
 
             if (size is not null) {
@@ -41,6 +41,26 @@ namespace Sphere.Domain.ClothingItems {
 
             if (priceAmount is not null && currency is not null) {
                 Price = new Price(priceAmount.Value, currency);
+            }
+
+            if (boughtAt is not null) {
+                BoughtAt = boughtAt.Value;
+            }
+
+            if (store is not null) {
+                Store = store;
+            }
+
+            if (brand is not null) {
+                Brand = brand;
+            }
+
+            if (isArchived is not null) {
+                IsArchived = isArchived.Value;
+            }
+
+            if (notes is not null) {
+                Notes = notes;
             }
 
             if (imageId is not null) {

@@ -56,12 +56,16 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Update {
             item.Update(
                 name: cmd.Name,
                 categoryId: categoryId,
-                description: cmd.Description,
                 size: cmd.Size,
                 material: cmd.Material,
                 color: cmd.Color,
                 priceAmount: cmd.PriceAmount,
                 currency: cmd.Currency,
+                boughtAt: cmd.BoughtAt,
+                store: cmd.Store,
+                brand: cmd.Brand,
+                isArchived: cmd.IsArchived,
+                notes: cmd.Notes,
                 imageId: newImageId ?? item.ImageId
             );
 

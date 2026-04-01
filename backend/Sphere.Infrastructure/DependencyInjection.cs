@@ -9,6 +9,7 @@ using Sphere.Infrastructure.Events;
 using Sphere.Infrastructure.Events.Handlers;
 using Sphere.Infrastructure.Persistance;
 using Sphere.Infrastructure.Repositories;
+using Sphere.Infrastructure.Repositories.MediaFiles;
 using Sphere.Infrastructure.Services.BackgroundRemover;
 using Sphere.Infrastructure.Services.FileStorage;
 using Sphere.Infrastructure.Services.ImageProcessing;
