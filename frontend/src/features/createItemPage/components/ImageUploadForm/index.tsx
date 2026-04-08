@@ -2,12 +2,18 @@ import { useRef, useState, type ChangeEvent } from "react";
 import { useBackgroundRemover } from "../../hooks/useBackgroundRemover";
 import useImageState from "../../../../shared/hooks/useImageState";
 
-const ImageUploadForm = () => {
+type Props = {
+    preview: string | null,
+    file: Blob | null,
+    setImage: (blob: Blob) => void,
+    clearImage: () => void
+}
+
+const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [isProcessed, setIsProcessed] = useState<boolean>(false);
 
-    const { preview, file, setImage, clearImage} = useImageState();
     const { processImage, loading } = useBackgroundRemover();
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -24,14 +24,13 @@ export async function createClothingItem(
     formData.append("Name", request.name ?? "");
     formData.append("Category", request.category);
 
-    if (request.description) formData.append("Description", request.description);
     if (request.size) formData.append("Size", request.size);
     if (request.material) formData.append("Material", request.material);
     if (request.color) formData.append("Color", request.color);
     if (request.priceAmount) formData.append("PriceAmount", request.priceAmount.toString());
     if (request.currency) formData.append("Color", request.currency);
 
-    formData.append("Image", request.image);
+    formData.append("Image", request.image, "image.png");
 
     const response = await api.clothing.createItem(formData);
     return response.data;

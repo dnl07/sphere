@@ -45,12 +45,16 @@ export type GetClothingParams = {
 export type CreateClothingItemRequest = {
     name: string | null;
     category: string;
-    description?: string | null;
     size?: string | null;
     material?: string | null;
     color?: string | null;
     priceAmount?: number | null;
     currency?: string | null;
+    boughtAt?: Date| null,
+    store?: string | null,
+    brand?: string | null,
+    isArchived: false,
+    notes?: string | null,  
     image: Blob;  
 }
 
