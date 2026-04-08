@@ -1,8 +1,9 @@
 import type { CreateClothingItemRequest } from "../../../clothing/api/clothingApi.types";
+import type { ClothingValidationErrors } from "../../../clothing/hooks/useCreateClothingItem";
 
-const FIELDS: { name: keyof CreateClothingItemRequest; label: string, placeholder: string, type?: string }[] = [
-    { name: "name", label: "Name", placeholder: "Red Bull jacket" },
-    { name: "category", label: "Category", placeholder: "placeholder" },
+const FIELDS: { name: keyof CreateClothingItemRequest; label: string, placeholder: string, type?: string, required?: boolean }[] = [
+    { name: "name", label: "Name", placeholder: "Red Bull jacket", required: true },
+    { name: "category", label: "Category", placeholder: "placeholder", required: true },
     { name: "size", label: "Size", placeholder: "L" },
     { name: "material", label: "Material", placeholder: "Fabric" },
     { name: "color", label: "Color", placeholder: "Blue" },
@@ -15,16 +16,20 @@ const FIELDS: { name: keyof CreateClothingItemRequest; label: string, placeholde
 
 type Props = {
     request: Partial<CreateClothingItemRequest> | null,
-    updateRequest: (fields: Partial<CreateClothingItemRequest>) => void
+    updateRequest: (fields: Partial<CreateClothingItemRequest>) => void,
+    validationErrors: ClothingValidationErrors
 }
 
-const ItemForm = ({ request, updateRequest }: Props) => {
+const ItemForm = ({ request, updateRequest, validationErrors }: Props) => {
     return(
         <div className="w-full text-2xl border-t py-2">
             <div className="flex flex-col gap-6 mb-10">
-                {FIELDS.map(({name, label, placeholder, type}) => (
+                {FIELDS.map(({name, label, placeholder, type, required}) => (
                     <div className={`flex gap-2 ${type === "checkbox" ? "flex-row items-center justify-between" : "flex-col"}`} key={name}>
-                        <h3 className="text-2xl">{label}</h3>
+                        <div className="w-full flex flex-row justify-between items-center ">
+                            <h3 className="text-2xl">{label}{required && "*"}</h3>
+                            <span className="text-red-700 text-lg">{validationErrors[name]}</span>                           
+                        </div>
                         {type === "checkbox" ? 
                             <div  
                                 className={`w-6 h-6 border-2 cursor-pointer transition-all duration-150 ${request?.[name] ? "bg-black" : ""}`}
