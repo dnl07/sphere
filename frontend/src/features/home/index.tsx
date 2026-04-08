@@ -3,7 +3,7 @@ import PageWrapper from "../../shared/components/layout/PageWrapper"
 
 function Home() {
     return (
-        <PageWrapper title="Home">
+        <PageWrapper>
             <HeroSection />
         </PageWrapper>
     )

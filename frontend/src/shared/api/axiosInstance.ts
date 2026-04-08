@@ -3,9 +3,7 @@ import qs from 'qs'
 
 const axiosInstance = axios.create({
     baseURL: "/api",
-    headers: {
-        'Content-Type': 'application/json',
-    },
+    headers: { "Content-Type": undefined },
     paramsSerializer: (params) => qs.stringify(params, { arrayFormat: "repeat"})
 });
 

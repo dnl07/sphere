@@ -9,11 +9,8 @@ const Closet = () => {
     const [ filterMenuOpen, setFilterMenuOpen ] = useState(false);
 
     return (
-        <PageWrapper>
+        <PageWrapper title="Closet">
             <ClosetProvider>
-                <div className=" w-full border-b mb-2">
-                    <h1 className="text-3xl align-self-end px-2 py-1">Closet</h1>
-                </div>
                 <ClothingGallery />
                 <FilterMenu open={filterMenuOpen} closeFilter={() => setFilterMenuOpen(false)}/>
                 <FilterIconButton filterMenuOpen={filterMenuOpen} onFilter={() => setFilterMenuOpen(!filterMenuOpen)}/>

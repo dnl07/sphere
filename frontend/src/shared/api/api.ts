@@ -8,7 +8,7 @@ export const api = {
     clothing: {
         getAll: (params: GetClothingParams) => axiosInstance.get<GetClothingItemsResponse>(`${API_BASE}/clothing`, { params }),
         getItem: (id: string) => axiosInstance.get<ClothingItemDto>(`${API_BASE}/clothing/${id}`),
-        createItem: (formData: FormData) => axiosInstance.post<ClothingItemDto>(`${API_BASE}/clothing`, { formData }),
+        createItem: (formData: FormData) => axiosInstance.post<ClothingItemDto>(`${API_BASE}/clothing`, formData),
         updateItem: (params: UpdateClothingItemByIdRequest) => axiosInstance.put<ClothingItemDto>(`${API_BASE}/clothing`, { params }),
         deleteItem: (id: string) => axiosInstance.delete<ClothingItemDto>(`${API_BASE}/clothing/${id}`),
         getImage: (id: string) => axiosInstance.get<Blob>(`${API_BASE}/clothing/${id}/image`),
@@ -17,8 +17,10 @@ export const api = {
         getImage: (imageId: string): Promise<Blob> => axiosInstance.get<Blob>(`${API_BASE}/image/${imageId}`, { responseType: "blob"}).then(image => image.data)
     },
     inference: {
-        inference: (formData: FormData) => axiosInstance.post<Blob>(`${API_BASE}/inference`, { formData })
-    }, 
+        inference: (formData: FormData) => axiosInstance.post<Blob>(`${API_BASE}/inference`, formData, {
+        responseType: "blob"        
+        })
+    },
     search: {
         search: (query: string) => axiosInstance.get<Blob>(`${API_BASE}/search`)
     }

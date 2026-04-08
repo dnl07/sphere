@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent } from "react";
-import { useBackgroundRemover } from "../hooks/useBackgroundRemover";
+import { useBackgroundRemover } from "../../createItemPage/hooks/useBackgroundRemover";
 import Button from "../../../shared/components/ui/Button";
 
 interface ClothingItemDto {
