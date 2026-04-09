@@ -1,6 +1,7 @@
 import Dropdown from "../../../../shared/components/ui/DropDown";
 import type { CreateClothingItemRequest } from "../../../clothing/api/clothingApi.types";
 import type { ClothingValidationErrors } from "../../../clothing/hooks/useCreateClothingItem";
+import { useGetCategories } from "../../../clothing/hooks/useGetCategories";
 
 const FIELDS: { name: keyof CreateClothingItemRequest; label: string, placeholder: string, type?: string, required?: boolean }[] = [
     { name: "name", label: "Name", placeholder: "Red Bull jacket", required: true },
@@ -22,6 +23,8 @@ type Props = {
 }
 
 const ItemForm = ({ request, updateRequest, validationErrors }: Props) => {
+    const { data } = useGetCategories();
+
     const displayField = (name: keyof CreateClothingItemRequest, placeholder: string, type?: string) => {
         if (type === "checkbox") {
             return ((
@@ -32,7 +35,7 @@ const ItemForm = ({ request, updateRequest, validationErrors }: Props) => {
             ));
         } else if (type === "dropdown") {
             return (
-                <Dropdown className="" values={["hallo", "hallo"]} setValue={(value: string) => updateRequest({ [name]: value })}/>
+                <Dropdown className="" values={data?.categories ?? [":)"]} setValue={(value: string) => updateRequest({ [name]: value })}/>
             );
         } else {
             return (

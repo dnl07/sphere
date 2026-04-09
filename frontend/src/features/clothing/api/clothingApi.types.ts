@@ -60,13 +60,17 @@ export type CreateClothingItemRequest = {
 
 // PUT /clothing request types
 export type UpdateClothingItemByIdRequest = {
-    Name?: string;
-    Category?: string;
-    Description?: string;
-    Size?: string;
-    Material?: string;
-    Color?: string;
-    PriceAmount?: number;
-    Currency?: string;
-    Image?: Blob;
+    name?: string;
+    category?: string;
+    description?: string;
+    size?: string;
+    material?: string;
+    color?: string;
+    priceAmount?: number;
+    currency?: string;
+    image?: Blob;
 };
+
+export type GetAllCategories = {
+    categories: string[]
+}

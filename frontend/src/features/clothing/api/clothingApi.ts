@@ -1,6 +1,6 @@
 import { api } from "../../../shared/api/api";
 import type { ClothingItemDto } from "../clothing.types";
-import type { CreateClothingItemRequest, GetClothingItemsResponse, GetClothingParams, UpdateClothingItemByIdRequest } from "./clothingApi.types";
+import type { CreateClothingItemRequest, GetAllCategories, GetClothingItemsResponse, GetClothingParams, UpdateClothingItemByIdRequest } from "./clothingApi.types";
 
 // GET
 export async function getClothingItem(id: string) {
@@ -32,6 +32,7 @@ export async function createClothingItem(
 
     formData.append("Image", request.image, "image.png");
 
+
     const response = await api.clothing.createItem(formData);
     return response.data;
 }
@@ -47,5 +48,11 @@ export async function updateClothingItemById(
 // DELETE /clothing 
 export async function deleteClothingItem(id: string) {
     const response = await api.clothing.deleteItem(id);
+    return response.data;
+}
+
+// GET /category
+export async function getCategories(): Promise<GetAllCategories> {
+    const response = await api.categories.getAll();
     return response.data;
 }

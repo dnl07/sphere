@@ -1,4 +1,4 @@
-import type { GetClothingItemsResponse, GetClothingParams, UpdateClothingItemByIdRequest } from "../../features/clothing/api/clothingApi.types";
+import type { GetAllCategories, GetClothingItemsResponse, GetClothingParams, UpdateClothingItemByIdRequest } from "../../features/clothing/api/clothingApi.types";
 import type { ClothingItemDto } from "../../features/clothing/clothing.types";
 import axiosInstance from "./axiosInstance";
 
@@ -15,6 +15,9 @@ export const api = {
     },
     image: {
         getImage: (imageId: string): Promise<Blob> => axiosInstance.get<Blob>(`${API_BASE}/image/${imageId}`, { responseType: "blob"}).then(image => image.data)
+    },
+    categories: {
+        getAll: () => axiosInstance.get<GetAllCategories>(`${API_BASE}/category`)
     },
     inference: {
         inference: (formData: FormData) => axiosInstance.post<Blob>(`${API_BASE}/inference`, formData, {

@@ -50,7 +50,7 @@ export function useCreateClothingItem(): UseCreateClothingItemReturn {
         }    
 
         setValidationErrors(errors);
-        return Object.keys(errors).length > 0;
+        return Object.keys(errors).length === 0;
     }
 
     const create = async () => {
@@ -58,6 +58,7 @@ export function useCreateClothingItem(): UseCreateClothingItemReturn {
 
         setState(prev => ({ ...prev, isLoading: true, error: null }));
         try {
+
             const data = await createClothingItem(request as CreateClothingItemRequest);
             setState({ data: data, isLoading: false, error: null, validationErrors: {}});
         } catch (e) {
