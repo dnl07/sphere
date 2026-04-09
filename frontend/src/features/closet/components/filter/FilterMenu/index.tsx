@@ -6,13 +6,16 @@ import Cross from "../../../../../shared/components/ui/icons/Cross";
 import FilterBox from "../FilterBox";
 import useDebounce from "../../../../../shared/hooks/useDebounce";
 import type { FilterOption, GetClothingParams } from "../../../../clothing/api/clothingApi.types";
+import arrayRange from "../../../../../shared/utils/arrayRange";
+import type { ColumnsMeta } from "../../../hooks/useColumns";
 
 type Props = {
     open: boolean,
-    closeFilter: () => void
+    closeFilter: () => void,
+    columnsMeta: ColumnsMeta
 }
 
-const FilterMenu = ({ open, closeFilter }: Props) => {
+const FilterMenu = ({ open, closeFilter, columnsMeta }: Props) => {
     const [ openLabel, setOpenLabel ] = useState<string | null>(null);
     const [searchParams, _] = useSearchParams();
 
@@ -73,6 +76,14 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
             <div className="bg-bg inset-0 w-full h-screen md:max-w-2xl shadow-xl px-5">
                 <div className="py-7 flex justify-end">
                     <Cross onClick={closeFilter}/>
+                </div>
+                <div className="w-full flex flex-row text-2xl items-center gap-5">
+                    <span>Set view:</span>
+                    <div className="flex gap-4">
+                        {arrayRange(columnsMeta.minColumns, columnsMeta.maxColumns).map((value) => (
+                            <button className={`cursor-pointer aspect-square h-8 flex items-center justify-center ${value === columnsMeta.columns ? "underline" : ""}`} onClick={() => columnsMeta.setColumnCount(value)}>{value}</button>
+                        ))}
+                    </div>
                 </div>
                 {filterOptions.map(({ label, paramKey, options }) => (
                     <FilterDropDown label={label} open={openLabel === label} onToggle={() => toggleBox(label)}><FilterBox options={options} paramKey={paramKey}/></FilterDropDown>

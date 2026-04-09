@@ -31,7 +31,7 @@ const Dropdown = ({ className, values, setValue }: Props) => {
                 {values.map((value) => (
                     <li key={value} className="text-xl">
                         <button 
-                            className={`w-full flex justify-start px-4 py-2 cursor-pointer ${value === activeValue ? "bg-bg text-black  ring-2 ring-inset ring-black" : ""}`}
+                            className={`w-full flex justify-start pl-4 pr-8 py-2 cursor-pointer transition-all duration-100 ${value === activeValue ? "bg-bg text-black  ring-2 ring-inset ring-black" : ""}`}
                             onPointerUp={() => setActiveValue(value)}
                         >{value}</button> 
                     </li>

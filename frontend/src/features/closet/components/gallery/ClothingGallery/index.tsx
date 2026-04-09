@@ -1,7 +1,11 @@
 import { useClosetContext } from "../../../context/ClosetContext";
 import ClothingGalleryItem from "../ClothingGalleryItem";
 
-const ClothingGallery = () => {    
+type Props = {
+    columns: number
+}
+
+const ClothingGallery = ({ columns }: Props) => {    
     const { data, isLoading, error } = useClosetContext();
 
     if (isLoading) return <div>Loading...</div>;
@@ -10,7 +14,7 @@ const ClothingGallery = () => {
     if (data?.items?.length === 0) return <div>No clothing items found :(</div>
 
     return (
-        <div className="grid grid-cols-3 gap-2">
+        <div className={`grid grid-cols-${columns} gap-10`}>
             {data?.items?.map((item) => (
                 <ClothingGalleryItem key={item.id} item={item} />   
             ))}
