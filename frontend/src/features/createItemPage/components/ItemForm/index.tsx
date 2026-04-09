@@ -1,9 +1,10 @@
+import Dropdown from "../../../../shared/components/ui/DropDown";
 import type { CreateClothingItemRequest } from "../../../clothing/api/clothingApi.types";
 import type { ClothingValidationErrors } from "../../../clothing/hooks/useCreateClothingItem";
 
 const FIELDS: { name: keyof CreateClothingItemRequest; label: string, placeholder: string, type?: string, required?: boolean }[] = [
     { name: "name", label: "Name", placeholder: "Red Bull jacket", required: true },
-    { name: "category", label: "Category", placeholder: "placeholder", required: true },
+    { name: "category", label: "Category", placeholder: "placeholder", required: true, type: "dropdown" },
     { name: "size", label: "Size", placeholder: "L" },
     { name: "material", label: "Material", placeholder: "Fabric" },
     { name: "color", label: "Color", placeholder: "Blue" },
@@ -21,6 +22,31 @@ type Props = {
 }
 
 const ItemForm = ({ request, updateRequest, validationErrors }: Props) => {
+    const displayField = (name: keyof CreateClothingItemRequest, placeholder: string, type?: string) => {
+        if (type === "checkbox") {
+            return ((
+                <div  
+                    className={`w-6 h-6 border-2 cursor-pointer transition-all duration-150 ${request?.[name] ? "bg-black" : ""}`}
+                    onClick={() => updateRequest({ [name]: !request?.[name] })}
+                />
+            ));
+        } else if (type === "dropdown") {
+            return (
+                <Dropdown className="" values={["hallo", "hallo"]} setValue={(value: string) => updateRequest({ [name]: value })}/>
+            );
+        } else {
+            return (
+                <input 
+                    type={type ?? "text"}
+                    placeholder={placeholder}
+                    value={(request?.[name] as string) ?? ""}
+                    onChange={e => updateRequest({ [name]: e.target.value })}
+                    className="text-xl border-2 px-4 py-2"
+                /> 
+            );
+        }
+    }
+
     return(
         <div className="w-full text-2xl border-t py-2">
             <div className="flex flex-col gap-6 mb-10">
@@ -30,20 +56,7 @@ const ItemForm = ({ request, updateRequest, validationErrors }: Props) => {
                             <h3 className="text-2xl">{label}{required && "*"}</h3>
                             <span className="text-red-700 text-lg">{validationErrors[name]}</span>                           
                         </div>
-                        {type === "checkbox" ? 
-                            <div  
-                                className={`w-6 h-6 border-2 cursor-pointer transition-all duration-150 ${request?.[name] ? "bg-black" : ""}`}
-                                onClick={() => updateRequest({ [name]: !request?.[name] })}
-                            />
-                        : 
-                            <input 
-                                type={type ?? "text"}
-                                placeholder={placeholder}
-                                value={(request?.[name] as string) ?? ""}
-                                onChange={e => updateRequest({ [name]: e.target.value })}
-                                className="text-xl border-2 px-4 py-2"
-                            />                        
-                        }
+                        {displayField(name, placeholder, type)}
                     </div>
                 ))}
             </div>
