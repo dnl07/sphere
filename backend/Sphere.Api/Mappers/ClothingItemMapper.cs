@@ -67,6 +67,7 @@ namespace Sphere.API.Mappers {
                 Materials = request.Materials,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
+                SortBy = request.SortBy
             };
         }
     }

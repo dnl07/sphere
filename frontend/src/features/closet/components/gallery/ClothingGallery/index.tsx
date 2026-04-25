@@ -14,7 +14,7 @@ const ClothingGallery = ({ columns }: Props) => {
     if (data?.items?.length === 0) return <div>No clothing items found :(</div>
 
     return (
-        <div className={`grid grid-cols-${columns} gap-10`}>
+        <div style={{gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`}} className={`grid gap-10`}>
             {data?.items?.map((item) => (
                 <ClothingGalleryItem key={item.id} item={item} />   
             ))}

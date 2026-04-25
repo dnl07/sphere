@@ -12,10 +12,9 @@ import type { ColumnsMeta } from "../../../hooks/useColumns";
 type Props = {
     open: boolean,
     closeFilter: () => void,
-    columnsMeta: ColumnsMeta
 }
 
-const FilterMenu = ({ open, closeFilter, columnsMeta }: Props) => {
+const FilterMenu = ({ open, closeFilter }: Props) => {
     const [ openLabel, setOpenLabel ] = useState<string | null>(null);
     const [searchParams, _] = useSearchParams();
 
@@ -62,6 +61,12 @@ const FilterMenu = ({ open, closeFilter, columnsMeta }: Props) => {
             clothingParams.SearchQuery = searchQuery;
         }
 
+        const sortBy = searchParams.get("sort")
+
+        if (sortBy) {
+            clothingParams.SortBy = sortBy;
+        }
+
         updateFilters(clothingParams);
     }
 
@@ -78,15 +83,14 @@ const FilterMenu = ({ open, closeFilter, columnsMeta }: Props) => {
                     <Cross onClick={closeFilter}/>
                 </div>
                 <div className="w-full flex flex-row text-2xl items-center gap-5">
-                    <span>Set view:</span>
+                    <span>Sort on</span>
                     <div className="flex gap-4">
-                        {arrayRange(columnsMeta.minColumns, columnsMeta.maxColumns).map((value) => (
-                            <button className={`cursor-pointer aspect-square h-8 flex items-center justify-center ${value === columnsMeta.columns ? "underline" : ""}`} onClick={() => columnsMeta.setColumnCount(value)}>{value}</button>
-                        ))}
                     </div>
                 </div>
                 {filterOptions.map(({ label, paramKey, options }) => (
-                    <FilterDropDown label={label} open={openLabel === label} onToggle={() => toggleBox(label)}><FilterBox options={options} paramKey={paramKey}/></FilterDropDown>
+                    <FilterDropDown label={label} open={openLabel === label} onToggle={() => toggleBox(label)}>
+                        <FilterBox options={options} paramKey={paramKey}/>
+                    </FilterDropDown>
                 ))}
                 <button onClick={applyFilters}>Submit</button>
             </div>

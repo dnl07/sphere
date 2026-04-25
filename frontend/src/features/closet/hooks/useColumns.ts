@@ -18,7 +18,7 @@ const useColumns = (defaultColumns: number, min: number, max: number): ColumnsMe
         localStorage.setItem("columns", count.toString())
         setColumns(count);
     }
- 
+
     return { columns, minColumns: min, maxColumns: max, setColumnCount}
 };
 

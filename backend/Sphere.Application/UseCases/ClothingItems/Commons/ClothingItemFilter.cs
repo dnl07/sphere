@@ -9,5 +9,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Commons {
         public string[]? Colors { get; set; }
         public string[]? Sizes { get; set; }
         public string[]? Materials { get; set; }
+        public ClothingItemSortOrder? SortBy { get; set; }
+
     }
 }

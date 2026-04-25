@@ -1,4 +1,4 @@
-import Dropdown from "../../../../shared/components/ui/DropDown";
+import Dropdown from "../FormDropDown";
 import type { CreateClothingItemRequest } from "../../../clothing/api/clothingApi.types";
 import type { ClothingValidationErrors } from "../../../clothing/hooks/useCreateClothingItem";
 import { useGetCategories } from "../../../clothing/hooks/useGetCategories";

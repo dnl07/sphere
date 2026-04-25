@@ -35,6 +35,7 @@ export type GetClothingParams = {
     Colors?: string[];
     Sizes?: string[];
     Materials?: string[];
+    SortBy?: string;
     PageNumber?: number;
     PageSize?: number;
     FromPage?: number;
