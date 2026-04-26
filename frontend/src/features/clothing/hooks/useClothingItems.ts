@@ -2,22 +2,39 @@ import { useEffect, useState } from "react";
 import type { GetClothingParams, PagedResult } from "../api/clothingApi.types";
 import { getClothingItems } from "../api/clothingApi";
 import { useApi } from "../../../shared/api/useApi";
+import type { ClothingItemDto } from "../clothing.types";
 
 const PAGESIZE = 3
 
 // GET: items
 export function useClothingItems(initial: GetClothingParams = {}) {
+    const { execute, data, ...state } = useApi(getClothingItems, { initialLoading: true})
+
     const [ params, setParams ] = useState<GetClothingParams>({
         PageNumber: 1,
         PageSize: PAGESIZE,
         ...initial
     });
 
-    const { execute, data, ...state } = useApi(getClothingItems, { initialLoading: true})
+    const [ items, setItems ] = useState<ClothingItemDto[]>([])
 
     useEffect(() => {
         execute(params);
     }, [params]);
+
+    useEffect(() => {
+        if (!data?.items) return;
+
+        if (data.pageNumber === 1) {
+            setItems(data.items);
+        } else {
+            setItems((prev) => {
+                const existingIds = new Set(prev.map(i => i.id))
+                const newItems = data.items!.filter(i => !existingIds.has(i.id))
+                return [...prev, ...newItems]
+            })
+        }
+    }, [data])
 
     const meta: PagedResult | null = data ? {
         totalCount: data.totalCount ?? 0,
@@ -26,16 +43,23 @@ export function useClothingItems(initial: GetClothingParams = {}) {
         hasPreviousPage: data.hasPreviousPage ?? false,
     } : null;
 
+    const loadNextPage = () => {
+        if (data?.hasNextPage) {
+            setParams(prev => ({ ...prev, PageNumber: (prev.PageNumber ?? 1) + 1 }))
+        }
+    }
+
     const updateFilters = (newFilters: Partial<GetClothingParams>) => {
         setParams({ ...newFilters, PageSize: PAGESIZE, PageNumber: 1});
     };
 
     return {
-        ...state,
-        items: data?.items ?? null,
+        items: items,
         meta,
         filters: data?.filters ?? null,
         refetch: () => execute(params),
-        updateFilters
+        loadNextPage,
+        updateFilters,
+        ...state
     }
 }

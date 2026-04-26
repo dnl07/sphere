@@ -28,6 +28,13 @@ export interface PriceRange {
     max?: number | null;
 }
 
+export interface PagedResult {
+    totalCount: number;
+    pageNumber: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;    
+}
+
 // Filter parameters
 export type GetClothingParams = {
     SearchQuery?: string;
@@ -38,8 +45,6 @@ export type GetClothingParams = {
     SortBy?: string;
     PageNumber?: number;
     PageSize?: number;
-    FromPage?: number;
-    ToPage?: number;
 };
 
 // POST /clothing request types

@@ -11,7 +11,6 @@ const Closet = () => {
     const [ filterMenuOpen, setFilterMenuOpen ] = useState(false);
 
     const columnsMeta = useColumns(3, 2, 4);
-
     return (
         <PageWrapper title="Closet">
             <ClosetProvider>

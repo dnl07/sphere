@@ -27,18 +27,22 @@ namespace Sphere.Infrastructure.Repositories {
 
         public async Task<PagedResult<ClothingItem>> GetItemsAsync(ClothingItemFilter filter, CancellationToken ct = default) {
             var query = _context.ClothingItems.AsQueryable();
-
             var spec = new ClothingItemSpecification(filter);
+
+            var totalCount = await spec.Apply(query).CountAsync(ct);
             var items = await spec.ApplyPagination(query).ToListAsync(ct);
 
-            _logger.LogInformation("Retrieved {Count} clothing items with filter {filter}", items.Count, filter.Sizes);
+            var totalPages = (int)Math.Ceiling((double)totalCount / filter.PageSize);
+
+            _logger.LogInformation("Retrieved {Count} clothing items", items.Count);
 
             return new PagedResult<ClothingItem> {
                 Items = items,
-                TotalCount = items.Count,
+                TotalCount = totalCount,
+                PageCount = items.Count,
                 PageNumber = filter.PageNumber,
-                HasNextPage = false,
-                HasPreviousPage = false
+                HasNextPage = filter.PageNumber < totalPages,
+                HasPreviousPage = filter.PageNumber > 1
             };
         }
 

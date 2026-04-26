@@ -12,7 +12,7 @@ const ItemPage = () => {
         return (<div>Invalid item</div>)
     }
 
-    const { data, isLoading } = useClothingItem(id);
+    const { item, isLoading } = useClothingItem(id);
     
     if (isLoading) {
         return (
@@ -22,14 +22,14 @@ const ItemPage = () => {
 
     return (
         <PageWrapper>
-            {data && 
+            {item && 
                 <div className="w-full flex flex-col items-center max-w-xl">
-                    <ItemDisplay imageId={data?.imageId}/>
+                    <ItemDisplay imageId={item?.imageId}/>
                     <div className="w-full flex justify-between items-center my-2">
-                        <h1 className="text-2xl">{data?.name}</h1>
+                        <h1 className="text-2xl">{item?.name}</h1>
                         <ItemActions itemId={id}/>      
                     </div>
-                    <ItemDescription item={data} />   
+                    <ItemDescription item={item} />   
                 </div>
             }
 

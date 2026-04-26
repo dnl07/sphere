@@ -23,7 +23,7 @@ type Props = {
 }
 
 const ItemForm = ({ request, updateRequest, validationErrors }: Props) => {
-    const { data } = useGetCategories();
+    const { categories } = useGetCategories();
 
     const displayField = (name: keyof CreateClothingItemRequest, placeholder: string, type?: string) => {
         if (type === "checkbox") {
@@ -35,7 +35,7 @@ const ItemForm = ({ request, updateRequest, validationErrors }: Props) => {
             ));
         } else if (type === "dropdown") {
             return (
-                <Dropdown className="" values={data?.categories ?? [":)"]} setValue={(value: string) => updateRequest({ [name]: value })}/>
+                <Dropdown className="" values={categories ?? [":)"]} setValue={(value: string) => updateRequest({ [name]: value })}/>
             );
         } else {
             return (

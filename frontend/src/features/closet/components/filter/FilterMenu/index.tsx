@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FilterDropDown from "../FilterDropDown";
 import { useSearchParams } from "react-router";
 import { useClosetContext } from "../../../context/ClosetContext";
@@ -6,8 +6,6 @@ import Cross from "../../../../../shared/components/ui/icons/Cross";
 import FilterBox from "../FilterBox";
 import useDebounce from "../../../../../shared/hooks/useDebounce";
 import type { FilterOption, GetClothingParams } from "../../../../clothing/api/clothingApi.types";
-import arrayRange from "../../../../../shared/utils/arrayRange";
-import type { ColumnsMeta } from "../../../hooks/useColumns";
 
 type Props = {
     open: boolean,
@@ -18,8 +16,9 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
     const [ openLabel, setOpenLabel ] = useState<string | null>(null);
     const [searchParams, _] = useSearchParams();
 
-    const { data, updateFilters } = useClosetContext();
+    const { filters, updateFilters } = useClosetContext();
     
+    const mounted = useRef(false);
 
     const toggleBox = (label: string) => {
         if (openLabel === label) {
@@ -30,10 +29,10 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
     }
 
     const filterOptions: {label: string, paramKey: string, options: FilterOption[]}[] = [
-        { label: "Category", paramKey: "categories", options: data?.filters?.categories ?? [] },
-        { label: "Color", paramKey: "colors", options: data?.filters?.colors ?? [] },
-        { label: "Material", paramKey: "materials", options: data?.filters?.materials ?? [] },
-        { label: "Size", paramKey: "sizes", options: data?.filters?.sizes ?? [] },
+        { label: "Category", paramKey: "categories", options: filters?.categories ?? [] },
+        { label: "Color", paramKey: "colors", options: filters?.colors ?? [] },
+        { label: "Material", paramKey: "materials", options: filters?.materials ?? [] },
+        { label: "Size", paramKey: "sizes", options: filters?.sizes ?? [] },
     ]
 
     const paramKeyMap: Record<string, keyof GetClothingParams> = {
@@ -56,13 +55,11 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
         });
 
         const searchQuery = searchParams.get("q");
-
         if (searchQuery) {
             clothingParams.SearchQuery = searchQuery;
         }
 
         const sortBy = searchParams.get("sort")
-
         if (sortBy) {
             clothingParams.SortBy = sortBy;
         }
@@ -73,6 +70,10 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
     const debounceApply = useDebounce(applyFilters, 300);
 
     useEffect(() => {
+        if (!mounted.current) {
+            mounted.current = true;
+            return;
+        }
         debounceApply();
     }, [searchParams])
 
@@ -88,7 +89,7 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
                     </div>
                 </div>
                 {filterOptions.map(({ label, paramKey, options }) => (
-                    <FilterDropDown label={label} open={openLabel === label} onToggle={() => toggleBox(label)}>
+                    <FilterDropDown label={label} open={openLabel === label} onToggle={() => toggleBox(label)} key={label}>
                         <FilterBox options={options} paramKey={paramKey}/>
                     </FilterDropDown>
                 ))}

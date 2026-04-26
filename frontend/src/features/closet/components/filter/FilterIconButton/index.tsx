@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent, type MouseEventHandler } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import { useSearchParams } from "react-router";
 import SearchIcon from "../../../../../shared/components/ui/icons/SearchIcon";
 import FilterIcon from "../../../../../shared/components/ui/icons/FilterIcon";
@@ -44,8 +44,11 @@ const FilterIconButton = ({ filterMenuOpen, onFilter }: Props) => {
     };
 
     return (
-        <div className={`fixed bottom-1 md:bottom-3 z-30 max-w-6xl w-full flex px-3 cursor-pointer`}  onClick={toggleExpansion}>
-            <div className={`bg-black p-3 flex gap-3 transition-all ease-in-out duration-200 ${isExpanded ? "w-full" : "w-39"}`}>
+        <div className={`fixed bottom-1 md:bottom-3 z-30 max-w-6xl w-full flex px-3 `}>
+            <div 
+                className={`bg-black p-3 flex gap-3 transition-all ease-in-out duration-200 cursor-pointer ${isExpanded ? "w-full" : "w-39"}`}
+                onClick={toggleExpansion}
+            >
                 <div className={`flex justify-center items-center text-white text-xl border-white border-2 h-15 p-2 transition-all ease-in-out duration-200  ${isExpanded ? "w-full" : "w-15"}`}>
                     {isExpanded ? 
                       <input type="text" name="search"

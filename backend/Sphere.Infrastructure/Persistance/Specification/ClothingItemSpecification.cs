@@ -1,5 +1,6 @@
 ﻿using Sphere.Application.UseCases.ClothingItems.Commons;
 using Sphere.Domain.ClothingItems;
+using System.Linq;
 
 namespace Sphere.Infrastructure.Persistance.Specification {
     public class ClothingItemSpecification : Specification<ClothingItem> {
@@ -48,9 +49,11 @@ namespace Sphere.Infrastructure.Persistance.Specification {
         public override IQueryable<ClothingItem> ApplyPagination(IQueryable<ClothingItem> query) {
             query = Apply(query);
 
-            return query
+            query = query
                 .Skip((_filter.PageNumber - 1) * _filter.PageSize)
                 .Take(_filter.PageSize);
+
+            return query;
         }
     }
 }

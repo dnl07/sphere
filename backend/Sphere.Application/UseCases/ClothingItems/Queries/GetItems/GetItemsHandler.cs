@@ -45,6 +45,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Queries.GetItems {
             var pagedResult = new PagedResult<ClothingItemDto> {
                 Items = dtos,
                 TotalCount = pagedItems.TotalCount,
+                PageCount = pagedItems.PageCount,
                 PageNumber = pagedItems.PageNumber,
                 HasNextPage = pagedItems.HasNextPage,
                 HasPreviousPage = pagedItems.HasPreviousPage

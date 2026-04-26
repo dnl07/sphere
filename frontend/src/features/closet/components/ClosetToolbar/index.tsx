@@ -53,6 +53,7 @@ const ClosetToolbar = ({ columnsMeta }: Props) => {
                         className={`cursor-pointer aspect-square flex items-center justify-center 
                             ${value === columnsMeta.columns ? "underline" : ""}`} 
                         onClick={() => columnsMeta.setColumnCount(value)}
+                        key={value}
                     >
                         {value}
                     </button>

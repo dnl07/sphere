@@ -1,48 +1,27 @@
 import { useEffect, useState } from "react";
-import type { ApiActions } from "../api/api.types";
+import { useApi } from "../api/useApi";
 
-interface UseBlobState { 
-    url: string | null;
-    isLoading: boolean,
-    error: Error | null,
-}
+export function useBlob(fetcher: () => Promise<Blob>) {
+    const { execute, data, ...state } = useApi(fetcher, { initialLoading: true})
 
-export interface UseBlobReturn extends UseBlobState, ApiActions { }
+    const [url, setUrl ] = useState<string | null>(null);
 
-export function useBlob(fetcher: () => Promise<Blob>): UseBlobReturn {
-    const [ state, setState ] = useState<UseBlobState>({
-        url: null,
-        isLoading: true,
-        error: null,
-    });
-
-    const fetchImage = (): () => void => {
+    useEffect(() => {
         let objectUrl: string;
 
-        fetcher()
-            .then(blob => {
-                objectUrl = URL.createObjectURL(blob);
-                setState(prev => ({ ...prev, url: objectUrl}));
-            })
-            .catch(e => {
-                setState(prev => ({ ...prev, isLoading: false, error: e}));
-            })
-            .finally(() => {
-                setState(prev => ({ ...prev, isLoading: false, error: null}));
-            })
+         execute().then(blob => {
+            if (!blob) return;
+            objectUrl = URL.createObjectURL(blob);
+            setUrl(objectUrl);
+        });
         
         return () => {
             if (objectUrl) URL.revokeObjectURL(objectUrl);
         }
-    }
-
-    useEffect(() => {
-        const cleanup = fetchImage();
-        return cleanup;
     }, []);
 
     return {
         ...state,
-        refetch: fetchImage
+        imageUrl: url
     }
 }
