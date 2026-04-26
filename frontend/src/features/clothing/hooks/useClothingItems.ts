@@ -1,46 +1,41 @@
 import { useEffect, useState } from "react";
-import type { ApiActions, ApiState } from "../../../shared/api/api.types";
-import type { GetClothingItemsResponse, GetClothingParams } from "../api/clothingApi.types";
+import type { GetClothingParams, PagedResult } from "../api/clothingApi.types";
 import { getClothingItems } from "../api/clothingApi";
+import { useApi } from "../../../shared/api/useApi";
+
+const PAGESIZE = 3
 
 // GET: items
-interface UseClothingItemsState extends ApiState<GetClothingItemsResponse> {
-    data: GetClothingItemsResponse | null;
-}
-
-export interface UseGetClothingItemsReturn extends UseClothingItemsState, ApiActions {
-    updateFilters: (newFilters: Partial<GetClothingParams>) => void;
-}
-
-export function useClothingItems(initial: GetClothingParams = {}): UseGetClothingItemsReturn {
-    const [ params, setParams ] = useState<GetClothingParams>(initial);
-    const [ state, setState ] = useState<UseClothingItemsState>({
-        data: null,
-        isLoading: true,
-        error: null,
+export function useClothingItems(initial: GetClothingParams = {}) {
+    const [ params, setParams ] = useState<GetClothingParams>({
+        PageNumber: 1,
+        PageSize: PAGESIZE,
+        ...initial
     });
 
-    const fetchItems = async () => {
-        setState(prev => ({ ...prev, isLoading: true, error: null }));
-        try {
-            const data = await getClothingItems(params);
-            setState({ data: data, isLoading: false, error: null});
-        } catch (e) {
-            setState(prev => ({ ...prev, isLoading: false, error: e instanceof Error ? e : new Error("Unknown Error")}));
-        }
-    };
+    const { execute, data, ...state } = useApi(getClothingItems, { initialLoading: true})
 
     useEffect(() => {
-        fetchItems();
+        execute(params);
     }, [params]);
 
+    const meta: PagedResult | null = data ? {
+        totalCount: data.totalCount ?? 0,
+        pageNumber: data.pageNumber ?? 1,
+        hasNextPage: data.hasNextPage ?? false,
+        hasPreviousPage: data.hasPreviousPage ?? false,
+    } : null;
+
     const updateFilters = (newFilters: Partial<GetClothingParams>) => {
-        setParams({ ...newFilters, PageNumber: 1});
+        setParams({ ...newFilters, PageSize: PAGESIZE, PageNumber: 1});
     };
 
     return {
         ...state,
-        refetch: fetchItems,
+        items: data?.items ?? null,
+        meta,
+        filters: data?.filters ?? null,
+        refetch: () => execute(params),
         updateFilters
     }
 }

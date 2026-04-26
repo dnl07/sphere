@@ -14,7 +14,7 @@ const ItemActions = ({ itemId }: Props) => {
 
     const navigate = useNavigate();
 
-    const { data, isLoading, error, refetch } = useDeleteClothingItem(itemId);
+    const { deleteItem } = useDeleteClothingItem();
 
     return (
         <>
@@ -23,7 +23,7 @@ const ItemActions = ({ itemId }: Props) => {
                 <button onClick={() => setShowDialog(true)}><DeleteIcon color="#000000" strokeWidth={1.25} className="w-8 h-8 cursor-pointer" /></button>
             </div>     
             {showDialog && 
-                <ConfirmDialog message="Are you sure you want to delete this item?" onConfirm={() => {refetch(); navigate(-1)}} onCancel={() => setShowDialog(false)}/>
+                <ConfirmDialog message="Are you sure you want to delete this item?" onConfirm={() => {deleteItem(itemId); navigate(-1)}} onCancel={() => setShowDialog(false)}/>
             } 
         </>
     );

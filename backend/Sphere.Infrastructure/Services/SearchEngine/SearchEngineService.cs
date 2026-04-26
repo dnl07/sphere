@@ -58,7 +58,7 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
         }
 
         public async Task<string> IndexItemAsync(SearchIndexItem indexItem, CancellationToken ct = default) {
-            var url = "documents/add";
+            var url = "documents";
 
             try {
                 var response = await _client.PostAsJsonAsync(url, indexItem, ct);
@@ -75,7 +75,7 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
         }
 
         public async Task UpdateItemAsync(SearchIndexItem indexItem, CancellationToken ct) {
-            var url = $"documents/update/{indexItem.Id}";
+            var url = $"documents/{indexItem.Id}";
 
             try {
                 var response = await _client.PutAsJsonAsync(url, indexItem, ct);
@@ -92,7 +92,7 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
 
 
         public async Task RemoveItemAsync(Guid clothingItemId, CancellationToken ct = default) {
-            var url = $"documents/remove/{clothingItemId}";
+            var url = $"documents/{clothingItemId}";
             try {
                 var response = await _client.DeleteAsync(url, ct);
                 response.EnsureSuccessStatusCode();
