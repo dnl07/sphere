@@ -11,6 +11,8 @@ const ClothingGallery = ({ columns }: Props) => {
 
     if (error) return <div>Error: Could not fetch items</div>;
 
+    console.log(items?.length)
+
     if (items?.length === 0) return <div>No clothing items found :(</div>
 
     return (

@@ -4,7 +4,7 @@ import { getClothingItems } from "../api/clothingApi";
 import { useApi } from "../../../shared/api/useApi";
 import type { ClothingItemDto } from "../clothing.types";
 
-const PAGESIZE = 3
+const PAGESIZE = 30
 
 // GET: items
 export function useClothingItems(initial: GetClothingParams = {}) {
@@ -24,8 +24,11 @@ export function useClothingItems(initial: GetClothingParams = {}) {
 
     useEffect(() => {
         if (!data?.items) return;
+        console.log(data.items, data.pageNumber)
+       
 
-        if (data.pageNumber === 1) {
+        if (data.pageNumber === 0 || data.pageNumber === 1) {
+
             setItems(data.items);
         } else {
             setItems((prev) => {

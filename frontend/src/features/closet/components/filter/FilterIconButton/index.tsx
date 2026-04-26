@@ -1,16 +1,15 @@
 import { useEffect, useState, type ChangeEvent } from "react";
-import { useSearchParams } from "react-router";
 import SearchIcon from "../../../../../shared/components/ui/icons/SearchIcon";
 import FilterIcon from "../../../../../shared/components/ui/icons/FilterIcon";
+import useMultiParam from "../../../../../shared/hooks/useMultiParam";
 
 type Props = {
-    filterMenuOpen: boolean
     onFilter: () => void
 }
 
-const FilterIconButton = ({ filterMenuOpen, onFilter }: Props) => {
+const FilterIconButton = ({ onFilter }: Props) => {
     const [ isExpanded, setIsExpanded ] = useState(false);
-    const [searchParams, setSearchParams] = useSearchParams();
+    const { toggle } = useMultiParam("q", true)
     
     const [query, setQuery] = useState<string | null>(null)
 
@@ -19,15 +18,11 @@ const FilterIconButton = ({ filterMenuOpen, onFilter }: Props) => {
     }
 
     const addQueryToUrl = () => {
-        const params = new URLSearchParams(searchParams);
-
         if (query && query.length >= 3) {
-            params.set("q", query);
+            toggle(query);
         } else if (!query || query === "") {
-            params.delete("q");
+            toggle("")
         }
-
-        setSearchParams(params)
     }
 
     useEffect(() => {
@@ -44,9 +39,9 @@ const FilterIconButton = ({ filterMenuOpen, onFilter }: Props) => {
     };
 
     return (
-        <div className={`fixed bottom-1 md:bottom-3 z-30 max-w-6xl w-full flex px-3 `}>
+        <div className={`fixed bottom-1 md:bottom-3 z-30 max-w-6xl w-full flex px-3 pointer-events-none`}>
             <div 
-                className={`bg-black p-3 flex gap-3 transition-all ease-in-out duration-200 cursor-pointer ${isExpanded ? "w-full" : "w-39"}`}
+                className={`bg-black p-3 flex gap-3 transition-all ease-in-out duration-200 cursor-pointer pointer-events-auto ${isExpanded ? "w-full" : "w-39"}`}
                 onClick={toggleExpansion}
             >
                 <div className={`flex justify-center items-center text-white text-xl border-white border-2 h-15 p-2 transition-all ease-in-out duration-200  ${isExpanded ? "w-full" : "w-15"}`}>

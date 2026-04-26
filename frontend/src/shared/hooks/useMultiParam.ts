@@ -8,7 +8,12 @@ export const useMultiParam = (paramKey: string, exclusive: boolean = false) => {
         const params = new URLSearchParams(searchParams);
 
         if (exclusive) {
-            params.set(paramKey, value)
+            if (!value || value === "") {
+                params.delete(paramKey)
+            } else {
+                params.set(paramKey, value)
+            }
+            
         } else {
             const next = values.includes(value)
                 ? values.filter(v => v !== value)

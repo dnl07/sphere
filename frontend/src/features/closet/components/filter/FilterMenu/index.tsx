@@ -78,15 +78,10 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
     }, [searchParams])
 
     return (
-        <div className={`fixed w-full top-0 z-30 flex justify-end transition-all ease-in-out duration-300 ${open ? "opacity-100" : "invisible opacity-0"}`}>
+        <div className={`fixed w-full top-0 bottom-0 z-30 flex justify-end transition-all ease-in-out duration-300 ${open ? "opacity-100" : "invisible opacity-0"}`}>
             <div className="bg-bg inset-0 w-full h-screen md:max-w-2xl shadow-xl px-5">
                 <div className="py-7 flex justify-end">
                     <Cross onClick={closeFilter}/>
-                </div>
-                <div className="w-full flex flex-row text-2xl items-center gap-5">
-                    <span>Sort on</span>
-                    <div className="flex gap-4">
-                    </div>
                 </div>
                 {filterOptions.map(({ label, paramKey, options }) => (
                     <FilterDropDown label={label} open={openLabel === label} onToggle={() => toggleBox(label)} key={label}>

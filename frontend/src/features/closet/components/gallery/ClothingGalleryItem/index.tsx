@@ -10,7 +10,7 @@ type Props = {
 
 const ClothingGalleryItem = ({ item }: Props) => {
     const navigate = useNavigate();
-    console.log("render:", item.id);
+
     const { imageUrl, isLoading, error } = useBlob(() => api.image.getImage(item.imageId));
     
     return (
