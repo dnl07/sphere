@@ -21,6 +21,9 @@ type ContextProps = {
     children: ReactNode;
 }
 
+/**
+ * Closet provider component, responsible for fetching and managing the state of the user's clothing items and filters.
+ */
 export const ClosetProvider = ({ children }: ContextProps) => {
     const { items, meta, filters, isLoading, error, updateFilters, loadNextPage, refetch, reset } = useClothingItems();
     

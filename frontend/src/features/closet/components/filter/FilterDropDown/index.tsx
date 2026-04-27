@@ -8,6 +8,9 @@ type Props = {
     label: string
 }
 
+/**
+ * Filter drop down component, used in the filter sidebar on the closet page.
+ */
 const FilterDropDown = ({ open, onToggle, children, label }: Props) => {
     return (
         <div className=" w-full">

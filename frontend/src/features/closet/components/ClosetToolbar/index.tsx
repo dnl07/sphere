@@ -8,6 +8,10 @@ type Props = {
     columnsMeta: ColumnsMeta
 }
 
+/**
+ * Toolbar component for the closet page, allowing users to sort items and adjust the number of columns in the gallery view.
+ * Is located under the closet header and above the gallery.
+ */
 const ClosetToolbar = ({ columnsMeta }: Props) => {
     const sortOption = {
         paramKey: "sort",

@@ -7,6 +7,11 @@ type Props = {
     onFilter: () => void
 }
 
+/**
+ * Filter icon button component, located in the bottom right corner of the closet page.
+ * Contains the search input and the filter button, which opens the filter sidebar.
+ * Expands to show the search input when clicked, and collapses when clicked again.
+ */
 const FilterIconButton = ({ onFilter }: Props) => {
     const [ isExpanded, setIsExpanded ] = useState(false);
     const { toggle } = useMultiParam("q", true)

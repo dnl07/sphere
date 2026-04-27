@@ -6,6 +6,11 @@ type Props = {
     paramKey: string
 }
 
+/**
+ * Filter box component, allowing users to filter items based on various criteria.
+ * Gets options and the paramKey as props, and uses the useMultiParam hook to manage the selected filters in the URL query parameters.
+ */
+
 const FilterBox = ({ options, paramKey }: Props) => {
     const { values, toggle } = useMultiParam(paramKey);
 

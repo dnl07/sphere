@@ -7,6 +7,9 @@ export type ColumnsMeta = {
     setColumnCount: (count: number) => void;
 }
 
+/**
+ * Hook for managing the number of columns in the clothing gallery on the closet page.
+ */
 const useColumns = (defaultColumns: number, min: number, max: number): ColumnsMeta => {
     const [ columns, setColumns ] = useState<number>(() => {
         const saved = localStorage.getItem("columns");

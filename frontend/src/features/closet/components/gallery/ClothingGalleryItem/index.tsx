@@ -8,6 +8,9 @@ type Props = {
     item: ClothingItemDto
 }
 
+/**
+ * Clothing gallery item component, representing a single clothing item in the gallery on the closet page.
+ */
 const ClothingGalleryItem = ({ item }: Props) => {
     const navigate = useNavigate();
 

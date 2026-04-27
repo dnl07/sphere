@@ -16,7 +16,7 @@ export function useClothingItems(initial: GetClothingParams = {}) {
         ...initial
     });
 
-    const [ items, setItems ] = useState<ClothingItemDto[]>([])
+    const [ items, setItems ] = useState<ClothingItemDto[] | null>([])
 
     useEffect(() => {
         execute(params);
@@ -32,9 +32,9 @@ export function useClothingItems(initial: GetClothingParams = {}) {
             setItems(data.items);
         } else {
             setItems((prev) => {
-                const existingIds = new Set(prev.map(i => i.id))
+                const existingIds = new Set(prev!.map(i => i.id))
                 const newItems = data.items!.filter(i => !existingIds.has(i.id))
-                return [...prev, ...newItems]
+                return [...prev!, ...newItems]
             })
         }
     }, [data])

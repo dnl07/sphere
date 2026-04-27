@@ -1,5 +1,8 @@
 import { useClosetContext } from "../../../context/ClosetContext";
 
+/**
+ * Clothing gallery paginator component, located at the bottom of the clothing gallery on the closet page.
+ */
 const ClothingGalleryPaginator = () => {
     const { meta, loadNextPage } = useClosetContext();
 

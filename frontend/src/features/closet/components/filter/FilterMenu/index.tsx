@@ -12,6 +12,9 @@ type Props = {
     closeFilter: () => void,
 }
 
+/**
+ * Filter menu component, located in the sidebar on the closet page. Opens when the filter button in the bottom right corner is clicked.
+ */
 const FilterMenu = ({ open, closeFilter }: Props) => {
     const [ openLabel, setOpenLabel ] = useState<string | null>(null);
     const [searchParams, _] = useSearchParams();
