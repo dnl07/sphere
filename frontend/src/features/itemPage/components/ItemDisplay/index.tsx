@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useBlob } from "../../../../shared/hooks/useBlob";
 import { api } from "../../../../shared/api/api";
+import LoadingScreen from "../../../../shared/components/LoadingScreen";
 
 type Props = {
     imageId: string
@@ -13,7 +14,12 @@ const ItemDisplay = ({ imageId }: Props) => {
 
     return (
         <div className="max-w-md flex justify-center flex-col items-center mt-2">
-            <div className="w-full h-90 cursor-pointer" onClick={() => setClicked(!clicked)}>
+            <div className="w-[90%] h-90 cursor-pointer" onClick={() => setClicked(!clicked)}>
+                {isLoading && 
+                    <div className="w-full h-full">
+                        <LoadingScreen />
+                    </div>
+                }
                 {imageUrl && <img src={imageUrl} className="w-full h-full object-contain transition-all duration-200 hover:scale-105 drop-shadow-2xl"/>}
             </div>    
             <div className={`transition-all duration-300 ${clicked ? "max-h-20 opacity-100 mb-10" : "max-h-0 opacity-0"}`}>

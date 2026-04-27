@@ -3,6 +3,7 @@ import type { ClothingItemDto } from "../../../../clothing/clothing.types";
 import { useBlob } from "../../../../../shared/hooks/useBlob";
 import { api } from "../../../../../shared/api/api";
 import { memo } from "react";
+import LoadingScreen from "../../../../../shared/components/LoadingScreen";
 
 type Props = {
     item: ClothingItemDto
@@ -18,6 +19,12 @@ const ClothingGalleryItem = ({ item }: Props) => {
     
     return (
         <div key={item.id} className="flex items-center justify-center aspect-square hover:scale-105 transition-all duration-200" onClick={() => navigate(`/item/${item.id}`)}>
+            {isLoading
+             && 
+                <div className="w-full h-full">
+                    <LoadingScreen />
+                </div>
+            }
             {imageUrl && <img src={imageUrl} className="drop-shadow-lg h-full w-full object-contain cursor-pointer"/>}
         </div>
     );

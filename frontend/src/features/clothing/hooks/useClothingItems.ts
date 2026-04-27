@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { GetClothingParams, PagedResult } from "../api/clothingApi.types";
 import { getClothingItems } from "../api/clothingApi";
 import { useApi } from "../../../shared/api/useApi";
@@ -18,6 +18,8 @@ export function useClothingItems(initial: GetClothingParams = {}) {
 
     const [ items, setItems ] = useState<ClothingItemDto[] | null>([])
 
+    const scrollY = useRef<number>(0);
+
     useEffect(() => {
         execute(params);
     }, [params]);
@@ -26,7 +28,6 @@ export function useClothingItems(initial: GetClothingParams = {}) {
         if (!data?.items) return;
         console.log(data.items, data.pageNumber)
        
-
         if (data.pageNumber === 0 || data.pageNumber === 1) {
 
             setItems(data.items);
@@ -36,7 +37,12 @@ export function useClothingItems(initial: GetClothingParams = {}) {
                 const newItems = data.items!.filter(i => !existingIds.has(i.id))
                 return [...prev!, ...newItems]
             })
+
+            setTimeout(() => {
+                window.scrollTo(0, scrollY.current);
+            }, 50);
         }
+
     }, [data])
 
     const meta: PagedResult | null = data ? {
@@ -47,7 +53,10 @@ export function useClothingItems(initial: GetClothingParams = {}) {
     } : null;
 
     const loadNextPage = () => {
+
         if (data?.hasNextPage) {
+            scrollY.current = window.scrollY;
+
             setParams(prev => ({ ...prev, PageNumber: (prev.PageNumber ?? 1) + 1 }))
         }
     }
