@@ -18,7 +18,7 @@ const ClothingGalleryItem = ({ item }: Props) => {
     const { imageUrl, isLoading, error } = useBlob(() => api.image.getImage(item.imageId));
     
     return (
-        <div key={item.id} className="flex items-center justify-center aspect-square hover:scale-105 transition-all duration-200" onClick={() => navigate(`/item/${item.id}`)}>
+        <div key={item.id} className="flex items-center justify-center aspect-square hover:scale-105 transition-all duration-200" onClick={() => navigate(`/item/${item.id}`, { state: { from: "/closet"}})}>
             {isLoading
              && 
                 <div className="w-full h-full">

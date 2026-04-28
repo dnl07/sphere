@@ -41,7 +41,8 @@ export function useCreateClothingItem() {
         if (!validate()) return;
 
         if (request) {
-            execute(request as CreateClothingItemRequest)
+            const item = await execute(request as CreateClothingItemRequest)
+            return item;
         }
     };
 

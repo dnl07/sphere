@@ -1,6 +1,7 @@
 import { useRef, useState, type ChangeEvent } from "react";
 import { useBackgroundRemover } from "../../hooks/useBackgroundRemover";
 import useImageState from "../../../../shared/hooks/useImageState";
+import LoadingScreen from "../../../../shared/components/LoadingScreen";
 
 type Props = {
     preview: string | null,
@@ -36,7 +37,9 @@ const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
         <div className="flex flex-col justify-center items-center w-full p-5">
             <div className="w-full max-w-sm min-w-50 aspect-3/4 rounded-xl flex flex-col justify-center items-center cursor-pointer">
                 {loading ?
-                <p>Loading...</p>
+                    <div className="w-full h-full">
+                        <LoadingScreen />
+                    </div>
                 :
                     preview ?
                         <div className="w-full max-w-sm min-w-50 flex flex-col justify-center items-center drop-shadow-lg">

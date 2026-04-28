@@ -47,8 +47,7 @@ export async function updateClothingItemById(
 
 // DELETE /clothing 
 export async function deleteClothingItem(id: string) {
-    const response = await api.clothing.deleteItem(id);
-    return response.data;
+    await api.clothing.deleteItem(id);
 }
 
 // GET /category
