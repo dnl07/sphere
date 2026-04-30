@@ -2,20 +2,20 @@
 using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
+using Sphere.Application.Mappers.ClothingItems;
 using Sphere.Domain.ClothingItems.Events;
-using Sphere.Infrastructure.Services.SearchEngine.Utils;
 
 namespace Sphere.Infrastructure.Events.Handlers {
     public class ClothingItemUpdatedEventHandler : IDomainEventHandler<ClothingItemUpdatedEvent> {
         private readonly ISearchEngineService _searchEngine;
         private readonly IClothingItemRepository _clothingItemRepository;
 
-        private readonly ILogger<ClothingItemCreatedEventHandler> _logger;
+        private readonly ILogger<ClothingItemUpdatedEventHandler> _logger;
 
         public ClothingItemUpdatedEventHandler(
             ISearchEngineService searchEngine, 
             IClothingItemRepository clothingItemRepository, 
-            ILogger<ClothingItemCreatedEventHandler> logger) {
+            ILogger<ClothingItemUpdatedEventHandler> logger) {
             _searchEngine = searchEngine;
             _clothingItemRepository = clothingItemRepository;
             _logger = logger;
@@ -36,7 +36,7 @@ namespace Sphere.Infrastructure.Events.Handlers {
                 throw new Exception();
             }
 
-            var indexItem = item.ToSearchableText(category.Name);
+            var indexItem = item.ToSearchIndexItem(category.Name);
 
             var response = await _searchEngine.IndexItemAsync(indexItem, ct);
             _logger.LogInformation("Clothing item indexed with ID {response}", response);

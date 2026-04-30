@@ -3,6 +3,7 @@ using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Application.Commons.Models;
 using Sphere.Infrastructure.Services.SearchEngine.Models;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace Sphere.Infrastructure.Services.SearchEngine {
     public class SearchEngineService : ISearchEngineService {
@@ -61,6 +62,12 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
             var url = "documents";
 
             try {
+                var json = JsonSerializer.Serialize(indexItem, new JsonSerializerOptions {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                });
+                _logger.LogDebug("Sending: {json}", json);
+
                 var response = await _client.PostAsJsonAsync(url, indexItem, ct);
                 var deserialized = await response.Content.ReadFromJsonAsync<IndexedResponse>(cancellationToken: ct);
 
@@ -89,7 +96,6 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
                 throw;
             }
         }
-
 
         public async Task RemoveItemAsync(Guid clothingItemId, CancellationToken ct = default) {
             var url = $"documents/{clothingItemId}";

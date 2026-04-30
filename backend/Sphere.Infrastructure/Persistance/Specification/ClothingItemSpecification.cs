@@ -1,6 +1,5 @@
 ﻿using Sphere.Application.UseCases.ClothingItems.Commons;
 using Sphere.Domain.ClothingItems;
-using System.Linq;
 
 namespace Sphere.Infrastructure.Persistance.Specification {
     public class ClothingItemSpecification : Specification<ClothingItem> {

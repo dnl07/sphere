@@ -1,4 +1,5 @@
-﻿using Sphere.Application.UseCases.ClothingItems.Commands.Create;
+﻿using Sphere.Application.Commons.Models;
+using Sphere.Application.UseCases.ClothingItems.Commands.Create;
 using Sphere.Application.UseCases.ClothingItems.Commons;
 using Sphere.Application.UseCases.Search.Command.Search;
 using Sphere.Domain.ClothingItems;
@@ -55,6 +56,27 @@ namespace Sphere.Application.Mappers.ClothingItems {
                 item.Price?.Currency,
                 item.ImageId
             );
+        }
+
+        public static SearchIndexItem ToSearchIndexItem(this ClothingItem item, string? categoryName) {
+            var tags = new[] {
+                categoryName,
+                item.Size,
+                item.Material,
+                item.Color,
+                item.Store,
+                item.Brand
+            }
+            .Where(t => !string.IsNullOrWhiteSpace(t))
+            .Cast<string>()
+            .ToArray();
+
+            return new SearchIndexItem {
+                Id = item.Id,
+                Title = item.Name,
+                Description = item.Notes ?? "",
+                Tags = tags ?? []
+            };
         }
     }
 }

@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
-using Sphere.Infrastructure.Services.SearchEngine.Utils;
 using Sphere.Application.UseCases.ClothingItems.Commons;
+using Sphere.Application.Mappers.ClothingItems;
 
 namespace Sphere.Infrastructure.Services.SearchEngine {
     public static class SearchEngineInitializer {
@@ -65,7 +65,7 @@ namespace Sphere.Infrastructure.Services.SearchEngine {
                         logger.LogWarning("SearchEngine: Item {ItemId} has category {CategoryName}", item.Id, category?.Name);
                     }
 
-                    var indexItem = item.ToSearchableText(category?.Name ?? "");
+                    var indexItem = item.ToSearchIndexItem(category?.Name ?? "");
                     await searchEngine.IndexItemAsync(indexItem, ct);
                     logger.LogDebug("SearchEngine: Indexed {ItemId}", item.Id);
                 } catch (Exception e) {
