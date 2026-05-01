@@ -42,7 +42,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
 
             var mediaFile = MediaFile.Create(cmd.ImageFileName, cmd.Image.Length, cmd.ImageContentType);
 
-            var trimmedImage = _imageProcessingService.TrimTransparentBackground(cmd.Image);
+            var trimmedImage = await _imageProcessingService.ProcessImage(cmd.Image, ct);
 
             await _fileStorage.SaveAsync(mediaFile.Id, trimmedImage, ct);
             await _mediaFileRepository.AddAsync(mediaFile, ct);

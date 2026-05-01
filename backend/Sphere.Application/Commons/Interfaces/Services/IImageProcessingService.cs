@@ -1,5 +1,5 @@
 ﻿namespace Sphere.Application.Commons.Interfaces.Services {
     public interface IImageProcessingService {
-        byte[] TrimTransparentBackground(byte[] imageBytes);
+        public Task<byte[]> ProcessImage(byte[] imageBytes, CancellationToken ct);
     }
 }

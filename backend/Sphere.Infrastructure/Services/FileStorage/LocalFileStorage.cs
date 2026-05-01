@@ -59,6 +59,6 @@ namespace Sphere.Infrastructure.Services.FileStorage {
             return Task.CompletedTask;
         }
 
-        private string GetFilePath(Guid key) => Path.Combine(_basePath, key.ToString());
+        private string GetFilePath(Guid key) => Path.Combine(_basePath, key.ToString() + ".webp");
     }
 }
