@@ -2,15 +2,15 @@ import { useState } from "react";
 
 const useImageState = () => {
     const [preview, setPreview] = useState<string | null>(null);
-    const [file, setFile] = useState<Blob | null>(null);
+    const [file, setFile] = useState<File | null>(null);
 
-    const setImage = (blob: Blob) => {
+    const setImage = (file: File) => {
         if (preview) {
             URL.revokeObjectURL(preview);
         }
 
-        setPreview(URL.createObjectURL(blob));
-        setFile(blob);
+        setPreview(URL.createObjectURL(file));
+        setFile(file);
     }
 
     const clearImage = () => {

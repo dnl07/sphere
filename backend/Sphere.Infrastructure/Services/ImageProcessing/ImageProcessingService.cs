@@ -123,7 +123,7 @@ namespace Sphere.Infrastructure.Services.ImageProcessing {
             var output = new MemoryStream();
             
             var encoder = new WebpEncoder {
-                Quality = 75,
+                Quality = 90,
                 Method = WebpEncodingMethod.BestQuality,
                 FileFormat = WebpFileFormatType.Lossy
             };  
