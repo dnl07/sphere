@@ -23,8 +23,6 @@ export interface PriceDto {
 }
 
 export const ClothingItemLabels: Partial<Record<keyof ClothingItemDto, string>> = {
-  category: "Category",
-  description: "Description",
   size: "Size",
   material: "Material",
   color: "Color",

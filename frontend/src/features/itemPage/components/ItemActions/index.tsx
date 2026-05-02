@@ -1,7 +1,5 @@
 import { useState } from "react";
 import ConfirmDialog from "../../../../shared/components/ConfirmDialog";
-import DeleteIcon from "../../../../shared/components/ui/icons/DeleteIcon";
-import EditIcon from "../../../../shared/components/ui/icons/EditIcon";
 import { useDeleteClothingItem } from "../../../clothing/hooks/useDeleteClothingItem";
 import { useLocation, useNavigate } from "react-router";
 
@@ -18,9 +16,9 @@ const ItemActions = ({ itemId }: Props) => {
 
     return (
         <>
-            <div className="flex flex-row gap-5 mr-1">
-                <button className=""><EditIcon color="#000000" strokeWidth={1.5} className="w-7.5 h-7.5 cursor-pointer"/></button>
-                <button onClick={() => setShowDialog(true)}><DeleteIcon color="#000000" strokeWidth={1.25} className="w-8 h-8 cursor-pointer" /></button>
+            <div className="flex flex-row w-full mb-4 gap-4">
+                <button className="bg-black w-full text-white flex-3 py-2 px-4 rounded-lg">Edit</button>
+                <button className="bg-red-100 w-full flex-1 py-2 px-4 rounded-lg text-red-400" onClick={() => setShowDialog(true)}>Delete</button>
             </div>     
             {showDialog && 
                 <ConfirmDialog 
