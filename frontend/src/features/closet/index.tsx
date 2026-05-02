@@ -12,7 +12,7 @@ const Closet = () => {
 
     const columnsMeta = useColumns(3, 2, 4);
     return (
-        <PageWrapper title="Closet">
+        <PageWrapper title="Closet" subtitle="Browse all items">
             <ClosetProvider>
                 <ClosetToolbar 
                     columnsMeta={columnsMeta}
@@ -22,7 +22,7 @@ const Closet = () => {
                     open={filterMenuOpen} 
                     closeFilter={() => setFilterMenuOpen(false)}
                 />
-                <FilterIconButton filterMenuOpen={filterMenuOpen} onFilter={() => setFilterMenuOpen(!filterMenuOpen)}/>
+                <FilterIconButton onFilter={() => setFilterMenuOpen(!filterMenuOpen)}/>
             </ClosetProvider>
         </PageWrapper>
     );

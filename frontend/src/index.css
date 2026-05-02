@@ -20,12 +20,17 @@
 }
 
 @theme {
+    /* Background */
     --color-bg: #f2f2f2;
     --color-bg-elevated: #ffffff;
     --color-bg-sunken: #e4e4e4;
 
+    /* Text */
     --color-text-main: #0a0a0a;
-    --color-text-sub:  #00000080; 
+    --color-text-sub: #00000080; 
+
+    /* Border */
+    --color-border: #00000010; 
 
     --font-size-xs:   clamp(0.75rem, 1vw, 0.875rem);
     --font-size-sm:   clamp(0.875rem, 1.2vw, 1rem);

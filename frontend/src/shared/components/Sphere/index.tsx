@@ -3,16 +3,18 @@ import { useEffect, useRef } from "react";
 type Props = {
     width?: number;
     height?: number;
+    rotating?: boolean;
+    lineWidth?: number;
+    speed?: number;
 };
 
-const Sphere = ({ width = 300, height = 300 }: Props) => {
+const Sphere = ({ width = 300, height = 300, rotating = true, lineWidth = 1.2, speed = 0.01 }: Props) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const angleRef = useRef(0);
     const rafRef = useRef<number>(0);
 
     const N = 15;
     const COLOR = "#000000";
-    const SPEED = 0.01;
     const TILT = 0.35;
 
     useEffect(() => {
@@ -47,7 +49,7 @@ const Sphere = ({ width = 300, height = 300 }: Props) => {
         const draw = () => {
             ctx.clearRect(0, 0, W, H);
             ctx.strokeStyle = COLOR;
-            ctx.lineWidth = 1.2;
+            ctx.lineWidth = lineWidth;
             ctx.globalAlpha = 0.75;
 
             const angle = angleRef.current;
@@ -86,7 +88,10 @@ const Sphere = ({ width = 300, height = 300 }: Props) => {
         };
 
         const loop = () => {
-            angleRef.current += SPEED;
+            if (rotating) {
+                angleRef.current += speed;
+            }
+
             draw();
             rafRef.current = requestAnimationFrame(loop);
         };
@@ -95,7 +100,7 @@ const Sphere = ({ width = 300, height = 300 }: Props) => {
 
         return () => cancelAnimationFrame(rafRef.current);
 
-    }, [width, height]);
+    }, [width, height, lineWidth, speed]);
 
     return (
         <div>

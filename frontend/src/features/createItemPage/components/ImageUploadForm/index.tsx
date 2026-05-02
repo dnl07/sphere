@@ -2,7 +2,6 @@ import { useRef, useState, type ChangeEvent } from "react";
 import { useBackgroundRemover } from "../../hooks/useBackgroundRemover";
 import LoadingScreen from "../../../../shared/components/LoadingScreen";
 import { convertToPng } from "../../../../shared/utils/convertToPng";
-import ImageEditor from "../../../imageEditor";
 
 type Props = {
     preview: string | null,

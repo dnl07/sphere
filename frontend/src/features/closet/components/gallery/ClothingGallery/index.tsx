@@ -27,7 +27,7 @@ const ClothingGallery = ({ columns }: Props) => {
 
     return (
         <div className="w-full">
-            <div style={{gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`}} className={`grid gap-10`}>
+            <div style={{gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`}} className={`grid gap-3`}>
                 {items?.map((item) => (
                     <ClothingGalleryItem key={item.id} item={item} />   
                 ))}
