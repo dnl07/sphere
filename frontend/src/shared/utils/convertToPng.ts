@@ -1,4 +1,4 @@
-export const convertToPng = async (file: File, maxSize: number = 1024): Promise<File> => {
+export const convertToPng = async (file: File, maxSize: number = 1280): Promise<File> => {
     return new Promise((resolve) => {
         const image = new Image();
         const url = URL.createObjectURL(file);
