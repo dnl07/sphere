@@ -6,13 +6,26 @@ import FilterIconButton from "./components/filter/FilterIconButton";
 import ClothingGallery from "./components/gallery/ClothingGallery";
 import useColumns from "./hooks/useColumns";
 import ClosetToolbar from "./components/ClosetToolbar";
+import { useNavigate } from "react-router";
 
 const Closet = () => {
+    const navigate = useNavigate();
     const [ filterMenuOpen, setFilterMenuOpen ] = useState(false);
 
     const columnsMeta = useColumns(3, 2, 4);
     return (
-        <PageWrapper title="Closet" subtitle="Browse all items">
+        <PageWrapper 
+            title="Closet" 
+            subtitle="Browse all items" 
+            sideChildren={
+                <button 
+                    className="bg-black text-white px-4 py-2 mr-4 text-nowrap rounded-lg"
+                    onClick={() => navigate("/atelier/create")}
+                >
+                    Add +
+                </button>
+            }
+        >
             <ClosetProvider>
                 <ClosetToolbar 
                     columnsMeta={columnsMeta}

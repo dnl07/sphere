@@ -20,7 +20,7 @@ const ClothingGalleryItem = ({ item }: Props) => {
     return (
         <div 
             key={item.id} 
-            className="flex items-center bg-bg-elevated border-border border-2 p-5 box-content
+            className="flex items-center bg-bg-elevated border-border border-2 p-4 box-border
             rounded-xl justify-center aspect-square hover:scale-105 transition-all duration-200" 
             onClick={() => navigate(`/item/${item.id}`, { state: { from: "/closet"}})}
         >
@@ -30,7 +30,7 @@ const ClothingGalleryItem = ({ item }: Props) => {
                     <LoadingScreen />
                 </div>
             }
-            {imageUrl && <img src={imageUrl} className="drop-shadow-lg  h-full w-full object-contain cursor-pointer"/>}
+            {imageUrl && <img src={imageUrl} className=" drop-shadow-lg  max-h-full object-contain cursor-pointer"/>}
         </div>
     );
 }

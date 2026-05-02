@@ -19,6 +19,8 @@ const ClothingGallery = ({ columns }: Props) => {
         if (items?.length === 0) {
             const timer = setTimeout(() => setShowEmpty(true), 300);
             return () => clearTimeout(timer);
+        } else {
+            setShowEmpty(false);
         }
     }, [items])
 

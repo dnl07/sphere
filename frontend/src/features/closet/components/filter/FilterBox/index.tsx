@@ -23,7 +23,7 @@ const FilterBox = ({ options, paramKey }: Props) => {
                     <button 
                         key={option.name} 
                         onPointerDown={() => toggle(option.name)}
-                        className={`px-2 py-1 border-2 cursor-pointer ${values.includes(option.name) ? "bg-black text-white border-2 border-black" : ""}`}
+                        className={`px-2 py-1 rounded-sm border-2 cursor-pointer ${values.includes(option.name) ? "bg-black text-white border-2 border-black" : ""}`}
                     >
                         <p>{option.name} ({option.count})</p>
                     </button>

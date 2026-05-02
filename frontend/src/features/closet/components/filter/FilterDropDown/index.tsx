@@ -18,7 +18,9 @@ const FilterDropDown = ({ open, onToggle, children, label }: Props) => {
                 {label}
                 <DropDownArrow open={open}/>
             </button>
-            {open && children}
+            <div className={`border-b border-border overflow-hidden transition-all duration-200 ${open ? "max-h-96" : "max-h-0"}`}>
+                {children}
+            </div>
         </div>
 
     )

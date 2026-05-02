@@ -82,8 +82,8 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
 
     return (
         <div className={`fixed w-full top-0 bottom-0 z-30 flex justify-end transition-all ease-in-out duration-300 ${open ? "opacity-100" : "invisible opacity-0"}`}>
-            <div className="bg-bg inset-0 w-full h-screen md:max-w-2xl shadow-xl px-5">
-                <div className="py-7 flex justify-end">
+            <div className="flex flex-col items-center bg-bg inset-0 w-full h-screen md:max-w-2xl shadow-xl px-5">
+                <div className="py-7 flex justify-end w-full">
                     <Cross onClick={closeFilter}/>
                 </div>
                 {filterOptions.map(({ label, paramKey, options }) => (
@@ -91,7 +91,7 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
                         <FilterBox options={options} paramKey={paramKey}/>
                     </FilterDropDown>
                 ))}
-                <button onClick={applyFilters}>Submit</button>
+                <button onClick={applyFilters} className="bg-black text-white py-3 px-5 rounded-xl mt-10 cursor-pointer">Found 0 items</button>
             </div>
         </div>
     )
