@@ -7,6 +7,7 @@ import ClothingGallery from "./components/gallery/ClothingGallery";
 import useColumns from "./hooks/useColumns";
 import ClosetToolbar from "./components/ClosetToolbar";
 import { useNavigate } from "react-router";
+import Plus from "../../shared/components/ui/icons/Plus";
 
 const Closet = () => {
     const navigate = useNavigate();
@@ -19,10 +20,10 @@ const Closet = () => {
             subtitle="Browse all items" 
             sideChildren={
                 <button 
-                    className="bg-black text-white px-4 py-2 mr-4 text-nowrap rounded-lg"
+                    className="bg-black text-white px-4 py-2 mr-4 text-nowrap rounded-lg cursor-pointer flex gap-2"
                     onClick={() => navigate("/atelier/create")}
                 >
-                    Add +
+                    Add <Plus className="w-3" strokeWidth={3}/>
                 </button>
             }
         >

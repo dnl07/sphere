@@ -83,8 +83,10 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
     return (
         <div className={`fixed w-full top-0 bottom-0 z-30 flex justify-end transition-all ease-in-out duration-300 ${open ? "opacity-100" : "invisible opacity-0"}`}>
             <div className="flex flex-col items-center bg-bg inset-0 w-full h-screen md:max-w-2xl shadow-xl px-5">
-                <div className="py-7 flex justify-end w-full">
-                    <Cross onClick={closeFilter}/>
+                <div className="py-7 flex justify-end w-full" >
+                    <div className="cursor-pointer" onClick={closeFilter}>
+                        <Cross color="#000000" strokeWidth={2} className="w-5"/>
+                    </div>
                 </div>
                 {filterOptions.map(({ label, paramKey, options }) => (
                     <FilterDropDown label={label} open={openLabel === label} onToggle={() => toggleBox(label)} key={label}>
@@ -97,4 +99,4 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
     )
 }
 
-export default FilterMenu;
+export default FilterMenu; 
