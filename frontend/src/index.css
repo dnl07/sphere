@@ -22,8 +22,8 @@
 @theme {
     /* Background */
     --color-bg: #f2f2f2;
-    --color-bg-elevated: #ffffff;
-    --color-bg-sunken: #e4e4e4;
+    --color-bg-elevated: #fafafa;
+    --color-bg-sunken: #eeeeee;
 
     /* Text */
     --color-text-main: #0a0a0a;

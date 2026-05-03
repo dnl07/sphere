@@ -2,6 +2,7 @@ import Dropdown from "../FormDropDown";
 import type { CreateClothingItemRequest } from "../../../clothing/api/clothingApi.types";
 import type { ClothingValidationErrors } from "../../../clothing/hooks/useCreateClothingItem";
 import { useGetCategories } from "../../../clothing/hooks/useGetCategories";
+import Card from "../../../../shared/components/layout/Card";
 
 const FIELDS: { name: keyof CreateClothingItemRequest; label: string, placeholder: string, type?: string, required?: boolean }[] = [
     { name: "name", label: "Name", placeholder: "Red Bull jacket", required: true },
@@ -29,13 +30,13 @@ const ItemForm = ({ request, updateRequest, validationErrors }: Props) => {
         if (type === "checkbox") {
             return ((
                 <div  
-                    className={`w-6 h-6 border-2 cursor-pointer transition-all duration-150 ${request?.[name] ? "bg-black" : ""}`}
+                    className={`w-6 h-6 rounded-md aspect-square bg-bg-elevated border-2 cursor-pointer transition-all duration-150 ${request?.[name] ? "bg-black" : ""}`}
                     onClick={() => updateRequest({ [name]: !request?.[name] })}
                 />
             ));
         } else if (type === "dropdown") {
             return (
-                <Dropdown className="" values={categories ?? [":)"]} setValue={(value: string) => updateRequest({ [name]: value })}/>
+                <Dropdown values={categories ?? ["No categories found"]} setValue={(value: string) => updateRequest({ [name]: value })}/>
             );
         } else {
             return (
@@ -44,27 +45,27 @@ const ItemForm = ({ request, updateRequest, validationErrors }: Props) => {
                     placeholder={placeholder}
                     value={(request?.[name] as string) ?? ""}
                     onChange={e => updateRequest({ [name]: e.target.value })}
-                    className="text-xl border-2 px-4 py-2"
+                    className="text-xl border-2 rounded-xl border-border bg-bg-sunken px-4 py-2"
                 /> 
             );
         }
     }
 
     return(
-        <div className="w-full text-2xl border-t py-2">
-            <div className="flex flex-col gap-6 mb-10">
+        <Card title="Details">
+            <div className="flex flex-col gap-6">
                 {FIELDS.map(({name, label, placeholder, type, required}) => (
                     <div className={`flex gap-2 ${type === "checkbox" ? "flex-row items-center justify-between" : "flex-col"}`} key={name}>
-                        <div className="w-full flex flex-row justify-between items-center ">
-                            <h3 className="text-2xl">{label}{required && "*"}</h3>
-                            <span className="text-red-700 text-lg">{validationErrors[name]}</span>                           
+                        <div className="w-full flex flex-row justify-between items-end">
+                            <h3 className="text-lg">{label}{required && "*"}</h3>
+                            <span className="text-red-700 text-md">{validationErrors[name]}</span>                           
                         </div>
                         {displayField(name, placeholder, type)}
                     </div>
                 ))}
             </div>
 
-        </div>
+        </Card>
     )
 };
 

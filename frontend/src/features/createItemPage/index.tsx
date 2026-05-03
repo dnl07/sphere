@@ -30,11 +30,14 @@ const CreateItemPage = () => {
     }
 
     return (
-        <PageWrapper title="Create a clothing item">
+        <PageWrapper 
+            title="Create a new item"
+            subtitle="Upload an image and add information"
+        >
             <ImageUploadForm preview={preview} file={file} setImage={setImage} clearImage={clearImage}/>
             <ItemForm request={request} updateRequest={updateRequest} validationErrors={validationErrors}/>
             <button
-                className="bg-black py-4 px-8 text-2xl text-white mb-10  cursor-pointer" 
+                className="bg-black px-16 text-lg font-semibold py-4 rounded-xl text-white my-4 cursor-pointer" 
                 onClick={submitForm}
             >
                 Submit form

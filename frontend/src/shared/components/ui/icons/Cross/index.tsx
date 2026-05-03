@@ -1,13 +1,11 @@
-type Props = {
-    onClick: () => void
-}
+import IconBase, { type IconProps } from "../IconBase";
 
-const Cross = ({ onClick }: Props) => {
+const Cross = (props: IconProps) => {
     return (
-        <button onClick={onClick} className="cursor-pointer">
-            <span className="block w-6 h-0.5 bg-black rotate-45" />
-            <span className="block w-6 h-0.5 bg-black -rotate-45 -translate-y-0.5" />
-        </button>
+        <IconBase {...props}>
+            <line className="block w-6 h-0.5 rotate-45" />
+            <line className="block w-6 h-0.5-rotate-45 -translate-y-0.5" />
+        </IconBase>
     );
 }
 

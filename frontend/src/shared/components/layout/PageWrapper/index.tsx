@@ -8,7 +8,7 @@ type Props = {
 const PageWrapper = ({ children, title, subtitle, sideChildren }: Props) => {
     return(
         <>
-            <div className={`w-full flex justify-center ${title || subtitle ? "border-border border-b" : ""} mb-2`}>
+            <div className={`w-full flex justify-center ${title || subtitle ? "border-border border-b" : ""} mb-4`}>
                 {title &&
                 <div className="w-full flex max-w-4xl justify-center items-center">
                     <div className="w-full py-2 pl-4">

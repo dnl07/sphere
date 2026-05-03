@@ -22,7 +22,7 @@ const FormDropdown = ({ className, headerClassName, values, setValue }: Props) =
     return(
         <div className={`relative ${className}`}>
             <div 
-                className={`text-xl border-2 border-black px-4 py-2  flex flex-row justify-between items-center ${headerClassName}`}
+                className={`text-xl border-2 rounded-xl border-border bg-bg-sunken px-4 py-2  flex flex-row justify-between items-center ${headerClassName}`}
                 onClick={() => setOpen(!isOpen)}
             >
                 {activeValue ? <span className="text-black">{activeValue}</span> : <span className="text-gray-500">Jacket</span>}

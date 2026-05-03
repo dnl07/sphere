@@ -7,7 +7,7 @@ type Props = {
 const ItemDescription = ({ item }: Props) => {
     return (
         <div className="w-full">
-            <div className="w-full pt-3 my-4  bg-bg-elevated rounded-xl p-4">
+            <div className="w-full pt-3 my-4 bg-bg-elevated rounded-xl p-4">
                 <h1 className="text-2xl font-semibold my-2">{item?.name}</h1>
                 <h2 className="mt-2 mb-5 text-text-sub">{item?.category}</h2>
                 <dl className="grid grid-cols-2 gap-3">

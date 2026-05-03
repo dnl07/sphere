@@ -2,6 +2,8 @@ import { useRef, useState, type ChangeEvent } from "react";
 import { useBackgroundRemover } from "../../hooks/useBackgroundRemover";
 import LoadingScreen from "../../../../shared/components/LoadingScreen";
 import { convertToPng } from "../../../../shared/utils/convertToPng";
+import Cross from "../../../../shared/components/ui/icons/Cross";
+import Card from "../../../../shared/components/layout/Card";
 
 type Props = {
     preview: string | null,
@@ -40,36 +42,50 @@ const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
     }
 
     return(
-        <div className="flex flex-col justify-center items-center w-full p-5">
-            <div className="w-full max-w-sm min-w-50 aspect-3/4 rounded-xl flex flex-col justify-center items-center cursor-pointer">
-                {loading ?
+        <div className="flex flex-col justify-center items-center w-full mb-4 gap-4">
+            <Card className="max-h-80" title="Item image">
+                {file ? 
+                <div className="bg-bg-sunken py-2 px-4 rounded-xl flex items-center justify-between">
+                    <div className="flex gap-3">
+                        <span>{file.name}</span>
+                        <span className="text-text-sub">{(file.size / (1000 * 1000)).toFixed(2)} MB</span>
+                    </div>
+                    <button className="cursor-pointer" onClick={clearImage}>
+                        <Cross className="w-8" strokeWidth={1} color="black"/>
+                    </button>
+                </div>
+                :
+                <div 
+                    className="w-full border-2 border-dashed py-4 border-[#00000025] rounded-xl flex flex-col gap-4 justify-center items-center cursor-pointer"
+                    onClick={() => inputRef.current?.click()}
+                >
+                    <span className="text-center font-semibold cursor-pointer">Click to select your image</span>
+                    <div className="bg-bg-sunken rounded-xl py-2 px-4 cursor-pointer">Browse files</div>
+                    <input type="file" name="image" accept="image/*" className="appearance-none hidden" ref={inputRef} onChange={handleFileChange}/>                    
+                </div>  
+                }
+            </Card>
+            <Card title="Preview">
+                 {loading ?
                     <div className="w-full h-full">
                         <LoadingScreen />
                     </div>
                 :
                     preview ?
-                        <div className="w-full max-w-sm min-w-50 flex flex-col justify-center items-center drop-shadow-lg">
-                            <img src={preview ?? ""} alt="Preview" className="w-full" />
+                        <div className="w-full flex flex-col justify-center items-center aspect-square drop-shadow-lg">
+                            <img src={preview ?? ""} alt="Preview" className="w-full object-contain" />
                         </div>
                     :
-                        <div className="w-full max-w-sm min-w-50 border-2 border-dashed aspect-3/4 rounded-xl flex flex-col gap-5 justify-center items-center cursor-pointer"
-                            onClick={() => inputRef.current?.click()}>
-                            <span className="text-center text-gray-500 cursor-pointer">Click to select a file</span>
-                            <div className="bg-black text-white py-2 px-4 cursor-pointer">Upload image</div>
-                            <span className="text-center text-gray-500 cursor-pointer">Accepted formats: png, jpg, jpeg</span>
-                            <input type="file" name="image" accept="image/*" className="appearance-none hidden" ref={inputRef} onChange={handleFileChange}/>
+                        <div className="w-full border border-border bg-bg-sunken py-4 aspect-square rounded-xl 
+                            flex flex-col gap-5 justify-center items-center">
+                            <span className="text-center text-gray-500">No image uploaded</span>
                         </div>
-                }
-            </div>
-            {(preview && !isProcessed) && <button className="bg-black text-white text-xl py-2 px-4 mt-6 cursor-pointer" onClick={handleRemoveBackground}>Remove background</button>}
-            {preview && <div className="flex gap-6 w-full max-w-sm min-w-50">
-                <button className="bg-black text-white py-2 px-4 mt-6 cursor-pointer flex-1" onClick={() => inputRef.current?.click()}>
-                    Upload again
-                    <input type="file" name="image" accept="image/png, image/jpeg" className="appearance-none hidden" ref={inputRef} onChange={handleFileChange}/>
-                </button>
-                <button className="bg-black text-white py-2 px-4 mt-6 cursor-pointer flex-1" onClick={clearImage}>Remove image</button>
-            </div>}
-            {/*<ImageEditor image={file}/>*/}
+                }               
+            </Card>
+            <Card title="Advanced Editor">
+                <p className="text-text-sub">Open the full editor for background removal, image adjustments and color grading.</p>
+                <button className="bg-black w-full text-white py-4 rounded-xl mt-6 font-semibold cursor-pointer">Open Image Editor</button>
+            </Card>
         </div>
     );
 }
