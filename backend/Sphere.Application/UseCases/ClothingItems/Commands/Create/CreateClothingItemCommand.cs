@@ -2,7 +2,7 @@
 using Sphere.Application.UseCases.ClothingItems.Commons;
 
 namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
-    public class CreateClothingItemCommand(string name,
+    public class CreateClothingItemCommand(
         string category,
         string? size,
         string? material,
@@ -17,7 +17,6 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
         byte[] image,
         string imageFileName,
         string imageContentType) : IUseCase<ClothingItemDto> {
-        public string Name { get; set; } = name ?? "";
         public string Category { get; set; } = category ?? "";
         public string? Size { get; set; } = size;
         public string? Material { get; set; } = material;

@@ -34,7 +34,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
         public async Task<ClothingItemDto> Handle(CreateClothingItemCommand cmd, CancellationToken ct) {
             var category = await _clothingRepository.GetCategoryByNameAsync(cmd.Category, ct);
 
-            _logger.LogInformation("Creating clothing item with name {Name} in category {Category} with id {id}", cmd.Name, cmd.Category, category?.Id);
+            _logger.LogInformation("Creating clothing item with category {Category} with id {id}", cmd.Category, category?.Id);
 
             if (category is null) {
                 throw new CategoryNotFoundException(cmd.Category);

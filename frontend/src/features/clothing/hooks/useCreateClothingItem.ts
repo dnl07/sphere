@@ -21,10 +21,6 @@ export function useCreateClothingItem() {
     const validate = (): boolean => {
         const errors: ClothingValidationErrors = {};
 
-        if (!request?.name) {
-            errors.name = "Name is required"
-        }
-
         if (!request?.category) {
             errors.category = "Category is required"
         }    

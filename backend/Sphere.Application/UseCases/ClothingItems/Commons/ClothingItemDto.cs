@@ -1,7 +1,6 @@
 namespace Sphere.Application.UseCases.ClothingItems.Commons {
     public class ClothingItemDto {
         public Guid Id { get; init; }
-        public required string Name { get; init; }
         public string? Category { get; init; }
         public string? Size { get; init; }
         public string? Material { get; init; }

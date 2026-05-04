@@ -54,7 +54,6 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Update {
             }
 
             item.Update(
-                name: cmd.Name,
                 categoryId: categoryId,
                 size: cmd.Size,
                 material: cmd.Material,

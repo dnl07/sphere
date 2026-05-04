@@ -10,10 +10,6 @@ namespace Sphere.Infrastructure.Persistance.Configurations {
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Name)
-                .IsRequired()
-                .HasMaxLength(100);
-
             builder.Property(x => x.Size)
                 .HasMaxLength(50);
 

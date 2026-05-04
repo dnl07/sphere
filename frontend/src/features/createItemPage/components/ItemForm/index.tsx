@@ -5,7 +5,6 @@ import { useGetCategories } from "../../../clothing/hooks/useGetCategories";
 import Card from "../../../../shared/components/layout/Card";
 
 const FIELDS: { name: keyof CreateClothingItemRequest; label: string, placeholder: string, type?: string, required?: boolean }[] = [
-    { name: "name", label: "Name", placeholder: "Red Bull jacket", required: true },
     { name: "category", label: "Category", placeholder: "placeholder", required: true, type: "dropdown" },
     { name: "size", label: "Size", placeholder: "L" },
     { name: "material", label: "Material", placeholder: "Fabric" },

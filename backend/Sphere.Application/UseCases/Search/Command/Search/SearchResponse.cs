@@ -8,7 +8,6 @@
 
     public class SearchResultItem {
         public Guid Id { get; }
-        public string Name { get; }
         public string? Category { get; }
         public string? Size { get; }
         public string? Material { get; }
@@ -19,7 +18,6 @@
 
         public SearchResultItem(
             Guid id,
-            string name,
             string? category,
             string? size,
             string? material,
@@ -29,7 +27,6 @@
             Guid imageId
         ) {
             Id = id;
-            Name = name;
             Category = category;
             Size = size;
             Material = material;

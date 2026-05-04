@@ -3,8 +3,6 @@
         Newest,
         Oldest,
         PriceAsc,
-        PriceDesc,
-        NameAsc,
-        NameDesc
+        PriceDesc
     }
 }

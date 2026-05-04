@@ -34,8 +34,6 @@ namespace Sphere.Infrastructure.Persistance.Specification {
             }
 
             query = _filter.SortBy switch {
-                ClothingItemSortOrder.NameAsc => query.OrderBy(item => item.Name),
-                ClothingItemSortOrder.NameDesc => query.OrderByDescending(item => item.Name),
                 ClothingItemSortOrder.PriceAsc => query.OrderBy(item => item.Price!.Amount),
                 ClothingItemSortOrder.PriceDesc => query.OrderByDescending(item => item.Price!.Amount),
                 ClothingItemSortOrder.Oldest => query.OrderBy(item => item.CreatedAt),

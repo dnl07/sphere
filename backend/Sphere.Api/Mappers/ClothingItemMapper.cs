@@ -11,7 +11,6 @@ namespace Sphere.API.Mappers {
             ArgumentNullException.ThrowIfNull(request.Image);
 
             return new CreateClothingItemCommand(
-                name: request.Name,
                 category: request.Category,
                 size: request.Size,
                 material: request.Material,
@@ -38,7 +37,6 @@ namespace Sphere.API.Mappers {
 
             return new UpdateClothingItemCommand(
                 id: Id,
-                name: request.Name,
                 category: request.Category,
                 size: request.Size,
                 material: request.Material,

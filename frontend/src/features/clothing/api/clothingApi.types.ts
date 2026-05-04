@@ -49,7 +49,6 @@ export type GetClothingParams = {
 
 // POST /clothing request types
 export type CreateClothingItemRequest = {
-    name: string | null;
     category: string;
     size?: string | null;
     material?: string | null;
@@ -66,7 +65,6 @@ export type CreateClothingItemRequest = {
 
 // PUT /clothing request types
 export type UpdateClothingItemByIdRequest = {
-    name?: string;
     category?: string;
     description?: string;
     size?: string;

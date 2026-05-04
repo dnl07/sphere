@@ -8,7 +8,6 @@ namespace Sphere.Application.Mappers.ClothingItems {
     public static class ClothingItemMapper {
         public static ClothingItem ToDomain(this CreateClothingItemCommand cmd, Guid categoryId, Guid imageId) {
             return ClothingItem.Create(
-                cmd.Name,
                 categoryId,
                 cmd.Size,
                 cmd.Material,
@@ -27,7 +26,6 @@ namespace Sphere.Application.Mappers.ClothingItems {
         public static ClothingItemDto ToDto(this ClothingItem item, string categoryName) {
             return new ClothingItemDto {
                 Id = item.Id,
-                Name = item.Name,
                 Category = categoryName,
                 Size = item.Size,
                 Material = item.Material,
@@ -47,7 +45,6 @@ namespace Sphere.Application.Mappers.ClothingItems {
         public static SearchResultItem ToSearchResult(this ClothingItem item, string? categoryName) {
             return new SearchResultItem(
                 item.Id,
-                item.Name,
                 categoryName,
                 item.Size,
                 item.Material,
@@ -60,7 +57,6 @@ namespace Sphere.Application.Mappers.ClothingItems {
 
         public static SearchIndexItem ToSearchIndexItem(this ClothingItem item, string? categoryName) {
             var tags = new[] {
-                categoryName,
                 item.Size,
                 item.Material,
                 item.Color,
@@ -73,7 +69,7 @@ namespace Sphere.Application.Mappers.ClothingItems {
 
             return new SearchIndexItem {
                 Id = item.Id,
-                Title = item.Name,
+                Title = categoryName ?? "",
                 Description = item.Notes ?? "",
                 Tags = tags ?? []
             };

@@ -4,7 +4,6 @@ using Sphere.Application.UseCases.ClothingItems.Commons;
 namespace Sphere.Application.UseCases.ClothingItems.Commands.Update {
     public class UpdateClothingItemCommand(
         Guid id,
-        string? name,
         string? category,
         string? size,
         string? material,
@@ -20,7 +19,6 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Update {
         string? imageFileName,
         string? imageContentType) : IUseCase<ClothingItemDto> {
         public Guid Id { get; set; } = id;
-        public string? Name { get; set; } = name;
         public string? Category { get; set; } = category;
         public string? Size { get; set; } = size;
         public string? Material { get; set; } = material;

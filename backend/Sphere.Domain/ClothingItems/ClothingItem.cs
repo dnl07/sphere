@@ -4,7 +4,6 @@ using Sphere.Domain.Common;
 
 namespace Sphere.Domain.ClothingItems {
     public partial class ClothingItem : AggregateRoot { 
-        public string Name { get; private set; }
         public Guid CategoryId { get; private set; }
 
         public string? Size { get; private set; }
@@ -26,7 +25,6 @@ namespace Sphere.Domain.ClothingItems {
         #pragma warning restore CS8618
 
         private ClothingItem(
-            string name, 
             Guid categoryId, 
             string? size, 
             string? material, 
@@ -38,7 +36,6 @@ namespace Sphere.Domain.ClothingItems {
             bool isArchived,
             string? notes,
             Guid imageId) {
-            Name = name;
             CategoryId = categoryId;
             Size = size;
             Material = material;

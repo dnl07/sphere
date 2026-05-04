@@ -16,9 +16,6 @@ namespace Sphere.Domain.ClothingItems {
             bool? isArchived = null,
             string? notes = null,
             Guid? imageId = null) {
-            if (name != null) {
-                Name = name;
-            }
 
             if (categoryId is not null) {
                 CategoryId = categoryId.Value;

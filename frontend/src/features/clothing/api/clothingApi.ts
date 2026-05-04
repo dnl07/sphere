@@ -21,7 +21,6 @@ export async function createClothingItem(
     request: CreateClothingItemRequest
 ): Promise<ClothingItemDto> {
     const formData = new FormData();
-    formData.append("Name", request.name ?? "");
     formData.append("Category", request.category);
 
     if (request.size) formData.append("Size", request.size);

@@ -1,6 +1,5 @@
 export interface ClothingItemDto {
   id: string;
-  name: string | null;
   category: string | null;
   description?: string | null;
   size?: string | null;
