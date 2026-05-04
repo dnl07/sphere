@@ -13,8 +13,8 @@ const ItemDisplay = ({ imageId }: Props) => {
     const { imageUrl, isLoading, error } = useBlob(() => api.image.getImage(imageId));
 
     return (
-        <div className="w-full flex justify-center flex-col items-center mt-2">
-            <div className="p-5 aspect-square cursor-pointer bg-bg-elevated border transition-all duration-200 hover:scale-102 border-border rounded-xl" onClick={() => setClicked(!clicked)}>
+        <div className="w-full flex flex-col items-center">
+            <div className="p-5 aspect-square cursor-pointer bg-bg-elevated  transition-all duration-200 hover:scale-102  rounded-xl" onClick={() => setClicked(!clicked)}>
                 {isLoading && 
                     <div className="w-full h-full">
                         <LoadingScreen />

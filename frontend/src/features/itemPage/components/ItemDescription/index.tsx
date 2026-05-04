@@ -1,45 +1,84 @@
-import { ClothingItemLabels, type ClothingItemDto } from "../../../clothing/clothing.types";
+import Card from "../../../../shared/components/layout/Card";
+import { convertDateFormat, isIsoDateString } from "../../../../shared/utils/dateUtils";
+import { type ClothingItemDto } from "../../../clothing/clothing.types";
+import { MetaDataLabels, ProductDetailsLabels, PurchaseLabels } from "./labels";
 
 type Props = {
     item: ClothingItemDto
 }
 
 const ItemDescription = ({ item }: Props) => {
+    const displayData = (item: ClothingItemDto, labels: Partial<Record<keyof ClothingItemDto, string>>) => {
+        const renderField = (key: string, label: string, value: ClothingItemDto[keyof ClothingItemDto]) => {
+            let displayValue: string;
+
+            if (value === undefined || value === null || value === "") {
+                value = "-"
+            }
+
+            if (key === "price") {
+                const price = item.price;
+                return (
+                    <div key={key} className="">
+                        <dt className="text-text-sub uppercase tracking-wide text-sm">{label}</dt>
+                        <dd>{price?.amount ?? "-"} {price?.currency ?? ""}</dd>
+                    </div>
+                );                      
+            }
+
+            if (key === "isArchived") {
+                const isArchived = item.isArchived;
+                return (
+                    <div key={key}>
+                        <dt className="text-text-sub uppercase tracking-wide text-sm">{label}</dt>
+                        <dd>{isArchived ? "Archived" : "Not archived"}</dd>
+                    </div>
+                );                
+            }
+
+            if (typeof value !== "string") return null;
+
+            if (isIsoDateString(value)) {
+                const date = convertDateFormat(value);
+                displayValue = date || "-";
+            } else {
+                displayValue = value;
+            }
+
+            return (
+                <div key={key}>
+                    <dt className="text-text-sub uppercase tracking-wide text-sm">{label}</dt>
+                    <dd>{displayValue}</dd>
+                </div>
+            );
+        }
+
+        return (
+            <div className="grid grid-cols-2 gap-4 text-md">
+                {Object.entries(labels).map(([key, label]) => 
+                    renderField(key, label, item[key as keyof ClothingItemDto])
+                )}                
+            </div>
+        )
+    }
+
     return (
-        <div className="w-full">
-            <div className="w-full pt-3 my-4 bg-bg-elevated rounded-xl p-4">
-                <h1 className="text-2xl font-semibold my-2">{item?.name}</h1>
-                <h2 className="mt-2 mb-5 text-text-sub">{item?.category}</h2>
-                <dl className="grid grid-cols-2 gap-3">
-                    {Object.entries(ClothingItemLabels).map(([key, label]) => {
-                        const value = item?.[key as keyof ClothingItemDto];
-
-                        if (key === "price") {
-                            const price = item?.price;
-
-                            return (
-                                <div key={key} className="">
-                                    <dt className="font-semibold">{label}</dt>
-                                    <dd>{price?.amount ?? "-"} {price?.currency ?? ""}</dd>
-                                </div>
-                        );                      
-                        }
-
-                        if (typeof value === "object") return null;
-
-                        return (
-                            <div key={key}>
-                                <dt className="font-semibold">{label}</dt>
-                                <dd>{value !== "" && value ? value : "-"}</dd>
-                            </div>
-                        );
-                    })}
-                </dl>
-            </div>
-            <div className="w-full pt-3 my-4  bg-bg-elevated rounded-xl p-4">
-                <h1 className="text-lg font-semibold my-2">Tags</h1>
+        <div className="w-full flex gap-4 flex-col">
+                        <Card title="Product Details" className="md:col-start-1 md:col-end-1">
+                            {displayData(item, ProductDetailsLabels)}
+                        </Card>
+            <Card title="Purchase Information">
+                {displayData(item, PurchaseLabels)}
+            </Card>
+            <Card title="Notes">
+                {item.notes ?? "-"}
+            </Card>
+            <Card title="Tags">
                 Coming soon...
-            </div>
+            </Card>            
+            <Card title="Metadata">
+                {displayData(item, MetaDataLabels)}
+            </Card>
         </div>
     );
 }

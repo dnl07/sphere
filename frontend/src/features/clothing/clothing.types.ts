@@ -6,14 +6,14 @@ export interface ClothingItemDto {
   material?: string | null;
   color?: string | null;
   price?: PriceDto;
-  boughtAt?: Date,
+  boughtAt?: string,
   store?: string | null,
   brand?: string | null,
-  isArchived: false,
+  isArchived: boolean,
   notes?: string | null,  
   imageId: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface PriceDto {
