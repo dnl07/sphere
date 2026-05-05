@@ -22,7 +22,7 @@ const ClothingGalleryItem = ({ item }: Props) => {
             key={item.id} 
             className="flex items-center bg-bg-elevated border-border border-2 p-4 box-border
             rounded-xl justify-center aspect-square hover:scale-105 transition-all duration-200" 
-            onClick={() => navigate(`/item/${item.id}`, { state: { from: "/closet"}})}
+            onClick={() => navigate(`item/${item.id}`, { state: { from: "/closet"}})}
         >
             {isLoading
              && 

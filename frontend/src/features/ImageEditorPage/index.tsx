@@ -1,8 +1,4 @@
-type Props = {
-    image: File | null
-}
-
-const ImageEditor = ({ image }: Props) => {
+const ImageEditorPage = () => {
     return (
         <div className="bg-black w-full h-full fixed z-30 top-0 bottom-0 left-0">
             <button className="bg-white">Back</button>
@@ -10,4 +6,4 @@ const ImageEditor = ({ image }: Props) => {
     )
 } 
 
-export default ImageEditor;
+export default ImageEditorPage;

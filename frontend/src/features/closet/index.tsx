@@ -21,7 +21,7 @@ const Closet = () => {
             sideChildren={
                 <button 
                     className="bg-black text-white px-4 py-2 mr-4 text-nowrap rounded-lg cursor-pointer flex gap-2"
-                    onClick={() => navigate("/atelier/create")}
+                    onClick={() => navigate("/atelier/clothing")}
                 >
                     Add <Plus className="w-3" strokeWidth={3}/>
                 </button>

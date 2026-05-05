@@ -5,6 +5,7 @@ import Closet from "../../features/closet";
 import Atelier from "../../features/atelier";
 import ItemPage from "../../features/itemPage";
 import CreateItemPage from "../../features/createItemPage";
+import ImageEditorPage from "../../features/ImageEditorPage";
 
 const router = createBrowserRouter([
     {
@@ -13,9 +14,10 @@ const router = createBrowserRouter([
         children: [
             {index: true, element: <Home />},
             {path: "closet", element: <Closet />},
+            {path: "closet/item/:id", element: <ItemPage />},
             {path: "atelier", element: <Atelier />},
-            {path: "item/:id", element: <ItemPage />},
-            {path: "atelier/create", element: <CreateItemPage />},
+            {path: "atelier/clothing", element: <CreateItemPage />},
+            {path: "image-editor", element: <ImageEditorPage />},
             { path: "*", element: <h1>404 Not Found</h1> }
         ]
     }
