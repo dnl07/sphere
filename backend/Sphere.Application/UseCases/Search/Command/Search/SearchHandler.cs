@@ -1,4 +1,5 @@
-﻿using Sphere.Application.Commons.Interfaces;
+﻿using Microsoft.Extensions.Logging;
+using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Application.Mappers.ClothingItems;
@@ -7,13 +8,17 @@ namespace Sphere.Application.UseCases.Search.Command.Search {
     public class SearchHandler : IUseCaseHandler<SearchCommand, SearchResponse> {
         private readonly ISearchEngineService _searchEngine;
         private readonly IClothingItemRepository _clothingRepository;
+        private readonly ILogger<SearchHandler> _logger;
 
-        public SearchHandler(ISearchEngineService searchEngine, IClothingItemRepository clothingRepository) {
+        public SearchHandler(ISearchEngineService searchEngine, IClothingItemRepository clothingRepository, ILogger<SearchHandler> logger) {
             _searchEngine = searchEngine;
             _clothingRepository = clothingRepository;
+            _logger = logger;
         }
 
         public async Task<SearchResponse> Handle(SearchCommand request, CancellationToken ct) {
+            _logger.LogInformation("Performing search with query: {Query}", request.Query);
+
             var ids = await _searchEngine.SearchAsync(request.Query, ct);
 
             var items = await _clothingRepository.GetByIdsAsync(ids, ct);

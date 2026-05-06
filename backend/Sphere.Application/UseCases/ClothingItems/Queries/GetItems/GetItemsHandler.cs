@@ -1,4 +1,5 @@
-﻿using Sphere.Application.Commons.Interfaces;
+﻿using Microsoft.Extensions.Logging;
+using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.Commons.Interfaces.Repository;
 using Sphere.Application.Commons.Interfaces.Services;
 using Sphere.Application.Commons.Models;
@@ -9,13 +10,17 @@ namespace Sphere.Application.UseCases.ClothingItems.Queries.GetItems {
     public class GetItemsHandler : IUseCaseHandler<GetItemsQuery, GetItemsResponse> {
         private readonly IClothingItemRepository _clothingRepository;
         private readonly ISearchEngineService _searchEngineService;
+        private readonly ILogger<GetItemsHandler> _logger;
 
-        public GetItemsHandler(IClothingItemRepository clothingRepository, ISearchEngineService searchEngineService) {
+        public GetItemsHandler(IClothingItemRepository clothingRepository, ISearchEngineService searchEngineService, ILogger<GetItemsHandler> logger) {
             _clothingRepository = clothingRepository;
             _searchEngineService = searchEngineService;
+            _logger = logger;
         }
 
         public async Task<GetItemsResponse> Handle(GetItemsQuery query, CancellationToken ct) {
+            _logger.LogInformation("Retrieving clothing items with filter");
+
             var filter = query.Filter ?? new ClothingItemFilter();
 
             if (!string.IsNullOrEmpty(filter.SearchQuery)) {
@@ -32,6 +37,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Queries.GetItems {
             var meta = await _clothingRepository.GetMetaAsync(filter, ct);
 
             if (pagedItems.Items.Count == 0) {
+                _logger.LogInformation("No clothing items found with the specified filter.");
                 return GetItemsResponse.Empty;
             }
 

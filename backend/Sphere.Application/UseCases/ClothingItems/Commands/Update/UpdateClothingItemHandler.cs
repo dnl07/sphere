@@ -29,13 +29,13 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Update {
         }
 
         public async Task<ClothingItemDto> Handle(UpdateClothingItemCommand cmd, CancellationToken ct) {
+            _logger.LogInformation("Updating clothing item with ID {Id}", cmd.Id);
+
             var item = await _clothingRepository.GetByIdAsync(cmd.Id, ct)
                 ?? throw new ClothingItemNotFoundException(cmd.Id);
 
             Guid? categoryId = null;
             if (cmd.Category != null) {
-                _logger.LogInformation("Looking up category '{CategoryName}' for clothing item update.", cmd.Category);
-
                 var category = await _clothingRepository.GetCategoryByNameAsync(cmd.Category, ct)
                     ?? throw new CategoryNotFoundException(cmd.Category);
                 categoryId = category.Id;

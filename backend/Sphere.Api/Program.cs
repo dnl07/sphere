@@ -33,6 +33,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
+// Logging
+builder.Services.AddHttpLogging(o => { });
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope()) {
@@ -44,6 +47,8 @@ await SearchEngineInitializer.InitializeAsync(app.Services);
 
 // Middleware
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.UseHttpLogging();
 
 app.UseCors("AllowFrontend");
 
