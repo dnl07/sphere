@@ -19,6 +19,10 @@
     animation: fadeIn 0.2s ease-in-out;
 }
 
+@utility no-scrollbar {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
 @theme {
     /* Background */
     --color-bg: #f2f2f2;

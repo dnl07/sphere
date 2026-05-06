@@ -8,7 +8,7 @@ const Atelier = () => {
         <PageWrapper title="Atelier">
             <button 
                 className="bg-black text-white py-15 px-20 rounded-xl text-xl font-semibold cursor-pointer"
-                onClick={() => navigate("clothing/create")}
+                onClick={() => navigate("clothing")}
             >
                 Create a new clothing item
             </button>

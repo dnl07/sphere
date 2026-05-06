@@ -27,7 +27,6 @@ const Slider = ({ min = 0, max = 100, initial = 50, label, onChange }: Props) =>
     }
 
     const MouseDown = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
         isDragging.current = true;
         calcValue(e.clientX);
 
@@ -50,7 +49,6 @@ const Slider = ({ min = 0, max = 100, initial = 50, label, onChange }: Props) =>
     }
 
     const onTouchStart = (e: React.TouchEvent<HTMLElement>) => {
-        e.preventDefault();
         isDragging.current = true;
         calcValue(e.touches[0].clientX);
 
@@ -84,7 +82,7 @@ const Slider = ({ min = 0, max = 100, initial = 50, label, onChange }: Props) =>
             </div>
 
             <div 
-                className="w-full relative bg-gray-500 h-1.5 rounded-sm flex items-center"
+                className="w-full relative bg-border h-1.5 rounded-sm flex items-center"
                 ref={trackRef}
             >
                 <div 
@@ -93,7 +91,7 @@ const Slider = ({ min = 0, max = 100, initial = 50, label, onChange }: Props) =>
                     onMouseDown={MouseDown}
                     onTouchStart={onTouchStart}
                 >
-                    <div className="bg-gray-400 cursor-pointer w-4 h-4 rounded-full"/>
+                    <div className="bg-black cursor-pointer w-4 h-4 rounded-full"/>
                 </div>
             </div>
 

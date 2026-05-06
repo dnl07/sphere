@@ -11,7 +11,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     return (
-        <header className= "w-full top-0 px-6 pt-3 flex justify-between">
+        <header className= "w-full top-0 px-6 py-3 flex justify-between items-center">
             <div onClick={() => navigate("")}>
                 <Sphere width={40} height={40} lineWidth={0.3} speed={0.005}/>
             </div>

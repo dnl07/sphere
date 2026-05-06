@@ -4,6 +4,7 @@ import LoadingScreen from "../../../../shared/components/LoadingScreen";
 import { convertToPng } from "../../../../shared/utils/convertToPng";
 import Cross from "../../../../shared/components/ui/icons/Cross";
 import Card from "../../../../shared/components/layout/Card";
+import { useNavigate } from "react-router";
 
 type Props = {
     preview: string | null,
@@ -13,6 +14,8 @@ type Props = {
 }
 
 const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
+    const navigate = useNavigate();
+
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [isProcessed, setIsProcessed] = useState<boolean>(false);
@@ -84,7 +87,7 @@ const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
             </Card>
             <Card title="Advanced Editor">
                 <p className="text-text-sub">Open the full editor for background removal, image adjustments and color grading.</p>
-                <button className="bg-black w-full text-white py-4 rounded-xl mt-6 font-semibold cursor-pointer">Open Image Editor</button>
+                <button className="bg-black w-full text-white py-4 rounded-xl mt-6 font-semibold cursor-pointer" onClick={() => navigate("/image-editor", { state: { preview, file }})}>Open Image Editor</button>
             </Card>
         </div>
     );

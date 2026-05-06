@@ -25,7 +25,7 @@ const CreateItemPage = () => {
         if (error) {
             setConfirmMessage(`An error occurred while creating.`)
         } else {
-            setConfirmMessage(`Creating "${item?.name}" was successfull!`)
+            setConfirmMessage(`Creating clothing item was successfull!`)
         }
     }
 

@@ -1,8 +1,17 @@
+import { useLocation } from "react-router";
+import PageWrapper from "../../shared/components/layout/PageWrapper";
+import ImageEditor from "./components/ImageEditor";
+
 const ImageEditorPage = () => {
+    const { state } = useLocation();
+    const imageUrl: string = state?.preview;
+    const file: File = state?.file;
+
     return (
-        <div className="bg-black w-full h-full fixed z-30 top-0 bottom-0 left-0">
-            <button className="bg-white">Back</button>
-        </div>
+        <PageWrapper title="Image Editor">
+            <ImageEditor imageUrl={imageUrl} file={file}/>
+        </PageWrapper>
+
     )
 } 
 
