@@ -4,12 +4,16 @@ const useImageState = () => {
     const [preview, setPreview] = useState<string | null>(null);
     const [file, setFile] = useState<File | null>(null);
 
-    const setImage = (file: File) => {
+    const setImage = (file: File, newPreview: string | null = null) => {
         if (preview) {
             URL.revokeObjectURL(preview);
         }
 
-        setPreview(URL.createObjectURL(file));
+        if (newPreview) {
+            setPreview(newPreview);
+        } else {
+            setPreview(URL.createObjectURL(file));
+        }
         setFile(file);
     }
 

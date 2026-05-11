@@ -31,7 +31,6 @@ export async function createClothingItem(
 
     formData.append("Image", request.image, "image.png");
 
-
     const response = await api.clothing.createItem(formData);
     return response.data;
 }

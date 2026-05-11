@@ -3,7 +3,6 @@
 namespace Sphere.Domain.ClothingItems {
     public partial class ClothingItem {
         public void Update(
-            string? name = null,
             Guid? categoryId = null,
             string? size = null,
             string? material = null,

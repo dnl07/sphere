@@ -1,6 +1,4 @@
-import { useRef, useState, type ChangeEvent } from "react";
-import { useBackgroundRemover } from "../../hooks/useBackgroundRemover";
-import LoadingScreen from "../../../../shared/components/LoadingScreen";
+import { useRef, type ChangeEvent } from "react";
 import { convertToPng } from "../../../../shared/utils/convertToPng";
 import Cross from "../../../../shared/components/ui/icons/Cross";
 import Card from "../../../../shared/components/layout/Card";
@@ -18,30 +16,13 @@ const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const [isProcessed, setIsProcessed] = useState<boolean>(false);
-    const { processImage, loading } = useBackgroundRemover();
-
     const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
         let file = e.target.files?.[0];
         if (!file) return;
-        console.log(file)
 
         file = await convertToPng(file);
 
-        console.log(file)
-
         setImage(file);
-        setIsProcessed(false);
-    }
-
-    const handleRemoveBackground = async () => {
-        if (!file) return;
-
-        const blob = await processImage(file);
-
-        const processedFile = new File([blob], file.name, { type: blob.type });
-        setImage(processedFile);
-        setIsProcessed(true);
     }
 
     return(
@@ -69,12 +50,7 @@ const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
                 }
             </Card>
             <Card title="Preview">
-                 {loading ?
-                    <div className="w-full h-full">
-                        <LoadingScreen />
-                    </div>
-                :
-                    preview ?
+                    {preview ?
                         <div className="w-full flex flex-col justify-center items-center aspect-square drop-shadow-lg">
                             <img src={preview ?? ""} alt="Preview" className="w-full object-contain" />
                         </div>
@@ -83,7 +59,7 @@ const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
                             flex flex-col gap-5 justify-center items-center">
                             <span className="text-center text-gray-500">No image uploaded</span>
                         </div>
-                }               
+                    }
             </Card>
             <Card title="Advanced Editor">
                 <p className="text-text-sub">Open the full editor for background removal, image adjustments and color grading.</p>

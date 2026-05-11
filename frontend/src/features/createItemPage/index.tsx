@@ -5,15 +5,23 @@ import { useCreateClothingItem } from "../clothing/hooks/useCreateClothingItem";
 import ImageUploadForm from "./components/ImageUploadForm"
 import ItemForm from "./components/ItemForm";
 import ConfirmDialog from "../../shared/components/ConfirmDialog";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 const CreateItemPage = () => {
     const navigate = useNavigate();
+    const { state } = useLocation();
 
     const { request, updateRequest, create, error, validationErrors } = useCreateClothingItem();
     const { preview, file, setImage, clearImage } = useImageState();
 
     const [ confirmMessage, setConfirmMessage ] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (state?.editedFile) {
+            setImage(state?.editedFile)
+        }
+        window.history.replaceState({}, "");
+    }, [])
 
     useEffect(() => {
         if (file) updateRequest({ image: file})

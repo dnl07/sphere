@@ -12,8 +12,8 @@ using Sphere.Infrastructure.Persistance;
 namespace Sphere.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260401141939_AddedNewProps")]
-    partial class AddedNewProps
+    [Migration("20260511085915_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,177 +50,177 @@ namespace Sphere.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("9827f22f-a79a-da9a-d435-2223e419a145"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2217),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7650),
                             Name = "T-Shirt",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2219)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7651)
                         },
                         new
                         {
                             Id = new Guid("177d825b-36e8-d9ab-4b93-e03b212dbfe2"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2251),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7657),
                             Name = "Long Sleeve Shirt",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2251)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7657)
                         },
                         new
                         {
                             Id = new Guid("8b4b0500-a80b-30c6-1761-1b99e6bf1f3f"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2264),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7661),
                             Name = "Blouse",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2264)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7661)
                         },
                         new
                         {
                             Id = new Guid("464b5ae7-5b60-de3a-dcce-3e98dace883a"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2268),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7665),
                             Name = "Jacket",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2268)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7665)
                         },
                         new
                         {
                             Id = new Guid("d92e166e-bca2-3076-7e0a-249786f4951e"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2272),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7669),
                             Name = "Coat",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2272)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7669)
                         },
                         new
                         {
                             Id = new Guid("e99548c0-13c7-3264-78a3-df15426030cd"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2277),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7678),
                             Name = "Blazer",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2277)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7679)
                         },
                         new
                         {
                             Id = new Guid("d1f37c34-1d7a-df71-9641-ba489fc0e0a0"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2281),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7682),
                             Name = "Jeans",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2281)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7682)
                         },
                         new
                         {
                             Id = new Guid("b223cd6e-b69c-1818-8451-cdf0f35d4704"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2285),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7687),
                             Name = "Pants",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2285)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7687)
                         },
                         new
                         {
                             Id = new Guid("7595c37a-01b7-93bc-aeb9-a7a1473a57c3"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2288),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7690),
                             Name = "Shorts",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2288)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7690)
                         },
                         new
                         {
                             Id = new Guid("6a72b4cc-64c0-c5c7-411a-5a6f70a1dc70"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2292),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7694),
                             Name = "Leggings",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2292)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7694)
                         },
                         new
                         {
                             Id = new Guid("cb67e7c8-3faa-5411-6b37-2c04e36eb531"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2298),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7697),
                             Name = "Joggers",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2299)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7697)
                         },
                         new
                         {
                             Id = new Guid("d96fed16-c3cd-aebe-3c49-075184bb5b96"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2302),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7700),
                             Name = "Sweatpants",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2303)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7701)
                         },
                         new
                         {
                             Id = new Guid("3c23e841-e0bb-ee3e-90cc-371b01175388"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2306),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7704),
                             Name = "Dress",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2306)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7704)
                         },
                         new
                         {
                             Id = new Guid("a937c8eb-a54d-6fb0-d0be-cfb3cdaa92c0"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2309),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7709),
                             Name = "Skirt",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2309)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7709)
                         },
                         new
                         {
                             Id = new Guid("c9aa9c37-9419-afd5-983d-32bd0a2f0557"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2312),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7712),
                             Name = "Sweater",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2313)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7712)
                         },
                         new
                         {
                             Id = new Guid("841bc02f-5d0c-32ee-4551-211edad39bdf"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2316),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7715),
                             Name = "Pullover",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2316)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7716)
                         },
                         new
                         {
                             Id = new Guid("650a1cb3-a76d-1e45-246d-2d220f50a986"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2319),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7718),
                             Name = "Cardigan",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2320)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7719)
                         },
                         new
                         {
                             Id = new Guid("7953797d-9211-fb4b-a10d-3f98f1623a48"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2322),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7722),
                             Name = "Hoodie",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2323)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7722)
                         },
                         new
                         {
                             Id = new Guid("627a0da1-ffaa-2f59-4eec-bcf2fe7fad9b"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2327),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7725),
                             Name = "Hat",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2327)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7725)
                         },
                         new
                         {
                             Id = new Guid("9734d588-a9f4-5829-c67c-73a9f2f52df3"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2331),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7728),
                             Name = "Cap",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2331)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7729)
                         },
                         new
                         {
                             Id = new Guid("2aec747c-a90c-0c95-64f8-28fa155c3a0d"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2334),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7732),
                             Name = "Scarf",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2334)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7732)
                         },
                         new
                         {
                             Id = new Guid("f1da3f64-f5fe-8d4e-ef75-1f54b706cd60"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2337),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7736),
                             Name = "Gloves",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2337)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7736)
                         },
                         new
                         {
                             Id = new Guid("0e2624ea-76f5-8940-bd80-4dad0885468b"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2340),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7739),
                             Name = "Sneakers",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2341)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7739)
                         },
                         new
                         {
                             Id = new Guid("b9657e79-cdc5-a20d-5a93-2f2b0947b94b"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2344),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7742),
                             Name = "Boots",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2344)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7742)
                         },
                         new
                         {
                             Id = new Guid("6b0d6657-f7e4-ce7c-ccfd-861400f11e4d"),
-                            CreatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2347),
+                            CreatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7745),
                             Name = "High Heels",
-                            UpdatedAt = new DateTime(2026, 4, 1, 14, 19, 38, 835, DateTimeKind.Utc).AddTicks(2347)
+                            UpdatedAt = new DateTime(2026, 5, 11, 8, 59, 14, 996, DateTimeKind.Utc).AddTicks(7746)
                         });
                 });
 
@@ -254,11 +254,6 @@ namespace Sphere.Infrastructure.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Material")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
