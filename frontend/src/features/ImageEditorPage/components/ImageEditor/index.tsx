@@ -7,13 +7,13 @@ import { type ActionTool, type FilterControlProps, type FilterTool } from "../..
 import { useBackgroundRemover } from "../../../createItemPage/hooks/useBackgroundRemover";
 import { useImageCanvas } from "../../hooks/useImageCanvas";
 import { useNavigate } from "react-router";
+import ProcessableImage from "../ProcessableImage";
 
 type Props = {
-    imageUrl: string | null;
     file: File | null;
 }
 
-const ImageEditor = ({ imageUrl, file}: Props) => {
+const ImageEditor = ({file}: Props) => {
     const navigate = useNavigate();
     const {previewUrl, applyBlob, toFile} = useImageCanvas(file);
     const {filters, filterString, updateFilter, resetFilters} = useImageFilters(allFilterTools);
@@ -96,8 +96,8 @@ const ImageEditor = ({ imageUrl, file}: Props) => {
                 </div>
             </div>
             <div className="flex-1 min-h-0 flex items-center justify-center overflow-hidden">
-                {imageUrl ? (
-                    <img src={previewUrl ?? imageUrl} className="h-full object-contain" style={{ filter: `${filterString}`}}/>
+                {previewUrl ? (
+                    <ProcessableImage url={previewUrl ?? ""} filterString={filterString} isLoading={loading} />
                 ) : (
                     <div className="w-full h-full flex justify-center items-center">
                         No image uploaded.
