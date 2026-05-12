@@ -21,12 +21,13 @@ const Slider = ({ min = 0, max = 100, initial = 50, label, onChange }: Props) =>
         const ratio = Math.min(Math.max((clientX - left) / width, 0), 1)
         const newValue = Math.round(ratio * (max - min) + min);
 
-
         setValue(newValue);
         onChange?.(newValue);
     }
 
     const MouseDown = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+
         isDragging.current = true;
         calcValue(e.clientX);
 

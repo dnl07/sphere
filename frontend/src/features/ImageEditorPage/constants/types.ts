@@ -1,11 +1,9 @@
 import type { ReactNode } from "react";
-import type { IconProps } from "../../../shared/components/ui/icons/IconBase";
 
 type BaseTool = {
     type: string;
     key: string;
     label: string;
-    icon: (props: IconProps) => ReactNode;  // only for mobile 
 }
 
 // Filter
@@ -36,6 +34,3 @@ export type ActionTool = BaseTool & {
 }
 
 export type EditorTool = ActionTool | FilterTool;
-
-export const isFilterTool = (tool: EditorTool): tool is FilterTool => tool.type === "filter";
-export const isActionTool = (tool: EditorTool): tool is ActionTool => tool.type === "action";

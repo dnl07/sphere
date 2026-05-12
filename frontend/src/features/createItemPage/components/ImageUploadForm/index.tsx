@@ -30,12 +30,12 @@ const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
             <Card className="max-h-80" title="Item image">
                 {file ? 
                 <div className="bg-bg-sunken py-2 px-4 rounded-xl flex items-center justify-between">
-                    <div className="flex gap-3">
+                    <div className="flex gap-4">
                         <span>{file.name}</span>
                         <span className="text-text-sub">{(file.size / (1000 * 1000)).toFixed(2)} MB</span>
                     </div>
                     <button className="cursor-pointer" onClick={clearImage}>
-                        <Cross className="w-8" strokeWidth={1} color="black"/>
+                        <Cross className="w-4" strokeWidth={2} color="black"/>
                     </button>
                 </div>
                 :
