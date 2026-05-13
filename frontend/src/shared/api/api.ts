@@ -8,6 +8,7 @@ export const api = {
     clothing: {
         getAll: (params: GetClothingParams) => axiosInstance.get<GetClothingItemsResponse>(`${API_BASE}/clothing`, { params }),
         getItem: (id: string) => axiosInstance.get<ClothingItemDto>(`${API_BASE}/clothing/${id}`),
+        getCount: (params: GetClothingParams) => axiosInstance.get<{ count: number }>(`${API_BASE}/clothing/count`, { params }),
         createItem: (formData: FormData) => axiosInstance.post<ClothingItemDto>(`${API_BASE}/clothing`, formData),
         updateItem: (params: UpdateClothingItemByIdRequest) => axiosInstance.put<ClothingItemDto>(`${API_BASE}/clothing`, { params }),
         deleteItem: (id: string) => axiosInstance.delete<ClothingItemDto>(`${API_BASE}/clothing/${id}`),

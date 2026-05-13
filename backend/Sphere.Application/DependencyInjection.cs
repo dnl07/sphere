@@ -7,6 +7,7 @@ using Sphere.Application.UseCases.ClothingItems.Commands.Delete;
 using Sphere.Application.UseCases.ClothingItems.Commands.Update;
 using Sphere.Application.UseCases.ClothingItems.Commons;
 using Sphere.Application.UseCases.ClothingItems.Queries.GetById;
+using Sphere.Application.UseCases.ClothingItems.Queries.GetCount;
 using Sphere.Application.UseCases.ClothingItems.Queries.GetImage;
 using Sphere.Application.UseCases.ClothingItems.Queries.GetItems;
 using Sphere.Application.UseCases.Inference.Commands.Inference;
@@ -26,6 +27,7 @@ namespace Sphere.Application {
             services.AddScoped<IUseCaseHandler<GetClothingItemByIdQuery, ClothingItemDto>, GetClothingItemByIdHandler>();
             services.AddScoped<IUseCaseHandler<GetClothingImageQuery, GetClothingImageResponse>, GetClothingImageHandler>();
             services.AddScoped<IUseCaseHandler<GetItemsQuery, GetItemsResponse>, GetItemsHandler>();
+            services.AddScoped<IUseCaseHandler<GetCountQuery, GetCountResponse>, GetCountHandler>();
 
             // Category Handlers
             services.AddScoped<IUseCaseHandler<GetAllCategoryQuery, GetAllCategoryResponse>, GetAllCategoryHandler>();

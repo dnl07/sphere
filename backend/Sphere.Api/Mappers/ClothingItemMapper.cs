@@ -68,5 +68,16 @@ namespace Sphere.API.Mappers {
                 SortBy = request.SortBy
             };
         }
+
+        public static ClothingItemFilter ToFilter(this ClothingItemCountRequest request) {
+            ArgumentNullException.ThrowIfNull(request);
+
+            return new ClothingItemFilter {
+                CategoryNames = request.CategoryNames,
+                Colors = request.Colors,
+                Sizes = request.Sizes,
+                Materials = request.Materials
+            };
+        }
     }
 }

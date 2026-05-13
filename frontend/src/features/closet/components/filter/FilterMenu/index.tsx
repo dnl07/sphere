@@ -6,6 +6,7 @@ import Cross from "../../../../../shared/components/ui/icons/Cross";
 import FilterBox from "../FilterBox";
 import useDebounce from "../../../../../shared/hooks/useDebounce";
 import type { FilterOption, GetClothingParams } from "../../../../clothing/api/clothingApi.types";
+import { getClothingCount } from "../../../../clothing/api/clothingApi";
 
 type Props = {
     open: boolean,
@@ -20,6 +21,8 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
     const [searchParams, _] = useSearchParams();
 
     const { filters, updateFilters } = useClosetContext();
+
+    const [filterCount, setFilterCount] = useState<number>(0)
     
     const mounted = useRef(false);
 
@@ -45,7 +48,7 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
         sizes: "Sizes"
     }
 
-    const applyFilters = () => {
+    const getParamsFromUrl = (): GetClothingParams => {
         const clothingParams: GetClothingParams = {};
 
         filterOptions.forEach(({ paramKey }) => {
@@ -56,6 +59,12 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
                 (clothingParams[mappedKey] as string[]) = paramValues;
             }
         });
+
+        return clothingParams;
+    }
+
+    const applyFilters = () => {
+        const clothingParams = getParamsFromUrl();
 
         const searchQuery = searchParams.get("q");
         if (searchQuery) {
@@ -78,7 +87,19 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
             return;
         }
         debounceApply();
+    }, [searchParams.get("q"), searchParams.get("sort")])
+
+    useEffect(() => {
+        if (!mounted.current) return;
+        getCount();
     }, [searchParams])
+
+    const getCount = async () => {
+        const params = getParamsFromUrl();
+        const count = await getClothingCount(params);
+        console.log(count)
+        setFilterCount(count);
+    }
 
     return (
         <div className={`fixed w-full top-0 bottom-0 z-30 flex justify-end transition-all ease-in-out duration-300 ${open ? "opacity-100" : "invisible opacity-0"}`}>
@@ -93,7 +114,7 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
                         <FilterBox options={options} paramKey={paramKey}/>
                     </FilterDropDown>
                 ))}
-                <button onClick={applyFilters} className="bg-black text-white py-3 px-5 rounded-xl mt-10 cursor-pointer">Found 0 items</button>
+                <button onClick={applyFilters} className="bg-black text-white py-3 px-5 rounded-xl mt-10 cursor-pointer">Found {filterCount} item{filterCount === 1 ? "" : "s"}</button>
             </div>
         </div>
     )

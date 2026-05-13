@@ -2,7 +2,7 @@ using Sphere.Api.Dtos.Requests.Commons;
 using Sphere.Application.UseCases.ClothingItems.Commons;
 
 namespace Sphere.Api.Dtos.Requests.ClothingItems {
-    public class ClothingItemFilterRequest : PagedRequest {
+    public class ClothingItemFilterRequest : PagedRequest, IClothingFilter {
         public string? SearchQuery { get; set; }
         public string[]? CategoryNames { get; set; }
         public string[]? Colors { get; set; }

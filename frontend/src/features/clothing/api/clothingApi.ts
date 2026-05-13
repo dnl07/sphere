@@ -16,6 +16,14 @@ export async function getClothingItems(
     return response.data;
 }
 
+// GET count
+export async function getClothingCount(
+    params: GetClothingParams = {}
+): Promise<number> {
+    const response = await api.clothing.getCount(params);
+    return response.data.count;
+}
+
 // POST /clothing request types
 export async function createClothingItem(
     request: CreateClothingItemRequest

@@ -7,6 +7,7 @@ using Sphere.Application.Commons.Interfaces;
 using Sphere.Application.UseCases.ClothingItems.Commands.Delete;
 using Sphere.Application.UseCases.ClothingItems.Queries.GetById;
 using Sphere.Application.UseCases.ClothingItems.Queries.GetItems;
+using Sphere.Application.UseCases.ClothingItems.Queries.GetCount;
 using Sphere.Application.UseCases.MediaFiles.Queries.Get;
 
 namespace Sphere.API.Controllers
@@ -45,7 +46,20 @@ namespace Sphere.API.Controllers
             }
 
             return Ok(response.ToResponse());
-            
+        }
+
+        [HttpGet("count")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> GetClothingCount([FromQuery] ClothingItemCountRequest request, CancellationToken ct) {
+            var query = new GetCountQuery(request.ToFilter());
+
+            var response = await _dispatcher.Dispatch(query, ct);
+
+            if (response is null) {
+                return NotFound();
+            }
+
+            return Ok(response);
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
