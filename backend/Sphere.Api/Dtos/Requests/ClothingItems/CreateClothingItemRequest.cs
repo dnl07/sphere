@@ -18,10 +18,6 @@ namespace Sphere.Api.Dtos.Requests.ClothingItems {
 
         [Range(0, 999999.99, ErrorMessage = "Price must be greater than 0 and less than 999999.99")]
         public decimal? PriceAmount { get; set; }
-
-        [StringLength(3, ErrorMessage = "Currency cannot be longer than 3 characters")]
-        public string? Currency { get; set; }
-
         public DateTime? BoughtAt { get; set; }
 
         [StringLength(150, ErrorMessage = "Store cannot be longer than 150 characters")]

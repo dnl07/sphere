@@ -15,8 +15,7 @@ namespace Sphere.API.Mappers {
                 size: request.Size,
                 material: request.Material,
                 color: request.Color,
-                amount: request.PriceAmount ?? 0,
-                currency: request.Currency ?? "EUR",
+                amount: request.PriceAmount,
                 boughtAt: request.BoughtAt,
                 store: request.Store,
                 brand: request.Brand,
@@ -41,8 +40,7 @@ namespace Sphere.API.Mappers {
                 size: request.Size,
                 material: request.Material,
                 color: request.Color,
-                amount: request.PriceAmount,
-                currency: request.Currency,
+                price: request.Price,
                 boughtAt: request.BoughtAt,
                 store: request.Store,
                 brand: request.Brand,
@@ -59,9 +57,13 @@ namespace Sphere.API.Mappers {
 
             return new ClothingItemFilter {
                 SearchQuery = request.SearchQuery,
-                CategoryNames = request.CategoryNames,
+                CategoryNames = request.Categories,
                 Colors = request.Colors,
+                PriceMin = request.PriceMin,
+                PriceMax = request.PriceMax,
                 Sizes = request.Sizes,
+                Brands = request.Brands,
+                Stores = request.Stores,
                 Materials = request.Materials,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
@@ -73,7 +75,7 @@ namespace Sphere.API.Mappers {
             ArgumentNullException.ThrowIfNull(request);
 
             return new ClothingItemFilter {
-                CategoryNames = request.CategoryNames,
+                CategoryNames = request.Categories,
                 Colors = request.Colors,
                 Sizes = request.Sizes,
                 Materials = request.Materials

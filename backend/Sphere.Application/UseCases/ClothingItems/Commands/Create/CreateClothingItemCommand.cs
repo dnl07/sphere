@@ -8,7 +8,6 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
         string? material,
         string? color,
         decimal? amount,
-        string? currency,
         DateTime? boughtAt,
         string? store,
         string? brand,
@@ -22,7 +21,6 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Create {
         public string? Material { get; set; } = material;
         public string? Color { get; set; } = color;
         public decimal? PriceAmount { get; set; } = amount;
-        public string? Currency { get; set; } = currency ?? "EUR";
         public DateTime? BoughtAt { get; set; } = boughtAt;
         public string? Store { get; set; } = store;
         public string? Brand { get; set; } = brand;

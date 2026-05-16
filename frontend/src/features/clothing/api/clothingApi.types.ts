@@ -16,6 +16,8 @@ export interface ClothingItemFilterResponse {
     sizes?: FilterOption[] | null;
     materials?: FilterOption[] | null;
     priceRange?: PriceRange;
+    brands?: FilterOption[] | null;
+    stores?: FilterOption[] | null;
 }
 
 export interface FilterOption {
@@ -38,10 +40,14 @@ export interface PagedResult {
 // Filter parameters
 export type GetClothingParams = {
     SearchQuery?: string;
-    CategoryNames?: string[];
+    Categories?: string[];
     Colors?: string[];
     Sizes?: string[];
     Materials?: string[];
+    PriceMin?: number[];
+    PriceMax?: number[];
+    Brands?: string[];
+    Stores?: string[];
     SortBy?: string;
     PageNumber?: number;
     PageSize?: number;
@@ -54,8 +60,7 @@ export type CreateClothingItemRequest = {
     material?: string | null;
     color?: string | null;
     priceAmount?: number | null;
-    currency?: string | null;
-    boughtAt?: Date| null,
+    boughtAt?: Date | null,
     store?: string | null,
     brand?: string | null,
     isArchived: false,

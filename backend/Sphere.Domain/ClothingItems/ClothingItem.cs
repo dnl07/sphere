@@ -1,5 +1,4 @@
 ﻿using Sphere.Domain.ClothingItems.Events;
-using Sphere.Domain.ClothingItems.ValueObjects;
 using Sphere.Domain.Common;
 
 namespace Sphere.Domain.ClothingItems {
@@ -9,7 +8,7 @@ namespace Sphere.Domain.ClothingItems {
         public string? Size { get; private set; }
         public string? Material { get; private set; }
         public string? Color { get; private set; }
-        public Price? Price { get; private set; }
+        public decimal? Price { get; private set; }
 
         public DateTime? BoughtAt { get; private set; }
         public string? Store { get; private set; }
@@ -28,8 +27,8 @@ namespace Sphere.Domain.ClothingItems {
             Guid categoryId, 
             string? size, 
             string? material, 
-            string? color, 
-            Price? price, 
+            string? color,
+            decimal? price, 
             DateTime? boughtAt,
             string? store,
             string? brand,

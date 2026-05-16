@@ -1,14 +1,11 @@
-﻿using Sphere.Domain.ClothingItems.ValueObjects;
-
-namespace Sphere.Domain.ClothingItems {
+﻿namespace Sphere.Domain.ClothingItems {
     public partial class ClothingItem {
         public void Update(
             Guid? categoryId = null,
             string? size = null,
             string? material = null,
             string? color = null,
-            decimal? priceAmount = null,
-            string? currency = null,
+            decimal? price = null,
             DateTime? boughtAt = null,
             string? store = null,
             string? brand = null,
@@ -32,11 +29,8 @@ namespace Sphere.Domain.ClothingItems {
                 Color = color;
             }
 
-            priceAmount ??= Price?.Amount;
-            currency ??= Price?.Currency;
-
-            if (priceAmount is not null && currency is not null) {
-                Price = new Price(priceAmount.Value, currency);
+            if (price is not null) {
+                Price = price;
             }
 
             if (boughtAt is not null) {

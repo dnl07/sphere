@@ -27,7 +27,7 @@ namespace Sphere.Infrastructure.Repositories {
 
         public async Task<PagedResult<ClothingItem>> GetItemsAsync(ClothingItemFilter filter, CancellationToken ct = default) {
             var query = _context.ClothingItems.AsQueryable();
-            var spec = new ClothingItemSpecification(filter);
+            var spec = new ClothingItemSpecification(filter, _logger);
 
             var totalCount = await spec.Apply(query).CountAsync(ct);
             var items = await spec.ApplyPagination(query).ToListAsync(ct);

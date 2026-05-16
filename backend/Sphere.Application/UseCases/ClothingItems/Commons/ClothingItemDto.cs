@@ -5,7 +5,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Commons {
         public string? Size { get; init; }
         public string? Material { get; init; }
         public string? Color { get; init; }
-        public PriceDto? Price { get; init; }
+        public decimal? Price { get; init; }
         public DateTime? BoughtAt { get; init; }
         public string? Store { get; init; }
         public string? Brand { get; init; }
@@ -15,6 +15,4 @@ namespace Sphere.Application.UseCases.ClothingItems.Commons {
         public DateTime CreatedAt { get; init; }
         public DateTime UpdatedAt { get; init; }
     }
-
-    public record PriceDto(decimal Amount, string Currency);
 }

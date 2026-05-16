@@ -13,7 +13,6 @@
         public string? Material { get; }
         public string? Color { get; }
         public decimal? PriceAmount { get; }
-        public string? PriceCurrency { get; }
         public Guid ImageId { get; }
 
         public SearchResultItem(
@@ -22,8 +21,7 @@
             string? size,
             string? material,
             string? color,
-            decimal? priceAmount,
-            string? priceCurrency,
+            decimal? price,
             Guid imageId
         ) {
             Id = id;
@@ -31,8 +29,7 @@
             Size = size;
             Material = material;
             Color = color;
-            PriceAmount = priceAmount;
-            PriceCurrency = priceCurrency;
+            PriceAmount = price;
             ImageId = imageId;
         }
     }

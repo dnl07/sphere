@@ -6,6 +6,8 @@ namespace Sphere.Api.Dtos.Responses.ClothingItems {
         public FilterOption[]? Colors { get; set; }
         public FilterOption[]? Sizes { get; set; }
         public FilterOption[]? Materials { get; set; }
+        public FilterOption[]? Brands { get; set; }
+        public FilterOption[]? Stores { get; set; }
         public PriceRange? PriceRange { get; set; }
     }
 

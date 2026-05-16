@@ -13,7 +13,6 @@ namespace Sphere.Application.Mappers.ClothingItems {
                 cmd.Material,
                 cmd.Color,
                 cmd.PriceAmount,
-                cmd.Currency,
                 cmd.BoughtAt,
                 cmd.Store,
                 cmd.Brand,
@@ -30,7 +29,7 @@ namespace Sphere.Application.Mappers.ClothingItems {
                 Size = item.Size,
                 Material = item.Material,
                 Color = item.Color,
-                Price = item.Price?.ToDto(),
+                Price = item.Price,
                 BoughtAt = item.BoughtAt,
                 Store = item.Store,
                 Brand = item.Brand,
@@ -49,8 +48,7 @@ namespace Sphere.Application.Mappers.ClothingItems {
                 item.Size,
                 item.Material,
                 item.Color,
-                item.Price?.Amount,
-                item.Price?.Currency,
+                item.Price,
                 item.ImageId
             );
         }

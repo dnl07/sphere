@@ -32,21 +32,14 @@ namespace Sphere.Infrastructure.Persistance.Configurations {
             builder.Property(x => x.Notes)
                 .HasMaxLength(500);
 
+            builder.Property(x => x.Price)
+                .HasPrecision(10, 2);
+
             builder.Property(x => x.CategoryId)
                 .IsRequired();
 
             builder.Property(x => x.ImageId)
                 .IsRequired();
-
-            builder.OwnsOne(x => x.Price, price => {
-                price.Property(p => p.Amount)
-                    .HasColumnName("PriceAmount")
-                    .HasColumnType("decimal(10,2)");
-
-                price.Property(p => p.Currency)
-                    .HasColumnName("PriceCurrency")
-                    .HasMaxLength(3);
-            });
         }
     }
 }

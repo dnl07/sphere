@@ -35,7 +35,11 @@ export async function createClothingItem(
     if (request.material) formData.append("Material", request.material);
     if (request.color) formData.append("Color", request.color);
     if (request.priceAmount) formData.append("PriceAmount", request.priceAmount.toString());
-    if (request.currency) formData.append("Color", request.currency);
+    if (request.boughtAt) formData.append("BoughtAt", request.boughtAt.toISOString());
+    if (request.store) formData.append("Store", request.store);
+    if (request.brand) formData.append("Brand", request.brand);
+    formData.append("Brand", String(request.isArchived ?? false));
+    if (request.notes) formData.append("Notes", request.notes);
 
     formData.append("Image", request.image, "image.png");
 

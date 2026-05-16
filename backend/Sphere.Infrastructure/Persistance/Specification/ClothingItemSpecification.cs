@@ -1,12 +1,14 @@
-﻿using Sphere.Application.UseCases.ClothingItems.Commons;
+﻿using Microsoft.Extensions.Logging;
+using Sphere.Application.UseCases.ClothingItems.Commons;
 using Sphere.Domain.ClothingItems;
 
 namespace Sphere.Infrastructure.Persistance.Specification {
     public class ClothingItemSpecification : Specification<ClothingItem> {
         private readonly ClothingItemFilter _filter;
-
-        public ClothingItemSpecification(ClothingItemFilter filter) {
+        private readonly ILogger _logger;
+        public ClothingItemSpecification(ClothingItemFilter filter, ILogger logger) {
             _filter = filter;
+            _logger = logger;
         }
 
         public override IQueryable<ClothingItem> Apply(IQueryable<ClothingItem> query) {
@@ -33,9 +35,27 @@ namespace Sphere.Infrastructure.Persistance.Specification {
                 query = query.Where(item => sizesLower.Contains(item.Size!.ToLower()));
             }
 
+            if (_filter.Brands != null && _filter.Brands.Length > 0) {
+                var brandsLower = _filter.Brands.Select(b => b.ToLower()).ToArray();
+                query = query.Where(item => brandsLower.Contains(item.Brand!.ToLower()));
+            }
+
+            if (_filter.Stores != null && _filter.Stores.Length > 0) {
+                var storesLower = _filter.Stores.Select(s => s.ToLower()).ToArray();
+                query = query.Where(item => storesLower.Contains(item.Store!.ToLower()));
+            }
+
+            if (_filter.PriceMin != null) {
+                query = query.Where(item => item.Price! >= _filter.PriceMin);
+            }
+
+            if (_filter.PriceMax != null) {
+                query = query.Where(item => item.Price! <= _filter.PriceMax);
+            }
+
             query = _filter.SortBy switch {
-                ClothingItemSortOrder.PriceAsc => query.OrderBy(item => item.Price!.Amount),
-                ClothingItemSortOrder.PriceDesc => query.OrderByDescending(item => item.Price!.Amount),
+                ClothingItemSortOrder.PriceAsc => query.OrderBy(item => item.Price!),
+                ClothingItemSortOrder.PriceDesc => query.OrderByDescending(item => item.Price!),
                 ClothingItemSortOrder.Oldest => query.OrderBy(item => item.CreatedAt),
                 _ => query.OrderByDescending(item => item.CreatedAt)
             };

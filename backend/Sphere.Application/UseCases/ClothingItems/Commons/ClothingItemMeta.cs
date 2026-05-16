@@ -4,6 +4,8 @@
         public FilterOption[] AvailableColors { get; set; } = [];
         public FilterOption[] AvailableSizes { get; set; } = [];
         public FilterOption[] AvailableMaterials { get; set; } = [];
+        public FilterOption[]? AvailableBrands { get; set; } = [];
+        public FilterOption[]? AvailableStores { get; set; } = [];
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }
 

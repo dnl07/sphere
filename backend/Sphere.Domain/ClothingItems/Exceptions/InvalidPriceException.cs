@@ -1,7 +1,7 @@
 ﻿namespace Sphere.Domain.ClothingItems.Exceptions {
     public class InvalidPriceException : Exception {
         public InvalidPriceException() { }
-        public InvalidPriceException(decimal amount, string currency) : base($"Invalid price: {amount} {currency}. Price must be positive and have a valid currency.") { }
-        public InvalidPriceException(decimal amount, string currency, Exception innerException) : base($"Invalid price: {amount} {currency}. Price must be positive and have a valid currency.", innerException) { }
+        public InvalidPriceException(decimal amount) : base($"Invalid price: {amount}. Price must be positive.") { }
+        public InvalidPriceException(decimal amount, Exception innerException) : base($"Invalid price: {amount}. Price must be positive.", innerException) { }
     }
 }

@@ -39,10 +39,12 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
         { label: "Color", paramKey: "colors", options: filters?.colors ?? [] },
         { label: "Material", paramKey: "materials", options: filters?.materials ?? [] },
         { label: "Size", paramKey: "sizes", options: filters?.sizes ?? [] },
+        { label: "Brand", paramKey: "sizes", options: filters?.brands ?? [] },
+        { label: "Store", paramKey: "sizes", options: filters?.stores ?? [] },
     ]
 
     const paramKeyMap: Record<string, keyof GetClothingParams> = {
-        categories: "CategoryNames",
+        categories: "Categories",
         colors: "Colors",
         materials: "Materials",
         sizes: "Sizes"

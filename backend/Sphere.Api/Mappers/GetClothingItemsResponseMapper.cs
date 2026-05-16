@@ -15,6 +15,8 @@ namespace Sphere.Api.Mappers {
                     Colors = dto.Meta.AvailableColors,
                     Sizes = dto.Meta.AvailableSizes,
                     Materials = dto.Meta.AvailableMaterials,
+                    Brands = dto.Meta.AvailableBrands,
+                    Stores = dto.Meta.AvailableStores,
                     PriceRange = new PriceRange {
                         Min = dto.Meta.MinPrice,
                         Max = dto.Meta.MaxPrice

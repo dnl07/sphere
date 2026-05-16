@@ -8,7 +8,7 @@ namespace Sphere.Infrastructure.Repositories {
         public async Task<ClothingItemMeta> GetMetaAsync(ClothingItemFilter filter, CancellationToken ct) {
             var query = _context.ClothingItems.AsQueryable();
 
-            var spec = new ClothingItemSpecification(filter);
+            var spec = new ClothingItemSpecification(filter, _logger);
             query = spec.Apply(query);
 
             var totalItems = await query.CountAsync(ct);
@@ -47,12 +47,12 @@ namespace Sphere.Infrastructure.Repositories {
 
             var minPrice = await query
                 .Where(i => i.Price != null)
-                .Select(i => (decimal?)i.Price!.Amount)
+                .Select(i => (decimal?)i.Price!)
                 .MinAsync(ct);
 
             var maxPrice = await query
                 .Where(i => i.Price != null)
-                .Select(i => (decimal?)i.Price!.Amount)
+                .Select(i => (decimal?)i.Price!)
                 .MaxAsync(ct);
 
             return new ClothingItemMeta(

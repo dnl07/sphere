@@ -8,8 +8,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Update {
         string? size,
         string? material,
         string? color,
-        decimal? amount,
-        string? currency,
+        decimal? price,
         DateTime? boughtAt,
         string? store,
         string? brand,
@@ -23,8 +22,7 @@ namespace Sphere.Application.UseCases.ClothingItems.Commands.Update {
         public string? Size { get; set; } = size;
         public string? Material { get; set; } = material;
         public string? Color { get; set; } = color;
-        public decimal? PriceAmount { get; set; } = amount;
-        public string? Currency { get; set; } = currency;
+        public decimal? Price { get; set; } = price;
         public DateTime? BoughtAt { get; set; } = boughtAt;
         public string? Store { get; set; } = store;
         public string? Brand { get; set; } = brand;
