@@ -5,7 +5,7 @@ export interface ClothingItemDto {
   size?: string | null;
   material?: string | null;
   color?: string | null;
-  price?: PriceDto;
+  price?: number;
   boughtAt?: string,
   store?: string | null,
   brand?: string | null,
@@ -14,11 +14,6 @@ export interface ClothingItemDto {
   imageId: string;
   createdAt?: string;
   updatedAt?: string;
-}
-
-export interface PriceDto {
-  amount?: number;
-  currency?: string | null;
 }
 
 export const ClothingItemLabels: Partial<Record<keyof ClothingItemDto, string>> = {

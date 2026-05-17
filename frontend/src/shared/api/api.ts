@@ -1,4 +1,4 @@
-import type { GetAllCategories, GetClothingItemsResponse, GetClothingParams, UpdateClothingItemByIdRequest } from "../../features/clothing/api/clothingApi.types";
+import type { GetAllCategories, GetClothingItemsResponse, GetClothingParams } from "../../features/clothing/api/clothingApi.types";
 import type { ClothingItemDto } from "../../features/clothing/clothing.types";
 import axiosInstance from "./axiosInstance";
 
@@ -10,7 +10,7 @@ export const api = {
         getItem: (id: string) => axiosInstance.get<ClothingItemDto>(`${API_BASE}/clothing/${id}`),
         getCount: (params: GetClothingParams) => axiosInstance.get<{ count: number }>(`${API_BASE}/clothing/count`, { params }),
         createItem: (formData: FormData) => axiosInstance.post<ClothingItemDto>(`${API_BASE}/clothing`, formData),
-        updateItem: (params: UpdateClothingItemByIdRequest) => axiosInstance.put<ClothingItemDto>(`${API_BASE}/clothing`, { params }),
+        updateItem: (id: string, formData: FormData) => axiosInstance.put<ClothingItemDto>(`${API_BASE}/clothing/${id}`, formData),
         deleteItem: (id: string) => axiosInstance.delete<ClothingItemDto>(`${API_BASE}/clothing/${id}`),
         getImage: (id: string) => axiosInstance.get<Blob>(`${API_BASE}/clothing/${id}/image`),
     },

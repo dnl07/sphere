@@ -1,4 +1,4 @@
-import Dropdown from "../FormDropDown";
+import FormDropdown from "../FormDropDown";
 import type { CreateClothingItemRequest } from "../../../clothing/api/clothingApi.types";
 import type { ClothingValidationErrors } from "../../../clothing/hooks/useCreateClothingItem";
 import { useGetCategories } from "../../../clothing/hooks/useGetCategories";
@@ -35,7 +35,7 @@ const ItemForm = ({ request, updateRequest, validationErrors }: Props) => {
             ));
         } else if (type === "dropdown") {
             return (
-                <Dropdown values={categories ?? ["No categories found"]} setValue={(value: string) => updateRequest({ [name]: value })}/>
+                <FormDropdown className="text-xl border-2 rounded-xl border-border bg-bg-sunken px-4 py-2 " values={categories ?? ["No categories found"]} setValue={(value: string) => updateRequest({ [name]: value })}/>
             );
         } else {
             return (

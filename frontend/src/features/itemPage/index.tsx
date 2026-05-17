@@ -5,6 +5,8 @@ import ItemDisplay from "./components/ItemDisplay";
 import ItemDescription from "./components/ItemDescription";
 import LoadingScreen from "../../shared/components/LoadingScreen";
 import ItemActions from "./components/ItemActions";
+import { useEffect, useState } from "react";
+import { useUpdateClothingItem } from "../clothing/hooks/useUpdateClothing";
 
 const ItemPage = () => {
     const { id } = useParams();
@@ -13,7 +15,19 @@ const ItemPage = () => {
         return (<div>Invalid item</div>)
     }
 
-    const { item, isLoading } = useClothingItem(id);
+    const { item, isLoading, refetch } = useClothingItem(id);
+    const [toUpdate, setToUpdate] = useState<boolean>(false);
+    const { update, updateRequest } = useUpdateClothingItem(id)
+
+    useEffect(() => {
+        console.log(item)
+    }, [item])
+
+    const updateItem = async() => {
+        await update(); 
+        setToUpdate(false);
+        refetch();
+    }
 
     return (
         <PageWrapper
@@ -29,8 +43,8 @@ const ItemPage = () => {
                     }
                     <ItemDisplay imageId={item?.imageId}/>
                     <div className="flex flex-col gap-4 md:col-start-2 md:row-start-1">
-                        <ItemDescription item={item} /> 
-                        <ItemActions itemId={item.id} /> 
+                        <ItemDescription updateRequest={updateRequest} toUpdate={toUpdate} item={item} /> 
+                        <ItemActions toUpdate={toUpdate} setToUpdate={setToUpdate} update={updateItem} itemId={item.id} /> 
                     </div>
                 </div>
             }

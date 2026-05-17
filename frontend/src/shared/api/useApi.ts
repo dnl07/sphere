@@ -39,7 +39,7 @@ export function useApi<T, TArgs extends unknown[]>(
     
 
     const reset = () => {
-            setState({ data: null, isLoading: false, error: null});
+        setState({ data: null, isLoading: false, error: null});
     }
 
     return { ...state, execute, reset };

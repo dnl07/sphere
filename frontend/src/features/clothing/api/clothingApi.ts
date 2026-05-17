@@ -34,11 +34,11 @@ export async function createClothingItem(
     if (request.size) formData.append("Size", request.size);
     if (request.material) formData.append("Material", request.material);
     if (request.color) formData.append("Color", request.color);
-    if (request.priceAmount) formData.append("PriceAmount", request.priceAmount.toString());
+    if (request.price !== undefined && request.price !== null) formData.append("PriceAmount", request.price.toString());
     if (request.boughtAt) formData.append("BoughtAt", request.boughtAt.toISOString());
     if (request.store) formData.append("Store", request.store);
     if (request.brand) formData.append("Brand", request.brand);
-    formData.append("Brand", String(request.isArchived ?? false));
+    formData.append("IsArchived", String(request.isArchived ?? false));
     if (request.notes) formData.append("Notes", request.notes);
 
     formData.append("Image", request.image, "image.png");
@@ -49,9 +49,24 @@ export async function createClothingItem(
 
 // PUT /clothing request types
 export async function updateClothingItemById(
+    id: string,
     params: UpdateClothingItemByIdRequest = {}
 ): Promise<ClothingItemDto> {
-    const response = await api.clothing.updateItem(params);
+    const formData = new FormData();
+
+    if (params.category) formData.append("Category", params.category);
+    if (params.size) formData.append("Size", params.size);
+    if (params.material) formData.append("Material", params.material);
+    if (params.color) formData.append("Color", params.color);
+    if (params.price !== undefined && params.price !== null) formData.append("Price", params.price.toString());
+    if (params.boughtAt) formData.append("BoughtAt", params.boughtAt);
+    if (params.store) formData.append("Store", params.store);
+    if (params.brand) formData.append("Brand", params.brand);
+    if (params.isArchived !== undefined && params.isArchived !== null) formData.append("IsArchived", String(params.isArchived));
+    if (params.notes) formData.append("Notes", params.notes);
+    if (params.image) formData.append("Image", params.image);
+
+    const response = await api.clothing.updateItem(id, formData);
     return response.data;
 }
 

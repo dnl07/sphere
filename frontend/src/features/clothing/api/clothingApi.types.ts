@@ -59,7 +59,7 @@ export type CreateClothingItemRequest = {
     size?: string | null;
     material?: string | null;
     color?: string | null;
-    priceAmount?: number | null;
+    price?: number | null;
     boughtAt?: Date | null,
     store?: string | null,
     brand?: string | null,
@@ -71,13 +71,16 @@ export type CreateClothingItemRequest = {
 // PUT /clothing request types
 export type UpdateClothingItemByIdRequest = {
     category?: string;
-    description?: string;
-    size?: string;
-    material?: string;
-    color?: string;
-    priceAmount?: number;
-    currency?: string;
-    image?: Blob;
+    size?: string | null;
+    material?: string | null;
+    color?: string | null;
+    price?: number | null;
+    boughtAt?: string | null,
+    store?: string | null,
+    brand?: string | null,
+    isArchived?: false,
+    notes?: string | null,  
+    image?: Blob;  
 };
 
 export type GetAllCategories = {
