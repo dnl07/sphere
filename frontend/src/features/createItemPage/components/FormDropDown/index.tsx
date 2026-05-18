@@ -7,11 +7,12 @@ type Props = {
     headerClassName?: string
     values: string[]
     setValue: (value: string) => void
+    defaultValue?: string
 }
 
-const FormDropdown = ({ className, headerClassName, values, setValue }: Props) => {
+const FormDropdown = ({ className, headerClassName, values, setValue, defaultValue }: Props) => {
     const [isOpen, setOpen] = useState<boolean>(false)
-    const [activeValue, setActiveValue] = useState<string | null>(null)
+    const [activeValue, setActiveValue] = useState<string | null>(defaultValue ?? null)
 
     useEffect(() => {
         if (activeValue) {

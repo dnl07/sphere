@@ -27,11 +27,9 @@ export function useUpdateClothingItem(id: string) {
 
     const update = async () => {
         if (!validate()) return
-        console.log(request)
 
         if (request) {
             const item = await execute(id, request)
-            console.log(item)
             return item
         }
     }

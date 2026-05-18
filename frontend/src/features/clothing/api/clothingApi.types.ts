@@ -78,7 +78,7 @@ export type UpdateClothingItemByIdRequest = {
     boughtAt?: string | null
     store?: string | null
     brand?: string | null
-    isArchived?: false
+    isArchived?: boolean
     notes?: string | null
     image?: Blob
 }

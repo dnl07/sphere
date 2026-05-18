@@ -5,7 +5,7 @@ import ItemDisplay from "./components/ItemDisplay"
 import ItemDescription from "./components/ItemDescription"
 import LoadingScreen from "../../shared/components/LoadingScreen"
 import ItemActions from "./components/ItemActions"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useUpdateClothingItem } from "../clothing/hooks/useUpdateClothing"
 
 const ItemPage = () => {

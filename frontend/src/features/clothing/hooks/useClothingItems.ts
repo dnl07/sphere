@@ -26,7 +26,6 @@ export function useClothingItems(initial: GetClothingParams = {}) {
 
     useEffect(() => {
         if (!data?.items) return
-        console.log(data.items, data.pageNumber)
 
         if (data.pageNumber === 0 || data.pageNumber === 1) {
             setItems(data.items)

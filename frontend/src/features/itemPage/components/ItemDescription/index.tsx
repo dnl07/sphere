@@ -1,11 +1,10 @@
-import { useState } from "react"
+import { useState, type ReactNode } from "react"
 import Card from "../../../../shared/components/layout/Card"
 import { convertDateFormat, isIsoDateString } from "../../../../shared/utils/dateUtils"
 import type { UpdateClothingItemByIdRequest } from "../../../clothing/api/clothingApi.types"
 import { type ClothingItemDto } from "../../../clothing/clothing.types"
-import { MetaDataLabels, ProductDetailsLabels, PurchaseLabels, type ItemField } from "./constants"
-import FormDropdown from "../../../createItemPage/components/FormDropDown"
 import { useGetCategories } from "../../../clothing/hooks/useGetCategories"
+import { MetaDataLabels, ProductDetailsLabels, PurchaseLabels, type ItemField } from "../../constants"
 
 type Props = {
     item: ClothingItemDto
@@ -24,6 +23,7 @@ const ItemDescription = ({ item, toUpdate, updateRequest }: Props) => {
         boughtAt: item.boughtAt ?? undefined,
         store: item.store ?? undefined,
         notes: item.notes,
+        isArchived: item.isArchived,
     })
 
     const { categories } = useGetCategories()
@@ -31,12 +31,22 @@ const ItemDescription = ({ item, toUpdate, updateRequest }: Props) => {
     const handleChange = (key: keyof UpdateClothingItemByIdRequest | null, value: string) => {
         if (!key) return
 
-        const updated = { ...formData, [key]: value }
+        const parsed = key === "isArchived" ? value === "true" : value
+        const updated = { ...formData, [key]: parsed }
         setFormData(updated)
         updateRequest(updated)
     }
 
     const renderField = (key: string, field: ItemField, value: ClothingItemDto[keyof ClothingItemDto]) => {
+        const renderFieldBox = (label: string, child: ReactNode | string, updateChild?: ReactNode) => {
+            return (
+                <div key={key}>
+                    <dt className="text-text-sub uppercase tracking-wide text-sm">{label}</dt>
+                    {toUpdate && updateChild ? <dd>{updateChild}</dd> : <dd>{child}</dd>}
+                </div>
+            )
+        }
+
         let displayValue: string
 
         if (value === undefined || value === null || value === "") {
@@ -44,35 +54,40 @@ const ItemDescription = ({ item, toUpdate, updateRequest }: Props) => {
         }
 
         if (field.key === "price") {
-            const price = item.price
-            return (
-                <div key={key} className="">
-                    <dt className="text-text-sub uppercase tracking-wide text-sm">{field.label}</dt>
-                    <dd>{price ?? "-"}€</dd>
-                </div>
+            return renderFieldBox(
+                field.label,
+                `${formData.price ?? "-"}€`,
+                <>
+                    {field.updateField?.(formData[field.updateKey!] ?? "", (value) =>
+                        handleChange(field.updateKey, value)
+                    )}
+                    <span> €</span>
+                </>
             )
         }
 
         if (field.key === "isArchived") {
-            const isArchived = item.isArchived
-            return (
-                <div key={key}>
-                    <dt className="text-text-sub uppercase tracking-wide text-sm">{field.label}</dt>
-                    <dd>{isArchived ? "Archived" : "Not archived"}</dd>
+            return renderFieldBox(
+                field.label,
+                `${formData.isArchived ? "Archived" : "Not archived"}`,
+                <div className="flex gap-2 items-center">
+                    {field.updateField?.(formData[field.updateKey!] ?? false, (value) =>
+                        handleChange(field.updateKey, value)
+                    )}
+                    <span>{`${formData.isArchived ? "Archived" : "Not archived"}`}</span>
                 </div>
             )
         }
 
-        if (field.key === "category" && toUpdate) {
-            return (
-                <div key={key}>
-                    <dt className="text-text-sub uppercase tracking-wide text-sm">{field.label}</dt>
-                    <FormDropdown
-                        className="border-2 rounded-sm py-1 px-2 text-black w-[90%] mt-2"
-                        values={categories ?? ["No categories found"]}
-                        setValue={(value: string) => updateRequest({ ["category"]: value })}
-                    />
-                </div>
+        if (field.key === "category") {
+            return renderFieldBox(
+                field.label,
+                formData.category,
+                field.updateField?.(
+                    categories ?? [],
+                    (value) => handleChange(field.updateKey, value),
+                    formData.category
+                )
             )
         }
 
@@ -85,19 +100,12 @@ const ItemDescription = ({ item, toUpdate, updateRequest }: Props) => {
             displayValue = value
         }
 
-        return (
-            <div key={key}>
-                <dt className="text-text-sub uppercase tracking-wide text-sm">{field.label}</dt>
-                {toUpdate ? (
-                    <input
-                        onChange={(e) => handleChange(field.updateKey, e.target.value)}
-                        className="border-2 rounded-sm py-1 px-2 mt-2 w-[90%]"
-                        value={String(formData[field.updateKey!] ?? "")}
-                    />
-                ) : (
-                    <dd>{displayValue}</dd>
-                )}
-            </div>
+        return renderFieldBox(
+            field.label,
+            displayValue,
+            field.updateField?.(String(formData[field.updateKey!] ?? ""), (value) =>
+                handleChange(field.updateKey, value)
+            )
         )
     }
 
@@ -117,9 +125,9 @@ const ItemDescription = ({ item, toUpdate, updateRequest }: Props) => {
             <Card title="Purchase Information">{displayData(item, PurchaseLabels)}</Card>
             <Card title="Notes">
                 {toUpdate ? (
-                    <input
+                    <textarea
                         onChange={(e) => handleChange("notes", e.target.value)}
-                        className="border-2 rounded-sm py-1 px-2 mt-2"
+                        className="border-2 rounded-sm py-1 px-2 mt-2 w-full h-30 flex justify-content-start"
                         value={formData.notes ?? ""}
                     />
                 ) : (

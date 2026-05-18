@@ -99,7 +99,6 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
     const getCount = async () => {
         const params = getParamsFromUrl()
         const count = await getClothingCount(params)
-        console.log(count)
         setFilterCount(count)
     }
 
