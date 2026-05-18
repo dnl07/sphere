@@ -1,12 +1,12 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import PageWrapper from "../../shared/components/layout/PageWrapper";
+import { Outlet, useNavigate } from "react-router-dom"
+import PageWrapper from "../../shared/components/layout/PageWrapper"
 
 const Atelier = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     return (
         <PageWrapper title="Atelier">
-            <button 
+            <button
                 className="bg-black text-white py-15 px-20 rounded-xl text-xl font-semibold cursor-pointer"
                 onClick={() => navigate("clothing")}
             >
@@ -14,7 +14,7 @@ const Atelier = () => {
             </button>
             <Outlet />
         </PageWrapper>
-    );
-};
+    )
+}
 
-export default Atelier;
+export default Atelier

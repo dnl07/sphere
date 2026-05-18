@@ -1,7 +1,6 @@
-import Sphere from "../../../../shared/components/Sphere";
+import Sphere from "../../../../shared/components/Sphere"
 
 const HeroSection = () => {
-
     return (
         <div className="flex-1 flex items-center justify-center flex-col text-center gap-4">
             <Sphere />
@@ -10,7 +9,7 @@ const HeroSection = () => {
                 Manage your clothing inventory with advanced tools and intuitive design
             </h2>
         </div>
-    );
+    )
 }
 
-export default HeroSection;
+export default HeroSection

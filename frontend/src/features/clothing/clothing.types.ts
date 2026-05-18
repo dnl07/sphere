@@ -1,31 +1,31 @@
 export interface ClothingItemDto {
-  id: string;
-  category: string | null;
-  description?: string | null;
-  size?: string | null;
-  material?: string | null;
-  color?: string | null;
-  price?: number;
-  boughtAt?: string,
-  store?: string | null,
-  brand?: string | null,
-  isArchived: boolean,
-  notes?: string | null,  
-  imageId: string;
-  createdAt?: string;
-  updatedAt?: string;
+    id: string
+    category: string | null
+    description?: string | null
+    size?: string | null
+    material?: string | null
+    color?: string | null
+    price?: number
+    boughtAt?: string
+    store?: string | null
+    brand?: string | null
+    isArchived: boolean
+    notes?: string | null
+    imageId: string
+    createdAt?: string
+    updatedAt?: string
 }
 
 export const ClothingItemLabels: Partial<Record<keyof ClothingItemDto, string>> = {
-  size: "Size",
-  material: "Material",
-  color: "Color",
-  price: "Price",
-  boughtAt: "Bought at",
-  store: "Store",
-  brand: "Brand",
-  isArchived: "Archived?",
-  notes: "Notes",  
-  createdAt: "Created At",
-  updatedAt: "Updated At",
+    size: "Size",
+    material: "Material",
+    color: "Color",
+    price: "Price",
+    boughtAt: "Bought at",
+    store: "Store",
+    brand: "Brand",
+    isArchived: "Archived?",
+    notes: "Notes",
+    createdAt: "Created At",
+    updatedAt: "Updated At",
 }

@@ -1,7 +1,7 @@
 type Props = {
-    title?: string;
-    children: React.ReactNode;
-    className?: string;
+    title?: string
+    children: React.ReactNode
+    className?: string
 }
 
 const Card = ({ title, children, className = "" }: Props) => (
@@ -9,6 +9,6 @@ const Card = ({ title, children, className = "" }: Props) => (
         {title && <h3 className="text-lg font-semibold mb-2">{title}</h3>}
         {children}
     </div>
-);
+)
 
-export default Card;
+export default Card

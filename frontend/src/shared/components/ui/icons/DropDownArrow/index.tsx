@@ -9,10 +9,10 @@ const DropDownArrow = ({ open }: Props) => {
             style={{
                 transform: open
                     ? "rotate(45deg) rotate3d(0, 0, 0, 0deg)"
-                    : "rotate(45deg) rotate3d(-90, 90, 0, 180deg)"
+                    : "rotate(45deg) rotate3d(-90, 90, 0, 180deg)",
             }}
         ></span>
     )
 }
 
-export default DropDownArrow;
+export default DropDownArrow

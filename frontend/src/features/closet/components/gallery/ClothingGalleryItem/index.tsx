@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import type { ClothingItemDto } from "../../../../clothing/clothing.types";
-import { useBlob } from "../../../../../shared/hooks/useBlob";
-import { api } from "../../../../../shared/api/api";
-import { memo } from "react";
-import LoadingScreen from "../../../../../shared/components/LoadingScreen";
+import { useNavigate } from "react-router-dom"
+import type { ClothingItemDto } from "../../../../clothing/clothing.types"
+import { useBlob } from "../../../../../shared/hooks/useBlob"
+import { api } from "../../../../../shared/api/api"
+import { memo } from "react"
+import LoadingScreen from "../../../../../shared/components/LoadingScreen"
 
 type Props = {
     item: ClothingItemDto
@@ -13,26 +13,25 @@ type Props = {
  * Clothing gallery item component, representing a single clothing item in the gallery on the closet page.
  */
 const ClothingGalleryItem = ({ item }: Props) => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
-    const { imageUrl, isLoading } = useBlob(() => api.image.getImage(item.imageId));
-    
+    const { imageUrl, isLoading } = useBlob(() => api.image.getImage(item.imageId))
+
     return (
-        <div 
-            key={item.id} 
+        <div
+            key={item.id}
             className="flex items-center bg-bg-elevated p-4 box-border
-            rounded-lg justify-center aspect-square hover:scale-105 transition-all duration-200" 
-            onClick={() => navigate(`item/${item.id}`, { state: { from: "/closet"}})}
+            rounded-lg justify-center aspect-square hover:scale-105 transition-all duration-200"
+            onClick={() => navigate(`item/${item.id}`, { state: { from: "/closet" } })}
         >
-            {isLoading
-             && 
+            {isLoading && (
                 <div className="w-full h-full">
                     <LoadingScreen />
                 </div>
-            }
-            {imageUrl && <img src={imageUrl} className="drop-shadow-lg max-h-full object-contain cursor-pointer"/>}
+            )}
+            {imageUrl && <img src={imageUrl} className="drop-shadow-lg max-h-full object-contain cursor-pointer" />}
         </div>
-    );
+    )
 }
 
-export default memo(ClothingGalleryItem);
+export default memo(ClothingGalleryItem)

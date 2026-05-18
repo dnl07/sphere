@@ -1,11 +1,11 @@
-import { useSearchParams } from "react-router";
+import { useSearchParams } from "react-router"
 
 export const useMultiParam = (paramKey: string, exclusive: boolean = false) => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const values = searchParams.get(paramKey)?.split(",") ?? [];
+    const [searchParams, setSearchParams] = useSearchParams()
+    const values = searchParams.get(paramKey)?.split(",") ?? []
 
     const toggle = (value: string) => {
-        const params = new URLSearchParams(searchParams);
+        const params = new URLSearchParams(searchParams)
 
         if (exclusive) {
             if (!value || value === "") {
@@ -13,23 +13,20 @@ export const useMultiParam = (paramKey: string, exclusive: boolean = false) => {
             } else {
                 params.set(paramKey, value)
             }
-            
         } else {
-            const next = values.includes(value)
-                ? values.filter(v => v !== value)
-                : [...values, value];
+            const next = values.includes(value) ? values.filter((v) => v !== value) : [...values, value]
 
             if (next.length === 0) {
-                params.delete(paramKey);
+                params.delete(paramKey)
             } else {
-                params.set(paramKey, next.join(","));
+                params.set(paramKey, next.join(","))
             }
         }
 
-        setSearchParams(params);        
+        setSearchParams(params)
     }
 
-    return { values, toggle };
+    return { values, toggle }
 }
 
-export default useMultiParam;
+export default useMultiParam

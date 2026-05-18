@@ -1,29 +1,26 @@
-import { useState } from "react";
-import type { FilterTool } from "../constants/types";
+import { useState } from "react"
+import type { FilterTool } from "../constants/types"
 
-export type FilterState = Record<string, number>;
+export type FilterState = Record<string, number>
 
 const useImageFilters = (tools: FilterTool[]) => {
-    const getInitialFilterState = (): FilterState =>
-        Object.fromEntries(tools.map(f => [f.key, f.initial]));
+    const getInitialFilterState = (): FilterState => Object.fromEntries(tools.map((f) => [f.key, f.initial]))
 
-    const [filters, setFilters] = useState<FilterState>(getInitialFilterState());
+    const [filters, setFilters] = useState<FilterState>(getInitialFilterState())
 
     const updateFilter = (key: string, value: number) => {
-        setFilters(prev => ({...prev, [key]: value}));
+        setFilters((prev) => ({ ...prev, [key]: value }))
     }
 
     const resetFilters = () => {
-        setFilters(getInitialFilterState());
+        setFilters(getInitialFilterState())
     }
 
     const buildFilterString = (state: FilterState): string => {
-        return tools    
-            .map(f => `${f.cssFilter}(${state[f.key]}${f.unit})`)
-            .join(" ");
+        return tools.map((f) => `${f.cssFilter}(${state[f.key]}${f.unit})`).join(" ")
     }
 
-    return {filters, filterString: buildFilterString(filters), updateFilter, resetFilters}
+    return { filters, filterString: buildFilterString(filters), updateFilter, resetFilters }
 }
 
-export default useImageFilters;
+export default useImageFilters

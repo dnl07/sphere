@@ -1,34 +1,34 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 import PageWrapper from "../../shared/components/layout/PageWrapper"
-import useImageState from "../../shared/hooks/useImageState";
-import { useCreateClothingItem } from "../clothing/hooks/useCreateClothingItem";
+import useImageState from "../../shared/hooks/useImageState"
+import { useCreateClothingItem } from "../clothing/hooks/useCreateClothingItem"
 import ImageUploadForm from "./components/ImageUploadForm"
-import ItemForm from "./components/ItemForm";
-import ConfirmDialog from "../../shared/components/ConfirmDialog";
-import { useLocation, useNavigate } from "react-router";
+import ItemForm from "./components/ItemForm"
+import ConfirmDialog from "../../shared/components/ConfirmDialog"
+import { useLocation, useNavigate } from "react-router"
 
 const CreateItemPage = () => {
-    const navigate = useNavigate();
-    const { state } = useLocation();
+    const navigate = useNavigate()
+    const { state } = useLocation()
 
-    const { request, updateRequest, create, error, validationErrors } = useCreateClothingItem();
-    const { preview, file, setImage, clearImage } = useImageState();
+    const { request, updateRequest, create, error, validationErrors } = useCreateClothingItem()
+    const { preview, file, setImage, clearImage } = useImageState()
 
-    const [ confirmMessage, setConfirmMessage ] = useState<string | null>(null);
+    const [confirmMessage, setConfirmMessage] = useState<string | null>(null)
 
     useEffect(() => {
         if (state?.editedFile) {
             setImage(state?.editedFile)
         }
-        window.history.replaceState({}, "");
+        window.history.replaceState({}, "")
     }, [])
 
     useEffect(() => {
-        if (file) updateRequest({ image: file})
+        if (file) updateRequest({ image: file })
     }, [file])
 
     const submitForm = async () => {
-        const item = await create();
+        const item = await create()
 
         if (error) {
             setConfirmMessage(`An error occurred while creating.`)
@@ -38,27 +38,26 @@ const CreateItemPage = () => {
     }
 
     return (
-        <PageWrapper 
-            title="Create a new item"
-            subtitle="Upload an image and add information"
-        >
-            <ImageUploadForm preview={preview} file={file} setImage={setImage} clearImage={clearImage}/>
-            <ItemForm request={request} updateRequest={updateRequest} validationErrors={validationErrors}/>
+        <PageWrapper title="Create a new item" subtitle="Upload an image and add information">
+            <ImageUploadForm preview={preview} file={file} setImage={setImage} clearImage={clearImage} />
+            <ItemForm request={request} updateRequest={updateRequest} validationErrors={validationErrors} />
             <button
-                className="bg-black px-16 text-lg font-semibold py-4 rounded-xl text-white my-4 cursor-pointer" 
+                className="bg-black px-16 text-lg font-semibold py-4 rounded-xl text-white my-4 cursor-pointer"
                 onClick={submitForm}
             >
                 Submit form
             </button>
-            {confirmMessage && <ConfirmDialog 
-                message={confirmMessage}
-                confirmMessage="Go to closet"
-                cancelMessage="Create another item"
-                onConfirm={() => navigate("/closet")}
-                onCancel={() => window.location.reload()}
-            />}
+            {confirmMessage && (
+                <ConfirmDialog
+                    message={confirmMessage}
+                    confirmMessage="Go to closet"
+                    cancelMessage="Create another item"
+                    onConfirm={() => navigate("/closet")}
+                    onCancel={() => window.location.reload()}
+                />
+            )}
         </PageWrapper>
-    );
+    )
 }
 
-export default CreateItemPage;
+export default CreateItemPage

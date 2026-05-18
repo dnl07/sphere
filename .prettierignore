@@ -1,0 +1,10 @@
+bin/
+obj/
+*.cshtml
+*.cs
+public
+node_modules
+build
+dist
+dist-ssr
+.vscode

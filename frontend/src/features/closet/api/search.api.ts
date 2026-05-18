@@ -1,13 +1,13 @@
-// GET /search 
+// GET /search
 
-import axiosInstance from "../../../shared/api/axiosInstance";
-import type { ClothingItemDto } from "../../clothing/clothing.types";
+import axiosInstance from "../../../shared/api/axiosInstance"
+import type { ClothingItemDto } from "../../clothing/clothing.types"
 
 export interface SearchResponse {
-    items?: ClothingItemDto[] | null;
+    items?: ClothingItemDto[] | null
 }
 
 export async function searchClothing(query: string): Promise<SearchResponse> {
-    const response = await axiosInstance.get<SearchResponse>("/search", { params: query });
-    return response.data;
+    const response = await axiosInstance.get<SearchResponse>("/search", { params: query })
+    return response.data
 }

@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
-import DropDownArrow from "../../../../../shared/components/ui/icons/DropDownArrow";
+import type { ReactNode } from "react"
+import DropDownArrow from "../../../../../shared/components/ui/icons/DropDownArrow"
 
 type Props = {
-    open: boolean,
-    onToggle: () => void,
-    children: ReactNode,
+    open: boolean
+    onToggle: () => void
+    children: ReactNode
     label: string
 }
 
@@ -14,16 +14,20 @@ type Props = {
 const FilterDropDown = ({ open, onToggle, children, label }: Props) => {
     return (
         <div className=" w-full">
-            <button className=" w-full flex justify-between items-center text-2xl py-2 cursor-pointer" onClick={onToggle}>
+            <button
+                className=" w-full flex justify-between items-center text-2xl py-2 cursor-pointer"
+                onClick={onToggle}
+            >
                 {label}
-                <DropDownArrow open={open}/>
+                <DropDownArrow open={open} />
             </button>
-            <div className={`border-b border-border overflow-hidden transition-all duration-200 ${open ? "max-h-96" : "max-h-0"}`}>
+            <div
+                className={`border-b border-border overflow-hidden transition-all duration-200 ${open ? "max-h-96" : "max-h-0"}`}
+            >
                 {children}
             </div>
         </div>
-
     )
 }
 
-export default FilterDropDown;
+export default FilterDropDown

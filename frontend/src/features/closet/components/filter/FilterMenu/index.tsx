@@ -1,40 +1,40 @@
-import { useEffect, useRef, useState } from "react";
-import FilterDropDown from "../FilterDropDown";
-import { useSearchParams } from "react-router";
-import { useClosetContext } from "../../../context/ClosetContext";
-import Cross from "../../../../../shared/components/ui/icons/Cross";
-import FilterBox from "../FilterBox";
-import useDebounce from "../../../../../shared/hooks/useDebounce";
-import type { FilterOption, GetClothingParams } from "../../../../clothing/api/clothingApi.types";
-import { getClothingCount } from "../../../../clothing/api/clothingApi";
+import { useEffect, useRef, useState } from "react"
+import FilterDropDown from "../FilterDropDown"
+import { useSearchParams } from "react-router"
+import { useClosetContext } from "../../../context/ClosetContext"
+import Cross from "../../../../../shared/components/ui/icons/Cross"
+import FilterBox from "../FilterBox"
+import useDebounce from "../../../../../shared/hooks/useDebounce"
+import type { FilterOption, GetClothingParams } from "../../../../clothing/api/clothingApi.types"
+import { getClothingCount } from "../../../../clothing/api/clothingApi"
 
 type Props = {
-    open: boolean,
-    closeFilter: () => void,
+    open: boolean
+    closeFilter: () => void
 }
 
 /**
  * Filter menu component, located in the sidebar on the closet page. Opens when the filter button in the bottom right corner is clicked.
  */
 const FilterMenu = ({ open, closeFilter }: Props) => {
-    const [ openLabel, setOpenLabel ] = useState<string | null>(null);
-    const [searchParams, _] = useSearchParams();
+    const [openLabel, setOpenLabel] = useState<string | null>(null)
+    const [searchParams, _] = useSearchParams()
 
-    const { filters, updateFilters } = useClosetContext();
+    const { filters, updateFilters } = useClosetContext()
 
     const [filterCount, setFilterCount] = useState<number>(0)
-    
-    const mounted = useRef(false);
+
+    const mounted = useRef(false)
 
     const toggleBox = (label: string) => {
         if (openLabel === label) {
-            setOpenLabel(null);
+            setOpenLabel(null)
         } else {
-            setOpenLabel(label);
+            setOpenLabel(label)
         }
     }
 
-    const filterOptions: {label: string, paramKey: string, options: FilterOption[]}[] = [
+    const filterOptions: { label: string; paramKey: string; options: FilterOption[] }[] = [
         { label: "Category", paramKey: "categories", options: filters?.categories ?? [] },
         { label: "Color", paramKey: "colors", options: filters?.colors ?? [] },
         { label: "Material", paramKey: "materials", options: filters?.materials ?? [] },
@@ -47,79 +47,91 @@ const FilterMenu = ({ open, closeFilter }: Props) => {
         categories: "Categories",
         colors: "Colors",
         materials: "Materials",
-        sizes: "Sizes"
+        sizes: "Sizes",
     }
 
     const getParamsFromUrl = (): GetClothingParams => {
-        const clothingParams: GetClothingParams = {};
+        const clothingParams: GetClothingParams = {}
 
         filterOptions.forEach(({ paramKey }) => {
-            const paramValues = searchParams.get(paramKey)?.split(",");
-            const mappedKey = paramKeyMap[paramKey];
+            const paramValues = searchParams.get(paramKey)?.split(",")
+            const mappedKey = paramKeyMap[paramKey]
 
             if (paramValues && paramValues.length > 0) {
-                (clothingParams[mappedKey] as string[]) = paramValues;
+                ;(clothingParams[mappedKey] as string[]) = paramValues
             }
-        });
+        })
 
-        return clothingParams;
+        return clothingParams
     }
 
     const applyFilters = () => {
-        const clothingParams = getParamsFromUrl();
+        const clothingParams = getParamsFromUrl()
 
-        const searchQuery = searchParams.get("q");
+        const searchQuery = searchParams.get("q")
         if (searchQuery) {
-            clothingParams.SearchQuery = searchQuery;
+            clothingParams.SearchQuery = searchQuery
         }
 
         const sortBy = searchParams.get("sort")
         if (sortBy) {
-            clothingParams.SortBy = sortBy;
+            clothingParams.SortBy = sortBy
         }
 
-        updateFilters(clothingParams);
+        updateFilters(clothingParams)
     }
 
-    const debounceApply = useDebounce(applyFilters, 300);
+    const debounceApply = useDebounce(applyFilters, 300)
 
     useEffect(() => {
         if (!mounted.current) {
-            mounted.current = true;
-            return;
+            mounted.current = true
+            return
         }
-        debounceApply();
+        debounceApply()
     }, [searchParams.get("q"), searchParams.get("sort")])
 
     useEffect(() => {
-        if (!mounted.current) return;
-        getCount();
+        if (!mounted.current) return
+        getCount()
     }, [searchParams])
 
     const getCount = async () => {
-        const params = getParamsFromUrl();
-        const count = await getClothingCount(params);
+        const params = getParamsFromUrl()
+        const count = await getClothingCount(params)
         console.log(count)
-        setFilterCount(count);
+        setFilterCount(count)
     }
 
     return (
-        <div className={`fixed w-full top-0 bottom-0 z-30 flex justify-end transition-all ease-in-out duration-300 ${open ? "opacity-100" : "invisible opacity-0"}`}>
+        <div
+            className={`fixed w-full top-0 bottom-0 z-30 flex justify-end transition-all ease-in-out duration-300 ${open ? "opacity-100" : "invisible opacity-0"}`}
+        >
             <div className="flex flex-col items-center bg-bg inset-0 w-full h-screen md:max-w-2xl shadow-xl px-5">
-                <div className="py-7 flex justify-end w-full" >
+                <div className="py-7 flex justify-end w-full">
                     <div className="cursor-pointer" onClick={closeFilter}>
-                        <Cross color="#000000" strokeWidth={2} className="w-5"/>
+                        <Cross color="#000000" strokeWidth={2} className="w-5" />
                     </div>
                 </div>
                 {filterOptions.map(({ label, paramKey, options }) => (
-                    <FilterDropDown label={label} open={openLabel === label} onToggle={() => toggleBox(label)} key={label}>
-                        <FilterBox options={options} paramKey={paramKey}/>
+                    <FilterDropDown
+                        label={label}
+                        open={openLabel === label}
+                        onToggle={() => toggleBox(label)}
+                        key={label}
+                    >
+                        <FilterBox options={options} paramKey={paramKey} />
                     </FilterDropDown>
                 ))}
-                <button onClick={applyFilters} className="bg-black text-white py-3 px-5 rounded-xl mt-10 cursor-pointer">Found {filterCount} item{filterCount === 1 ? "" : "s"}</button>
+                <button
+                    onClick={applyFilters}
+                    className="bg-black text-white py-3 px-5 rounded-xl mt-10 cursor-pointer"
+                >
+                    Found {filterCount} item{filterCount === 1 ? "" : "s"}
+                </button>
             </div>
         </div>
     )
 }
 
-export default FilterMenu; 
+export default FilterMenu

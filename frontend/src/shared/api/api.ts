@@ -1,31 +1,42 @@
-import type { GetAllCategories, GetClothingItemsResponse, GetClothingParams } from "../../features/clothing/api/clothingApi.types";
-import type { ClothingItemDto } from "../../features/clothing/clothing.types";
-import axiosInstance from "./axiosInstance";
+import type {
+    GetAllCategories,
+    GetClothingItemsResponse,
+    GetClothingParams,
+} from "../../features/clothing/api/clothingApi.types"
+import type { ClothingItemDto } from "../../features/clothing/clothing.types"
+import axiosInstance from "./axiosInstance"
 
-export const API_BASE = "";
+export const API_BASE = ""
 
 export const api = {
     clothing: {
-        getAll: (params: GetClothingParams) => axiosInstance.get<GetClothingItemsResponse>(`${API_BASE}/clothing`, { params }),
+        getAll: (params: GetClothingParams) =>
+            axiosInstance.get<GetClothingItemsResponse>(`${API_BASE}/clothing`, { params }),
         getItem: (id: string) => axiosInstance.get<ClothingItemDto>(`${API_BASE}/clothing/${id}`),
-        getCount: (params: GetClothingParams) => axiosInstance.get<{ count: number }>(`${API_BASE}/clothing/count`, { params }),
+        getCount: (params: GetClothingParams) =>
+            axiosInstance.get<{ count: number }>(`${API_BASE}/clothing/count`, { params }),
         createItem: (formData: FormData) => axiosInstance.post<ClothingItemDto>(`${API_BASE}/clothing`, formData),
-        updateItem: (id: string, formData: FormData) => axiosInstance.put<ClothingItemDto>(`${API_BASE}/clothing/${id}`, formData),
+        updateItem: (id: string, formData: FormData) =>
+            axiosInstance.put<ClothingItemDto>(`${API_BASE}/clothing/${id}`, formData),
         deleteItem: (id: string) => axiosInstance.delete<ClothingItemDto>(`${API_BASE}/clothing/${id}`),
         getImage: (id: string) => axiosInstance.get<Blob>(`${API_BASE}/clothing/${id}/image`),
     },
     image: {
-        getImage: (imageId: string): Promise<Blob> => axiosInstance.get<Blob>(`${API_BASE}/image/${imageId}`, { responseType: "blob"}).then(image => image.data)
+        getImage: (imageId: string): Promise<Blob> =>
+            axiosInstance
+                .get<Blob>(`${API_BASE}/image/${imageId}`, { responseType: "blob" })
+                .then((image) => image.data),
     },
     categories: {
-        getAll: () => axiosInstance.get<GetAllCategories>(`${API_BASE}/category`)
+        getAll: () => axiosInstance.get<GetAllCategories>(`${API_BASE}/category`),
     },
     inference: {
-        inference: (formData: FormData) => axiosInstance.post<Blob>(`${API_BASE}/inference`, formData, {
-        responseType: "blob"        
-        })
+        inference: (formData: FormData) =>
+            axiosInstance.post<Blob>(`${API_BASE}/inference`, formData, {
+                responseType: "blob",
+            }),
     },
     search: {
-        search: (query: string) => axiosInstance.get<Blob>(`${API_BASE}/search`)
-    }
+        search: (query: string) => axiosInstance.get<Blob>(`${API_BASE}/search`),
+    },
 }

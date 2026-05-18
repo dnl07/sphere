@@ -1,28 +1,28 @@
-import { useState } from "react";
+import { useState } from "react"
 
 const useImageState = () => {
-    const [preview, setPreview] = useState<string | null>(null);
-    const [file, setFile] = useState<File | null>(null);
+    const [preview, setPreview] = useState<string | null>(null)
+    const [file, setFile] = useState<File | null>(null)
 
     const setImage = (file: File, newPreview: string | null = null) => {
         if (preview) {
-            URL.revokeObjectURL(preview);
+            URL.revokeObjectURL(preview)
         }
 
         if (newPreview) {
-            setPreview(newPreview);
+            setPreview(newPreview)
         } else {
-            setPreview(URL.createObjectURL(file));
+            setPreview(URL.createObjectURL(file))
         }
-        setFile(file);
+        setFile(file)
     }
 
     const clearImage = () => {
-        setPreview(null);
-        setFile(null);
+        setPreview(null)
+        setFile(null)
     }
 
-    return { preview, file, setImage, clearImage};
-};
+    return { preview, file, setImage, clearImage }
+}
 
-export default useImageState;
+export default useImageState

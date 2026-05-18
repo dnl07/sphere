@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import DropDownBox from "../../../../shared/components/ui/DropDownBox";
-import useMultiParam from "../../../../shared/hooks/useMultiParam";
-import arrayRange from "../../../../shared/utils/arrayRange";
-import type { ColumnsMeta } from "../../hooks/useColumns";
+import { useEffect, useState } from "react"
+import DropDownBox from "../../../../shared/components/ui/DropDownBox"
+import useMultiParam from "../../../../shared/hooks/useMultiParam"
+import arrayRange from "../../../../shared/utils/arrayRange"
+import type { ColumnsMeta } from "../../hooks/useColumns"
 
 type Props = {
     columnsMeta: ColumnsMeta
@@ -15,21 +15,14 @@ type Props = {
 const ClosetToolbar = ({ columnsMeta }: Props) => {
     const sortOption = {
         paramKey: "sort",
-        options: [
-            "Newest",
-            "Oldest",
-            "NameAsc",
-            "NameDesc",
-            "PriceAsc",
-            "PriceDesc"
-        ],
-        defaultValue: "Newest"
+        options: ["Newest", "Oldest", "NameAsc", "NameDesc", "PriceAsc", "PriceDesc"],
+        defaultValue: "Newest",
     }
 
-    const { values, toggle } = useMultiParam(sortOption.paramKey, true);
+    const { values, toggle } = useMultiParam(sortOption.paramKey, true)
 
-    const [ isSortOpen, setOpenSort ] = useState<boolean>(false);
-    const [ activeSortValue, setActiveSortValue ] = useState<string | null>(values[0] ?? sortOption.defaultValue);
+    const [isSortOpen, setOpenSort] = useState<boolean>(false)
+    const [activeSortValue, setActiveSortValue] = useState<string | null>(values[0] ?? sortOption.defaultValue)
 
     useEffect(() => {
         if (activeSortValue) {
@@ -42,7 +35,7 @@ const ClosetToolbar = ({ columnsMeta }: Props) => {
             <div className="flex items-center relative cursor-pointer gap-2" onClick={() => setOpenSort(!isSortOpen)}>
                 <p>Sort by:</p>
                 <span>{activeSortValue}</span>
-                <DropDownBox 
+                <DropDownBox
                     values={sortOption.options}
                     setActiveValue={setActiveSortValue}
                     activeValue={activeSortValue}
@@ -53,9 +46,9 @@ const ClosetToolbar = ({ columnsMeta }: Props) => {
             <div className="flex flex-row items-center text-black gap-3">
                 <p>View:</p>
                 {arrayRange(columnsMeta.minColumns, columnsMeta.maxColumns).map((value) => (
-                    <button 
+                    <button
                         className={`cursor-pointer aspect-square flex items-center justify-center 
-                            ${value === columnsMeta.columns ? "underline" : ""}`} 
+                            ${value === columnsMeta.columns ? "underline" : ""}`}
                         onClick={() => columnsMeta.setColumnCount(value)}
                         key={value}
                     >
@@ -64,7 +57,7 @@ const ClosetToolbar = ({ columnsMeta }: Props) => {
                 ))}
             </div>
         </div>
-    );
+    )
 }
 
-export default ClosetToolbar;
+export default ClosetToolbar
