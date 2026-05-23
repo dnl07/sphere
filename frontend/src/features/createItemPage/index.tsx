@@ -38,7 +38,14 @@ const CreateItemPage = () => {
     }
 
     return (
-        <PageWrapper title="Create a new item" subtitle="Upload an image and add information">
+        <PageWrapper
+            header={{
+                mode: "breadcrumb",
+                title: "Create a new item",
+                subtitle: "Upload an image and add information",
+                items: [{ label: "Atelier", to: "/atelier" }, { label: "Clothing" }],
+            }}
+        >
             <ImageUploadForm preview={preview} file={file} setImage={setImage} clearImage={clearImage} />
             <ItemForm request={request} updateRequest={updateRequest} validationErrors={validationErrors} />
             <button

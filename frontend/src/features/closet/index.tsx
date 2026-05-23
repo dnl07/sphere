@@ -8,16 +8,22 @@ import useColumns from "./hooks/useColumns"
 import ClosetToolbar from "./components/ClosetToolbar"
 import { useNavigate } from "react-router"
 import Plus from "../../shared/components/ui/icons/Plus"
+import { useBreakpointContext } from "../../shared/context/BreakPointContext"
 
 const Closet = () => {
     const navigate = useNavigate()
     const [filterMenuOpen, setFilterMenuOpen] = useState(false)
+    const { isMobile } = useBreakpointContext()
+    const columnsMeta = useColumns(isMobile ? 2 : 3, 2, 4)
 
-    const columnsMeta = useColumns(3, 2, 4)
     return (
         <PageWrapper
-            title="Closet"
-            subtitle="Browse all items"
+            header={{
+                mode: "breadcrumb",
+                title: "Closet",
+                subtitle: "Browse all items",
+                items: [{ label: "Closet", to: "/closet" }],
+            }}
             sideChildren={
                 <button
                     className="bg-black text-white px-4 py-2 mr-4 text-nowrap rounded-lg cursor-pointer flex gap-2"

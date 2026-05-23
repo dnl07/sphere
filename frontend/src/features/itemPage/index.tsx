@@ -26,7 +26,14 @@ const ItemPage = () => {
     }
 
     return (
-        <PageWrapper title="Item Details" subtitle={`ID: ${item?.id}`}>
+        <PageWrapper
+            header={{
+                mode: "breadcrumb",
+                title: "Closet",
+                subtitle: "Browse all items",
+                items: [{ label: "Closet", to: "/closet" }, { label: "Item" }],
+            }}
+        >
             {item && (
                 <div className="w-full grid grid-cols-1 md:grid-cols-[3fr_4fr] gap-4">
                     {isLoading && (

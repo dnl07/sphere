@@ -6,14 +6,21 @@ type Props = {
     rotating?: boolean
     lineWidth?: number
     speed?: number
+    numberOfLines?: number
 }
 
-const Sphere = ({ width = 300, height = 300, rotating = true, lineWidth = 1.2, speed = 0.01 }: Props) => {
+const Sphere = ({
+    width = 300,
+    height = 300,
+    rotating = true,
+    lineWidth = 1.2,
+    speed = 0.01,
+    numberOfLines = 15,
+}: Props) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const angleRef = useRef(0)
     const rafRef = useRef<number>(0)
 
-    const N = 15
     const COLOR = "#000000"
     const TILT = 0.35
 
@@ -54,8 +61,8 @@ const Sphere = ({ width = 300, height = 300, rotating = true, lineWidth = 1.2, s
 
             const angle = angleRef.current
 
-            for (let i = 0; i <= N; i++) {
-                const lat = (i / N) * Math.PI
+            for (let i = 0; i <= numberOfLines; i++) {
+                const lat = (i / numberOfLines) * Math.PI
                 ctx.beginPath()
                 for (let j = 0; j <= 64; j++) {
                     const lon = (j / 64) * 2 * Math.PI + angle
@@ -69,8 +76,8 @@ const Sphere = ({ width = 300, height = 300, rotating = true, lineWidth = 1.2, s
                 ctx.stroke()
             }
 
-            for (let j = 0; j < N; j++) {
-                const lon = (j / N) * 2 * Math.PI + angle
+            for (let j = 0; j < numberOfLines; j++) {
+                const lon = (j / numberOfLines) * 2 * Math.PI + angle
                 ctx.beginPath()
                 for (let i = 0; i <= 64; i++) {
                     const lat = (i / 64) * Math.PI

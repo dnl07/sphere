@@ -7,7 +7,18 @@ const ImageEditorPage = () => {
     const file: File = state?.file
 
     return (
-        <PageWrapper title="Image Editor">
+        <PageWrapper
+            header={{
+                mode: "breadcrumb",
+                title: "Image Editor",
+                items: [
+                    { label: "Atelier", to: "/atelier" },
+                    { label: "Clothing", to: "/atelier/clothing" },
+                    { label: "Editor" },
+                ],
+            }}
+        >
+            {" "}
             <ImageEditor file={file} />
         </PageWrapper>
     )

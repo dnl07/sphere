@@ -5,7 +5,13 @@ const Atelier = () => {
     const navigate = useNavigate()
 
     return (
-        <PageWrapper title="Atelier">
+        <PageWrapper
+            header={{
+                mode: "breadcrumb",
+                title: "Atelier",
+                items: [{ label: "Atelier" }],
+            }}
+        >
             <button
                 className="bg-black text-white py-15 px-20 rounded-xl text-xl font-semibold cursor-pointer"
                 onClick={() => navigate("clothing")}
