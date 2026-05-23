@@ -11,11 +11,11 @@ type Props = {
 const ConfirmDialog = ({ message, confirmMessage, cancelMessage, onConfirm, onCancel }: Props) => {
     return (
         <ClickableBackground bgColor="" onClick={onCancel ?? (() => {})}>
-            <div className="bg-bg shadow-2xl px-8 py-6 flex flex-col items-center gap-6 animate-fade-in z-20">
+            <div className="bg-bg shadow-2xl px-8 py-6 flex flex-col items-center gap-8 animate-fade-in z-20">
                 <h3 className="text-md">{message}</h3>
                 <div className="flex flex-row justify-between gap-8 whitespace-nowrap">
                     <button
-                        className="border-black border-2 p-2 flex-1 cursor-pointer"
+                        className="border-black border-2 p-2 flex-1 w-30 rounded-lg cursor-pointer"
                         onClick={(e) => {
                             e.stopPropagation()
                             onConfirm()
@@ -25,7 +25,7 @@ const ConfirmDialog = ({ message, confirmMessage, cancelMessage, onConfirm, onCa
                     </button>
                     {onCancel && (
                         <button
-                            className="bg-black border-black text-white border-2 p-2 flex-1 cursor-pointer"
+                            className="bg-black border-black text-white border-2 rounded-lg p-2 w-30 flex-1 cursor-pointer"
                             onClick={(e) => {
                                 e.stopPropagation()
                                 onCancel()

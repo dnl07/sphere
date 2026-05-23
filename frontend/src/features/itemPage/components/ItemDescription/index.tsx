@@ -54,9 +54,10 @@ const ItemDescription = ({ item, toUpdate, updateRequest }: Props) => {
         }
 
         if (field.key === "price") {
+            const price = formData.price ? `${formData.price}€` : "-"
             return renderFieldBox(
                 field.label,
-                `${formData.price ?? "-"}€`,
+                price,
                 <>
                     {field.updateField?.(formData[field.updateKey!] ?? "", (value) =>
                         handleChange(field.updateKey, value)
@@ -131,7 +132,7 @@ const ItemDescription = ({ item, toUpdate, updateRequest }: Props) => {
                         value={formData.notes ?? ""}
                     />
                 ) : (
-                    <dd>{formData.notes}</dd>
+                    <dd>{formData.notes ?? "no notes"}</dd>
                 )}
             </Card>
             <Card title="Tags">Coming soon...</Card>
