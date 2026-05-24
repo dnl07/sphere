@@ -29,8 +29,7 @@ const ItemPage = () => {
         <PageWrapper
             header={{
                 mode: "breadcrumb",
-                title: "Closet",
-                subtitle: "Browse all items",
+                title: "Item Details",
                 items: [{ label: "Closet", to: "/closet" }, { label: "Item" }],
             }}
         >

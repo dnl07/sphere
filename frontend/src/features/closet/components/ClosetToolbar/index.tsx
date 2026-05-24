@@ -31,9 +31,12 @@ const ClosetToolbar = ({ columnsMeta }: Props) => {
     }, [activeSortValue])
 
     return (
-        <div className="flex justify-between w-full mb-2">
-            <div className="flex items-center relative cursor-pointer gap-2" onClick={() => setOpenSort(!isSortOpen)}>
-                <p>Sort by:</p>
+        <div className="flex justify-between w-full mb-4">
+            <div
+                className="flex items-center relative cursor-pointer gap-2 bg-bg-elevated py-2 px-2 rounded-xl"
+                onClick={() => setOpenSort(!isSortOpen)}
+            >
+                <span className="text-text-sub">SORT BY</span>
                 <span>{activeSortValue}</span>
                 <DropDownBox
                     values={sortOption.options}
@@ -43,12 +46,12 @@ const ClosetToolbar = ({ columnsMeta }: Props) => {
                     isOpen={isSortOpen}
                 />
             </div>
-            <div className="flex flex-row items-center text-black gap-3">
-                <p>View:</p>
+            <div className="flex flex-row items-center text-black gap-3 bg-bg-elevated py-2 px-2 rounded-xl">
+                <span className="text-text-sub">VIEW</span>
                 {arrayRange(columnsMeta.minColumns, columnsMeta.maxColumns).map((value) => (
                     <button
-                        className={`cursor-pointer aspect-square flex items-center justify-center 
-                            ${value === columnsMeta.columns ? "underline" : ""}`}
+                        className={`cursor-pointer aspect-square border border-border h-8 rounded-md flex items-center justify-center 
+                            ${value === columnsMeta.columns ? "bg-black text-white" : "bg-bg-elevated"}`}
                         onClick={() => columnsMeta.setColumnCount(value)}
                         key={value}
                     >

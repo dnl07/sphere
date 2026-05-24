@@ -1,5 +1,6 @@
 import { Link } from "react-router"
 import { useBreakpointContext } from "../../../context/BreakPointContext"
+import { ChevronRight } from "lucide-react"
 
 export type BreadcrumbItem = {
     label: string
@@ -14,7 +15,7 @@ const Breadcrumb = ({ items }: Props) => {
     const { isBelow } = useBreakpointContext()
 
     return (
-        <div className={`w-full border-b border-border ${isBelow("xl") ? "px-4 py-2" : "p-5"}`}>
+        <div className={`w-full border-b border-border flex items-center gap-1 ${isBelow("xl") ? "px-4 py-2" : "p-5"}`}>
             {items.map((item, i) => (
                 <>
                     <span
@@ -23,11 +24,7 @@ const Breadcrumb = ({ items }: Props) => {
                     >
                         {item.to ? <Link to={item.to}>{item.label}</Link> : <span>{item.label}</span>}{" "}
                     </span>
-                    {i !== items.length - 1 && (
-                        <span key={`gt${i}`} className="text-text-sub text-sm">
-                            {"> "}
-                        </span>
-                    )}
+                    {i !== items.length - 1 && <ChevronRight size={15} color="#00000080" />}
                 </>
             ))}
         </div>

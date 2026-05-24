@@ -6,6 +6,7 @@ import ImageUploadForm from "./components/ImageUploadForm"
 import ItemForm from "./components/ItemForm"
 import ConfirmDialog from "../../shared/components/ConfirmDialog"
 import { useLocation, useNavigate } from "react-router"
+import { Send } from "lucide-react"
 
 const CreateItemPage = () => {
     const navigate = useNavigate()
@@ -49,10 +50,11 @@ const CreateItemPage = () => {
             <ImageUploadForm preview={preview} file={file} setImage={setImage} clearImage={clearImage} />
             <ItemForm request={request} updateRequest={updateRequest} validationErrors={validationErrors} />
             <button
-                className="bg-black px-16 text-lg font-semibold py-4 rounded-xl text-white my-4 cursor-pointer"
+                className="bg-black px-16 text-lg font-semibold py-4 rounded-xl text-white my-4 cursor-pointer flex justify-center items-center gap-2"
                 onClick={submitForm}
             >
-                Submit form
+                <Send />
+                <span>Submit form</span>
             </button>
             {confirmMessage && (
                 <ConfirmDialog

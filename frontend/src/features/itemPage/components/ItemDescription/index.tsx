@@ -5,6 +5,7 @@ import type { UpdateClothingItemByIdRequest } from "../../../clothing/api/clothi
 import { type ClothingItemDto } from "../../../clothing/clothing.types"
 import { useGetCategories } from "../../../clothing/hooks/useGetCategories"
 import { MetaDataLabels, ProductDetailsLabels, PurchaseLabels, type ItemField } from "../../constants"
+import { Clock, Notebook, Shirt, ShoppingBag, Tags } from "lucide-react"
 
 type Props = {
     item: ClothingItemDto
@@ -120,11 +121,13 @@ const ItemDescription = ({ item, toUpdate, updateRequest }: Props) => {
 
     return (
         <div className="w-full flex gap-4 flex-col">
-            <Card title="Product Details" className="md:col-start-1 md:col-end-1">
+            <Card title="Product Details" TitleIcon={Shirt} className="md:col-start-1 md:col-end-1">
                 {displayData(item, ProductDetailsLabels)}
             </Card>
-            <Card title="Purchase Information">{displayData(item, PurchaseLabels)}</Card>
-            <Card title="Notes">
+            <Card title="Purchase Information" TitleIcon={ShoppingBag}>
+                {displayData(item, PurchaseLabels)}
+            </Card>
+            <Card title="Notes" TitleIcon={Notebook}>
                 {toUpdate ? (
                     <textarea
                         onChange={(e) => handleChange("notes", e.target.value)}
@@ -135,8 +138,12 @@ const ItemDescription = ({ item, toUpdate, updateRequest }: Props) => {
                     <dd>{formData.notes ?? "no notes"}</dd>
                 )}
             </Card>
-            <Card title="Tags">Coming soon...</Card>
-            <Card title="Metadata">{displayData(item, MetaDataLabels)}</Card>
+            <Card title="Tags" TitleIcon={Tags}>
+                Coming soon...
+            </Card>
+            <Card title="Metadata" TitleIcon={Clock}>
+                {displayData(item, MetaDataLabels)}
+            </Card>
         </div>
     )
 }

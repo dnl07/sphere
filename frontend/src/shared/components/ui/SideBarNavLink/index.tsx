@@ -1,13 +1,15 @@
 import { Link, useLocation } from "react-router"
-import FilterIcon from "../icons/FilterIcon"
+import type { ReactNode } from "react"
+import type { LucideProps } from "lucide-react"
 
 type Props = {
     to: string
     label: string
     onClick?: () => void
+    Icon: (props: LucideProps) => ReactNode
 }
 
-const SideBarNavLink = ({ to, label, onClick }: Props) => {
+const SideBarNavLink = ({ to, label, onClick, Icon }: Props) => {
     const location = useLocation()
     const isActive = location.pathname === to
 
@@ -15,12 +17,12 @@ const SideBarNavLink = ({ to, label, onClick }: Props) => {
         <Link
             onClick={onClick}
             to={to}
-            className={`flex items-center gap-4 w-full py-2 text-xl rounded-xl px-3 font-semibold ${isActive ? "bg-black text-white" : "hover:bg-bg-sunken"}`}
+            className={`flex items-center gap-4 w-full py-2 text-xl rounded-xl px-3 ${isActive ? "bg-black text-white" : "hover:bg-bg-sunken"}`}
         >
             <div
                 className={`aspect-square h-8 rounded-xl flex justify-center items-center ${isActive ? "bg-bg-dark-elevated" : "bg-bg-sunken"}`}
             >
-                <FilterIcon className="h-[60%]" color={`${isActive ? "#F2F2F2" : "#000000"}`} />
+                <Icon className="h-[60%]" color={`${isActive ? "#F2F2F2" : "#000000"}`} />
             </div>
             {label}
             <div className="aspect-square w-2 bg-bg-elevated rounded-full ml-auto" />

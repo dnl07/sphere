@@ -2,6 +2,7 @@ import { useState } from "react"
 import ConfirmDialog from "../../../../shared/components/ConfirmDialog"
 import { useDeleteClothingItem } from "../../../clothing/hooks/useDeleteClothingItem"
 import { useLocation, useNavigate } from "react-router"
+import { Pencil, Trash2 } from "lucide-react"
 
 type Props = {
     itemId: string
@@ -40,13 +41,27 @@ const ItemActions = ({ itemId, toUpdate, setToUpdate, update }: Props) => {
                     className={`bg-black w-full text-white  py-2 px-4 rounded-lg cursor-pointer transition-all duration-150 ${toUpdate ? "flex-1" : "flex-3"}`}
                     onClick={handleEditToggle}
                 >
-                    {toUpdate ? "Update" : "Edit"}
+                    {toUpdate ? (
+                        <span>Update</span>
+                    ) : (
+                        <div className="flex justify-center items-center gap-2">
+                            <Pencil size={20} />
+                            <span>Edit</span>
+                        </div>
+                    )}
                 </button>
                 <button
                     className={`bg-red-100 w-full flex-1 py-2 px-4 rounded-lg text-red-400 cursor-pointer transition-all duration-150 ${toUpdate ? "flex-3" : "flex-1"}`}
                     onClick={handleDeleteOrCancel}
                 >
-                    {toUpdate ? "Cancel" : "Delete"}
+                    {toUpdate ? (
+                        <span>Cancel</span>
+                    ) : (
+                        <div className="flex justify-center items-center gap-2 font-semibold">
+                            <Trash2 size={20} />
+                            <span>Delete</span>
+                        </div>
+                    )}{" "}
                 </button>
             </div>
             {showDialog && (

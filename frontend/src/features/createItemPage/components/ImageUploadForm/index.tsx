@@ -3,6 +3,7 @@ import { convertToPng } from "../../../../shared/utils/convertToPng"
 import Cross from "../../../../shared/components/ui/icons/Cross"
 import Card from "../../../../shared/components/layout/Card"
 import { useNavigate } from "react-router"
+import { Image, Upload, WandSparkles } from "lucide-react"
 
 type Props = {
     preview: string | null
@@ -27,7 +28,7 @@ const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
 
     return (
         <div className="flex flex-col justify-center items-center w-full mb-4 gap-4">
-            <Card className="max-h-80" title="Item image">
+            <Card className="max-h-100" title="Item image">
                 {file ? (
                     <div className="bg-bg-sunken py-2 px-4 rounded-xl flex items-center justify-between">
                         <div className="flex gap-4">
@@ -40,9 +41,12 @@ const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
                     </div>
                 ) : (
                     <div
-                        className="w-full border-2 border-dashed py-4 border-[#00000025] rounded-xl flex flex-col gap-4 justify-center items-center cursor-pointer"
+                        className="w-full border-2 border-dashed py-16 border-[#00000025] rounded-xl flex flex-col gap-4 justify-center items-center cursor-pointer hover:bg-[#e5e5e5]"
                         onClick={() => inputRef.current?.click()}
                     >
+                        <div className="bg-bg-sunken rounded-xl p-3">
+                            <Upload size={50} />
+                        </div>
                         <span className="text-center font-semibold cursor-pointer">Click to select your image</span>
                         <div className="bg-bg-sunken rounded-xl py-2 px-4 cursor-pointer">Browse files</div>
                         <input
@@ -66,19 +70,21 @@ const ImageUploadForm = ({ preview, file, setImage, clearImage }: Props) => {
                         className="w-full border border-border bg-bg-sunken py-4 aspect-square rounded-xl 
                             flex flex-col gap-5 justify-center items-center"
                     >
+                        <Image color="#6a7282" size={100} strokeWidth={1} />
                         <span className="text-center text-gray-500">No image uploaded</span>
                     </div>
                 )}
             </Card>
             <Card title="Advanced Editor">
-                <p className="text-text-sub">
+                <span className="text-text-sub">
                     Open the full editor for background removal, image adjustments and color grading.
-                </p>
+                </span>
                 <button
-                    className="bg-black w-full text-white py-4 rounded-xl mt-6 font-semibold cursor-pointer"
+                    className="bg-black w-full text-white py-4 rounded-xl mt-6 font-semibold cursor-pointer flex justify-center gap-4"
                     onClick={() => navigate("/image-editor", { state: { preview, file } })}
                 >
-                    Open Image Editor
+                    <WandSparkles />
+                    <span>Open Image Editor</span>
                 </button>
             </Card>
         </div>

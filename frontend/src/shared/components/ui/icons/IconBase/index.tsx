@@ -1,17 +1,12 @@
 import type { ReactNode } from "react"
-
-export type IconProps = {
-    className?: string
-    color?: string
-    strokeWidth?: number
-}
+import type { LucideProps } from "lucide-react"
 
 const IconBase = ({
     className = "w-10 h-10",
     color = "#F2F2F2",
     strokeWidth = 1.5,
     children,
-}: IconProps & { children: ReactNode }) => {
+}: LucideProps & { children: ReactNode }) => {
     return (
         <svg
             className={className}
@@ -23,6 +18,7 @@ const IconBase = ({
             strokeLinecap="round"
             strokeLinejoin="round"
         >
+            {" "}
             {children}
         </svg>
     )
